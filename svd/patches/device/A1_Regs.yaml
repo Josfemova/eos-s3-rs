@@ -1,0 +1,20 @@
+A1_Regs:
+#  description: Selects source APB Master to SPI Master between M4/AP and Fabric
+#  groupName: A1
+#  baseAddress: 0x40006000
+#  addressBlocks:
+#    - offset: 0x0
+#      size: 0x4
+#      usage: registers
+  _add:
+    _registers:
+      CFG_CTRL:
+        description: Configuration Control
+        addressOffset: 0x0
+        access: read-write
+        resetValue: 0x0000_0000
+        fields:
+          CFG_IN_SEL:
+            description: Selects source APB master to SPI Master between M4/AP and Fabric
+            bitOffset: 0
+            bitWidth: 1

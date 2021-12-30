@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
+	<name>EOS-S3</name>
+	<version>0.1</version>
+	<description>EOS-S3</description>
+	<!-- details about the cpu embedded in the device -->
+	<cpu>
+		<name>CM4</name>
+		<revision>r0p1</revision>
+		<endian>selectable</endian>
+		<mpuPresent>true</mpuPresent>
+		<fpuPresent>true</fpuPresent>
+		<nvicPrioBits>3</nvicPrioBits>
+		<vendorSystickConfig>false</vendorSystickConfig>
+	</cpu>
+	<addressUnitBits>8</addressUnitBits>
+	<width>32</width>
+	<size>32</size>
+	<access>read-write</access>
+	<resetValue>0x00000000</resetValue>
+	<resetMask>0xFFFFFFFF</resetMask>
+	<peripherals>
+		<peripheral>
+			<name>A1_Regs</name>
+			<description>Selects source APB Master to SPI Master between M4/AP and Fabric</description>
+			<groupName>A1_Regs</groupName>
+			<baseAddress>0x40006000</baseAddress>
+			<addressBlock>
+				<offset>0</offset>
+				<size>4</size>
+				<usage>registers</usage>
+			</addressBlock>
+		</peripheral>
+	</peripherals>
+</device>

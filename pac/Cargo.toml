@@ -1,0 +1,19 @@
+[package]
+name = "eos-s3"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bare-metal="0.2"
+cortex-m="0.7"
+vcell="0.1.2"
+
+
+[dependencies.cortex-m-rt]
+version = "0.7"
+optional = true
+
+[features]
+rt = ["cortex-m-rt/device"]

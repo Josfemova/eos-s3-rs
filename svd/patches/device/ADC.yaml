@@ -1,0 +1,52 @@
+_add:
+  ADC:
+    description: Analog-to-Digital Converter
+    groupName: ADC
+    baseAddress: 0x40005A00
+    addressBlocks:
+      - offset: 0
+        size: 0x009
+        usage: registers 
+    registers:
+      OUT:
+        description: Last sampled value 
+        addressOffset: 0x000
+        access: read-only 
+        size: 32
+        resetValue: 0x0000_0000
+        fields: 
+          OUT: 
+            description: Stored last sampled value 
+            bitOffset: 0
+            bitWidth: 12
+      Status:
+        description: Status 
+        addressOffset: 0x004
+        access: read-only 
+        size: 32
+        resetValue: 0x0000_0000
+        fields:
+          EOC:
+            description: End of Conversion. Rises when data is valid
+            bitOffset: 0
+            bitWidth: 1
+      Control:
+        description: Control register
+        addressOffset: 0x008 
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0000    
+        fields:
+          SOC: 
+            description: Asynchronous start-of-conversion. Needs to rise and be held high for each conversion 
+            bitOffset: 0
+            bitWidth: 1
+          SEL:
+            description:  Channel Selection. 0=CH0, 1=CH1 
+            bitOffset: 1
+            bitWidth: 1
+          Bat:
+            description: Battery measurement enable
+            bitOffset: 2
+            bitWidth: 1 
+
