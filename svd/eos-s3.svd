@@ -38,7 +38,7 @@
 			<baseAddress>0x40004C00</baseAddress>
 			<addressBlock>
 				<offset>0x0</offset>
-				<size>0x15</size>
+				<size>0x1B0</size>
 				<usage>registers</usage>
 			</addressBlock>
 			<registers>

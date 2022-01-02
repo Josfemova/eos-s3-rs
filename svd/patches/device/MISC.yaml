@@ -1,0 +1,286 @@
+_add:
+  MISC:
+    description: MISC registers
+    baseAddress: 0x40005000
+    addressBlocks:
+      - offset: 0
+        size: 0x400
+        usage: registers
+    registers:
+      DBG_MON:
+        description: Debug Monitor information
+        addressOffset: 0x000
+        access: read-only
+        size: 32
+        resetValue: 0x0000_0000
+        fields:
+          DEBUG_MON:
+            description: Reads the debug status/information
+            bitOffset: 0
+            bitWidth: 8
+      SUBSYS_DBG_MON_SEL:
+        description: Register for selecting the subsystem routed to the debug monitor
+        addressOffset: 0x004
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0000
+        fields:
+          SUBSYS_DEBUG_MON_SEL:
+            description: Select which subsystem the debug monitors are routed from
+            bitOffset: 0
+            bitWidth: 3
+      A0_DBG_MON_SEL:
+        description: Select A0 debug monitors
+        addressOffset: 0x008
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0000
+        fields:
+          A0_DEBUG_MON_SEL:
+            description: Select debug monitors
+            bitOffset: 0
+            bitWidth: 3
+      A0_PMU_DBG_MON_SEL:
+        description: Selects the data present in the PMU debug monitor. The output will be (Except 0 and 10), {Status0, Status1, ISO, RET, GateCLK_N, Mem_DS, MP_Gate, RP_Gate)
+        addressOffset: 0x00C
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0000
+        fields:
+          A0_PMU_DEBUG_MON_SEL:
+            description: Select data to be shown in the PMU debug monitor
+            bitOffset: 0
+            bitWidth: 6
+      IO_INPUT:
+        description: Reads the value of the IO pins
+        addressOffset: 0x100
+        access: read-only
+        resetValue: 0x0000_0000
+        fields:
+          IO_0:
+            description: Read digital value of pin mapped to IO bit 0
+            bitOffset: 0
+            bitWidth: 1
+          IO_1:
+            description: Read digital value of pin mapped to IO bit 1
+            bitOffset: 1
+            bitWidth: 1
+          IO_2:
+            description: Read digital value of pin mapped to IO bit 2
+            bitOffset: 2
+            bitWidth: 1
+          IO_3:
+            description: Read digital value of pin mapped to IO bit 3
+            bitOffset: 3
+            bitWidth: 1
+          IO_4:
+            description: Read digital value of pin mapped to IO bit 4
+            bitOffset: 4
+            bitWidth: 1
+          IO_5:
+            description: Read digital value of pin mapped to IO bit 5
+            bitOffset: 5
+            bitWidth: 1
+          IO_6:
+            description: Read digital value of pin mapped to IO bit 6
+            bitOffset: 6
+            bitWidth: 1
+          IO_7:
+            description: Read digital value of pin mapped to IO bit 7
+            bitOffset: 7
+            bitWidth: 1
+      IO_OUTPUT:
+        description: Allows FW to drive the IO with the values specified in this register
+        addressOffset: 0x104
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0000
+        fields:
+          IO_0:
+            description: Read digital value of pin mapped to IO bit 0
+            bitOffset: 0
+            bitWidth: 1
+          IO_1:
+            description: Read digital value of pin mapped to IO bit 1
+            bitOffset: 1
+            bitWidth: 1
+          IO_2:
+            description: Read digital value of pin mapped to IO bit 2
+            bitOffset: 2
+            bitWidth: 1
+          IO_3:
+            description: Read digital value of pin mapped to IO bit 3
+            bitOffset: 3
+            bitWidth: 1
+          IO_4:
+            description: Read digital value of pin mapped to IO bit 4
+            bitOffset: 4
+            bitWidth: 1
+          IO_5:
+            description: Read digital value of pin mapped to IO bit 5
+            bitOffset: 5
+            bitWidth: 1
+          IO_6:
+            description: Read digital value of pin mapped to IO bit 6
+            bitOffset: 6
+            bitWidth: 1
+          IO_7:
+            description: Read digital value of pin mapped to IO bit 7
+            bitOffset: 7
+            bitWidth: 1
+      SW_MB_1:
+        description: Software Mailbox (can be used for communication between M4 and AP)
+        addressOffset: 0x110
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0000
+      SW_MB_2:
+        description: Software Mailbox (can be used for communication between M4 and AP)
+        addressOffset: 0x114
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0000
+      PAD_SEL18:
+        description: Select 1.8V for VCCIO for up to 4 banks. Write a 1 to a bank field to make the IO VCC = 1.8V
+        addressOffset: 0x200
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0000
+        fields:
+          TOP_BANK_0:
+            description: bit for top bank 0
+            bitOffset: 0
+            bitWidth: 1
+          TOP_BANK_1:
+            description: bit for top bank 1
+            bitOffset: 1
+            bitWidth: 1
+          BOTTOM_BANK_2:
+            description: bit for bottom bank 0
+            bitOffset: 2
+            bitWidth: 1
+          BOTTOM_BANK_3:
+            description: bit for bottom bank 1
+            bitOffset: 3
+            bitWidth: 1
+      CONFIG_MEM128_AON:
+        description: Memory Configuration
+        addressOffset: 0x210
+        size: 32
+        resetValue: 0b010000100001000010
+        fields:
+          MEM0_32K_RM:
+            description: Read and write margin control. Recommended setting is 2'b10. 2'b00 provides the most margin (slowest speed). 2'b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation.
+            access: read-write
+            bitOffset: 0
+            bitWidth: 2
+          MEM0_32K_DST:
+            description: Disable-Self-Time. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2'b00. This pin is intended for debug/FA purposes only.
+            access: read-write
+            bitOffset: 4
+            bitWidth: 1
+          MEM1_32K_RM:
+            description: Read and write margin control. Recommended setting is 2'b10. 2'b00 provides the most margin (slowest speed). 2'b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation.
+            access: read-write
+            bitOffset: 5
+            bitWidth: 2
+          MEM1_32K_DST:
+            description: Disable-Self-Time. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2'b00. This pin is intended for debug/FA purposes only.
+            access: read-write
+            bitOffset: 9
+            bitWidth: 1
+          MEM2_32K_RM:
+            description: Read and write margin control. Recommended setting is 2'b10. 2'b00 provides the most margin (slowest speed). 2'b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation.
+            access: read-write
+            bitOffset: 10
+            bitWidth: 2
+          MEM2_32K_DST:
+            description: Disable-Self-Time. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2'b00. This pin is intended for debug/FA purposes only.
+            access: read-write
+            bitOffset: 14
+            bitWidth: 1
+          MEM3_32K_RM:
+            description: Read and write margin control. Recommended setting is 2'b10. 2'b00 provides the most margin (slowest speed). 2'b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation.
+            access: read-write
+            bitOffset: 15
+            bitWidth: 2
+          MEM3_32K_DST:
+            description: "Disable-Self-Time. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2'b00. This pin is intended for debug/FA purposes only."
+            access: read-only
+            bitOffset: 19
+            bitWidth: 1
+      LOCK_KEY_CTRL:
+        description: Control value and status of LOCK_KEY 
+        addressOffset: 0x310
+        size: 32
+        resetValue: 0x1ACCE551
+        fields:
+          LOCK_KEY_EN:
+            description: "0: lock disabled, write to register enabled, 1: lock enable, write to register disabled"
+            access: read-write
+            bitOffset: 0
+            bitWidth: 1 
+          LOCK_KEY: 
+            description: "Enable write access to all below registers by writing 0x1ACCE551. Disable write access by writing any other value. M4 WDT Intr/reset clear - 0x4000_4830[4:3], M4 WDT Intr/reset enable AP - 0x4000_4834[4:3], Pad #43 (AP_INTR) - 0x40004CAC[12:0], M4 Low Power Configuration - 0x40004484[1:0], M4 WDT Clock Gate - 0x40004054[0]"
+            access: write-only
+            bitOffset: 1
+            bitWidth: 31 
+      FB_DEVICE_ID:
+        description: Fabric device ID 
+        addressOffset: 0x3FC 
+        access: read-only 
+        size: 32
+        resetValue: 0x0000_0000
+        fields: 
+          ID: 
+            description: Fabric device ID 
+            bitOffset: 0
+            bitWidth: 16
+            
+
+
+
+MISC:
+  SUBSYS_DBG_MON_SEL:
+    SUBSYS_DEBUG_MON_SEL:
+      monitor_a0: [0, "Monitor A0 subsystem"]
+      monitor_cpu: [1, "Monitor the CPU subsystem"]
+      #monitor_reserved: [2, "Monitor 'reserved', no idea what that is tho"]
+      monitor_ffe: [3, "Monitor the FPGA Fabric subsystem"]
+      monitor_audio: [4, "Monitor the audio subsystem"]
+  A0_DBG_MON_SEL:
+    A0_DEBUG_MON_SEL:
+      use_pmu_monitor:
+        [0, "Selects the PMU monitor as the monitor for the A0 subsystem"]
+      use_cru_monitor:
+        [1, "Selects the CRU monitor as the monitor for the A0 subsystem"]
+  A0_PMU_DBG_MON_SEL:
+    A0_PMU_DEBUG_MON_SEL:
+      show_m4stm_kickoff_and_busy_plus_0x000000:
+        [0, "{M4STM_KickOff, M4STM_BUSY, 6'h0}"]
+      show_a1: [1, ""]
+      show_m4: [2, ""]
+      show_m4s0: [3, ""]
+      show_ad5: [4, ""]
+      show_ad4: [5, ""]
+      show_ad3: [6, ""]
+      show_ad2: [7, ""]
+      show_ad1: [8, ""]
+      show_ad0: [9, ""]
+      show_fbst_kickoff_and_busy_plus_0x000000:
+        [10, "{FBSTM_KickOff, FBSTM_BUSY,6'h0}"]
+      show_i2s: [11, ""]
+      #perhaps an error in the excel sheet?
+      #must confirm with QuickLogic the following values are correct:
+      show_m4s15: [13, ""]
+      show_m4s11: [14, ""]
+      show_m4s7: [15, ""]
+      show_m4s3: [16, ""]
+      show_pf: [17, ""]
+      show_sdma: [18, ""]
+      show_ffe: [19, ""]
+      show_fb: [20, ""]
+  LOCK_KEY_CTRL:
+    LOCK_KEY_EN:
+      lock_disable: [0, "Disable lock to allow writing the lock_key field"]
+      lock_enable: [1, "Enable lock to prevent writing the lock_key field"]

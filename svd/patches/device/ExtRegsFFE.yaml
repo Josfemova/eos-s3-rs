@@ -1,0 +1,8 @@
+_add: 
+  ExtM4Regs:
+    description: Additional core registers 
+    baseAddress: 0x4000_0000
+    addressBlocks: 
+      - offset: 0
+        size: 12 
+        usage: registers

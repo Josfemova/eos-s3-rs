@@ -1,0 +1,8 @@
+_add:
+  SPI: 
+    description: ""
+    baseAddress: 0x4000_7000
+    addressBlocks:
+      - offset: 0 
+        size: 0x64
+        usage: registers 

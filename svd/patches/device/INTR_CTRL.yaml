@@ -1,8 +1,8 @@
 _add:
-  I2S_Slave: 
+  INTR_CTRL: 
     description: ""
-    baseAddress: 0x4000_B000
+    baseAddress: 0x4000_4800
     addressBlocks:
       - offset: 0 
-        size: 0x3FC
+        size: 0x0A8
         usage: registers 

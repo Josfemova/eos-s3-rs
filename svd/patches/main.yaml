@@ -1,8 +1,8 @@
 _svd: "../eos-s3.svd"
 
 _include: 
-  - "device/A1_Regs.yaml"
-  - "device/ADC.yaml"
+  - "device/A1_Regs.yaml" #done
+  - "device/ADC.yaml" #done 
   - "device/AIP.yaml"
   - "device/AUD.yaml"
   - "device/CFG_CTL.yaml"
@@ -10,9 +10,18 @@ _include:
   - "device/DMA.yaml"
   - "device/ExtRegsFFE.yaml"
   - "device/I2S_Slave.yaml"
-  - "device/INTR_CNTRL.yaml"
-  - "device/IO_MUX.yaml"
-  - "device/MISC.yaml"
+  - "device/INTR_CTRL.yaml"
+  - "device/IO_MUX.yaml" #done
+  - "device/MISC.yaml" #done
+  - "device/PKFB.yaml"
+  - "device/PMU.yaml"
+  - "device/SDMA_Bridge.yaml"
+  - "device/SDMA.yaml"
+  - "device/SPI.yaml"
+  - "device/SPT.yaml"
+  - "device/TIMER.yaml"
+  - "device/UART.yaml"
+  - "device/WDT.yaml"
   - "core/DWT.yaml"
   - "core/EXTM4Regs.yaml"
   - "core/FPB.yaml"

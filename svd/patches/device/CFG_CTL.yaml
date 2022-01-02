@@ -1,0 +1,8 @@
+_add:
+  CFG_CTL:
+    description: "" 
+    baseAddress: 0x4001_4000
+    addressBlocks:
+      - offset: 0
+        size: 0xB000
+        usage: registers 

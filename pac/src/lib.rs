@@ -33,7 +33,11 @@ use generic::*;
 #[doc = r"Common register and bit access and modify traits"]
 pub mod generic;
 #[cfg(feature = "rt")]
-extern "C" {}
+extern "C" {
+    fn SENSOR_GPIO();
+    fn UART();
+    fn ADC_DONE();
+}
 #[doc(hidden)]
 pub union Vector {
     _handler: unsafe extern "C" fn(),
@@ -43,14 +47,45 @@ pub union Vector {
 #[doc(hidden)]
 #[link_section = ".vector_table.interrupts"]
 #[no_mangle]
-pub static __INTERRUPTS: [Vector; 0] = [];
+pub static __INTERRUPTS: [Vector; 20] = [
+    Vector { _reserved: 0 },
+    Vector { _reserved: 0 },
+    Vector { _reserved: 0 },
+    Vector { _reserved: 0 },
+    Vector { _reserved: 0 },
+    Vector {
+        _handler: SENSOR_GPIO,
+    },
+    Vector { _reserved: 0 },
+    Vector { _handler: UART },
+    Vector { _reserved: 0 },
+    Vector { _reserved: 0 },
+    Vector { _reserved: 0 },
+    Vector { _reserved: 0 },
+    Vector { _reserved: 0 },
+    Vector { _reserved: 0 },
+    Vector { _reserved: 0 },
+    Vector { _reserved: 0 },
+    Vector { _reserved: 0 },
+    Vector { _reserved: 0 },
+    Vector { _reserved: 0 },
+    Vector { _handler: ADC_DONE },
+];
 #[doc = r"Enumeration of all the interrupts."]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
-pub enum Interrupt {}
+#[repr(u16)]
+pub enum Interrupt {
+    #[doc = "5 - Global GPIO interrupt"]
+    SENSOR_GPIO = 5,
+    #[doc = "7 - Global UART interrupt"]
+    UART = 7,
+    #[doc = "19 - ADC Done interrupt"]
+    ADC_DONE = 19,
+}
 unsafe impl cortex_m::interrupt::InterruptNumber for Interrupt {
     #[inline(always)]
     fn number(self) -> u16 {
-        match self {}
+        self as u16
     }
 }
 #[doc = "Selects source APB Master to SPI Master between M4/AP and Fabric"]
@@ -137,6 +172,34 @@ impl core::fmt::Debug for ADC {
 }
 #[doc = "Analog-to-Digital Converter"]
 pub mod adc;
+#[doc = "MISC registers"]
+pub struct MISC {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for MISC {}
+impl MISC {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const misc::RegisterBlock = 0x4000_5000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const misc::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for MISC {
+    type Target = misc::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for MISC {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("MISC").finish()
+    }
+}
+#[doc = "MISC registers"]
+pub mod misc;
 #[no_mangle]
 static mut DEVICE_PERIPHERALS: bool = false;
 #[doc = r"All the peripherals"]
@@ -148,6 +211,8 @@ pub struct Peripherals {
     pub IOMUX: IOMUX,
     #[doc = "ADC"]
     pub ADC: ADC,
+    #[doc = "MISC"]
+    pub MISC: MISC,
 }
 impl Peripherals {
     #[doc = r"Returns all the peripherals *once*"]
@@ -173,6 +238,9 @@ impl Peripherals {
                 _marker: PhantomData,
             },
             ADC: ADC {
+                _marker: PhantomData,
+            },
+            MISC: MISC {
                 _marker: PhantomData,
             },
         }

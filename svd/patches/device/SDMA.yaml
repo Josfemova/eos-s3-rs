@@ -1,0 +1,8 @@
+_add:
+  SDMA: 
+    description: ""
+    baseAddress: 0x4000_C000
+    addressBlocks:
+      - offset: 0 
+        size: 0x1000
+        usage: registers 

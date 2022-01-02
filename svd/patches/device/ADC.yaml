@@ -2,11 +2,15 @@ _add:
   ADC:
     description: Analog-to-Digital Converter
     groupName: ADC
-    baseAddress: 0x40005A00
+    baseAddress: 0x4000_5A00
     addressBlocks:
       - offset: 0
-        size: 9
+        size: 0x00C
         usage: registers 
+    interrupts: 
+      ADC_DONE:
+        description: "ADC Done interrupt"
+        value: 19
     registers:
       ADC_OUT:
         description: Last sampled value 

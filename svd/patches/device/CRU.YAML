@@ -1,0 +1,8 @@
+_add: 
+  CRU: 
+    description: "" 
+    baseAddress: 0x40004000 
+    addressBlocks:
+      - offset: 0
+        size: 0x148
+        usage: registers

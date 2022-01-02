@@ -1,0 +1,8 @@
+_add:
+  PMU: 
+    description: ""
+    baseAddress: 0x4000_2000
+    addressBlocks:
+      - offset: 0 
+        size: 0x3FC
+        usage: registers 

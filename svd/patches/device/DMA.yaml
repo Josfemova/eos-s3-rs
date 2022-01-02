@@ -1,0 +1,8 @@
+_add:
+  DMA: 
+    description: ""
+    baseAddress: 0x4000_7400
+    addressBlocks:
+      - offset: 0 
+        size: 0x1C
+        usage: registers 

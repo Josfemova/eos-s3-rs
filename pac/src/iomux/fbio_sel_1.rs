@@ -40,7 +40,7 @@ impl From<crate::W<FBIO_SEL_1_SPEC>> for W {
 pub enum SEL_A {
     #[doc = "0: Lacking documentation. Guess: Leaves pad unselected"]
     UNDEFINED = 0,
-    #[doc = "1: Lacking documentation. Guess: Activates some sort of selection for pads 0-31"]
+    #[doc = "1: Lacking documentation. Guess: Activates some sort of FPGA Fabric control for pads 0-31"]
     SELECT_PAD = 1,
 }
 impl From<SEL_A> for u32 {
@@ -98,7 +98,7 @@ impl<'a> SEL_W<'a> {
     pub fn undefined(self) -> &'a mut W {
         self.variant(SEL_A::UNDEFINED)
     }
-    #[doc = "Lacking documentation. Guess: Activates some sort of selection for pads 0-31"]
+    #[doc = "Lacking documentation. Guess: Activates some sort of FPGA Fabric control for pads 0-31"]
     #[inline(always)]
     pub fn select_pad(self) -> &'a mut W {
         self.variant(SEL_A::SELECT_PAD)

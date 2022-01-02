@@ -1,0 +1,8 @@
+_add:
+  AUD: 
+    description: ""
+    baseAddress: 0x4001_5000
+    addressBlocks:
+      - offset: 0 
+        size: 0x34
+        usage: registers 

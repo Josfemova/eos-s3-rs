@@ -1,0 +1,9 @@
+_add:
+  AIP:
+    description:  Analog IP block
+    baseAddress: 0x40005400
+    addressBlocks: 
+      - offset: 0
+        size: 0x218
+        usage: registers 
+    

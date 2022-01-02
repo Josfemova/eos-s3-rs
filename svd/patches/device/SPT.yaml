@@ -1,0 +1,8 @@
+_add:
+  SPT: 
+    description: ""
+    baseAddress: 0x4000_5C00
+    addressBlocks:
+      - offset: 0 
+        size: 0x40
+        usage: registers 

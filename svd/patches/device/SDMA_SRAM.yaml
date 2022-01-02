@@ -1,0 +1,8 @@
+_add:
+  SDMA_SRAM: 
+    description: ""
+    baseAddress: 0x4000_F000
+    addressBlocks:
+      - offset: 0 
+        size: 0x1FC
+        usage: registers 
