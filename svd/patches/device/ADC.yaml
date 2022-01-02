@@ -5,10 +5,10 @@ _add:
     baseAddress: 0x40005A00
     addressBlocks:
       - offset: 0
-        size: 0x009
+        size: 9
         usage: registers 
     registers:
-      OUT:
+      ADC_OUT:
         description: Last sampled value 
         addressOffset: 0x000
         access: read-only 
@@ -19,7 +19,7 @@ _add:
             description: Stored last sampled value 
             bitOffset: 0
             bitWidth: 12
-      Status:
+      ADC_Status:
         description: Status 
         addressOffset: 0x004
         access: read-only 
@@ -30,7 +30,7 @@ _add:
             description: End of Conversion. Rises when data is valid
             bitOffset: 0
             bitWidth: 1
-      Control:
+      ADC_Control:
         description: Control register
         addressOffset: 0x008 
         access: read-write
@@ -42,11 +42,27 @@ _add:
             bitOffset: 0
             bitWidth: 1
           SEL:
-            description:  Channel Selection. 0=CH0, 1=CH1 
+            description:  Channel Selection. 0 = CH0, 1 = CH1 
             bitOffset: 1
             bitWidth: 1
-          Bat:
+            access: read-write
+          BAT:
             description: Battery measurement enable
             bitOffset: 2
-            bitWidth: 1 
+            bitWidth: 1
+ADC:
+  ADC_Status:
+    EOC:
+      non_valid: [0, "data in OUT field is not valid"]
+      valid: [1, "data in OUT field is valid"]
+  ADC_Control:
+    SOC:
+      stop: [0, "Stop conversion"]
+      start: [1, "Start conversion. Needs to be held high until EOC is valid"]
+    SEL:
+      select_ch0: [0, "Select channel 0"]
+      select_ch1: [1, "Select channel 1"]
+    BAT:
+      enable: [1, "Enables battery measurement"]
+      disable: [0, "Disables battery measurement"]
 

@@ -81,6 +81,34 @@ impl core::fmt::Debug for A1_REGS {
 }
 #[doc = "Selects source APB Master to SPI Master between M4/AP and Fabric"]
 pub mod a1_regs;
+#[doc = "IO Multiplexing Control"]
+pub struct IOMUX {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for IOMUX {}
+impl IOMUX {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const iomux::RegisterBlock = 0x4000_4c00 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const iomux::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for IOMUX {
+    type Target = iomux::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for IOMUX {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("IOMUX").finish()
+    }
+}
+#[doc = "IO Multiplexing Control"]
+pub mod iomux;
 #[doc = "Analog-to-Digital Converter"]
 pub struct ADC {
     _marker: PhantomData<*const ()>,
@@ -116,6 +144,8 @@ static mut DEVICE_PERIPHERALS: bool = false;
 pub struct Peripherals {
     #[doc = "A1_REGS"]
     pub A1_REGS: A1_REGS,
+    #[doc = "IOMUX"]
+    pub IOMUX: IOMUX,
     #[doc = "ADC"]
     pub ADC: ADC,
 }
@@ -137,6 +167,9 @@ impl Peripherals {
         DEVICE_PERIPHERALS = true;
         Peripherals {
             A1_REGS: A1_REGS {
+                _marker: PhantomData,
+            },
+            IOMUX: IOMUX {
                 _marker: PhantomData,
             },
             ADC: ADC {

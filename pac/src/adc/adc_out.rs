@@ -1,15 +1,15 @@
-#[doc = "Register `OUT` reader"]
-pub struct R(crate::R<OUT_SPEC>);
+#[doc = "Register `ADC_OUT` reader"]
+pub struct R(crate::R<ADC_OUT_SPEC>);
 impl core::ops::Deref for R {
-    type Target = crate::R<OUT_SPEC>;
+    type Target = crate::R<ADC_OUT_SPEC>;
     #[inline(always)]
     fn deref(&self) -> &Self::Target {
         &self.0
     }
 }
-impl From<crate::R<OUT_SPEC>> for R {
+impl From<crate::R<ADC_OUT_SPEC>> for R {
     #[inline(always)]
-    fn from(reader: crate::R<OUT_SPEC>) -> Self {
+    fn from(reader: crate::R<ADC_OUT_SPEC>) -> Self {
         R(reader)
     }
 }
@@ -35,17 +35,17 @@ impl R {
         OUT_R::new((self.bits & 0x0fff) as u16)
     }
 }
-#[doc = "Last sampled value\n\nThis register you can [`read`](crate::generic::Reg::read). See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [out](index.html) module"]
-pub struct OUT_SPEC;
-impl crate::RegisterSpec for OUT_SPEC {
+#[doc = "Last sampled value\n\nThis register you can [`read`](crate::generic::Reg::read). See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [adc_out](index.html) module"]
+pub struct ADC_OUT_SPEC;
+impl crate::RegisterSpec for ADC_OUT_SPEC {
     type Ux = u32;
 }
-#[doc = "`read()` method returns [out::R](R) reader structure"]
-impl crate::Readable for OUT_SPEC {
+#[doc = "`read()` method returns [adc_out::R](R) reader structure"]
+impl crate::Readable for ADC_OUT_SPEC {
     type Reader = R;
 }
-#[doc = "`reset()` method sets OUT to value 0"]
-impl crate::Resettable for OUT_SPEC {
+#[doc = "`reset()` method sets ADC_OUT to value 0"]
+impl crate::Resettable for ADC_OUT_SPEC {
     #[inline(always)]
     fn reset_value() -> Self::Ux {
         0

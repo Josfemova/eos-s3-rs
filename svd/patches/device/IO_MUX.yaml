@@ -1,0 +1,614 @@
+IOMUX:
+  _add:
+    SDA0_SEL_REG:
+      description: Select pad for SDA function in I2C0 (only pad 1 is selectable)
+      addressOffset: 0x100
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 1
+    SDA1_SEL_REG:
+      description: Select pad for SDA function in I2C1 (3 pads available)
+      addressOffset: 0x104
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 2
+    SDA2_SEL_REG:
+      description: Select pad for SDA function in I2C2 (only pad 41 is selectable)
+      addressOffset: 0x108
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 1
+    SCL0_SEL_REG:
+      description: Select pad for SCL function in I2C0 (only pad 0 is selectable)
+      addressOffset: 0x10C
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 1
+    SCL1_SEL_REG:
+      description: Select pad for SCL function in I2C1 (3 pads available)
+      addressOffset: 0x110
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 2
+    SCL2_SEL_REG:
+      description: Select pad for SCL function in I2C2 (only pad 40 is selectable)
+      addressOffset: 0x114
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 1
+    SPIs_CLK_SEL:
+      description: Select pad for SPI CLK function (only pad 16 is selectable)
+      addressOffset: 0x118
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 1
+    SPIs_SSn_SEL:
+      description: Select pad for SPI SS function (only pad 20 is selectable)
+      addressOffset: 0x11C
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 1
+    SPIs_MOSI_SEL:
+      description: Select pad for SPI MOSI function (only pad 19 is selectable)
+      addressOffset: 0x120
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 1
+    SPIs_MISO_SEL:
+      description: Select pad for SPI MISO function (only pad 36 is selectable)
+      addressOffset: 0x124
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 1
+
+    PDM_DATA_SELE:
+      description: Select pad for PDM microphone data line
+      addressOffset: 0x128
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 2
+    I2S_DATA_SELECT:
+      description: Select pad for the I2S Serial Data (SD)
+      addressOffset: 0x12C
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 2
+    UART_rxd_SEL:
+      description: a
+      addressOffset: 0x134
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 3
+    IrDA_Sirin_SEL:
+      description: Select pad for SIREN in function
+      addressOffset: 0x138
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 3
+    S_INTR_0_SEL_REG:
+      description: Select pad that triggers GPIO interrupt 0
+      addressOffset: 0x13C
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 1
+    S_INTR_1_SEL_REG:
+      description: Select pad that triggers GPIO interrupt 1
+      addressOffset: 0x140
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 3
+    S_INTR_2_SEL:
+      description: Select pad that triggers GPIO interrupt 2
+      addressOffset: 0x144
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 3
+    S_INTR_3_SEL:
+      description: Select pad that triggers GPIO interrupt 3
+      addressOffset: 0x148
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 3
+    S_INTR_4_SEL:
+      description: Select pad that triggers GPIO interrupt 4
+      addressOffset: 0x14C
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 3
+    S_INTR_5_SEL:
+      description: Select pad that triggers GPIO interrupt 5
+      addressOffset: 0x150
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 3
+    S_INTR_6_SEL:
+      description: Select pad that triggers GPIO interrupt 6
+      addressOffset: 0x154
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 3
+    S_INTR_7_SEL:
+      description: Select pad that triggers GPIO interrupt 7
+      addressOffset: 0x158
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 3
+    NUARTCTS_SEL:
+      description: Pad Selection for the CTS nUART function
+      addressOffset: 0x15C
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 2
+    IO_REG_SEL:
+      description: Selects which IO input will be registered (Pads used as GPIOS)
+      addressOffset: 0x160
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        IO_SEL_0:
+          description: Select pad for IO maped to bit 0
+          bitOffset: 0
+          bitWidth: 1
+        IO_SEL_1:
+          description: Select pad for IO maped to bit 1
+          bitOffset: 1
+          bitWidth: 1
+        IO_SEL_2:
+          description: Select pad for IO maped to bit 2
+          bitOffset: 2
+          bitWidth: 1
+        IO_SEL_3:
+          description: Select pad for IO maped to bit 3
+          bitOffset: 3
+          bitWidth: 1
+        IO_SEL_4:
+          description: Select pad for IO maped to bit 4
+          bitOffset: 4
+          bitWidth: 1
+        IO_SEL_5:
+          description: Select pad for IO maped to bit 5
+          bitOffset: 5
+          bitWidth: 1
+        IO_SEL_6:
+          description: Select pad for IO maped to bit 6
+          bitOffset: 6
+          bitWidth: 1
+        IO_SEL_7:
+          description: Select pad for IO maped to bit 7
+          bitOffset: 7
+          bitWidth: 1
+    SW_CLK_SEL:
+      description: Selection for SWD clock pad (SCK)
+      addressOffset: 0x170
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 1
+    SW_IO_SEL:
+      description: Selection for SWD IO pad (SDIO)
+      addressOffset: 0x174
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 1
+    FBIO_SEL_1:
+      description: Lacking proper documentation. Configuration of pins 0-31 related to Fabric 
+      addressOffset: 0x180
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 32
+    FBIO_SEL_2:
+      description: Lacking proper documentation. Configuration of pins 32-45 related to Fabric 
+      addressOffset: 0x184
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 14
+
+    SPI_SENSOR_MISO_SEL:
+      description: Selects pad for MISO function for the sensor SPI
+      addressOffset: 0x190
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 2
+    SPI_SENSOR_MOSI_SEL:
+      description: Selects pad for MOSI function for the sensor SPI
+      addressOffset: 0x194
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 2
+    I2S_WD_CLKIN_SEL:
+      description: Selects pad for the I2S Data-Word Select (WS)
+      addressOffset: 0x1A0
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 1
+    I2S_CLKIN_SEL:
+      description: Selects pad for I2S clock (SCK)
+      addressOffset: 0x1A4
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 1
+    PDM_STAT_IN_SEL:
+      description: Selects pin for PDM STATUS_IN function
+      addressOffset: 0x1A8
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 2
+    PDM_CLKIN_SEL: 
+      description: Selects pin for PDM CLKIN source (AP PDM CKO IN)
+      addressOffset: 0x1AC
+      access: read-write
+      size: 32
+      resetValue: 0x0000_0000
+      fields:
+        SEL:
+          description: Sel
+          bitOffset: 0
+          bitWidth: 1
+  
+  "PAD_*_CTRL":
+    CTRL_SEL:
+      a0_registers: [0x0, "A0 registers"]
+      others: [0x1, "Others"]
+      fabric: [0x2, "Fabric"]
+  "PAD_*_CTRL_FFE":
+    CTRL_SEL:
+      a0_registers: [0x0, "A0 registers"]
+      others: [0x1, "Others"]
+  "PAD_*_CTRL*":
+    #Similar to how ATSAMD cores multiplex stuff, Check TechRef Manual Section 19 
+    FUNC_SEL:
+      alternative_0: [0, "Select alternative function 0"]
+      alternative_1: [1, "Select alternative function 1"]
+      alternative_2: [2, "Select alternative function 2"]
+      alternative_3: [3, "Select alternative function 3"]
+    OEN:
+      driver_disabled: [1, "driver disabled"]
+      normal_operation: [0, "normal operation"]
+    P:
+      z: [0, "floating, high impedance"]
+      pull_up: [1, "pull-up mode"]
+      pull_down: [2, pull-down mode]
+      keeper: [3, "bus keeper mode"]
+    E:
+      current_2ma: [0, "Configures the drive current at 2mA"]
+      current_4ma: [1, "Configures the drive current at 4mA"]
+      current_8ma: [2, "Configures the drive current at 8mA"]
+      current_12ma: [3, "Configures the drive current at 12mA"]
+    SR:
+      slow: [0, "slow (half frequency) slew rate"]
+      fast: [1, "fast slew rate"]
+    REN:
+      disable_receive: [0, "disable receive"]
+      enable_receive: [1, "enable receive"]
+    SMT:
+      disable_trigger: [0, "Disable the Schmitt trigger"]
+      enable_trigger: [1, "Enable the Schmitt trigger"]
+  SDA0_SEL_REG:
+    SEL:
+      default_undefined: [0, "Documentation lacking, guessed meaning: Selects pad #1 for the SDA function in I2C0"]
+      pad_01: [1, "Selects pad #1 for the SDA function in I2C0"]
+  SDA1_SEL_REG:
+    SEL:
+      default_undefined: [0, "Documentation lacking, guessed meaning: Select pad #15 for the SDA function in I2C1"]
+      pad_15: [1, "Select pad #15 for the SDA function in I2C1"]
+      pad_32: [2, "Select pad #32 for the SDA function in I2C1"]
+      pad_44: [3, "Select pad #44 for the SDA function in I2C1"]
+  SDA2_SEL_REG:
+    SEL:
+      default_undefined: [0, "Documentation lacking, guessed meaning: Selects pad #41 for the SDA function in I2C2"]
+      pad_41: [1, "Selects pad #41 for the SDA function in I2C2"]
+  SCL0_SEL_REG:
+    SEL:
+      default_undefined: [0, "Documentation lacking, guessed meaning: Selects pad #0 for the SCL function in I2C0"]
+      pad_00: [1, "Selects pad #0 for the SCL function in I2C0"]
+  SCL1_SEL_REG:
+    SEL:
+      default_undefined: [0, "Documentation lacking, guessed meaning: Select pad #14 for the SCL function in I2C1"]
+      pad_14: [1, "Select pad #14 for the SCL function in I2C1"]
+      pad_33: [2, "Select pad #33 for the SCL function in I2C1"]
+      pad_45: [3, "Select pad #45 for the SCL function in I2C1"]
+  SCL2_SEL_REG:
+    SEL:
+      default_undefined: [0, "Documentation lacking, guessed meaning: Selects pad #40 for the SCL function in I2C2"]
+      pad_40: [1, "Selects pad #40 for the SCL function in I2C2"]
+  PDM_DATA_SELE:
+    SEL: 
+      undefined: [0, "undefined (0:0 in documentation)"]
+      pad_10: [1, "Selects pad #10 for PDM data line"]
+      pad_28: [2, "Selects pad #28 for PDM data line"]
+  I2S_DATA_SELECT:
+    SEL: 
+      undefined: [0, "undefined (0:0 in documentation)"]
+      pad_10: [1, "Selects pad #10 for I2S data line"]
+      pad_28: [2, "Selects pad #28 for I2S data line"]
+  UART_rxd_SEL:
+    SEL: 
+      undefined: [0, "undefined (0:0 in documentation)"]
+      pad_14: [1, "Selects pad #14 for UART RXD line"]
+      pad_16: [2, "Selects pad #16 for UART RXD line"]
+      pad_25: [3, "Selects pad #25 for UART RXD line"]
+      pad_45: [4, "Selects pad #45 for UART RXD line"]
+  IrDA_Sirin_SEL:
+    SEL: 
+      undefined: [0, "undefined (0:0 in documentation)"]
+      pad_06 : [1, "Selects pad #14 for Siren in line"]
+      pad_15 : [2, "Selects pad #15 for Siren in line"]
+      pad_21 : [3, "Selects pad #21 for Siren in line"]
+      pad_24 : [4, "Selects pad #24 for Siren in line"]
+      pad_28 : [5, "Selects pad #28 for Siren in line"]
+      pad_40 : [6, "Selects pad #40 for Siren in line"]
+      pad_44 : [7, "Selects pad #44 for Siren in line"]
+  S_INTR_0_SEL_REG:
+    SEL: 
+      undefined: [0, "undefined (0:0 in documentation)"]
+      pad_03 : [1, "Selects pad #3 as the trigger"]
+  S_INTR_1_SEL_REG:
+    SEL: 
+      undefined: [0, "undefined (0:0 in documentation)"]
+      pad_02: [1, "Selects pad #2 as the trigger"]
+      pad_06: [2, "Selects pad #6 as the trigger"]
+      pad_18: [3, "Selects pad #18 as the trigger"]
+      pad_24: [4, "Selects pad #24 as the trigger"]
+      pad_35: [5, "Selects pad #35 as the trigger"]
+      pad_36: [6, "Selects pad #36 as the trigger"]
+  S_INTR_2_SEL:
+    SEL: 
+      undefined: [0, "undefined (0:0 in documentation)"]
+      pad_04 : [1, "Selects pad #4 as the trigger"]
+      pad_08 : [2, "Selects pad #8 as the trigger"]
+      pad_21: [3, "Selects pad #21 as the trigger"]
+      pad_25: [4, "Selects pad #25 as the trigger"]
+      pad_37: [5, "Selects pad #37 as the trigger"]
+      pad_38: [6, "Selects pad #38 as the trigger"]
+  S_INTR_3_SEL:
+    SEL: 
+      undefined: [0, "undefined (0:0 in documentation)"]
+      pad_05 : [1, "Selects pad #2 as the trigger"]
+      pad_09 : [2, "Selects pad #9 as the trigger"]
+      pad_22: [3, "Selects pad #22 as the trigger"]
+      pad_28: [4, "Selects pad #28 as the trigger"]
+      pad_39: [5, "Selects pad #39 as the trigger"]
+      pad_40: [6, "Selects pad #40 as the trigger"]
+  S_INTR_4_SEL:
+    SEL: 
+      undefined: [0, "undefined (0:0 in documentation)"]
+      pad_07 : [1, "Selects pad #7 as the trigger"]
+      pad_10: [2, "Selects pad #10 as the trigger"]
+      pad_26: [3, "Selects pad #26 as the trigger"]
+      pad_29: [4, "Selects pad #29 as the trigger"]
+      pad_44: [5, "Selects pad #44 as the trigger"]
+  S_INTR_5_SEL:
+    SEL: 
+      undefined: [0, "undefined (0:0 in documentation)"]
+      pad_11: [1, "Selects pad #11 as the trigger"]
+      pad_14: [2, "Selects pad #14 as the trigger"]
+      pad_27: [3, "Selects pad #27 as the trigger"]
+      pad_30: [4, "Selects pad #30 as the trigger"]
+      pad_45: [5, "Selects pad #45 as the trigger"]
+  S_INTR_6_SEL:
+    SEL: 
+      undefined: [0, "undefined (0:0 in documentation)"]
+      pad_12: [1, "Selects pad #12 as the trigger"]
+      pad_15: [2, "Selects pad #15 as the trigger"]
+      pad_31: [3, "Selects pad #31 as the trigger"]
+      pad_32: [4, "Selects pad #32 as the trigger"]
+      pad_41: [5, "Selects pad #41 as the trigger"]
+  S_INTR_7_SEL:
+    SEL: 
+      undefined: [0, "undefined (0:0 in documentation)"]
+      pad_13: [1, "Selects pad #13 as the trigger"]
+      pad_23: [2, "Selects pad #23 as the trigger"]
+      pad_33: [3, "Selects pad #33 as the trigger"]
+      pad_34: [4, "Selects pad #34 as the trigger"]
+      pad_42: [5, "Selects pad #42 as the trigger"]
+  IO_REG_SEL:
+    IO_SEL_0:
+      pad_06: [0, "Enable pad #6 as GPIO"]
+      pad_24: [1, "Enable pad #24 as GPIO"]
+    IO_SEL_1:
+      pad_09: [0, "Enable pad #9 as GPIO"]
+      pad_26: [1, "Enable pad #26 as GPIO"]
+    IO_SEL_2:
+      pad_11: [0, "Enable pad #11 as GPIO"]
+      pad_28: [1, "Enable pad #28 as GPIO"]
+    IO_SEL_3:
+      pad_14: [0, "Enable pad #14 as GPIO"]
+      pad_30: [1, "Enable pad #30 as GPIO"]
+    IO_SEL_4:
+      pad_18: [0, "Enable pad #18 as GPIO"]
+      pad_31: [1, "Enable pad #31 as GPIO"]
+    IO_SEL_5:
+      pad_21: [0, "Enable pad #21 as GPIO"]
+      pad_26: [1, "Enable pad #26 as GPIO"]
+    IO_SEL_6:
+      pad_22: [0, "Enable pad #22 as GPIO"]
+      pad_38: [1, "Enable pad #38 as GPIO"]
+    IO_SEL_7:
+      pad_23: [0, "Enable pad #23 as GPIO"]
+      pad_45: [1, "Enable pad #45 as GPIO"]
+  SW_CLK_SEL:
+    SEL: 
+      select_strap_pad_14_45: [0,"pad #14/#45 (pad selection will depend on pad #8, See ch. 30 of TechRef Manual)"]
+      undefined: [1, "Lacking documentation. Might mean the same as `select_strap_pad`"]
+  SW_IO_SEL:
+    SEL: 
+      select_strap_pad_15_44: [0,"pad #15/#44 (pad selection will depend on pad #8, See ch. 30 of TechRef Manual)"]
+      undefined: [1, "Lacking documentation. Might mean the same as `select_strap_pad`"]
+  FBIO_SEL_1:
+    SEL: 
+      undefined: [0, "Lacking documentation. Guess: Leaves pad unselected"]
+      select_pad: [1, "Lacking documentation. Guess: Activates some sort of FPGA Fabric control for pads 0-31"]
+  FBIO_SEL_2:
+    SEL: 
+      undefined: [0, "Lacking documentation. Guess: Leaves pad unselected"]
+      select_pad: [1, "Lacking documentation. Guess: Activates some sort of FPGA Fabric control for pads 32-45"]
+  SPI_SENSOR_MISO_SEL:
+    SEL:
+      undefined: [0, "undefined (0:0 in documentation)"]
+      pad_08 : [1, "Selects pad #8 for sensor SPI MISO"]
+      pad_29 : [2, "Selects pad #29 for sensor SPI MISO"]
+  SPI_SENSOR_MOSI_SEL:
+    SEL:
+      undefined: [0, "undefined (0:0 in documentation)"]
+      pad_06 : [1, "Selects pad #6 for sensor SPI MISO"]
+      pad_28 : [2, "Selects pad #28 for sensor SPI MISO"]

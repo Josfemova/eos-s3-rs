@@ -31,5 +31,138 @@
 				<usage>registers</usage>
 			</addressBlock>
 		</peripheral>
+		<peripheral>
+			<name>IOMUX</name>
+			<description>IO Multiplexing Control</description>
+			<groupName>IOMUX</groupName>
+			<baseAddress>0x40004C00</baseAddress>
+			<addressBlock>
+				<offset>0x0</offset>
+				<size>0x15</size>
+				<usage>registers</usage>
+			</addressBlock>
+			<registers>
+				<register>
+					<dim>35</dim>
+					<dimIncrement>4</dimIncrement>
+					<dimIndex>0-34</dimIndex>
+					<name>PAD_%s_CTRL</name>
+					<description>PAD_%s control register</description>
+					<addressOffset>0x0</addressOffset>
+					<access>read-write</access>
+					<resetValue>0x00000000</resetValue>
+					<fields>
+						<field>
+							<name>FUNC_SEL</name>
+							<description>Functional selection for IO output. Refer to IO Mux</description>
+							<bitOffset>0</bitOffset>
+							<bitWidth>2</bitWidth>
+						</field>
+						<field>
+							<name>CTRL_SEL</name>
+							<description>Control selection for IO Output. 0x0 = A0 registers, 0x1 = Others, 0x2 = Fabric</description>
+							<bitOffset>3</bitOffset>
+							<bitWidth>2</bitWidth>
+						</field>
+						<field>
+							<name>OEN</name>
+							<description>Active low output enable</description>
+							<bitOffset>5</bitOffset>
+							<bitWidth>1</bitWidth>
+						</field>
+						<field>
+							<name>P</name>
+							<description>Driver state control</description>
+							<bitOffset>6</bitOffset>
+							<bitWidth>2</bitWidth>
+						</field>
+						<field>
+							<name>E</name>
+							<description>Driver Strenght</description>
+							<bitOffset>8</bitOffset>
+							<bitWidth>2</bitWidth>
+						</field>
+						<field>
+							<name>SR</name>
+							<description>Slew Rate</description>
+							<bitOffset>10</bitOffset>
+							<bitWidth>1</bitWidth>
+						</field>
+						<field>
+							<name>REN</name>
+							<description>Receive Enable</description>
+							<bitOffset>11</bitOffset>
+							<bitWidth>1</bitWidth>
+						</field>
+						<field>
+							<name>SMT</name>
+							<description>Schmitt Trigger</description>
+							<bitOffset>12</bitOffset>
+							<bitWidth>1</bitWidth>
+						</field>
+					</fields>
+				</register>
+				<register>
+					<dim>11</dim>
+					<dimIncrement>4</dimIncrement>
+					<dimIndex>35-45</dimIndex>
+					<name>PAD_%s_CTRL_FFE</name>
+					<description>PAD_%s control register(ffe exclusive)</description>
+					<addressOffset>0x08C</addressOffset>
+					<access>read-write</access>
+					<resetValue>0x00000000</resetValue>
+					<fields>
+						<field>
+							<name>FUNC_SEL</name>
+							<description>Functional selection for IO output. Refer to IO Mux</description>
+							<bitOffset>0</bitOffset>
+							<bitWidth>2</bitWidth>
+						</field>
+						<field>
+							<name>CTRL_SEL</name>
+							<description>Control selection for IO Output. 0x0 = A0 registers, 0x1 = Others, 0x2 = Fabric. * Exception - when FUNC_SEL=2, the control is from FFE</description>
+							<bitOffset>3</bitOffset>
+							<bitWidth>2</bitWidth>
+						</field>
+						<field>
+							<name>OEN</name>
+							<description>Active low output enable</description>
+							<bitOffset>5</bitOffset>
+							<bitWidth>1</bitWidth>
+						</field>
+						<field>
+							<name>P</name>
+							<description>Driver state control</description>
+							<bitOffset>6</bitOffset>
+							<bitWidth>2</bitWidth>
+						</field>
+						<field>
+							<name>E</name>
+							<description>Driver Strenght</description>
+							<bitOffset>8</bitOffset>
+							<bitWidth>2</bitWidth>
+						</field>
+						<field>
+							<name>SR</name>
+							<description>Slew Rate</description>
+							<bitOffset>10</bitOffset>
+							<bitWidth>1</bitWidth>
+						</field>
+						<field>
+							<name>REN</name>
+							<description>Receive Enable</description>
+							<bitOffset>11</bitOffset>
+							<bitWidth>1</bitWidth>
+						</field>
+						<field>
+							<name>SMT</name>
+							<description>Schmitt Trigger</description>
+							<bitOffset>12</bitOffset>
+							<bitWidth>1</bitWidth>
+						</field>
+					</fields>
+				</register>
+			</registers>
+		</peripheral>
 	</peripherals>
 </device>
