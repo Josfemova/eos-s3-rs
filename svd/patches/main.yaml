@@ -3,7 +3,7 @@ _svd: "../eos-s3.svd"
 _include: 
   - "device/A1_Regs.yaml" #done
   - "device/ADC.yaml" #done 
-  - "device/AIP.yaml"
+  - "device/AIP.yaml" #done
   - "device/AUD.yaml"
   - "device/CFG_CTL.yaml"
   - "device/CRU.YAML"

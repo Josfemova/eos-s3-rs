@@ -172,6 +172,34 @@ impl core::fmt::Debug for ADC {
 }
 #[doc = "Analog-to-Digital Converter"]
 pub mod adc;
+#[doc = "Analog IP block"]
+pub struct AIP {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for AIP {}
+impl AIP {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const aip::RegisterBlock = 0x4000_5400 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const aip::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for AIP {
+    type Target = aip::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for AIP {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("AIP").finish()
+    }
+}
+#[doc = "Analog IP block"]
+pub mod aip;
 #[doc = "MISC registers"]
 pub struct MISC {
     _marker: PhantomData<*const ()>,
@@ -211,6 +239,8 @@ pub struct Peripherals {
     pub IOMUX: IOMUX,
     #[doc = "ADC"]
     pub ADC: ADC,
+    #[doc = "AIP"]
+    pub AIP: AIP,
     #[doc = "MISC"]
     pub MISC: MISC,
 }
@@ -238,6 +268,9 @@ impl Peripherals {
                 _marker: PhantomData,
             },
             ADC: ADC {
+                _marker: PhantomData,
+            },
+            AIP: AIP {
                 _marker: PhantomData,
             },
             MISC: MISC {
