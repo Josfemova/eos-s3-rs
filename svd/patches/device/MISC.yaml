@@ -97,35 +97,35 @@ _add:
         resetValue: 0x0000_0000
         fields:
           IO_0:
-            description: Read digital value of pin mapped to IO bit 0
+            description: Write digital value of pin mapped to IO bit 0
             bitOffset: 0
             bitWidth: 1
           IO_1:
-            description: Read digital value of pin mapped to IO bit 1
+            description: Write digital value of pin mapped to IO bit 1
             bitOffset: 1
             bitWidth: 1
           IO_2:
-            description: Read digital value of pin mapped to IO bit 2
+            description: Write digital value of pin mapped to IO bit 2
             bitOffset: 2
             bitWidth: 1
           IO_3:
-            description: Read digital value of pin mapped to IO bit 3
+            description: Write digital value of pin mapped to IO bit 3
             bitOffset: 3
             bitWidth: 1
           IO_4:
-            description: Read digital value of pin mapped to IO bit 4
+            description: Write digital value of pin mapped to IO bit 4
             bitOffset: 4
             bitWidth: 1
           IO_5:
-            description: Read digital value of pin mapped to IO bit 5
+            description: Write digital value of pin mapped to IO bit 5
             bitOffset: 5
             bitWidth: 1
           IO_6:
-            description: Read digital value of pin mapped to IO bit 6
+            description: Write digital value of pin mapped to IO bit 6
             bitOffset: 6
             bitWidth: 1
           IO_7:
-            description: Read digital value of pin mapped to IO bit 7
+            description: Write digital value of pin mapped to IO bit 7
             bitOffset: 7
             bitWidth: 1
       SW_MB_1:
