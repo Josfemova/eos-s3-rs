@@ -1,8 +1,160 @@
 _add:
   INTR_CTRL: 
-    description: ""
+    description: "Interrupt Controller"
     baseAddress: 0x4000_4800
     addressBlocks:
       - offset: 0 
         size: 0x0A8
         usage: registers 
+    interrupts: 
+      Software_Interrupt_2:
+        description: "" 
+        value: 0
+      Software_Interrupt_1:
+        description: "" 
+        value: 1
+      FFE0_Message:
+        description: "" 
+        value: 3
+      Fabric_Message:
+        description: "" 
+        value: 4
+      Sensor_GPIO:
+        description: "Global GPIO interrupt" 
+        value: 5
+      UART:
+        description: "Global UART interrupt" 
+        value: 7 
+      TIMER:
+        description: "Interrupt triggered when a timer counts down to 0. The status can be read and cleared (0x4000_4830[2]), and can be masked (0x4000_4834[2] for Host), and (0x4000_4838[2] for M4)." 
+        value: 8
+      CPU_WDOG_INTR:
+        description: "" 
+        value: 9
+      CPU_WDOG_RST:
+        description: "" 
+        value: 10
+      BUS_Timeout:
+        description: "" 
+        value: 11
+      FPU:
+        description: "" 
+        value: 12
+      PKFB:
+        description: "" 
+        value: 13
+      I2S:
+        description: "" 
+        value: 14
+      Audio:
+        description: "" 
+        value: 15
+      SPI_MS:
+        description: "" 
+        value: 16
+      CFG_DMA:
+        description: "" 
+        value: 17
+      PMU_TIMER:
+        description: "" 
+        value: 18
+      ADC_DONE:
+        description: "ADC Done interrupt"
+        value: 19
+      RTC_Alarm:
+        description: ""
+        value: 20
+      Reset_Interrupt:
+        description: ""
+        value: 21
+      FFE0_Combined:
+        description: ""
+        value: 22
+      FFE_WDT:
+        description: ""
+        value: 23
+      AP_Boot:
+        description: ""
+        value: 24
+      LDO30_PG_INTR:
+        description: ""
+        value: 25
+      LDO50_PG_INTR:
+        description: ""
+        value: 26
+      SRAM_128_TIMEOUT:
+        description: ""
+        value: 27
+      LPSD_Voice_Det:
+        description: ""
+        value: 28
+      DMIC_Voice_Det:
+        description: ""
+        value: 29
+      SDMA_DONE_1:
+        description: "" 
+        value: 31
+      SDMA_DONE_2:
+        description: "" 
+        value: 32
+      SDMA_DONE_3:
+        description: "" 
+        value: 33
+      SDMA_DONE_4:
+        description: "" 
+        value: 34
+      SDMA_DONE_5:
+        description: "" 
+        value: 35
+      SDMA_DONE_6:
+        description: "" 
+        value: 36
+      SDMA_DONE_7:
+        description: "" 
+        value: 37
+      SDMA_DONE_8:
+        description: "" 
+        value: 38
+      SDMA_DONE_9:
+        description: "" 
+        value: 39
+      SDMA_DONE_10:
+        description: "" 
+        value: 40
+      SDMA_DONE_11:
+        description: "" 
+        value: 41
+      AP_PDM_CLK_ON:
+        description: ""
+        value: 42
+      AP_PDM_CLK_OFF:
+        description: ""
+        value: 43
+      DMAC0_BLK_DONE:
+        description: ""
+        value: 44
+      DMAC0_BUF_DONE:
+        description: ""
+        value: 45
+      DMAC1_BLK_DONE:
+        description: ""
+        value: 46
+      DMAC1_BUF_DONE:
+        description: ""
+        value: 47
+      SDMA_DONE_0:
+        description: ""
+        value: 48
+      SDMA_ERR:
+        description: ""
+        value: 49
+      I2SSLV_M4_tx_or_intr:
+        description: ""
+        value: 50
+      LPSD_VOICE_OFF:
+        description: ""
+        value: 51
+      DMIC_VOICE_OFF:
+        description: ""
+        value: 52
+

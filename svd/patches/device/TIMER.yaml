@@ -6,10 +6,6 @@ _add:
       - offset: 0 
         size: 0x1000
         usage: registers
-    interrupts:
-      TIMER:
-        description: "Interrupt triggered when a timer counts down to 0. The status can be read and cleared (0x4000_4830[2]), and can be masked (0x4000_4834[2] for Host), and (0x4000_4838[2] for M4)." 
-        value: 8
     registers:
       CTRL:
         description: "Timer control register" 

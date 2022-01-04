@@ -34,10 +34,56 @@ use generic::*;
 pub mod generic;
 #[cfg(feature = "rt")]
 extern "C" {
+    fn SOFTWARE_INTERRUPT_2();
+    fn SOFTWARE_INTERRUPT_1();
+    fn FFE0_MESSAGE();
+    fn FABRIC_MESSAGE();
     fn SENSOR_GPIO();
     fn UART();
     fn TIMER();
+    fn CPU_WDOG_INTR();
+    fn CPU_WDOG_RST();
+    fn BUS_TIMEOUT();
+    fn FPU();
+    fn PKFB();
+    fn I2S();
+    fn AUDIO();
+    fn SPI_MS();
+    fn CFG_DMA();
+    fn PMU_TIMER();
     fn ADC_DONE();
+    fn RTC_ALARM();
+    fn RESET_INTERRUPT();
+    fn FFE0_COMBINED();
+    fn FFE_WDT();
+    fn AP_BOOT();
+    fn LDO30_PG_INTR();
+    fn LDO50_PG_INTR();
+    fn SRAM_128_TIMEOUT();
+    fn LPSD_VOICE_DET();
+    fn DMIC_VOICE_DET();
+    fn SDMA_DONE_1();
+    fn SDMA_DONE_2();
+    fn SDMA_DONE_3();
+    fn SDMA_DONE_4();
+    fn SDMA_DONE_5();
+    fn SDMA_DONE_6();
+    fn SDMA_DONE_7();
+    fn SDMA_DONE_8();
+    fn SDMA_DONE_9();
+    fn SDMA_DONE_10();
+    fn SDMA_DONE_11();
+    fn AP_PDM_CLK_ON();
+    fn AP_PDM_CLK_OFF();
+    fn DMAC0_BLK_DONE();
+    fn DMAC0_BUF_DONE();
+    fn DMAC1_BLK_DONE();
+    fn DMAC1_BUF_DONE();
+    fn SDMA_DONE_0();
+    fn SDMA_ERR();
+    fn I2SSLV_M4_TX_OR_INTR();
+    fn LPSD_VOICE_OFF();
+    fn DMIC_VOICE_OFF();
 }
 #[doc(hidden)]
 pub union Vector {
@@ -48,34 +94,149 @@ pub union Vector {
 #[doc(hidden)]
 #[link_section = ".vector_table.interrupts"]
 #[no_mangle]
-pub static __INTERRUPTS: [Vector; 20] = [
+pub static __INTERRUPTS: [Vector; 53] = [
+    Vector {
+        _handler: SOFTWARE_INTERRUPT_2,
+    },
+    Vector {
+        _handler: SOFTWARE_INTERRUPT_1,
+    },
     Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
+    Vector {
+        _handler: FFE0_MESSAGE,
+    },
+    Vector {
+        _handler: FABRIC_MESSAGE,
+    },
     Vector {
         _handler: SENSOR_GPIO,
     },
     Vector { _reserved: 0 },
     Vector { _handler: UART },
     Vector { _handler: TIMER },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
-    Vector { _reserved: 0 },
+    Vector {
+        _handler: CPU_WDOG_INTR,
+    },
+    Vector {
+        _handler: CPU_WDOG_RST,
+    },
+    Vector {
+        _handler: BUS_TIMEOUT,
+    },
+    Vector { _handler: FPU },
+    Vector { _handler: PKFB },
+    Vector { _handler: I2S },
+    Vector { _handler: AUDIO },
+    Vector { _handler: SPI_MS },
+    Vector { _handler: CFG_DMA },
+    Vector {
+        _handler: PMU_TIMER,
+    },
     Vector { _handler: ADC_DONE },
+    Vector {
+        _handler: RTC_ALARM,
+    },
+    Vector {
+        _handler: RESET_INTERRUPT,
+    },
+    Vector {
+        _handler: FFE0_COMBINED,
+    },
+    Vector { _handler: FFE_WDT },
+    Vector { _handler: AP_BOOT },
+    Vector {
+        _handler: LDO30_PG_INTR,
+    },
+    Vector {
+        _handler: LDO50_PG_INTR,
+    },
+    Vector {
+        _handler: SRAM_128_TIMEOUT,
+    },
+    Vector {
+        _handler: LPSD_VOICE_DET,
+    },
+    Vector {
+        _handler: DMIC_VOICE_DET,
+    },
+    Vector { _reserved: 0 },
+    Vector {
+        _handler: SDMA_DONE_1,
+    },
+    Vector {
+        _handler: SDMA_DONE_2,
+    },
+    Vector {
+        _handler: SDMA_DONE_3,
+    },
+    Vector {
+        _handler: SDMA_DONE_4,
+    },
+    Vector {
+        _handler: SDMA_DONE_5,
+    },
+    Vector {
+        _handler: SDMA_DONE_6,
+    },
+    Vector {
+        _handler: SDMA_DONE_7,
+    },
+    Vector {
+        _handler: SDMA_DONE_8,
+    },
+    Vector {
+        _handler: SDMA_DONE_9,
+    },
+    Vector {
+        _handler: SDMA_DONE_10,
+    },
+    Vector {
+        _handler: SDMA_DONE_11,
+    },
+    Vector {
+        _handler: AP_PDM_CLK_ON,
+    },
+    Vector {
+        _handler: AP_PDM_CLK_OFF,
+    },
+    Vector {
+        _handler: DMAC0_BLK_DONE,
+    },
+    Vector {
+        _handler: DMAC0_BUF_DONE,
+    },
+    Vector {
+        _handler: DMAC1_BLK_DONE,
+    },
+    Vector {
+        _handler: DMAC1_BUF_DONE,
+    },
+    Vector {
+        _handler: SDMA_DONE_0,
+    },
+    Vector { _handler: SDMA_ERR },
+    Vector {
+        _handler: I2SSLV_M4_TX_OR_INTR,
+    },
+    Vector {
+        _handler: LPSD_VOICE_OFF,
+    },
+    Vector {
+        _handler: DMIC_VOICE_OFF,
+    },
 ];
 #[doc = r"Enumeration of all the interrupts."]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 #[repr(u16)]
 pub enum Interrupt {
+    #[doc = "0 - Software_Interrupt_2"]
+    SOFTWARE_INTERRUPT_2 = 0,
+    #[doc = "1 - Software_Interrupt_1"]
+    SOFTWARE_INTERRUPT_1 = 1,
+    #[doc = "3 - FFE0_Message"]
+    FFE0_MESSAGE = 3,
+    #[doc = "4 - Fabric_Message"]
+    FABRIC_MESSAGE = 4,
     #[doc = "5 - Global GPIO interrupt"]
     SENSOR_GPIO = 5,
     #[doc = "7 - Global UART interrupt"]
@@ -84,8 +245,92 @@ pub enum Interrupt {
 for Host), and (0x4000_4838\\[2\\]
 for M4)."]
     TIMER = 8,
+    #[doc = "9 - CPU_WDOG_INTR"]
+    CPU_WDOG_INTR = 9,
+    #[doc = "10 - CPU_WDOG_RST"]
+    CPU_WDOG_RST = 10,
+    #[doc = "11 - BUS_Timeout"]
+    BUS_TIMEOUT = 11,
+    #[doc = "12 - FPU"]
+    FPU = 12,
+    #[doc = "13 - PKFB"]
+    PKFB = 13,
+    #[doc = "14 - I2S"]
+    I2S = 14,
+    #[doc = "15 - Audio"]
+    AUDIO = 15,
+    #[doc = "16 - SPI_MS"]
+    SPI_MS = 16,
+    #[doc = "17 - CFG_DMA"]
+    CFG_DMA = 17,
+    #[doc = "18 - PMU_TIMER"]
+    PMU_TIMER = 18,
     #[doc = "19 - ADC Done interrupt"]
     ADC_DONE = 19,
+    #[doc = "20 - RTC_Alarm"]
+    RTC_ALARM = 20,
+    #[doc = "21 - Reset_Interrupt"]
+    RESET_INTERRUPT = 21,
+    #[doc = "22 - FFE0_Combined"]
+    FFE0_COMBINED = 22,
+    #[doc = "23 - FFE_WDT"]
+    FFE_WDT = 23,
+    #[doc = "24 - AP_Boot"]
+    AP_BOOT = 24,
+    #[doc = "25 - LDO30_PG_INTR"]
+    LDO30_PG_INTR = 25,
+    #[doc = "26 - LDO50_PG_INTR"]
+    LDO50_PG_INTR = 26,
+    #[doc = "27 - SRAM_128_TIMEOUT"]
+    SRAM_128_TIMEOUT = 27,
+    #[doc = "28 - LPSD_Voice_Det"]
+    LPSD_VOICE_DET = 28,
+    #[doc = "29 - DMIC_Voice_Det"]
+    DMIC_VOICE_DET = 29,
+    #[doc = "31 - SDMA_DONE_1"]
+    SDMA_DONE_1 = 31,
+    #[doc = "32 - SDMA_DONE_2"]
+    SDMA_DONE_2 = 32,
+    #[doc = "33 - SDMA_DONE_3"]
+    SDMA_DONE_3 = 33,
+    #[doc = "34 - SDMA_DONE_4"]
+    SDMA_DONE_4 = 34,
+    #[doc = "35 - SDMA_DONE_5"]
+    SDMA_DONE_5 = 35,
+    #[doc = "36 - SDMA_DONE_6"]
+    SDMA_DONE_6 = 36,
+    #[doc = "37 - SDMA_DONE_7"]
+    SDMA_DONE_7 = 37,
+    #[doc = "38 - SDMA_DONE_8"]
+    SDMA_DONE_8 = 38,
+    #[doc = "39 - SDMA_DONE_9"]
+    SDMA_DONE_9 = 39,
+    #[doc = "40 - SDMA_DONE_10"]
+    SDMA_DONE_10 = 40,
+    #[doc = "41 - SDMA_DONE_11"]
+    SDMA_DONE_11 = 41,
+    #[doc = "42 - AP_PDM_CLK_ON"]
+    AP_PDM_CLK_ON = 42,
+    #[doc = "43 - AP_PDM_CLK_OFF"]
+    AP_PDM_CLK_OFF = 43,
+    #[doc = "44 - DMAC0_BLK_DONE"]
+    DMAC0_BLK_DONE = 44,
+    #[doc = "45 - DMAC0_BUF_DONE"]
+    DMAC0_BUF_DONE = 45,
+    #[doc = "46 - DMAC1_BLK_DONE"]
+    DMAC1_BLK_DONE = 46,
+    #[doc = "47 - DMAC1_BUF_DONE"]
+    DMAC1_BUF_DONE = 47,
+    #[doc = "48 - SDMA_DONE_0"]
+    SDMA_DONE_0 = 48,
+    #[doc = "49 - SDMA_ERR"]
+    SDMA_ERR = 49,
+    #[doc = "50 - I2SSLV_M4_tx_or_intr"]
+    I2SSLV_M4_TX_OR_INTR = 50,
+    #[doc = "51 - LPSD_VOICE_OFF"]
+    LPSD_VOICE_OFF = 51,
+    #[doc = "52 - DMIC_VOICE_OFF"]
+    DMIC_VOICE_OFF = 52,
 }
 unsafe impl cortex_m::interrupt::InterruptNumber for Interrupt {
     #[inline(always)]

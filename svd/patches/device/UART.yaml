@@ -6,7 +6,3 @@ _add:
       - offset: 0 
         size: 0x1000
         usage: registers
-    interrupts: 
-      UART:
-        description: Global UART interrupt 
-        value: 7 

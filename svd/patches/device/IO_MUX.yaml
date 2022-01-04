@@ -1,9 +1,5 @@
 IOMUX:
   _add:
-    _interrupts:
-        Sensor_GPIO:
-          description: Global GPIO interrupt 
-          value: 5
     SDA0_SEL_REG:
       description: Select pad for SDA function in I2C0 (only pad 1 is selectable)
       addressOffset: 0x100

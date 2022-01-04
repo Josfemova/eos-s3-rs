@@ -7,10 +7,6 @@ _add:
       - offset: 0
         size: 0x00C
         usage: registers 
-    interrupts: 
-      ADC_DONE:
-        description: "ADC Done interrupt"
-        value: 19
     registers:
       ADC_OUT:
         description: Last sampled value 
