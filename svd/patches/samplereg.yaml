@@ -1,0 +1,16 @@
+_add 
+  PERIPHERAL:
+    registers:
+      REG:
+        description: "" 
+        addressOffset: 0x000
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          FIELD:
+            description: ""
+            bitOffset:
+            bitWidth: 
+      
+    

@@ -36,6 +36,7 @@ pub mod generic;
 extern "C" {
     fn SENSOR_GPIO();
     fn UART();
+    fn TIMER();
     fn ADC_DONE();
 }
 #[doc(hidden)]
@@ -58,7 +59,7 @@ pub static __INTERRUPTS: [Vector; 20] = [
     },
     Vector { _reserved: 0 },
     Vector { _handler: UART },
-    Vector { _reserved: 0 },
+    Vector { _handler: TIMER },
     Vector { _reserved: 0 },
     Vector { _reserved: 0 },
     Vector { _reserved: 0 },
@@ -79,6 +80,10 @@ pub enum Interrupt {
     SENSOR_GPIO = 5,
     #[doc = "7 - Global UART interrupt"]
     UART = 7,
+    #[doc = "8 - Interrupt triggered when a timer counts down to 0. The status can be read and cleared (0x4000_4830\\[2\\]), and can be masked (0x4000_4834\\[2\\]
+for Host), and (0x4000_4838\\[2\\]
+for M4)."]
+    TIMER = 8,
     #[doc = "19 - ADC Done interrupt"]
     ADC_DONE = 19,
 }
@@ -200,6 +205,34 @@ impl core::fmt::Debug for AIP {
 }
 #[doc = "Analog IP block"]
 pub mod aip;
+#[doc = "Clock Reset Unit"]
+pub struct CRU {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for CRU {}
+impl CRU {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const cru::RegisterBlock = 0x4000_4000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const cru::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for CRU {
+    type Target = cru::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for CRU {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("CRU").finish()
+    }
+}
+#[doc = "Clock Reset Unit"]
+pub mod cru;
 #[doc = "MISC registers"]
 pub struct MISC {
     _marker: PhantomData<*const ()>,
@@ -228,6 +261,34 @@ impl core::fmt::Debug for MISC {
 }
 #[doc = "MISC registers"]
 pub mod misc;
+#[doc = "TIMER"]
+pub struct TIMER {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for TIMER {}
+impl TIMER {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const timer::RegisterBlock = 0x4001_3000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const timer::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for TIMER {
+    type Target = timer::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for TIMER {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("TIMER").finish()
+    }
+}
+#[doc = "TIMER"]
+pub mod timer;
 #[no_mangle]
 static mut DEVICE_PERIPHERALS: bool = false;
 #[doc = r"All the peripherals"]
@@ -241,8 +302,12 @@ pub struct Peripherals {
     pub ADC: ADC,
     #[doc = "AIP"]
     pub AIP: AIP,
+    #[doc = "CRU"]
+    pub CRU: CRU,
     #[doc = "MISC"]
     pub MISC: MISC,
+    #[doc = "TIMER"]
+    pub TIMER: TIMER,
 }
 impl Peripherals {
     #[doc = r"Returns all the peripherals *once*"]
@@ -273,7 +338,13 @@ impl Peripherals {
             AIP: AIP {
                 _marker: PhantomData,
             },
+            CRU: CRU {
+                _marker: PhantomData,
+            },
             MISC: MISC {
+                _marker: PhantomData,
+            },
+            TIMER: TIMER {
                 _marker: PhantomData,
             },
         }

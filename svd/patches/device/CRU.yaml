@@ -1,0 +1,954 @@
+_add: 
+  CRU: 
+    description: "Clock Reset Unit" 
+    baseAddress: 0x40004000 
+    addressBlocks:
+      - offset: 0
+        size: 0x148
+        usage: registers
+    registers:
+      CLK_CTRL_A_0:
+        description: "For Clock 10 (SYNC Up on A0 and AHB Interface of Batching Memory, AUDIO DMA, M4 SRAMs,M4 Bus Matrix and Trace block)"
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0b0010_0000_0100
+        fields:
+          Clock_Divider_Ratio: 
+            description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2. default div is 6"
+            bitOffset: 0
+            access: read-write
+            bitWidth: 9
+          Enable_Clock_Divider:
+            description: "Control if the clock divider is on"
+            access: read-write
+            bitOffset: 9
+            bitWidth: 1
+      CLK_CTRL_A_1:
+        description: "For Clock 10 (SYNC Up on A0 and AHB Interface of Batching Memory, AUDIO DMA, M4 SRAMs,M4 Bus Matrix and Trace block)"
+        addressOffset: 0x004
+        size: 32
+        resetValue: 0x0
+        fields:
+          Clock_Source_Selection: 
+            description: "Select the clock source"
+            bitOffset: 0
+            bitWidth: 2
+            access: read-write
+      CLK_CTRL_B_0:
+        description: "For Clock 2 (FB, A1 (Including CFGSM))"
+        addressOffset: 0x008
+        size: 32
+        resetValue: 0b0010_0000_0100
+        fields:
+          Clock_Divider_Ratio: 
+            description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2. default div is 6"
+            bitOffset: 0
+            access: read-write
+            bitWidth: 9
+          Enable_Clock_Divider:
+            description: "Control if the clock divider is on"
+            access: read-write
+            bitOffset: 9
+            bitWidth: 1
+      CLK_CTRL_B_1:
+        description: "For Clock 2 (FB, A1 (Including CFGSM))"
+        addressOffset: 0x00C
+        size: 32
+        resetValue: 0x0
+        fields:
+          Clock_Source_Selection: 
+            description: "Select the clock source"
+            bitOffset: 0
+            bitWidth: 2
+            access: read-write
+      CLK_CTRL_C_0:
+        description: "For Clock 8 X4 (FFE X4 clk)"
+        addressOffset: 0x010
+        size: 32
+        resetValue: 0b0010_0000_0100
+        fields:
+          Clock_Divider_Ratio: 
+            description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2. default div is 6"
+            bitOffset: 0
+            access: read-write
+            bitWidth: 9
+          Enable_Clock_Divider:
+            description: "Control if the clock divider is on"
+            access: read-write
+            bitOffset: 9
+            bitWidth: 1
+      CLK_CTRL_D_0:
+        description: "For Clock 11 (To M4 peripherals - AHB/APB bridge, UART, WDT and TIMER)"
+        addressOffset: 0x014
+        size: 32
+        resetValue: 0b0010_0000_1110
+        fields:
+          Clock_Divider_Ratio: 
+            description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2, default div is 16"
+            bitOffset: 0
+            access: read-write
+            bitWidth: 9
+          Enable_Clock_Divider:
+            description: "Control if the clock divider is on"
+            access: read-write
+            bitOffset: 9
+            bitWidth: 1
+      CLK_CTRL_E_0:
+        description: "For Clock 12 - Reserved"
+        addressOffset: 0x018
+        size: 32
+      CLK_CTRL_E_1:
+        description: "For Clock 12"
+        addressOffset: 0x01C
+        size: 32
+        resetValue: 0x0
+        access: read-only
+        fields:
+          Clock_Source_Selection: 
+            description: "The selected the clock source"
+            bitOffset: 0
+            bitWidth: 2
+      CLK_CTRL_F_0:
+        description: "For Clock 16 (FB)"
+        addressOffset: 0x020
+        size: 32
+        resetValue: 0b0010_0000_1110
+        fields:
+          Clock_Divider_Ratio: 
+            description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2, default div is 16"
+            bitOffset: 0
+            access: read-write
+            bitWidth: 9
+          Enable_Clock_Divider:
+            description: "Control if the clock divider is on"
+            access: read-write
+            bitOffset: 9
+            bitWidth: 1
+      CLK_CTRL_F_1:
+        description: "For Clock 16 (FB)"
+        addressOffset: 0x024
+        size: 32
+        resetValue: 0x0
+        fields:
+          Clock_Source_Selection: 
+            description: "Select the clock source"
+            bitOffset: 0
+            bitWidth: 2
+            access: read-write
+      CLK_CTRL_G_0:
+        description: "For Clock 30 (PDM LEFT/RIGHT clk, I2S Master clk)"
+        addressOffset: 0x028
+        size: 32
+        resetValue: 0b0010_0001_1110
+        fields:
+          Clock_Divider_Ratio: 
+            description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2, default div is 32"
+            bitOffset: 0
+            access: read-write
+            bitWidth: 9
+          Enable_Clock_Divider:
+            description: "Control if the clock divider is on"
+            access: read-write
+            bitOffset: 9
+            bitWidth: 1
+      CLK_CTRL_H_0:
+        description: "For Clock 19 (ADC)"
+        addressOffset: 0x02C
+        size: 32
+        resetValue: 0b0010_0000_1110
+        fields:
+          Clock_Divider_Ratio: 
+            description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2, default div is 16"
+            bitOffset: 0
+            access: read-write
+            bitWidth: 9
+          Enable_Clock_Divider:
+            description: "Control if the clock divider is on"
+            access: read-write
+            bitOffset: 9
+            bitWidth: 1
+      CLK_CTRL_H_1:
+        description: "For Clock 19 (ADC)"
+        addressOffset: 0x030
+        size: 32
+        resetValue: 0x0
+        access: read-only
+        fields:
+          Clock_Source_Selection: 
+            description: "Select the clock source"
+            bitOffset: 0
+            bitWidth: 2
+      CLK_CTRL_I_0:
+        description: "For Clock 21 (FB - additional clk)"
+        addressOffset: 0x034
+        size: 32
+        resetValue: 0b0010_0000_1110
+        fields:
+          Clock_Divider_Ratio: 
+            description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2, default div is 16"
+            bitOffset: 0
+            access: read-write
+            bitWidth: 9
+          Enable_Clock_Divider:
+            description: "Control if the clock divider is on"
+            access: read-write
+            bitOffset: 9
+            bitWidth: 1
+      CLK_CTRL_I_1:
+        description: "For Clock 21 (FB - additional clk)"
+        addressOffset: 0x038
+        size: 32
+        resetValue: 0x0
+        fields:
+          Clock_Source_Selection: 
+            description: "Select the clock source"
+            bitOffset: 0
+            bitWidth: 2
+            access: read-write
+      C01_CLK_GATE:
+        description: "Gating control for Clock 1"
+        addressOffset:  0x040 
+        size: 32
+        resetValue: 0b0010_1001_0001
+        fields:
+          Path_0_Gating_Control:
+            description: "To A0" 
+            access: read-only
+            bitOffset: 0
+            bitWidth: 1
+          Path_1_Gating_Control:
+            description: "To SDMA SRAM" 
+            access: read-write
+            bitOffset: 1
+            bitWidth: 1
+          Path_2_Gating_Control:
+            description: "To packet FIFO" 
+            access: read-write
+            bitOffset: 2
+            bitWidth: 1
+          Path_3_Gating_Control:
+            description: "To FFE" 
+            access: read-write
+            bitOffset: 3
+            bitWidth: 1
+          Path_4_Gating_Control:
+            description: "To AHB2APB Bridge /CFG DMA Bridge inside A1 , Allow M4 to configure SPI Master to load the code" 
+            access: read-write
+            bitOffset: 4
+            bitWidth: 1
+          Path_5_Gating_Control:
+            description: "To I2S module inside A1" 
+            access: read-write
+            bitOffset: 5
+            bitWidth: 1
+          Path_6_Gating_Control:
+            description: "To SDMA" 
+            access: read-write
+            bitOffset: 6
+            bitWidth: 1
+          Path_7_Gating_Control:
+            description: "Not specified" 
+            access: read-write
+            bitOffset: 7
+            bitWidth: 1
+          Path_9_Gating_Control:
+            description: "For SPT" 
+            access: read-write
+            bitOffset: 9
+            bitWidth: 1
+      C02_CLK_GATE:
+        description: "Gating control for Clock 2"
+        addressOffset:  0x044 
+        size: 32
+        resetValue: 0b0101
+        fields:
+          Path_0_Gating_Control:
+            description: "To A1 (including CFGSM)" 
+            access: read-write
+            bitOffset: 0
+            bitWidth: 1
+          Path_1_Gating_Control:
+            description: "To FB" 
+            access: read-write
+            bitOffset: 1
+            bitWidth: 1
+          Path_2_Gating_Control:
+            description: "Not specified" 
+            access: read-write
+            bitOffset: 2
+            bitWidth: 1
+      C08_X4_CLK_GATE:
+        description: "Gating control for FFE X4 clock"
+        addressOffset:  0x048 
+        size: 32
+        resetValue: 0x0
+        fields:
+          Path_0_Gating_Control:
+            description: "To FFE X4 clk" 
+            access: read-write
+            bitOffset: 0
+            bitWidth: 1
+      C08_X1_CLK_GATE:
+        description: "Gating control for FFE X1  clock"
+        addressOffset:  0x04C 
+        size: 32
+        resetValue: 0x0
+        fields:
+          Path_0_Gating_Control:
+            description: "To FFE X1 clk" 
+            access: read-write
+            bitOffset: 0
+            bitWidth: 1
+          Path_2_Gating_Control:
+            description: "To To A0" 
+            access: read-write
+            bitOffset: 2
+            bitWidth: 1
+          Path_3_Gating_Control:
+            description: "To To PF ASYNC FIFO 0" 
+            access: read-write
+            bitOffset: 3
+            bitWidth: 1
+      C10_FCLK_GATE:
+        description: "Gating control for Clock 10"
+        addressOffset:  0x050 
+        size: 32
+        resetValue: 0b0100_0011
+        fields:
+          Path_0_Gating_Control:
+            description: "To M4 Bus Matrix and Trace block" 
+            access: read-only
+            bitOffset: 0
+            bitWidth: 1
+          Path_1_Gating_Control:
+            description: "RWHC: To M4 SRAM Instance, M4S0~M4S3. This bit will be set if any of the Memories (M4S0~M4S3) been wakeup  by Hardware." 
+            access: read-write
+            bitOffset: 1
+            bitWidth: 1
+          Path_2_Gating_Control:
+            description: "RWHC: To M4 SRAM Instance, M4S4~M4S7. This bit will be set if any of the Memories (M4S4~M4S7) been wakeup  by Hardware." 
+            access: read-write
+            bitOffset: 2
+            bitWidth: 1
+          Path_3_Gating_Control:
+            description: "RWHC: To M4 SRAM Instance, M4S8~M4S11. This bit will be set if any of the Memories (M4S8~M4S11) been wakeup by Hardware." 
+            access: read-write
+            bitOffset: 3
+            bitWidth: 1
+          Path_4_Gating_Control:
+            description: "RWHC: To M4 SRAM Instance, M4S12~M4S15. This bit will be set if any of the Memories (M4S12~M4S15) been wakeup by Hardware." 
+            access: read-write
+            bitOffset: 4
+            bitWidth: 1
+          Path_5_Gating_Control:
+            description: "To AUDIO DMA"
+            access: read-write
+            bitOffset: 5
+            bitWidth: 1
+          Path_6_Gating_Control:
+            description: "To the SYNC Up on A0 and AHB Interface of Batching Memory" 
+            access: read-write
+            bitOffset: 6
+            bitWidth: 1
+      C11_CLK_GATE:
+        description: "Gating control for clock 11"
+        addressOffset:  0x054 
+        size: 32
+        resetValue: 0x0
+        fields:
+          Path_0_Gating_Control:
+            description: "To M4 peripherals - AHB/APB bridge, UART, WDT and TIMER" 
+            access: read-write
+            bitOffset: 0
+            bitWidth: 1
+      C12_CLK_GATE_Reserved: #anotated to avoid svdtools thinking this got Gating control
+        description: "Gating control for clock 12"
+        addressOffset:  0x058 
+        size: 32
+        access: read-only
+      CS_CLK_GATE:
+        description: "Gating control for SWD CS clock U"
+        addressOffset:  0x05C 
+        size: 32
+        resetValue: 0x0
+        fields:
+          Path_0_Gating_Control:
+            description: "To SWD Clk from PIN" 
+            access: read-write
+            bitOffset: 0
+            bitWidth: 1
+      CU_CLK_GATE_Reserved: #anotated to avoid svdtools thinking this got Gating control
+        description: "Not specified"
+        addressOffset:  0x060
+        size: 32
+        access: read-only
+      C16_CLK_GATE:
+        description: "Gating control for FB clock 16"
+        addressOffset:  0x064 
+        size: 32
+        resetValue: 0x0
+        fields:
+          Path_0_Gating_Control:
+            description: "To SWD Clk from PIN" 
+            access: read-write
+            bitOffset: 0
+            bitWidth: 1
+      CLK_RESERVED_0: 
+        description: "Not specified"
+        addressOffset:  0x068
+        size: 32
+        access: read-only
+      C19_CLK_GATE:
+        description: "Gating control for ADC clock 19"
+        addressOffset:  0x06C 
+        size: 32
+        resetValue: 0x0
+        fields:
+          Path_0_Gating_Control:
+            description: "To ADC" 
+            access: read-write
+            bitOffset: 0
+            bitWidth: 1
+      C21_CLK_GATE:
+        description: "Gating control for FB additional clock 21"
+        addressOffset:  0x070 
+        size: 32
+        resetValue: 0x0
+        fields:
+          Path_0_Gating_Control:
+            description: "To FB (additional CLK)" 
+            access: read-write
+            bitOffset: 0
+            bitWidth: 1
+      PF_SW_RESET:
+        description: "Packet FIFO power domain Software Reset.Once Program the SW Reset Bit to 1, the corresponding reset will be asserted immediately. Once Program the SW Reset Bit to 0, the corresponding reset will be de-asserted synchronous even the corresponding clock is not running. (Turn off by Clock gating cell)"
+        addressOffset: 0x080
+        size: 32
+        access: read-write
+        resetValue: 0x0000_0000
+        fields:
+          PF_FIFO_0_SW_RESET: 
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually."
+            bitOffset: 0
+            bitWidth: 1    
+          PF_FIFO_1_SW_RESET: 
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually."
+            bitOffset: 1
+            bitWidth: 1    
+          PF_FIFO_2_SW_RESET: 
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually."
+            bitOffset: 2
+            bitWidth: 1    
+          PF_FIFO_8k_SW_RESET: 
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually."
+            bitOffset: 3
+            bitWidth: 1    
+          PF_ASYNC_FIFO_0_SW_RESET: 
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually.(R08_P3 as well)"
+            bitOffset: 4
+            bitWidth: 1    
+          PF_Peripheral_SW_RESET: 
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually."
+            bitOffset: 5
+            bitWidth: 1    
+      FFE_SW_RESET:
+        description: "Once Program the SW Reset Bit to 1, the corresponding reset will be asserted immediately. Once Program the SW Reset Bit to 0, the corresponding reset will be de-asserted synchronous even the corresponding clock is not running. (Turn off by Clock gating cell)"
+        addressOffset:  0x084 
+        size: 32
+        resetValue: 0x0
+        fields:
+          FFE_0_X1_SW_Reset: 
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually. (R01_P3_FFE as well)"
+            access: read-write
+            bitOffset: 0
+            bitWidth: 1
+          FFE_0_X4_SW_Reset: 
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually. (R01_P3_FFE as well)"
+            access: read-write
+            bitOffset: 0
+            bitWidth: 1
+      FB_SW_RESET:
+        description: "Once Program the SW Reset Bit to 1, the corresponding reset will be asserted immediately. Once Program the SW Reset Bit to 0, the corresponding reset will be de-asserted synchronous even the corresponding clock is not running. (Turn off by Clock gating cell)"
+        addressOffset: 0x088
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          FB_C02_Domain_SW_Reset:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually."
+            bitOffset: 0
+            bitWidth: 1
+          FB_C09_Domain_SW_Reset:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually."
+            bitOffset: 2
+            bitWidth: 1
+          FB_C16_Domain_SW_Reset:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually."
+            bitOffset: 4
+            bitWidth: 1
+          FB_C21_Domain_SW_Reset:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually." 
+            bitOffset: 5
+            bitWidth: 1
+      A1_SW_RESET:
+        description: "Once Program the SW Reset Bit to 1, the corresponding reset will be asserted immediately. Once Program the SW Reset Bit to 0, the corresponding reset will be de-asserted synchronous even the corresponding clock is not running. (Turn off by Clock gating cell)" 
+        addressOffset: 0x08C
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          SPT_SW_RESET:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually. -> This is used to Reset the SPT"
+            bitOffset: 0
+            bitWidth: 1
+          CfgSM_SW_RESET:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually. -> This is used to Reset the CfgSM/SPI Master and Related FIFO, DMA and AHB Master"
+            bitOffset: 2
+            bitWidth: 1
+      AUDIO_MISC_SW_RESET:
+        description: "Once Program the SW Reset Bit to 1, the corresponding reset will be asserted immediately. Once Program the SW Reset Bit to 0, the corresponding reset will be de-asserted synchronous even the corresponding clock is not running. (Turn off by Clock gating cell)" 
+        addressOffset: 0x090
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          AD0_SW_RESET:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually. ==> For DMA Power Domain."
+            bitOffset: 0 
+            bitWidth: 1 
+          AD1_SW_RESET:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually. ==> For DMA Power Domain."
+            bitOffset: 1 
+            bitWidth: 1 
+          AD2_SW_RESET:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually. ==> For DMA Power Domain."
+            bitOffset: 2 
+            bitWidth: 1 
+          AD3_SW_RESET:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually. ==> For DMA Power Domain."
+            bitOffset: 3
+            bitWidth: 1 
+          AD4_SW_RESET:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually. ==> For DMA Power Domain."
+            bitOffset: 4
+            bitWidth: 1 
+          AD5_SW_RESET:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually. ==> For DMA Power Domain."
+            bitOffset: 5
+            bitWidth: 1 
+          DMA_SW_RESET:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually. ==> For DMA Power Domain."
+            bitOffset: 6
+            bitWidth: 1 
+          I2S_SW_RESET:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually. ==> For I2S Power Domain.
+  Note: It will only reset the AHB interface R01, but it will not reset R32 path. Suggest to power down, then power on I2S if Software Reset is needed"
+            bitOffset: 7
+            bitWidth: 1 
+      FB_MISC_SW_RST_CTL:
+        description: "Not specified. FAFIFO1, AHBWB Software Reset control" 
+        addressOffset: 0x094
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          AHBWB_SW_RESET:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually. ==> For R40"
+            bitOffset: 0
+            bitWidth: 1
+          PFAFIFO1_SW_RESET:
+            description: "1'b1 : Enable the Software Reset. FW need to disable it manually. ==> For R41"
+            bitOffset: 1
+            bitWidth: 1
+      CLK_CTRL_PMU:
+        description: "This Clock is used to delay the Clock gating control signals from PMU. The PMU will monitor the feedback/delayed Clock Gating Control signals to ensure the clocks are OFF before jump to next state. The Firmware needs to Configure this divider to ensure there delay time is longer enough. C23 Clock needs to be 2/3 of the lowest clock frequency of other clocks. For Example, if the Lowest clock frequency of other clocks are 5, then C23 should be lower than 3.33MHz (Or the clock frequency of other clocks should be at least 1.5 times faster than C23.)" 
+        addressOffset: 0x100
+        size: 32
+        access: read-write
+        resetValue: 0b0010_0011_1110
+        fields:
+          Clock_Divider_Ratio:
+            description: "High Speed Clock Divider Ratio. Ratio is reg value + 2. default div is 64"
+            bitOffset: 0
+            bitWidth: 9
+          Enable_Clock_Divider:
+            description: "1'b1 Clock Divider is ON. 1'b0 Clock Divider is OFF, Output the Source Clock Directly"
+            bitOffset: 9
+            bitWidth: 1
+      CRU_GENERAL:
+        description: "General reg and SPI ALWAYS ON control" 
+        addressOffset: 0x104
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          SPICLK_ALWAYS_ON:
+            description: "Controls wether the SPI clock is always on or not"
+            bitOffset: 0
+            bitWidth:  1
+          General:
+            description: "General purpose register"
+            bitOffset: 1
+            bitWidth: 8
+      CRU_DEBUG:
+        description: "CRU Debug registers" 
+        addressOffset: 0x108
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          CRU_DEBUG_Select:
+            description: "Select the clock to be monitored"
+            bitOffset: 0
+            bitWidth: 4
+      C01_CLK_DIV:
+        description: "Source Clock is C10 (CLK to SDMA,I2S module Inside A1, AHB2APB Bridge /CFG DMA Bridge inside A1 , FFE, Packet FIFO,SDMA,A0 )
+If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0 can not change at same time." 
+        addressOffset: 0x110
+        size: 32
+        access: read-write
+        resetValue: 0b0001_0001
+        fields:
+          C01_CLK_DIV:
+            description: "The input clock frequency will be divided and generate the corresponding clock output. div is reg value + 1"
+            bitOffset: 0
+            bitWidth: 4
+          C01_CLK_DIV_CG:
+            description: "This bit is used to turn off the clock for the SYNC down Divider"
+            bitOffset: 4
+            bitWidth: 1
+      C09_CLK_DIV:
+        description: "Source Clock is C10 (CLK to Voice APB interface, PIF, FB). If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0 can not change at same time." 
+        addressOffset: 0x114
+        size: 32
+        access: read-write
+        resetValue: 0b0001_0001
+        fields:
+          C01_CLK_DIV:
+            description: "The input clock frequency will be divided and generate the corresponding clock output. div is reg value + 1"
+            bitOffset: 0
+            bitWidth: 4
+          C01_CLK_DIV_CG:
+            description: "This bit is used to turn off the clock for the SYNC down Divider"
+            bitOffset: 4
+            bitWidth: 1
+      C31_CLK_DIV:
+        description: "Source Clock is C30 (LPSD CLK).If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0 can not change at same time." 
+        addressOffset: 0x118
+        size: 32
+        access: read-write
+        resetValue: 0b0001_0011
+        fields:
+          C01_CLK_DIV:
+            description: "The input clock frequency will be divided and generate the corresponding clock output. div is reg value + 1"
+            bitOffset: 0
+            bitWidth: 4
+          C01_CLK_DIV_CG:
+            description: "This bit is used to turn off the clock for the SYNC down Divider"
+            bitOffset: 4
+            bitWidth: 1
+      C09_CLK_GATE:
+        description: "Gating control for clock 09"
+        addressOffset:  0x11C 
+        size: 32
+        resetValue: 0x0
+        fields:
+          Path_0_Gating_Control:
+            description: "To voice APB interface" 
+            access: read-write
+            bitOffset: 0
+            bitWidth: 1
+          Path_1_Gating_Control:
+            description: "To PIF" 
+            access: read-write
+            bitOffset: 1
+            bitWidth: 1
+          Path_2_Gating_Control:
+            description: "To FB" 
+            access: read-write
+            bitOffset: 2
+            bitWidth: 1      
+      C30_C31_CLK_GATE:
+        description: "Gating control for clocks 30-31"
+        addressOffset:  0x120 
+        size: 32
+        resetValue: 0x0
+        fields:
+          C30_Path_0_Gating_Control:
+            description: "To PDM LEFT CLK" 
+            access: read-write
+            bitOffset: 0
+            bitWidth: 1
+          C30_Path_1_Gating_Control:
+            description: "To PDM RIGHT CLK" 
+            access: read-write
+            bitOffset: 1
+            bitWidth: 1
+          C30_Path_2_Gating_Control:
+            description: "To I2S Master Clk" 
+            access: read-write
+            bitOffset: 2
+            bitWidth: 1    
+          C31_Path_0_Gating_Control:
+            description: "To LPSD clk" 
+            access: read-write
+            bitOffset: 3
+            bitWidth: 1    
+      CLK_DIVIDER_CLK_GATING:
+        description: "Control for divider gates in different clocks"
+        addressOffset:  0x124 
+        size: 32
+        resetValue: 0b0011_1111_1111
+        fields:
+          CLK_DIVIDER_A_CG:
+            description: "To C10,C01,C09 (SYNC Up on A0, AHB Interface of Batching Memory, AUDIO DMA, M4 SRAMs,M4 Bus Matrix , M4 Trace block, Debug controller, SDMA,I2S module Inside A1, AHB2APB Bridge /CFG DMA Bridge inside A1 , FFE, Packet FIFO,SDMA,A0, Voice APB interface, PIF, FB). Note: Firmware Should NOT program this bit to 0." 
+            access: read-write
+            bitOffset: 0
+            bitWidth: 1
+          CLK_DIVIDER_B_CG:
+            description: "To C02 (FB, A1 (Including CFGSM))" 
+            access: read-write
+            bitOffset: 1
+            bitWidth: 1
+          CLK_DIVIDER_C_CG:
+            description: "To C08 (FFE X4, X1)" 
+            access: read-write
+            bitOffset: 2
+            bitWidth: 1
+          CLK_DIVIDER_D_CG:
+            description: "To C11 (M4 peripherals - AHB/APB bridge, UART, WDT and TIMER)" 
+            access: read-write
+            bitOffset: 3
+            bitWidth: 1
+          CLK_DIVIDER_F_CG:
+            description: "To C16 (FB)" 
+            access: read-write
+            bitOffset: 5
+            bitWidth: 1
+          CLK_DIVIDER_G_CG:
+            description: "To C30, C31 (PDM LEFT/RIGHT Clk, I2S_MASTER clk, LPSD CLK)" 
+            access: read-write
+            bitOffset: 6
+            bitWidth: 1
+          CLK_DIVIDER_H_CG:
+            description: "To C19 (ADC)<F11>" 
+            access: read-write
+            bitOffset: 7
+            bitWidth: 1
+          CLK_DIVIDER_I_CG:
+            description: "To C21 (FB)" 
+            access: read-write
+            bitOffset: 8
+            bitWidth: 1
+          CLK_DIVIDER_J_CG:
+            description: "To C23 (PMU clk gating control)" 
+            access: read-write
+            bitOffset: 9
+            bitWidth: 1
+      CLK_SWITCH_FOR_B:
+        description: "For Clock 2 (FB, A1 (Including CFGSM))" 
+        addressOffset: 0x130
+        size: 32
+        resetValue: 0x0
+        fields:
+          Clock_Source_Selection:
+            description: "Choose between High Speed Clock or 32Khz oscillator"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      CLK_SWITCH_FOR_C:
+        description: "For Clock 8 X4 (FFE X4 clk)" 
+        addressOffset: 0x134
+        size: 32
+        resetValue: 0x0
+        fields:
+          Clock_Source_Selection:
+            description: "Choose between High Speed Clock or 32Khz oscillator"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      CLK_SWITCH_FOR_D:
+        description: "For Clock 11 (To M4 peripherals - AHB/APB bridge, UART, WDT and TIMER)" 
+        addressOffset: 0x138
+        size: 32
+        resetValue: 0x0
+        fields:
+          Clock_Source_Selection:
+            description: "Choose between High Speed Clock or 32Khz oscillator"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      CLK_SWITCH_FOR_H:
+        description: "For Clock 19 (ADC)" 
+        addressOffset: 0x13C
+        size: 32
+        resetValue: 0x0
+        fields:
+          Clock_Source_Selection:
+            description: "Choose between High Speed Clock or 32Khz oscillator"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      CLK_SWITCH_FOR_J:
+        description: "For CLK 23 (PMU clk gating control)" 
+        addressOffset: 0x140
+        size: 32
+        resetValue: 0x0
+        fields:
+          Clock_Source_Selection:
+            description: "Choose between High Speed Clock or 32Khz oscillator"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      CLK_SWITCH_FOR_G:
+        description: "To C30(PDM LEFT/RIGHT Clk, I2S_MASTER)" 
+        addressOffset: 0x144
+        size: 32
+        resetValue: 0x0
+        fields:
+          Clock_Source_Selection:
+            description: "Choose between High Speed Clock or 32Khz oscillator"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+
+
+
+
+CRU:
+  CLK_CTRL_A_0:
+    _modify:
+      Clock_Divider_Ratio:
+        _write_constraint: [0x0, 0x1FE]
+    Enable_Clock_Divider:
+        disable: [0, "Clock divider is OFF, Output Source clock directly"]
+        enable: [1, "Clock divider is ON"]
+  CLK_CTRL_A_1:
+    Clock_Source_Selection:
+      with_hs_clk: [0, "Selects the High speed/Divided clock"]
+      with_32khz_clk: [1, "Selects the 32KHz oscillator"]
+  CLK_CTRL_B_0:
+    _modify:
+      Clock_Divider_Ratio:
+        _write_constraint: [0x0, 0x1FE]
+    Enable_Clock_Divider:
+        disable: [0, "Clock divider is OFF, Output Source clock directly"]
+        enable: [1, "Clock divider is ON"]
+  CLK_CTRL_B_1:
+    Clock_Source_Selection:
+      with_hs_clk: [0, "Selects the High speed/Divided clock"]
+  CLK_CTRL_C_0:
+    _modify:
+      Clock_Divider_Ratio:
+        _write_constraint: [0x0, 0x1FE]
+    Enable_Clock_Divider:
+        disable: [0, "Clock divider is OFF, Output Source clock directly"]
+        enable: [1, "Clock divider is ON"]
+  CLK_CTRL_D_0:
+    _modify:
+      Clock_Divider_Ratio:
+        _write_constraint: [0x0, 0x1FE]
+    Enable_Clock_Divider:
+        disable: [0, "Clock divider is OFF, Output Source clock directly"]
+        enable: [1, "Clock divider is ON"]
+  CLK_CTRL_E_1:
+    Clock_Source_Selection:
+      with_hs_clk: [0, "Selects the High speed/Divided clock"]
+  CLK_CTRL_F_0:
+    _modify:
+      Clock_Divider_Ratio:
+        _write_constraint: [0x0, 0x1FE]
+    Enable_Clock_Divider:
+        disable: [0, "Clock divider is OFF, Output Source clock directly"]
+        enable: [1, "Clock divider is ON"]
+  CLK_CTRL_F_1:
+    Clock_Source_Selection:
+      with_hs_clk: [0, "Selects the High speed/Divided clock"]
+      with_32khz_clk: [1, "Selects the 32KHz oscillator"]
+  CLK_CTRL_G_0:
+    _modify:
+      Clock_Divider_Ratio:
+        _write_constraint: [0x0, 0x1FE]
+    Enable_Clock_Divider:
+        disable: [0, "Clock divider is OFF, Output Source clock directly"]
+        enable: [1, "Clock divider is ON"]
+  CLK_CTRL_H_0:
+    _modify:
+      Clock_Divider_Ratio:
+        _write_constraint: [0x0, 0x1FE]
+    Enable_Clock_Divider:
+        disable: [0, "Clock divider is OFF, Output Source clock directly"]
+        enable: [1, "Clock divider is ON"]
+  CLK_CTRL_H_1:
+    Clock_Source_Selection:
+      with_hs_clk: [0, "Selects the High speed/Divided clock"]
+  CLK_CTRL_I_0:
+    _modify:
+      Clock_Divider_Ratio:
+        _write_constraint: [0x0, 0x1FE]
+    Enable_Clock_Divider:
+        disable: [0, "Clock divider is OFF, Output Source clock directly"]
+        enable: [1, "Clock divider is ON"]
+  CLK_CTRL_I_1:
+    Clock_Source_Selection:
+      with_hs_clk: [0, "Selects the High speed/Divided clock"]
+      with_32khz_clk: [1, "Selects the 32KHz oscillator"]       
+  "C*CLK_GATE":
+    "*Path_*_Gating_Control":
+      stop: [0, "Clock is stop"] 
+      run: [1, "Clock is runnig"]
+  PF_SW_RESET:
+    "PF_*":
+      enable: [1, "Enable the software reset. FW need to disable it manually"]
+  FFE_SW_RESET:
+    "FFE*": 
+      enable: [1, "Enable the software reset. FW need to disable it manually. (R01_P3_FFE as well)"]
+  FB_SW_RESET:
+    "FB*": 
+      enable: [1, "Enable the software reset. FW need to disable it manually"]
+  AUDIO_MISC_SW_RESET:
+    "*_SW_RESET":
+      enable: [1, "Enable the software reset. FW need to disable it manually"]
+  FB_MISC_SW_RST_CTL:
+    "*_SW_RESET":
+      enable: [1, "Enable the software reset. FW need to disable it manually"]
+  CLK_CTRL_PMU:
+    _modify:
+      Clock_Divider_Ratio:
+        _write_constraint: [0x0, 0x1FE]
+    Enable_Clock_Divider:
+        disable: [0, "Clock divider is OFF, Output Source clock directly"]
+        enable: [1, "Clock divider is ON"]
+  CRU_GENERAL:
+    SPICLK_ALWAYS_ON:
+      always_off: [0, "Internal SPI Clock (C00) will be gated off if SPI CS is de-asserted even SPI Clock on the PAD is still running.  "]
+      always_on: [1, "Internal SPIC Clock (C00) is running if SPI Clock on the PAD is toggling regardless of SPI CS value."]
+  CRU_DEBUG:
+    CRU_DEBUG_Select:
+      monitor_C00_clock: [1  ,"Select clock C00 as the clock to debug" ] 
+      monitor_C01_clock: [2  ,"Select clock C01 as the clock to debug" ]   
+      monitor_C02_clock: [3  ,"Select clock C02 as the clock to debug" ]   
+      monitor_C08X4_clock: [4  ,"Select clock C08X4 as the clock to debug" ]   
+      monitor_C08X1_clock: [5  ,"Select clock C08X1 as the clock to debug" ]   
+      monitor_C09_clock: [6  ,"Select clock C09 as the clock to debug" ]   
+      monitor_C10_clock: [7  ,"Select clock C10 as the clock to debug" ]     
+      monitor_C11_clock: [8  ,"Select clock C11 as the clock to debug" ]     
+      monitor_CS_clock: [9  ,"Select clock CS as the clock to debug" ]     
+      monitor_C16_clock: [10 ,"Select clock C16 as the clock to debug" ]     
+      monitor_C19_clock: [11 ,"Select clock C19 as the clock to debug" ]     
+      monitor_C20_C32_clock: [12 ,"Select clock C20/C32 as the clock to debug" ]       
+      monitor_C21_clock: [13 ,"Select clock C21 as the clock to debug" ]     
+      monitor_C23_clock: [14 ,"Select clock C23 as the clock to debug" ]     
+      monitor_C30_C31_clock: [15 ,"Select clock C30/C31 as the clock to debug" ]         
+  "*_CLK_DIV":
+    "*CLK_DIV_CG":
+      stop: [0, "Clock is stop"] 
+      run: [1, "Clock is runnig"]
+  CLK_DIVIDER_CLK_GATING:
+    "CLK_DIVIDER_*":
+      stop: [0, "Clock is stop"] 
+      run: [1, "Clock is runnig"]
+  "CLK_SWITCH_FOR_*":
+    Clock_Source_Selection:
+      with_hs_clk: [0, "Selects the High speed/Divided clock"]
+      with_32khz_clk: [1, "Selects the 32KHz oscillator"]

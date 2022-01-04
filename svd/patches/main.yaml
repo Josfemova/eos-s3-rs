@@ -6,7 +6,7 @@ _include:
   - "device/AIP.yaml" #done
   - "device/AUD.yaml"
   - "device/CFG_CTL.yaml"
-  - "device/CRU.YAML"
+  - "device/CRU.yaml" #done
   - "device/DMA.yaml"
   - "device/ExtRegsFFE.yaml"
   - "device/I2S_Slave.yaml"
@@ -19,7 +19,7 @@ _include:
   - "device/SDMA.yaml"
   - "device/SPI.yaml"
   - "device/SPT.yaml"
-  - "device/TIMER.yaml"
+  - "device/TIMER.yaml" #done
   - "device/UART.yaml"
   - "device/WDT.yaml"
   - "core/DWT.yaml"
