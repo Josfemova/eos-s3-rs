@@ -49,7 +49,9 @@ impl From<CLOCK_SOURCE_SELECTION_A> for bool {
     }
 }
 #[doc = "Field `Clock_Source_Selection` reader - Choose between High Speed Clock or 32Khz oscillator"]
-pub struct CLOCK_SOURCE_SELECTION_R(crate::FieldReader<bool, CLOCK_SOURCE_SELECTION_A>);
+pub struct CLOCK_SOURCE_SELECTION_R(
+    crate::FieldReader<bool, CLOCK_SOURCE_SELECTION_A>,
+);
 impl CLOCK_SOURCE_SELECTION_R {
     #[inline(always)]
     pub(crate) fn new(bits: bool) -> Self {

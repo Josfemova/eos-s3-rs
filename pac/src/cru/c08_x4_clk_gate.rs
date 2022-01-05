@@ -49,7 +49,9 @@ impl From<PATH_0_GATING_CONTROL_A> for bool {
     }
 }
 #[doc = "Field `Path_0_Gating_Control` reader - To FFE X4 clk"]
-pub struct PATH_0_GATING_CONTROL_R(crate::FieldReader<bool, PATH_0_GATING_CONTROL_A>);
+pub struct PATH_0_GATING_CONTROL_R(
+    crate::FieldReader<bool, PATH_0_GATING_CONTROL_A>,
+);
 impl PATH_0_GATING_CONTROL_R {
     #[inline(always)]
     pub(crate) fn new(bits: bool) -> Self {

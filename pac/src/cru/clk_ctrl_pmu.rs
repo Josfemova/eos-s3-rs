@@ -76,7 +76,9 @@ impl From<ENABLE_CLOCK_DIVIDER_A> for bool {
     }
 }
 #[doc = "Field `Enable_Clock_Divider` reader - 1'b1 Clock Divider is ON. 1'b0 Clock Divider is OFF, Output the Source Clock Directly"]
-pub struct ENABLE_CLOCK_DIVIDER_R(crate::FieldReader<bool, ENABLE_CLOCK_DIVIDER_A>);
+pub struct ENABLE_CLOCK_DIVIDER_R(
+    crate::FieldReader<bool, ENABLE_CLOCK_DIVIDER_A>,
+);
 impl ENABLE_CLOCK_DIVIDER_R {
     #[inline(always)]
     pub(crate) fn new(bits: bool) -> Self {
@@ -141,7 +143,8 @@ impl<'a> ENABLE_CLOCK_DIVIDER_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub fn bit(self, value: bool) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x01 << 9)) | ((value as u32 & 0x01) << 9);
+        self.w.bits =
+            (self.w.bits & !(0x01 << 9)) | ((value as u32 & 0x01) << 9);
         self.w
     }
 }

@@ -25,7 +25,9 @@ pub const NVIC_PRIO_BITS: u8 = 3;
 #[cfg(feature = "rt")]
 pub use self::Interrupt as interrupt;
 pub use cortex_m::peripheral::Peripherals as CorePeripherals;
-pub use cortex_m::peripheral::{CBP, CPUID, DCB, DWT, FPB, FPU, ITM, MPU, NVIC, SCB, SYST, TPIU};
+pub use cortex_m::peripheral::{
+    CBP, CPUID, DCB, DWT, FPB, FPU, ITM, MPU, NVIC, SCB, SYST, TPIU,
+};
 #[cfg(feature = "rt")]
 pub use cortex_m_rt::interrupt;
 #[allow(unused_imports)]

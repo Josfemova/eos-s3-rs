@@ -86,7 +86,9 @@ impl From<A0_PMU_DEBUG_MON_SEL_A> for u8 {
     }
 }
 #[doc = "Field `A0_PMU_DEBUG_MON_SEL` reader - Select data to be shown in the PMU debug monitor"]
-pub struct A0_PMU_DEBUG_MON_SEL_R(crate::FieldReader<u8, A0_PMU_DEBUG_MON_SEL_A>);
+pub struct A0_PMU_DEBUG_MON_SEL_R(
+    crate::FieldReader<u8, A0_PMU_DEBUG_MON_SEL_A>,
+);
 impl A0_PMU_DEBUG_MON_SEL_R {
     #[inline(always)]
     pub(crate) fn new(bits: u8) -> Self {
@@ -122,7 +124,8 @@ impl A0_PMU_DEBUG_MON_SEL_R {
     #[doc = "Checks if the value of the field is `SHOW_M4STM_KICKOFF_AND_BUSY_PLUS_0X000000`"]
     #[inline(always)]
     pub fn is_show_m4stm_kickoff_and_busy_plus_0x000000(&self) -> bool {
-        **self == A0_PMU_DEBUG_MON_SEL_A::SHOW_M4STM_KICKOFF_AND_BUSY_PLUS_0X000000
+        **self
+            == A0_PMU_DEBUG_MON_SEL_A::SHOW_M4STM_KICKOFF_AND_BUSY_PLUS_0X000000
     }
     #[doc = "Checks if the value of the field is `SHOW_A1`"]
     #[inline(always)]
@@ -172,7 +175,8 @@ impl A0_PMU_DEBUG_MON_SEL_R {
     #[doc = "Checks if the value of the field is `SHOW_FBST_KICKOFF_AND_BUSY_PLUS_0X000000`"]
     #[inline(always)]
     pub fn is_show_fbst_kickoff_and_busy_plus_0x000000(&self) -> bool {
-        **self == A0_PMU_DEBUG_MON_SEL_A::SHOW_FBST_KICKOFF_AND_BUSY_PLUS_0X000000
+        **self
+            == A0_PMU_DEBUG_MON_SEL_A::SHOW_FBST_KICKOFF_AND_BUSY_PLUS_0X000000
     }
     #[doc = "Checks if the value of the field is `SHOW_I2S`"]
     #[inline(always)]
@@ -240,7 +244,9 @@ impl<'a> A0_PMU_DEBUG_MON_SEL_W<'a> {
     #[doc = "{M4STM_KickOff, M4STM_BUSY, 6'h0}"]
     #[inline(always)]
     pub fn show_m4stm_kickoff_and_busy_plus_0x000000(self) -> &'a mut W {
-        self.variant(A0_PMU_DEBUG_MON_SEL_A::SHOW_M4STM_KICKOFF_AND_BUSY_PLUS_0X000000)
+        self.variant(
+            A0_PMU_DEBUG_MON_SEL_A::SHOW_M4STM_KICKOFF_AND_BUSY_PLUS_0X000000,
+        )
     }
     #[doc = "`1`"]
     #[inline(always)]
@@ -290,7 +296,9 @@ impl<'a> A0_PMU_DEBUG_MON_SEL_W<'a> {
     #[doc = "{FBSTM_KickOff, FBSTM_BUSY,6'h0}"]
     #[inline(always)]
     pub fn show_fbst_kickoff_and_busy_plus_0x000000(self) -> &'a mut W {
-        self.variant(A0_PMU_DEBUG_MON_SEL_A::SHOW_FBST_KICKOFF_AND_BUSY_PLUS_0X000000)
+        self.variant(
+            A0_PMU_DEBUG_MON_SEL_A::SHOW_FBST_KICKOFF_AND_BUSY_PLUS_0X000000,
+        )
     }
     #[doc = "`1011`"]
     #[inline(always)]

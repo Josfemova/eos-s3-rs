@@ -87,9 +87,11 @@ pub struct RegisterBlock {
     pub fbio_sel_2: crate::Reg<fbio_sel_2::FBIO_SEL_2_SPEC>,
     _reserved40: [u8; 0x08],
     #[doc = "0x190 - Selects pad for MISO function for the sensor SPI"]
-    pub spi_sensor_miso_sel: crate::Reg<spi_sensor_miso_sel::SPI_SENSOR_MISO_SEL_SPEC>,
+    pub spi_sensor_miso_sel:
+        crate::Reg<spi_sensor_miso_sel::SPI_SENSOR_MISO_SEL_SPEC>,
     #[doc = "0x194 - Selects pad for MOSI function for the sensor SPI"]
-    pub spi_sensor_mosi_sel: crate::Reg<spi_sensor_mosi_sel::SPI_SENSOR_MOSI_SEL_SPEC>,
+    pub spi_sensor_mosi_sel:
+        crate::Reg<spi_sensor_mosi_sel::SPI_SENSOR_MOSI_SEL_SPEC>,
     _reserved42: [u8; 0x08],
     #[doc = "0x1a0 - Selects pad for the I2S Data-Word Select (WS)"]
     pub i2s_wd_clkin_sel: crate::Reg<i2s_wd_clkin_sel::I2S_WD_CLKIN_SEL_SPEC>,
@@ -221,11 +223,13 @@ pub type FBIO_SEL_2 = crate::Reg<fbio_sel_2::FBIO_SEL_2_SPEC>;
 #[doc = "Lacking proper documentation. Configuration of pins 32-45 related to Fabric"]
 pub mod fbio_sel_2;
 #[doc = "SPI_SENSOR_MISO_SEL register accessor: an alias for `Reg<SPI_SENSOR_MISO_SEL_SPEC>`"]
-pub type SPI_SENSOR_MISO_SEL = crate::Reg<spi_sensor_miso_sel::SPI_SENSOR_MISO_SEL_SPEC>;
+pub type SPI_SENSOR_MISO_SEL =
+    crate::Reg<spi_sensor_miso_sel::SPI_SENSOR_MISO_SEL_SPEC>;
 #[doc = "Selects pad for MISO function for the sensor SPI"]
 pub mod spi_sensor_miso_sel;
 #[doc = "SPI_SENSOR_MOSI_SEL register accessor: an alias for `Reg<SPI_SENSOR_MOSI_SEL_SPEC>`"]
-pub type SPI_SENSOR_MOSI_SEL = crate::Reg<spi_sensor_mosi_sel::SPI_SENSOR_MOSI_SEL_SPEC>;
+pub type SPI_SENSOR_MOSI_SEL =
+    crate::Reg<spi_sensor_mosi_sel::SPI_SENSOR_MOSI_SEL_SPEC>;
 #[doc = "Selects pad for MOSI function for the sensor SPI"]
 pub mod spi_sensor_mosi_sel;
 #[doc = "I2S_WD_CLKIN_SEL register accessor: an alias for `Reg<I2S_WD_CLKIN_SEL_SPEC>`"]

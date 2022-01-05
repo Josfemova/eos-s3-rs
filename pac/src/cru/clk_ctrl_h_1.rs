@@ -27,7 +27,9 @@ impl From<CLOCK_SOURCE_SELECTION_A> for u8 {
     }
 }
 #[doc = "Field `Clock_Source_Selection` reader - Select the clock source"]
-pub struct CLOCK_SOURCE_SELECTION_R(crate::FieldReader<u8, CLOCK_SOURCE_SELECTION_A>);
+pub struct CLOCK_SOURCE_SELECTION_R(
+    crate::FieldReader<u8, CLOCK_SOURCE_SELECTION_A>,
+);
 impl CLOCK_SOURCE_SELECTION_R {
     #[inline(always)]
     pub(crate) fn new(bits: u8) -> Self {

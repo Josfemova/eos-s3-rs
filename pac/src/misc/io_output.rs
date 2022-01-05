@@ -34,7 +34,7 @@ impl From<crate::W<IO_OUTPUT_SPEC>> for W {
         W(writer)
     }
 }
-#[doc = "Field `IO_0` reader - Read digital value of pin mapped to IO bit 0"]
+#[doc = "Field `IO_0` reader - Write digital value of pin mapped to IO bit 0"]
 pub struct IO_0_R(crate::FieldReader<bool, bool>);
 impl IO_0_R {
     #[inline(always)]
@@ -49,7 +49,7 @@ impl core::ops::Deref for IO_0_R {
         &self.0
     }
 }
-#[doc = "Field `IO_0` writer - Read digital value of pin mapped to IO bit 0"]
+#[doc = "Field `IO_0` writer - Write digital value of pin mapped to IO bit 0"]
 pub struct IO_0_W<'a> {
     w: &'a mut W,
 }
@@ -71,7 +71,7 @@ impl<'a> IO_0_W<'a> {
         self.w
     }
 }
-#[doc = "Field `IO_1` reader - Read digital value of pin mapped to IO bit 1"]
+#[doc = "Field `IO_1` reader - Write digital value of pin mapped to IO bit 1"]
 pub struct IO_1_R(crate::FieldReader<bool, bool>);
 impl IO_1_R {
     #[inline(always)]
@@ -86,7 +86,7 @@ impl core::ops::Deref for IO_1_R {
         &self.0
     }
 }
-#[doc = "Field `IO_1` writer - Read digital value of pin mapped to IO bit 1"]
+#[doc = "Field `IO_1` writer - Write digital value of pin mapped to IO bit 1"]
 pub struct IO_1_W<'a> {
     w: &'a mut W,
 }
@@ -104,11 +104,12 @@ impl<'a> IO_1_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub fn bit(self, value: bool) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x01 << 1)) | ((value as u32 & 0x01) << 1);
+        self.w.bits =
+            (self.w.bits & !(0x01 << 1)) | ((value as u32 & 0x01) << 1);
         self.w
     }
 }
-#[doc = "Field `IO_2` reader - Read digital value of pin mapped to IO bit 2"]
+#[doc = "Field `IO_2` reader - Write digital value of pin mapped to IO bit 2"]
 pub struct IO_2_R(crate::FieldReader<bool, bool>);
 impl IO_2_R {
     #[inline(always)]
@@ -123,7 +124,7 @@ impl core::ops::Deref for IO_2_R {
         &self.0
     }
 }
-#[doc = "Field `IO_2` writer - Read digital value of pin mapped to IO bit 2"]
+#[doc = "Field `IO_2` writer - Write digital value of pin mapped to IO bit 2"]
 pub struct IO_2_W<'a> {
     w: &'a mut W,
 }
@@ -141,11 +142,12 @@ impl<'a> IO_2_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub fn bit(self, value: bool) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x01 << 2)) | ((value as u32 & 0x01) << 2);
+        self.w.bits =
+            (self.w.bits & !(0x01 << 2)) | ((value as u32 & 0x01) << 2);
         self.w
     }
 }
-#[doc = "Field `IO_3` reader - Read digital value of pin mapped to IO bit 3"]
+#[doc = "Field `IO_3` reader - Write digital value of pin mapped to IO bit 3"]
 pub struct IO_3_R(crate::FieldReader<bool, bool>);
 impl IO_3_R {
     #[inline(always)]
@@ -160,7 +162,7 @@ impl core::ops::Deref for IO_3_R {
         &self.0
     }
 }
-#[doc = "Field `IO_3` writer - Read digital value of pin mapped to IO bit 3"]
+#[doc = "Field `IO_3` writer - Write digital value of pin mapped to IO bit 3"]
 pub struct IO_3_W<'a> {
     w: &'a mut W,
 }
@@ -178,11 +180,12 @@ impl<'a> IO_3_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub fn bit(self, value: bool) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x01 << 3)) | ((value as u32 & 0x01) << 3);
+        self.w.bits =
+            (self.w.bits & !(0x01 << 3)) | ((value as u32 & 0x01) << 3);
         self.w
     }
 }
-#[doc = "Field `IO_4` reader - Read digital value of pin mapped to IO bit 4"]
+#[doc = "Field `IO_4` reader - Write digital value of pin mapped to IO bit 4"]
 pub struct IO_4_R(crate::FieldReader<bool, bool>);
 impl IO_4_R {
     #[inline(always)]
@@ -197,7 +200,7 @@ impl core::ops::Deref for IO_4_R {
         &self.0
     }
 }
-#[doc = "Field `IO_4` writer - Read digital value of pin mapped to IO bit 4"]
+#[doc = "Field `IO_4` writer - Write digital value of pin mapped to IO bit 4"]
 pub struct IO_4_W<'a> {
     w: &'a mut W,
 }
@@ -215,11 +218,12 @@ impl<'a> IO_4_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub fn bit(self, value: bool) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x01 << 4)) | ((value as u32 & 0x01) << 4);
+        self.w.bits =
+            (self.w.bits & !(0x01 << 4)) | ((value as u32 & 0x01) << 4);
         self.w
     }
 }
-#[doc = "Field `IO_5` reader - Read digital value of pin mapped to IO bit 5"]
+#[doc = "Field `IO_5` reader - Write digital value of pin mapped to IO bit 5"]
 pub struct IO_5_R(crate::FieldReader<bool, bool>);
 impl IO_5_R {
     #[inline(always)]
@@ -234,7 +238,7 @@ impl core::ops::Deref for IO_5_R {
         &self.0
     }
 }
-#[doc = "Field `IO_5` writer - Read digital value of pin mapped to IO bit 5"]
+#[doc = "Field `IO_5` writer - Write digital value of pin mapped to IO bit 5"]
 pub struct IO_5_W<'a> {
     w: &'a mut W,
 }
@@ -252,11 +256,12 @@ impl<'a> IO_5_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub fn bit(self, value: bool) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x01 << 5)) | ((value as u32 & 0x01) << 5);
+        self.w.bits =
+            (self.w.bits & !(0x01 << 5)) | ((value as u32 & 0x01) << 5);
         self.w
     }
 }
-#[doc = "Field `IO_6` reader - Read digital value of pin mapped to IO bit 6"]
+#[doc = "Field `IO_6` reader - Write digital value of pin mapped to IO bit 6"]
 pub struct IO_6_R(crate::FieldReader<bool, bool>);
 impl IO_6_R {
     #[inline(always)]
@@ -271,7 +276,7 @@ impl core::ops::Deref for IO_6_R {
         &self.0
     }
 }
-#[doc = "Field `IO_6` writer - Read digital value of pin mapped to IO bit 6"]
+#[doc = "Field `IO_6` writer - Write digital value of pin mapped to IO bit 6"]
 pub struct IO_6_W<'a> {
     w: &'a mut W,
 }
@@ -289,11 +294,12 @@ impl<'a> IO_6_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub fn bit(self, value: bool) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x01 << 6)) | ((value as u32 & 0x01) << 6);
+        self.w.bits =
+            (self.w.bits & !(0x01 << 6)) | ((value as u32 & 0x01) << 6);
         self.w
     }
 }
-#[doc = "Field `IO_7` reader - Read digital value of pin mapped to IO bit 7"]
+#[doc = "Field `IO_7` reader - Write digital value of pin mapped to IO bit 7"]
 pub struct IO_7_R(crate::FieldReader<bool, bool>);
 impl IO_7_R {
     #[inline(always)]
@@ -308,7 +314,7 @@ impl core::ops::Deref for IO_7_R {
         &self.0
     }
 }
-#[doc = "Field `IO_7` writer - Read digital value of pin mapped to IO bit 7"]
+#[doc = "Field `IO_7` writer - Write digital value of pin mapped to IO bit 7"]
 pub struct IO_7_W<'a> {
     w: &'a mut W,
 }
@@ -326,89 +332,90 @@ impl<'a> IO_7_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub fn bit(self, value: bool) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x01 << 7)) | ((value as u32 & 0x01) << 7);
+        self.w.bits =
+            (self.w.bits & !(0x01 << 7)) | ((value as u32 & 0x01) << 7);
         self.w
     }
 }
 impl R {
-    #[doc = "Bit 0 - Read digital value of pin mapped to IO bit 0"]
+    #[doc = "Bit 0 - Write digital value of pin mapped to IO bit 0"]
     #[inline(always)]
     pub fn io_0(&self) -> IO_0_R {
         IO_0_R::new((self.bits & 0x01) != 0)
     }
-    #[doc = "Bit 1 - Read digital value of pin mapped to IO bit 1"]
+    #[doc = "Bit 1 - Write digital value of pin mapped to IO bit 1"]
     #[inline(always)]
     pub fn io_1(&self) -> IO_1_R {
         IO_1_R::new(((self.bits >> 1) & 0x01) != 0)
     }
-    #[doc = "Bit 2 - Read digital value of pin mapped to IO bit 2"]
+    #[doc = "Bit 2 - Write digital value of pin mapped to IO bit 2"]
     #[inline(always)]
     pub fn io_2(&self) -> IO_2_R {
         IO_2_R::new(((self.bits >> 2) & 0x01) != 0)
     }
-    #[doc = "Bit 3 - Read digital value of pin mapped to IO bit 3"]
+    #[doc = "Bit 3 - Write digital value of pin mapped to IO bit 3"]
     #[inline(always)]
     pub fn io_3(&self) -> IO_3_R {
         IO_3_R::new(((self.bits >> 3) & 0x01) != 0)
     }
-    #[doc = "Bit 4 - Read digital value of pin mapped to IO bit 4"]
+    #[doc = "Bit 4 - Write digital value of pin mapped to IO bit 4"]
     #[inline(always)]
     pub fn io_4(&self) -> IO_4_R {
         IO_4_R::new(((self.bits >> 4) & 0x01) != 0)
     }
-    #[doc = "Bit 5 - Read digital value of pin mapped to IO bit 5"]
+    #[doc = "Bit 5 - Write digital value of pin mapped to IO bit 5"]
     #[inline(always)]
     pub fn io_5(&self) -> IO_5_R {
         IO_5_R::new(((self.bits >> 5) & 0x01) != 0)
     }
-    #[doc = "Bit 6 - Read digital value of pin mapped to IO bit 6"]
+    #[doc = "Bit 6 - Write digital value of pin mapped to IO bit 6"]
     #[inline(always)]
     pub fn io_6(&self) -> IO_6_R {
         IO_6_R::new(((self.bits >> 6) & 0x01) != 0)
     }
-    #[doc = "Bit 7 - Read digital value of pin mapped to IO bit 7"]
+    #[doc = "Bit 7 - Write digital value of pin mapped to IO bit 7"]
     #[inline(always)]
     pub fn io_7(&self) -> IO_7_R {
         IO_7_R::new(((self.bits >> 7) & 0x01) != 0)
     }
 }
 impl W {
-    #[doc = "Bit 0 - Read digital value of pin mapped to IO bit 0"]
+    #[doc = "Bit 0 - Write digital value of pin mapped to IO bit 0"]
     #[inline(always)]
     pub fn io_0(&mut self) -> IO_0_W {
         IO_0_W { w: self }
     }
-    #[doc = "Bit 1 - Read digital value of pin mapped to IO bit 1"]
+    #[doc = "Bit 1 - Write digital value of pin mapped to IO bit 1"]
     #[inline(always)]
     pub fn io_1(&mut self) -> IO_1_W {
         IO_1_W { w: self }
     }
-    #[doc = "Bit 2 - Read digital value of pin mapped to IO bit 2"]
+    #[doc = "Bit 2 - Write digital value of pin mapped to IO bit 2"]
     #[inline(always)]
     pub fn io_2(&mut self) -> IO_2_W {
         IO_2_W { w: self }
     }
-    #[doc = "Bit 3 - Read digital value of pin mapped to IO bit 3"]
+    #[doc = "Bit 3 - Write digital value of pin mapped to IO bit 3"]
     #[inline(always)]
     pub fn io_3(&mut self) -> IO_3_W {
         IO_3_W { w: self }
     }
-    #[doc = "Bit 4 - Read digital value of pin mapped to IO bit 4"]
+    #[doc = "Bit 4 - Write digital value of pin mapped to IO bit 4"]
     #[inline(always)]
     pub fn io_4(&mut self) -> IO_4_W {
         IO_4_W { w: self }
     }
-    #[doc = "Bit 5 - Read digital value of pin mapped to IO bit 5"]
+    #[doc = "Bit 5 - Write digital value of pin mapped to IO bit 5"]
     #[inline(always)]
     pub fn io_5(&mut self) -> IO_5_W {
         IO_5_W { w: self }
     }
-    #[doc = "Bit 6 - Read digital value of pin mapped to IO bit 6"]
+    #[doc = "Bit 6 - Write digital value of pin mapped to IO bit 6"]
     #[inline(always)]
     pub fn io_6(&mut self) -> IO_6_W {
         IO_6_W { w: self }
     }
-    #[doc = "Bit 7 - Read digital value of pin mapped to IO bit 7"]
+    #[doc = "Bit 7 - Write digital value of pin mapped to IO bit 7"]
     #[inline(always)]
     pub fn io_7(&mut self) -> IO_7_W {
         IO_7_W { w: self }

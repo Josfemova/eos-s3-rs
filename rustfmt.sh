@@ -1,0 +1,1 @@
+rustfmt --edition 2021 --check */**/*.rs

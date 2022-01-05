@@ -84,7 +84,8 @@ impl<'a> VT_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub unsafe fn bits(self, value: u8) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x1f << 3)) | ((value as u32 & 0x1f) << 3);
+        self.w.bits =
+            (self.w.bits & !(0x1f << 3)) | ((value as u32 & 0x1f) << 3);
         self.w
     }
 }

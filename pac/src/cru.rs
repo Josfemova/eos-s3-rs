@@ -45,11 +45,13 @@ pub struct RegisterBlock {
     #[doc = "0x54 - Gating control for clock 11"]
     pub c11_clk_gate: crate::Reg<c11_clk_gate::C11_CLK_GATE_SPEC>,
     #[doc = "0x58 - Gating control for clock 12"]
-    pub c12_clk_gate_reserved: crate::Reg<c12_clk_gate_reserved::C12_CLK_GATE_RESERVED_SPEC>,
+    pub c12_clk_gate_reserved:
+        crate::Reg<c12_clk_gate_reserved::C12_CLK_GATE_RESERVED_SPEC>,
     #[doc = "0x5c - Gating control for SWD CS clock U"]
     pub cs_clk_gate: crate::Reg<cs_clk_gate::CS_CLK_GATE_SPEC>,
     #[doc = "0x60 - Not specified"]
-    pub cu_clk_gate_reserved: crate::Reg<cu_clk_gate_reserved::CU_CLK_GATE_RESERVED_SPEC>,
+    pub cu_clk_gate_reserved:
+        crate::Reg<cu_clk_gate_reserved::CU_CLK_GATE_RESERVED_SPEC>,
     #[doc = "0x64 - Gating control for FB clock 16"]
     pub c16_clk_gate: crate::Reg<c16_clk_gate::C16_CLK_GATE_SPEC>,
     #[doc = "0x68 - Not specified"]
@@ -68,9 +70,11 @@ pub struct RegisterBlock {
     #[doc = "0x8c - Once Program the SW Reset Bit to 1, the corresponding reset will be asserted immediately. Once Program the SW Reset Bit to 0, the corresponding reset will be de-asserted synchronous even the corresponding clock is not running. (Turn off by Clock gating cell)"]
     pub a1_sw_reset: crate::Reg<a1_sw_reset::A1_SW_RESET_SPEC>,
     #[doc = "0x90 - Once Program the SW Reset Bit to 1, the corresponding reset will be asserted immediately. Once Program the SW Reset Bit to 0, the corresponding reset will be de-asserted synchronous even the corresponding clock is not running. (Turn off by Clock gating cell)"]
-    pub audio_misc_sw_reset: crate::Reg<audio_misc_sw_reset::AUDIO_MISC_SW_RESET_SPEC>,
+    pub audio_misc_sw_reset:
+        crate::Reg<audio_misc_sw_reset::AUDIO_MISC_SW_RESET_SPEC>,
     #[doc = "0x94 - Not specified. FAFIFO1, AHBWB Software Reset control"]
-    pub fb_misc_sw_rst_ctl: crate::Reg<fb_misc_sw_rst_ctl::FB_MISC_SW_RST_CTL_SPEC>,
+    pub fb_misc_sw_rst_ctl:
+        crate::Reg<fb_misc_sw_rst_ctl::FB_MISC_SW_RST_CTL_SPEC>,
     _reserved34: [u8; 0x68],
     #[doc = "0x100 - This Clock is used to delay the Clock gating control signals from PMU. The PMU will monitor the feedback/delayed Clock Gating Control signals to ensure the clocks are OFF before jump to next state. The Firmware needs to Configure this divider to ensure there delay time is longer enough. C23 Clock needs to be 2/3 of the lowest clock frequency of other clocks. For Example, if the Lowest clock frequency of other clocks are 5, then C23 should be lower than 3.33MHz (Or the clock frequency of other clocks should be at least 1.5 times faster than C23.)"]
     pub clk_ctrl_pmu: crate::Reg<clk_ctrl_pmu::CLK_CTRL_PMU_SPEC>,
@@ -90,7 +94,8 @@ pub struct RegisterBlock {
     #[doc = "0x120 - Gating control for clocks 30-31"]
     pub c30_c31_clk_gate: crate::Reg<c30_c31_clk_gate::C30_C31_CLK_GATE_SPEC>,
     #[doc = "0x124 - Control for divider gates in different clocks"]
-    pub clk_divider_clk_gating: crate::Reg<clk_divider_clk_gating::CLK_DIVIDER_CLK_GATING_SPEC>,
+    pub clk_divider_clk_gating:
+        crate::Reg<clk_divider_clk_gating::CLK_DIVIDER_CLK_GATING_SPEC>,
     _reserved43: [u8; 0x08],
     #[doc = "0x130 - For Clock 2 (FB, A1 (Including CFGSM))"]
     pub clk_switch_for_b: crate::Reg<clk_switch_for_b::CLK_SWITCH_FOR_B_SPEC>,
@@ -190,7 +195,8 @@ pub type C11_CLK_GATE = crate::Reg<c11_clk_gate::C11_CLK_GATE_SPEC>;
 #[doc = "Gating control for clock 11"]
 pub mod c11_clk_gate;
 #[doc = "C12_CLK_GATE_Reserved register accessor: an alias for `Reg<C12_CLK_GATE_RESERVED_SPEC>`"]
-pub type C12_CLK_GATE_RESERVED = crate::Reg<c12_clk_gate_reserved::C12_CLK_GATE_RESERVED_SPEC>;
+pub type C12_CLK_GATE_RESERVED =
+    crate::Reg<c12_clk_gate_reserved::C12_CLK_GATE_RESERVED_SPEC>;
 #[doc = "Gating control for clock 12"]
 pub mod c12_clk_gate_reserved;
 #[doc = "CS_CLK_GATE register accessor: an alias for `Reg<CS_CLK_GATE_SPEC>`"]
@@ -198,7 +204,8 @@ pub type CS_CLK_GATE = crate::Reg<cs_clk_gate::CS_CLK_GATE_SPEC>;
 #[doc = "Gating control for SWD CS clock U"]
 pub mod cs_clk_gate;
 #[doc = "CU_CLK_GATE_Reserved register accessor: an alias for `Reg<CU_CLK_GATE_RESERVED_SPEC>`"]
-pub type CU_CLK_GATE_RESERVED = crate::Reg<cu_clk_gate_reserved::CU_CLK_GATE_RESERVED_SPEC>;
+pub type CU_CLK_GATE_RESERVED =
+    crate::Reg<cu_clk_gate_reserved::CU_CLK_GATE_RESERVED_SPEC>;
 #[doc = "Not specified"]
 pub mod cu_clk_gate_reserved;
 #[doc = "C16_CLK_GATE register accessor: an alias for `Reg<C16_CLK_GATE_SPEC>`"]
@@ -234,11 +241,13 @@ pub type A1_SW_RESET = crate::Reg<a1_sw_reset::A1_SW_RESET_SPEC>;
 #[doc = "Once Program the SW Reset Bit to 1, the corresponding reset will be asserted immediately. Once Program the SW Reset Bit to 0, the corresponding reset will be de-asserted synchronous even the corresponding clock is not running. (Turn off by Clock gating cell)"]
 pub mod a1_sw_reset;
 #[doc = "AUDIO_MISC_SW_RESET register accessor: an alias for `Reg<AUDIO_MISC_SW_RESET_SPEC>`"]
-pub type AUDIO_MISC_SW_RESET = crate::Reg<audio_misc_sw_reset::AUDIO_MISC_SW_RESET_SPEC>;
+pub type AUDIO_MISC_SW_RESET =
+    crate::Reg<audio_misc_sw_reset::AUDIO_MISC_SW_RESET_SPEC>;
 #[doc = "Once Program the SW Reset Bit to 1, the corresponding reset will be asserted immediately. Once Program the SW Reset Bit to 0, the corresponding reset will be de-asserted synchronous even the corresponding clock is not running. (Turn off by Clock gating cell)"]
 pub mod audio_misc_sw_reset;
 #[doc = "FB_MISC_SW_RST_CTL register accessor: an alias for `Reg<FB_MISC_SW_RST_CTL_SPEC>`"]
-pub type FB_MISC_SW_RST_CTL = crate::Reg<fb_misc_sw_rst_ctl::FB_MISC_SW_RST_CTL_SPEC>;
+pub type FB_MISC_SW_RST_CTL =
+    crate::Reg<fb_misc_sw_rst_ctl::FB_MISC_SW_RST_CTL_SPEC>;
 #[doc = "Not specified. FAFIFO1, AHBWB Software Reset control"]
 pub mod fb_misc_sw_rst_ctl;
 #[doc = "CLK_CTRL_PMU register accessor: an alias for `Reg<CLK_CTRL_PMU_SPEC>`"]
@@ -274,7 +283,8 @@ pub type C30_C31_CLK_GATE = crate::Reg<c30_c31_clk_gate::C30_C31_CLK_GATE_SPEC>;
 #[doc = "Gating control for clocks 30-31"]
 pub mod c30_c31_clk_gate;
 #[doc = "CLK_DIVIDER_CLK_GATING register accessor: an alias for `Reg<CLK_DIVIDER_CLK_GATING_SPEC>`"]
-pub type CLK_DIVIDER_CLK_GATING = crate::Reg<clk_divider_clk_gating::CLK_DIVIDER_CLK_GATING_SPEC>;
+pub type CLK_DIVIDER_CLK_GATING =
+    crate::Reg<clk_divider_clk_gating::CLK_DIVIDER_CLK_GATING_SPEC>;
 #[doc = "Control for divider gates in different clocks"]
 pub mod clk_divider_clk_gating;
 #[doc = "CLK_SWITCH_FOR_B register accessor: an alias for `Reg<CLK_SWITCH_FOR_B_SPEC>`"]

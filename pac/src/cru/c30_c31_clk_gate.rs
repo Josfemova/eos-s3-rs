@@ -49,7 +49,9 @@ impl From<C30_PATH_0_GATING_CONTROL_A> for bool {
     }
 }
 #[doc = "Field `C30_Path_0_Gating_Control` reader - To PDM LEFT CLK"]
-pub struct C30_PATH_0_GATING_CONTROL_R(crate::FieldReader<bool, C30_PATH_0_GATING_CONTROL_A>);
+pub struct C30_PATH_0_GATING_CONTROL_R(
+    crate::FieldReader<bool, C30_PATH_0_GATING_CONTROL_A>,
+);
 impl C30_PATH_0_GATING_CONTROL_R {
     #[inline(always)]
     pub(crate) fn new(bits: bool) -> Self {
@@ -155,7 +157,8 @@ impl<'a> C30_PATH_1_GATING_CONTROL_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub fn bit(self, value: bool) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x01 << 1)) | ((value as u32 & 0x01) << 1);
+        self.w.bits =
+            (self.w.bits & !(0x01 << 1)) | ((value as u32 & 0x01) << 1);
         self.w
     }
 }
@@ -196,7 +199,8 @@ impl<'a> C30_PATH_2_GATING_CONTROL_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub fn bit(self, value: bool) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x01 << 2)) | ((value as u32 & 0x01) << 2);
+        self.w.bits =
+            (self.w.bits & !(0x01 << 2)) | ((value as u32 & 0x01) << 2);
         self.w
     }
 }
@@ -237,7 +241,8 @@ impl<'a> C31_PATH_0_GATING_CONTROL_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub fn bit(self, value: bool) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x01 << 3)) | ((value as u32 & 0x01) << 3);
+        self.w.bits =
+            (self.w.bits & !(0x01 << 3)) | ((value as u32 & 0x01) << 3);
         self.w
     }
 }

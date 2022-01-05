@@ -47,7 +47,9 @@ impl From<FB_C02_DOMAIN_SW_RESET_A> for bool {
     }
 }
 #[doc = "Field `FB_C02_Domain_SW_Reset` reader - 1'b1 : Enable the Software Reset. FW need to disable it manually."]
-pub struct FB_C02_DOMAIN_SW_RESET_R(crate::FieldReader<bool, FB_C02_DOMAIN_SW_RESET_A>);
+pub struct FB_C02_DOMAIN_SW_RESET_R(
+    crate::FieldReader<bool, FB_C02_DOMAIN_SW_RESET_A>,
+);
 impl FB_C02_DOMAIN_SW_RESET_R {
     #[inline(always)]
     pub(crate) fn new(bits: bool) -> Self {
@@ -138,7 +140,8 @@ impl<'a> FB_C09_DOMAIN_SW_RESET_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub fn bit(self, value: bool) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x01 << 2)) | ((value as u32 & 0x01) << 2);
+        self.w.bits =
+            (self.w.bits & !(0x01 << 2)) | ((value as u32 & 0x01) << 2);
         self.w
     }
 }
@@ -174,7 +177,8 @@ impl<'a> FB_C16_DOMAIN_SW_RESET_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub fn bit(self, value: bool) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x01 << 4)) | ((value as u32 & 0x01) << 4);
+        self.w.bits =
+            (self.w.bits & !(0x01 << 4)) | ((value as u32 & 0x01) << 4);
         self.w
     }
 }
@@ -210,7 +214,8 @@ impl<'a> FB_C21_DOMAIN_SW_RESET_W<'a> {
     #[doc = r"Writes raw bits to the field"]
     #[inline(always)]
     pub fn bit(self, value: bool) -> &'a mut W {
-        self.w.bits = (self.w.bits & !(0x01 << 5)) | ((value as u32 & 0x01) << 5);
+        self.w.bits =
+            (self.w.bits & !(0x01 << 5)) | ((value as u32 & 0x01) << 5);
         self.w
     }
 }

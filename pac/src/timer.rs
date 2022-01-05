@@ -8,7 +8,8 @@ pub struct RegisterBlock {
     #[doc = "0x08 - Reload value. A write to this register sets the current value"]
     pub reload: crate::Reg<reload::RELOAD_SPEC>,
     #[doc = "0x0c - Timer interrupt. Write one to clear"]
-    pub intstatus_intclear: crate::Reg<intstatus_intclear::INTSTATUS_INTCLEAR_SPEC>,
+    pub intstatus_intclear:
+        crate::Reg<intstatus_intclear::INTSTATUS_INTCLEAR_SPEC>,
     _reserved4: [u8; 0x0fc0],
     #[doc = "0xfd0 - Peripheral ID register 4: \\[7:4\\]
 Block count. \\[3:0\\]
@@ -58,7 +59,8 @@ pub type RELOAD = crate::Reg<reload::RELOAD_SPEC>;
 #[doc = "Reload value. A write to this register sets the current value"]
 pub mod reload;
 #[doc = "INTSTATUS_INTCLEAR register accessor: an alias for `Reg<INTSTATUS_INTCLEAR_SPEC>`"]
-pub type INTSTATUS_INTCLEAR = crate::Reg<intstatus_intclear::INTSTATUS_INTCLEAR_SPEC>;
+pub type INTSTATUS_INTCLEAR =
+    crate::Reg<intstatus_intclear::INTSTATUS_INTCLEAR_SPEC>;
 #[doc = "Timer interrupt. Write one to clear"]
 pub mod intstatus_intclear;
 #[doc = "PID4 register accessor: an alias for `Reg<PID4_SPEC>`"]

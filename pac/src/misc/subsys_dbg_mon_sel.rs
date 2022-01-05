@@ -54,7 +54,9 @@ impl From<SUBSYS_DEBUG_MON_SEL_A> for u8 {
     }
 }
 #[doc = "Field `SUBSYS_DEBUG_MON_SEL` reader - Select which subsystem the debug monitors are routed from"]
-pub struct SUBSYS_DEBUG_MON_SEL_R(crate::FieldReader<u8, SUBSYS_DEBUG_MON_SEL_A>);
+pub struct SUBSYS_DEBUG_MON_SEL_R(
+    crate::FieldReader<u8, SUBSYS_DEBUG_MON_SEL_A>,
+);
 impl SUBSYS_DEBUG_MON_SEL_R {
     #[inline(always)]
     pub(crate) fn new(bits: u8) -> Self {
