@@ -508,6 +508,34 @@ impl core::fmt::Debug for MISC {
 }
 #[doc = "MISC registers"]
 pub mod misc;
+#[doc = "Power Management Unit"]
+pub struct PMU {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for PMU {}
+impl PMU {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const pmu::RegisterBlock = 0x4000_2000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const pmu::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for PMU {
+    type Target = pmu::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for PMU {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("PMU").finish()
+    }
+}
+#[doc = "Power Management Unit"]
+pub mod pmu;
 #[doc = "TIMER"]
 pub struct TIMER {
     _marker: PhantomData<*const ()>,
@@ -553,6 +581,8 @@ pub struct Peripherals {
     pub CRU: CRU,
     #[doc = "MISC"]
     pub MISC: MISC,
+    #[doc = "PMU"]
+    pub PMU: PMU,
     #[doc = "TIMER"]
     pub TIMER: TIMER,
 }
@@ -589,6 +619,9 @@ impl Peripherals {
                 _marker: PhantomData,
             },
             MISC: MISC {
+                _marker: PhantomData,
+            },
+            PMU: PMU {
                 _marker: PhantomData,
             },
             TIMER: TIMER {

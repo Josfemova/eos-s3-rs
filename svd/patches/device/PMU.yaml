@@ -1,8 +1,1185 @@
 _add:
   PMU: 
-    description: ""
+    description: "Power Management Unit"
     baseAddress: 0x4000_2000
     addressBlocks:
       - offset: 0 
         size: 0x3FC
         usage: registers 
+    registers:
+      MISC_POR_0: 
+        description: "On POR Reset Domain" 
+        addressOffset: 0x000
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          M4_Rst_Release:
+            description: "RWHC: In AP mode, (SPIS_SS is High by default) ( In Wearable Mode, it has NO effect). The Hardware will clear this bit if `AP_Reboot_enable_N` is programmed and M4 is waking up from Mode 1 (SD) to ensure the M4 is kept on Reset once waking up."
+            bitOffset: 0
+            bitWidth: 1
+      MISC_POR_1:
+        description: "On POR Reset Domain"
+        addressOffset: 0x004
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          Cfg_fpd_on:
+            description: "The FW need to program this bit if FW put the SPI flash to Power Down Mode. The CfgSM will wake up the Flash before reloading the boot code if this bit is 1. FW need to ensure this bit is clear after boot code reloading."   
+            bitOffset: 0 
+            bitWidth: 1
+          Sys_rst_as_int:
+            description: "RWHC: Interrupt pin. This bit will be clear if System Reset Trigger when this bit is one"  
+            bitOffset: 1
+            bitWidth: 1
+          Sys_rst_as_int_pw:
+            description: "If Sys_rst_as_int bit is programmed, then this system Reset INT will trigger if the reset pin is low and the pulse width greater than the configuration value." 
+            bitOffset: 2
+            bitWidth: 2
+          Sys_rst_pulse_ext:
+            description: "If reset pin is still ketp low after the system reset INT is triggered, then the Chip will be reset if its pulse width is greater than configuration value"  
+            bitOffset: 4
+            bitWidth: 1
+          
+      MISC_POR_2:
+        description: "On POR Reset Domain" 
+        addressOffset: 0x008
+        size: 32
+        access: read-write
+        resetValue: 0b0011
+        fields:
+          SPI_Reboot_enable_N:
+            description: "If 1'b0, Need cfgSM to reload the code when M4 waking up from SD (Mode1). FW needs to clear this bit if needs code reloading from SPI flash once waking up from SD mdoe (MODE1). CfgSM will be kick off if code reloading from SPI flash needed. This is for code reloading ONLY."
+            bitOffset: 0
+            bitWidth: 1
+          AP_Reboot_enable_N:
+            description: "If 1'b0, Need cfgSM to reload the code when M4 waking up from SD (Mode1) FW needs to clear this bit if needs code reloading from SPI flash once waking up from SD mdoe (MODE1). CfgSM will be kick off if code reloading from SPI flash needed. This is for code reloading ONLY."
+            bitOffset: 1
+            bitWidth: 1 
+      MISC_POR_3:
+        description: "On POR Reset Domain" 
+        addressOffset: 0x00C
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          Scratch_byte_0:
+            description: "Scratch Bytes, General Purpose Registers"
+            bitOffset: 0
+            bitWidth: 8
+          Scratch_byte_1:
+            description: "Scratch Bytes, General Purpose Registers"
+            bitOffset: 8
+            bitWidth: 8 
+      RST_CTRL_0:
+        description: "Reserved" 
+        addressOffset: 0x010
+        size: 32
+        access: read-only
+      RST_CTRL_1:
+        description: "Reserved" 
+        addressOffset: 0x014
+        size: 32
+        access: read-only
+      CHIP_STA_0:
+        description: "Reserved" 
+        addressOffset: 0x018
+        size: 32
+        access: read-only
+      CHIP_STA_1:
+        description: "Chip Status register" 
+        addressOffset: 0x01C
+        size: 32
+        access: read-only
+        fields:
+          FFE0_BUSY:
+            description: "Indicates if FFE0 is busy"
+            bitOffset: 0
+            bitWidth: 1
+          Code_Source_Cfg:
+            description: "This reflects the value of boot strap bit. Pad[19]"
+            bitOffset: 4
+            bitWidth: 1
+          Debug_Port_Cfg:
+            description: "This reflects the value of boot strap bit. Pad[8]"
+            bitOffset: 5
+            bitWidth: 1 
+          FB_0:
+            description: "FB Stasus Siganl 0 (Its definition is depending on the implementation of FB)"
+            bitOffset: 6
+            bitWidth: 1
+          FB_1:
+            description: "FB Stasus Siganl 1 (Its definition is depending on the implementation of FB)"
+            bitOffset: 7
+            bitWidth: 1
+          FB_2:
+            description: "FB Stasus Siganl 2 (Its definition is depending on the implementation of FB)"
+            bitOffset: 8
+            bitWidth: 1
+          FB_3:
+            description: "FB Stasus Siganl 3 (Its definition is depending on the implementation of FB)"
+            bitOffset: 9
+            bitWidth: 1
+          SWD_Mode_Cfg:
+            description: "This reflects the value of boot strap bit. Pad[20]"
+            bitOffset: 10
+            bitWidth: 1
+          CLOCK_BYPASS_Cfg:
+            description: "This reflects the value of boot strap bit. Pad[9]"
+            bitOffset: 11
+            bitWidth: 1
+      WIC_CTRL:
+        description: "Wake-up Interrupt Controller control register" 
+        addressOffset: 0x020
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          WIC_Enable: 
+            description: "RWHC: This bit will be clear once M4 is in Mode 1 (SD mode) by HW."
+            bitOffset: 0
+            bitWidth: 1
+      WIC_STATUS:
+        description: "Wake-up Interrupt Controller Status register" 
+        addressOffset: 0x024
+        size: 32
+        access: read-only
+        fields:
+          WIC_Ready:
+            description: "This bit is indicates that M4 Power Saving is enabled. This bit is based on the WIC/M4 interface signal."
+            bitOffset: 0
+            bitWidth: 1
+      PWR_DWN_SCH:
+        description: "Power Down Scheme configuration" 
+        addressOffset: 0x030
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          FFEFB_WU:
+            description: "FFE and FB simultaneous wakeup-event behaviour"
+            bitOffset: 0
+            bitWidth: 1
+          SRAM_WU:
+            description: "SRAM simultaneous wakeup-event behaviour"
+            bitOffset: 1
+            bitWidth: 1
+          AUDIO_WU:
+            description: "Audio simultaneous wakeup-event behaviour"
+            bitOffset: 2
+            bitWidth: 1
+          M4M4S0_WU:
+            description: "M4 and M4S0 simultaneous wakeup-event behaviour"
+            bitOffset: 3
+            bitWidth: 1
+          FFEFB_PD:
+            description: "FFE and FB simultaneous power-down behaviour"
+            bitOffset: 4
+            bitWidth: 1
+          SRAM_PD:
+            description: "SRAM simultaneous power-down behaviour"
+            bitOffset: 5
+            bitWidth: 1
+          AUDIO_PD:
+            description: "AUDIO simultaneous power-down behaviour"
+            bitOffset: 6
+            bitWidth: 1
+          M4M4S0_PD:
+            description: "M4 and M4S0 simultaneous power-down behaviour"
+            bitOffset: 7
+            bitWidth: 1
+      PWR_OFF_OSC:
+        description: "Control the power state of Oscillator once the M4 is in Power Saving Mode" 
+        addressOffset: 0x040
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          Power_Off_OSC:
+            description: "1'b1 : Turn Off OSC once the M4 is in Power Saving Mode"
+            bitOffset: 0
+            bitWidth: 1
+      EXT_WAKING_UP_SRC:
+        description: "Configure the external wakeup event source. Turn on the OSC once PMUT is time out or GPIO INT is triggering. "
+        addressOffset: 0x044
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          Ext_WU_Source_Mask_N_0_GPIO_INT:
+            description: "Bit 7:0 GPIO/Sensor INT, level only, (Raw information from PAD direclty) (Turn on OSC)"
+            bitOffset: 0 
+            bitWidth: 8
+          Ext_WU_Source_Mask_N_0_PMU_Timer:
+            description: "Bit 8 : PMU Timer"
+            bitOffset: 8 
+            bitWidth: 1
+          Ext_WU_Source_Mask_N_0_Reset_Interrupt:
+            description: "Bit 9 : Reset Interrupt INT (Always Mask)."
+            bitOffset: 9 
+            bitWidth: 1
+      
+      SDMA_STATUS:
+        description: "SDMA status register" 
+        addressOffset: 0x070
+        size: 32
+        access: read-only
+        fields:
+          SDMA_Active:
+            description: "SDMA power domain is active"
+            bitOffset: 0
+            bitWidth: 1
+          SDMA_Deep_Sleep:
+            description: "SDMA power domain is in Deep Sleep Mode"
+            bitOffset: 1 
+            bitWidth: 1 
+          SDMA_Shut_Down:
+            description: "SDMA power domain is in Shut Down mode"
+            bitOffset: 2
+            bitWidth: 1
+          SDMA_Clock_Gating:
+            description: "Reserved"
+            bitOffset: 3
+            bitWidth: 1
+      SDMA_POWER_MODE_CFG:
+        description: "Register for SDMA Power Mode configuration" 
+        addressOffset: 0x074
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          SDMA_Power_Mode_Cfg:
+            description: "FW need to configure the registers before kicking off the power down event."
+            bitOffset: 0 
+            bitWidth: 2
+      SDMA_PD_SRC_MASK_N:
+        description: "Register for controlling if power down event will be masked" 
+        addressOffset: 0x078
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          SDMA_PD_EVENT:
+            description: "1'b0 : SDMA HW Power Down Event will be masked."
+            bitOffset: 0
+            bitWidth:  1
+      SDMA_WU_SRC_MASK_N:
+        description: "Reserved" 
+        addressOffset: 0x07C
+        size: 32
+        access: read-only
+      
+      M4_STATUS:
+        description: "Status of the M4 Power Domain" 
+        addressOffset: 0x080
+        size: 32
+        access: read-only
+        fields:
+          M4_Active:
+            description: "M4 Power Domain is active"
+            bitOffset: 0 
+            bitWidth: 1
+          M4_Deep_Sleep:
+            description: "Reserved"
+            bitOffset: 1 
+            bitWidth: 1
+          M4_Shut_Down:
+            description: "M4 Power Domain is in Shut Down mode"
+            bitOffset: 2
+            bitWidth: 1
+          M4_Clock_Gating:
+            description: "Reserved"
+            bitOffset: 3
+            bitWidth: 1 
+      M4_PWR_MODE_CFG:
+        description: "Configuration for the M4 power domain" 
+        addressOffset: 0x084
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          M4_Power_Mode_Cfg:
+            description: "FW need to configure the registers before clocking off the power down event"
+            bitOffset: 0
+            bitWidth: 2
+      M4_PD_SRC_MASKk_N:
+        description: "Reserved" 
+        addressOffset: 0x088
+        size: 32
+        access: read-only
+      M4_WU:
+        description: "Reserved" 
+        addressOffset: 0x08C
+        size: 32
+        access: read-only
+      FFE_STATUS:
+        description: "Status of the Flexible Fusion Engine" 
+        addressOffset: 0x090
+        size: 32
+        access: read-only
+        fields:
+          FFE_Active:
+            description: "FFE Power Domain is active"
+            bitOffset: 0
+            bitWidth: 1
+          FFE_Deep_Sleep:
+            description: "FFE Power Domain is in Deep Sleep mode"
+            bitOffset: 1
+            bitWidth: 1
+          FFE_Shut_Down:
+            description: "FFE Power Domain is in Shut_Down mode"
+            bitOffset: 2
+            bitWidth: 1
+          FFE_Clock_Gating:
+            description: "Power Domain is alive, Onlt related clock is gated off -- This mode is for debugging only"
+            bitOffset: 3
+            bitWidth: 1
+      FFE_PWR_MODE_CFG:
+        description: "Power Mode configuration for the Flexible Fusion Engine Power Domain" 
+        addressOffset: 0x094
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          FFE_Power_Mode_Cfg:
+            description: "FW need to configure the registers before kicking off the power down event."
+            bitOffset: 0 
+            bitWidth: 2
+      FFE_PD_SRC_MASK_N:
+        description: "Control masking of busy signal. The falling edge of any of the above signals (non-mask) will put the FFE into Power saving mode base on the Power Mode Cfg. Note: These signals used to indicate the BUSY status, so they must be level signals." 
+        addressOffset: 0x098
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          FFE_PD_Event_Mask:
+            description: "FFEs Busy Signal (FFE 0, SM 0 and SM1 Busy Signals ) Mask_N" 
+            bitOffset: 0
+            bitWidth: 1
+      FFE_WU_SRC_MASK_N:
+        description: "Control the masking of the Flexible Fusion Engine wake-up event triggers" 
+        addressOffset: 0x09C
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          KickOff_Timer_Time_Out:
+            description: "If unmasked, kick off timer time-out event will wake up FFE."
+            bitOffset: 0
+            bitWidth: 1
+          Sensor_GPIO_0_INT:
+            description: "If unmasked, GPIO0 interrupt will wake up FFE."
+            bitOffset: 1
+            bitWidth: 1
+          Sensor_GPIO_1_INT:
+            description: "If unmasked, GPIO1 interrupt will wake up FFE."
+            bitOffset: 2
+            bitWidth: 1
+          Sensor_GPIO_2_INT:
+            description: "If unmasked, GPIO2 interrupt will wake up FFE."
+            bitOffset: 3
+            bitWidth: 1
+          Sensor_GPIO_3_INT:
+            description: "If unmasked, GPIO3 interrupt will wake up FFE."
+            bitOffset: 4
+            bitWidth: 1
+          Sensor_GPIO_4_INT:
+            description: "If unmasked, GPIO4 interrupt will wake up FFE."
+            bitOffset: 5
+            bitWidth: 1
+          Sensor_GPIO_5_INT:
+            description: "If unmasked, GPIO5 interrupt will wake up FFE."
+            bitOffset: 6
+            bitWidth: 1
+          Sensor_GPIO_6_INT:
+            description: "If unmasked, GPIO6 interrupt will wake up FFE."
+            bitOffset: 7
+            bitWidth: 1
+          Sensor_GPIO_7_INT:
+            description: "If unmasked, GPIO7 interrupt will wake up FFE."
+            bitOffset: 8
+            bitWidth: 1
+
+      FB_STATUS:
+        description: "FPGA Fabric Power domain status" 
+        addressOffset: 0x0A0
+        size: 32
+        access: read-only
+        fields:
+          FB_Active:
+            description: "FPGA Fabric Power domain is active"
+            bitOffset: 0
+            bitWidth: 1
+          FB_Deep_Sleep:
+            description: "FPGA Fabric Power domain is in mode"
+            bitOffset: 1
+            bitWidth: 1
+          FB_Shut_Down:
+            description: "FPGA Fabric Power domain is in mode"
+            bitOffset: 2
+            bitWidth: 1
+        FB_Clock_Gating:
+            description: "Reserved"
+            bitOffset: 3
+            bitWidth: 1
+      FB_PWR_MODE_CFG:
+        description: "Power mode configuration for the FPGA Fabric Power domain" 
+        addressOffset: 0x0A4
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          FB_Power_Mode_Cfg:
+            description: "FW need to configure the registers before kicking off the power down event."
+            bitOffset: 0
+            bitWidth: 2
+      FB_PD_SRC_MASK_N:
+        description: "Control masking of power down event signals for the FPGA Fabric power domain. The falling edge of any of the listed signals (non-mask) will put the FB into Power saving mode base on the Power Mode Cfg. Note: These signals used to indicate the BUSY status, so they must be level signals." 
+        addressOffset: 0x0A8
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          Interface_Signal_0:
+            description: "Control the mask for the Interface Signal 0"
+            bitOffset: 1 
+            bitWidth: 1
+          Interface_Signal_1:
+            description: "Control the mask for the Interface Signal 1"
+            bitOffset: 2 
+            bitWidth: 1
+          Interface_Signal_2:
+            description: "Control the mask for the Interface Signal 2"
+            bitOffset: 3 
+            bitWidth: 1
+          Interface_Signal_3:
+            description: "Control the mask for the Interface Signal 3"
+            bitOffset: 4 
+            bitWidth: 1
+      FB_WU_SRC_MASK_N:
+        description: "Control the masking of the FPGA FAbric wake-up event triggers" 
+        addressOffset: 0x0AC
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          Sensor_GPIO_0_INT:
+            description: "If unmasked, GPIO0 interrupt will wake up FB."
+            bitOffset: 0
+            bitWidth: 1
+          Sensor_GPIO_1_INT:
+            description: "If unmasked, GPIO1 interrupt will wake up FB."
+            bitOffset: 1
+            bitWidth: 1
+          Sensor_GPIO_2_INT:
+            description: "If unmasked, GPIO2 interrupt will wake up FB."
+            bitOffset: 2
+            bitWidth: 1
+          Sensor_GPIO_3_INT:
+            description: "If unmasked, GPIO3 interrupt will wake up FB."
+            bitOffset: 3
+            bitWidth: 1
+          Sensor_GPIO_4_INT:
+            description: "If unmasked, GPIO4 interrupt will wake up FB."
+            bitOffset: 4
+            bitWidth: 1
+          Sensor_GPIO_5_INT:
+            description: "If unmasked, GPIO5 interrupt will wake up FB."
+            bitOffset: 5
+            bitWidth: 1
+          Sensor_GPIO_6_INT:
+            description: "If unmasked, GPIO6 interrupt will wake up FB."
+            bitOffset: 6
+            bitWidth: 1
+          Sensor_GPIO_7_INT:
+            description: "If unmasked, GPIO7 interrupt will wake up FB."
+            bitOffset: 7
+            bitWidth: 1
+          KickOff_Timer_Time_Out:
+            description: "If unmasked, kick off timer time-out event will wake up FB."
+            bitOffset: 8
+            bitWidth: 1
+      PF_STATUS:
+        description: "PF SRAM Power Domain status" 
+        addressOffset: 0x080
+        size: 32
+        access: read-only
+        fields:
+          FB_Active:
+            description: "PF SRAM Power domain is active"
+            bitOffset: 0
+            bitWidth: 1
+          FB_Deep_Sleep:
+            description: "PF SRAM Fabric Power domain is in mode"
+            bitOffset: 1
+            bitWidth: 1
+          FB_Shut_Down:
+            description: "PF SRAM Fabric Power domain is in mode"
+            bitOffset: 2
+            bitWidth: 1
+          FB_Clock_Gating:
+            description: "Reserved"
+            bitOffset: 3
+            bitWidth: 1
+      PF_PWR_MODE_CFG:
+        description: "Power mode configuration for the PF SRAM Power domain" 
+        addressOffset: 0x0B4
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          PF_Power_Mode_Cfg:
+            description: "DW need to configure the registers before kicking off the power down event"
+            bitOffset: 0 
+            bitWidth: 2
+      PF_PD_SRC_MASK_N:
+        description: "Reserved" 
+        addressOffset: 0x0B8
+        size: 32
+        access: read-only
+      PF_WU_SRC_MASK_N:
+        description: "Reserved" 
+        addressOffset: 0x0BC
+        size: 32
+        access: read-only
+      M4S0_SRAM_STATUS:
+        description: "M4S0 SRAM Power Domain status" 
+        addressOffset: 0x0C0
+        size: 32
+        access: read-only
+        fields:
+          M4S0_Active:
+            description: "PF SRAM Power domain is active."
+            bitOffset: 0
+            bitWidth: 1
+          M4S0_Deep_Sleep:
+            description: "Reserved. Deep Sleep not supported for this power domain."
+            bitOffset: 1
+            bitWidth: 1
+          M4S0_Shut_Down:
+            description: "PF SRAM Fabric Power domain is in mode."
+            bitOffset: 2
+            bitWidth: 1
+          M4S0_Clock_Gating:
+            description: "Reserved"
+            bitOffset: 3
+            bitWidth: 1
+      M4S0_PWR_MODE_CFG:
+        description: "Power mode configuration for the M4S0 SRAM power domain" 
+        addressOffset: 0x0C4
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          M4S0_Power_Mode_Cfg:
+            description: "FW need to configure the registers before kicking off the power down event"
+            bitOffset: 0
+            bitWidth: 2
+      M4S0_PD_SRC_MASK_N:
+        description: "Control masking of power-down event triggers for the M4S0 SRAM domain" 
+        addressOffset: 0x0C8
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          M4S0_PD_Event_Mask:
+            description: "If not mask, The M4S0 power domain will put into Power Saving Mode base on Power_Mode_cfg once M4 is entering Shut Down mode and M4S0 power domain is NOT in power saving mode."
+            bitOffset: 0
+            bitWidth: 1
+      M4S0_WU_SRC_MASK_N:
+        description: "Control masking of wake-up event triggers for the M4S0 SRAM domain" 
+        addressOffset: 0x0CC
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          M4S0_PD_Event_Mask:
+            description: "If not mask, The M4S0 power domain will wake up once M4 is waking up from Power Saving and M4S0 power domain is NOT in active mode."
+            bitOffset: 0
+            bitWidth: 1
+      A1_STATUS:
+        description: "Status of the A1 power domain"
+        addressOffset: 0x0D0
+        size: 32
+        access: read-only
+        resetValue: 0x0
+        fields:
+          M4S0_Active:
+            description: "A1 Power domain is active."
+            bitOffset: 0
+            bitWidth: 1
+          M4S0_Deep_Sleep:
+            description: "A1 Power domain is in retention mode"
+            bitOffset: 1
+            bitWidth: 1
+          M4S0_Shut_Down:
+            description: "A1 Power domain is in mode."
+            bitOffset: 2
+            bitWidth: 1
+          M4S0_Clock_Gating:
+            description: "Reserved"
+            bitOffset: 3
+            bitWidth: 1
+      A1_PWR_MODE_CFG:
+        description: "Power mode configuration for the A1 power domain" 
+        addressOffset: 0x0D4
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          A1_Power_Mode_Cfg: 
+            description: "FW need to configure the registers before kicking off the power down event"
+            bitOffset: 0
+            bitWidth: 2
+      A1_PD_SRC_MASK_N:
+        description: "Reserved" 
+        addressOffset: 0x0D8
+        size: 32
+        access: read-only
+      A1_WU_SRC_MASK_N:
+        description: "Control masking of wake-up event triggers for the A1 domain" 
+        addressOffset: 0x0DC
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          A1_WU_EVENT_MASK_M:
+            description: "If Boot Code Reloading after M4 wake up is needed, this bit should be set to 1."
+            bitOffset: 0
+            bitWidth: 1
+      MISC_STATUS:
+        description: "I2S Power info" 
+        addressOffset: 0x0E0
+        size: 32
+        access: read-only
+        fields:
+          I2S:
+            description: "Bit will be set if the I2S is powered on"
+            bitOffset: 4
+            bitWidth: 1
+      AUDIO_STATUS:
+        description: "Audio power domain status" 
+        addressOffset: 0x0E4
+        size: 32
+        access: read-only
+        fields:
+          AD0:
+            description: "Bit is set if AD0 is on"
+            bitOffset: 0
+            bitWidth: 1
+          AD1:
+            description: "Bit is set if AD1 power domain is on"
+            bitOffset: 1
+            bitWidth: 1
+          AD2:
+            description: "Bit is set if AD2 power domain is on"
+            bitOffset: 2
+            bitWidth: 1
+          AD3:
+            description: "Bit is set if AD3 power domain is on"
+            bitOffset: 3
+            bitWidth: 1
+          AD4:
+            description: "Bit is set if AD4 power domain is on"
+            bitOffset: 4
+            bitWidth: 1
+          AD5:
+            description: "Bit is set if AD5 power domain is on"
+            bitOffset: 5
+            bitWidth: 1
+      M4_SRAM_STATUS:
+        description: "M4 SRAM Power domain status" 
+        addressOffset: 0x0E8
+        size: 32
+        access: read-only
+        fields:
+          M4S0:
+            description: "Bit is set if M4S0 SRAM power domain is on. Same as M4S0_SRAM_STATUS[0:0]"
+            bitOffset: 0
+            bitWidth: 1
+          M4S1:
+            description: "Bit is set if M4S1 SRAM power domain is on"
+            bitOffset: 1
+            bitWidth: 1
+          M4S2:
+            description: "Bit is set if M4S2 SRAM power domain is on"
+            bitOffset: 2
+            bitWidth: 1
+          M4S3:
+            description: "Bit is set if M4S3 SRAM power domain is on"
+            bitOffset: 3
+            bitWidth: 1
+          M4S4:
+            description: "Bit is set if M4S4 SRAM power domain is on"
+            bitOffset: 4
+            bitWidth: 1
+          M4S5:
+            description: "Bit is set if M4S5 SRAM power domain is on"
+            bitOffset: 5
+            bitWidth: 1
+          M4S6:
+            description: "Bit is set if M4S6 SRAM power domain is on"
+            bitOffset: 6
+            bitWidth: 1
+          M4S7:
+            description: "Bit is set if M4S7 SRAM power domain is on"
+            bitOffset: 7
+            bitWidth: 1
+          M4S8:
+            description: "Bit is set if M4S8 SRAM power domain is on"
+            bitOffset: 8
+            bitWidth: 1
+          M4S9:
+            description: "Bit is set if M4S9 SRAM power domain is on"
+            bitOffset: 9
+            bitWidth: 1
+          M4S10:
+            description: "Bit is set if M4S10 SRAM  power domain is on"
+            bitOffset: 10
+            bitWidth: 1
+          M4S11:
+            description: "Bit is set if M4S11 SRAM  power domain is on"
+            bitOffset: 11
+            bitWidth: 1
+          M4S12:
+            description: "Bit is set if M4S12 SRAM  power domain is on"
+            bitOffset: 12
+            bitWidth: 1
+          M4S13:
+            description: "Bit is set if M4S13 SRAM  power domain is on"
+            bitOffset: 13
+            bitWidth: 1
+          M4S14:
+            description: "Bit is set if M4S14 SRAM power domain is on"
+            bitOffset: 14
+            bitWidth: 1
+          M4S15:
+            description: "Bit is set if M4S15 SRAM power domain is on"
+            bitOffset: 15
+            bitWidth: 1
+      AUDIO_WU_SRC_MASK_N:
+        description: "Control masking of wake-up event triggers for the Audio domains" 
+        addressOffset: 0x0EC
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          AD0_WU_Event_Mask_N:
+            description: "Allow external interrupt coming from pads 9 or 30 to serve as wake-up event trigger"
+            bitOffset: 0 
+            bitWidth: 1
+          AD1_WU_Event_Mask_N:
+            description: "Allow external interrupt coming from pads 9 or 30 to serve as wake-up event trigger"
+            bitOffset: 1 
+            bitWidth: 1
+          AD2_WU_Event_Mask_N:
+            description: "Allow external interrupt coming from pads 9 or 30 to serve as wake-up event trigger"
+            bitOffset: 2 
+            bitWidth: 1
+          AD3_WU_Event_Mask_N:
+            description: "Allow external interrupt coming from pads 9 or 30 to serve as wake-up event trigger"
+            bitOffset: 3 
+            bitWidth: 1
+          AD4_WU_Event_Mask_N:
+            description: "Allow external interrupt coming from pads 9 or 30 to serve as wake-up event trigger"
+            bitOffset: 4 
+            bitWidth: 1
+          AD5_WU_Event_Mask_N:
+            description: "Allow external interrupt coming from pads 9 or 30 to serve as wake-up event trigger"
+            bitOffset: 5 
+            bitWidth: 1
+      M4_MEM_CTRL_0:
+        description: "Control DS pins for different SRAM instances on the M4 subsystem. For each instance: 1'b1 : Enable the Deep Sleep funciton of SRAM Macro, Memory content will be kept. While M4 access the memory in Deep Sleep mode, the HW will clear the corresponding bit." 
+        addressOffset: 0x100
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          CTRL_M4_SRAM_DS_0:
+            description: "Control DS pin of 32KB SRAM Instance 0 on M4 subsystem"
+            bitOffset: 0
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_1:
+            description: "Control DS pin of 32KB SRAM Instance 1 on M4 subsystem"
+            bitOffset: 1
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_2:
+            description: "Control DS pin of 32KB SRAM Instance 2 on M4 subsystem"
+            bitOffset: 2
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_3:
+            description: "Control DS pin of 32KB SRAM Instance 3 on M4 subsystem"
+            bitOffset: 3
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_4:
+            description: "Control DS pin of 32KB SRAM Instance 4 on M4 subsystem"
+            bitOffset: 4
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_5:
+            description: "Control DS pin of 32KB SRAM Instance 5 on M4 subsystem"
+            bitOffset: 5
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_6:
+            description: "Control DS pin of 32KB SRAM Instance 6 on M4 subsystem"
+            bitOffset: 6
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_7:
+            description: "Control DS pin of 32KB SRAM Instance 7 on M4 subsystem"
+            bitOffset: 7
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_8:
+            description: "Control DS pin of 32KB SRAM Instance 8 on M4 subsystem"
+            bitOffset: 8
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_9:
+            description: "Control DS pin of 32KB SRAM Instance 9 on M4 subsystem"
+            bitOffset: 9
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_10:
+            description: "Control DS pin of 32KB SRAM Instance 10 on M4 subsystem"
+            bitOffset: 10
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_11:
+            description: "Control DS pin of 32KB SRAM Instance 11 on M4 subsystem"
+            bitOffset: 11
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_12:
+            description: "Control DS pin of 32KB SRAM Instance 12 on M4 subsystem"
+            bitOffset: 12
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_13:
+            description: "Control DS pin of 32KB SRAM Instance 13 on M4 subsystem"
+            bitOffset: 13
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_14:
+            description: "Control DS pin of 32KB SRAM Instance 14 on M4 subsystem"
+            bitOffset: 14
+            bitWidth: 1
+          CTRL_M4_SRAM_DS_15:
+            description: "Control DS pin of 32KB SRAM Instance 15 on M4 subsystem"
+            bitOffset: 15
+            bitWidth: 1
+      M4_MEM_CTRL_1:
+        description: "Control Shutdown pin for various instances of SRAM on the M4 subsystem. For each instance: 1'b1 : Enable the Shutdown funciton of SRAM Macro, Memory content will be lost. While M4 access the memory in Shutdown mode, the HW will clear the corresponding bit." 
+        addressOffset: 0x104
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          CTRL_M4_SRAM_SD_0:
+            description: "Control SD pin of 32KB SRAM Instance 0 on M4 subsystem"
+            bitOffset: 0
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_1:
+            description: "Control SD pin of 32KB SRAM Instance 1 on M4 subsystem"
+            bitOffset: 1
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_2:
+            description: "Control SD pin of 32KB SRAM Instance 2 on M4 subsystem"
+            bitOffset: 2
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_3:
+            description: "Control SD pin of 32KB SRAM Instance 3 on M4 subsystem"
+            bitOffset: 3
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_4:
+            description: "Control SD pin of 32KB SRAM Instance 4 on M4 subsystem"
+            bitOffset: 4
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_5:
+            description: "Control SD pin of 32KB SRAM Instance 5 on M4 subsystem"
+            bitOffset: 5
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_6:
+            description: "Control SD pin of 32KB SRAM Instance 6 on M4 subsystem"
+            bitOffset: 6
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_7:
+            description: "Control SD pin of 32KB SRAM Instance 7 on M4 subsystem"
+            bitOffset: 7
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_8:
+            description: "Control SD pin of 32KB SRAM Instance 8 on M4 subsystem"
+            bitOffset: 8
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_9:
+            description: "Control SD pin of 32KB SRAM Instance 9 on M4 subsystem"
+            bitOffset: 9
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_10:
+            description: "Control SD pin of 32KB SRAM Instance 10 on M4 subsystem"
+            bitOffset: 10
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_11:
+            description: "Control SD pin of 32KB SRAM Instance 10 on M4 subsystem"
+            bitOffset: 11
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_12:
+            description: "Control SD pin of 32KB SRAM Instance 10 on M4 subsystem"
+            bitOffset: 12
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_13:
+            description: "Control SD pin of 32KB SRAM Instance 10 on M4 subsystem"
+            bitOffset: 13
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_14:
+            description: "Control SD pin of 32KB SRAM Instance 10 on M4 subsystem"
+            bitOffset: 14
+            bitWidth: 1
+          CTRL_M4_SRAM_SD_15:
+            description: "Control SD pin of 32KB SRAM Instance 10 on M4 subsystem"
+            bitOffset: 15
+            bitWidth: 1
+      PF_MEM_CTRL_0:
+        description: "RESERVED" 
+        addressOffset: 0x108
+        size: 32
+        access: read-only
+      PF_MEM_CTRL_1:
+        description: "Control SD pin of varios FIFOs intances in the PF subsystem. For each one: 1'b1 : Enable the Shut Down function of SRAM Macro, Memory content will be lost" 
+        addressOffset: 0x10C
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          CTRL_PF_SRAM_SD_0:
+            description: "Control SD Pin of FIFO_0  instances on PF subsystem"
+            bitOffset: 0 
+            bitWidth: 1
+          CTRL_PF_SRAM_SD_0:
+            description: "Control SD Pin of FIFO_1  instances on PF subsystem"
+            bitOffset: 1 
+            bitWidth: 1
+          CTRL_PF_SRAM_SD_0:
+            description: "Control SD Pin of FIFO_2  instances on PF subsystem"
+            bitOffset: 2 
+            bitWidth: 1
+          CTRL_PF_SRAM_SD_8k:
+            description: "Control SD Pin of FIFO_8k  instances on PF subsystem"
+            bitOffset: 3 
+            bitWidth: 1
+      FFE_MEM_CTRL_0:
+        description: "Control de Deep Sleep pin of various elements in the Flexible Fusion Engine power domain. For each: 1'b1 : Enable the Deep Sleep function of SRAM Macro, Memory content will be kept. " 
+        addressOffset: 0x110
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          CTRL_FFE_SRAM_DS_CM0:
+            description: "Control DS pin of CM0 8Kx40"
+            bitOffset: 0
+            bitWidth: 1
+          CTRL_FFE_SRAM_DS_DM0:
+            description: "Control DS pin of DM0 1Kx32"
+            bitOffset: 1
+            bitWidth: 1
+          CTRL_FFE_SRAM_DS_DM1:
+            description: "Control DS pin of DM1 1Kx32"
+            bitOffset: 2
+            bitWidth: 1
+          CTRL_FFE_SRAM_DS_SM0:
+            description: "Control DS pin of SM0 1Kx18"
+            bitOffset: 3
+            bitWidth: 1
+          CTRL_FFE_SRAM_DS_SM1:
+            description: "Control DS pin of SM1 0.5Kx18"
+            bitOffset: 4
+            bitWidth: 1
+          CTRL_FFE_SRAM_DS_CM1:
+            description: "Control DS pin of CM1 2Kx40"
+            bitOffset: 5
+            bitWidth: 1
+          CTRL_FFE_SRAM_DS_DM2:
+            description: "Control DS pin of CM0 1Kx32"
+            bitOffset: 6
+            bitWidth: 1
+          CTRL_FFE_SRAM_DS_DM3:
+            description: "Control DS pin of CM0 1Kx32"
+            bitOffset: 7
+            bitWidth: 1
+      FFE_MEM_CTRL_1:
+        description: "Control de Shut Down pin of various elements in the Flexible Fusion Engine power domain. For each: 1'b1 : Enable the Deep Sleep function of SRAM Macro, Memory content will be kept. " 
+        addressOffset: 0x114
+        size: 32
+        access: read-write
+        resetValue: 0x0
+        fields:
+          CTRL_FFE_SRAM_SD_CM0:
+            description: "Control SD pin of CM0 8Kx40"
+            bitOffset: 0
+            bitWidth: 1
+          CTRL_FFE_SRAM_SD_DM0:
+            description: "Control SD pin of DM0 1Kx32"
+            bitOffset: 1
+            bitWidth: 1
+          CTRL_FFE_SRAM_SD_DM1:
+            description: "Control SD pin of DM1 1Kx32"
+            bitOffset: 2
+            bitWidth: 1
+          CTRL_FFE_SRAM_SD_SM0:
+            description: "Control SD pin of SM0 1Kx18"
+            bitOffset: 3
+            bitWidth: 1
+          CTRL_FFE_SRAM_SD_SM1:
+            description: "Control SD pin of SM1 0.5Kx18"
+            bitOffset: 4
+            bitWidth: 1
+          CTRL_FFE_SRAM_SD_CM1:
+            description: "Control SD pin of CM1 2Kx40"
+            bitOffset: 5
+            bitWidth: 1
+          CTRL_FFE_SRAM_SD_DM2:
+            description: "Control SD pin of CM0 1Kx32"
+            bitOffset: 6
+            bitWidth: 1
+          CTRL_FFE_SRAM_SD_DM3:
+            description: "Control SD pin of CM0 1Kx32"
+            bitOffset: 7
+            bitWidth: 1
+
+
+PMU:
+  MISC_POR_0:
+    M4_Rst_Release:
+      keep_on_reset : [0, "Keep M4 Core on Reset"]
+      release_from_reset: [1, "Release M4 Core Reset"]
+  MISC_POR_1:
+    Cfg_fpd_on:
+      wakeup_flash: [1, "The SPI is in Power Down Mode. If set, flash will be woken up"]
+    Sys_rst_as_int: 
+      sys_rst_as_chip_rst: [0, "Treat SYSTEM Reset as Chip Reset"]
+      sys_rst_pin_as_exti: [1, "Reconfigure the SYSTEM Reset pin as the external interrupt pin"]
+    Sys_rst_as_int_pw:
+      pulse_1S_2S: [0, "PWM must be 1S ~ 2S  for Reset INT"]
+      pulse_2S_3S: [1, "PWM must be 2S ~ 3S  for Reset INT"]
+      pulse_3S_4S: [2, "PWM must be 3S ~ 4S  for Reset INT"]
+      pulse_4S_5S: [3, "PWM must be 4S ~ 5S  for Reset INT"]
+    Sys_rst_pulse_ext:
+      after_4s: [0, "4S after INT trigger"]
+      after_8s: [1, "8S after INT trigger"]
+  MISC_POR_2:
+    SPI_Reboot_enable_N:
+      spi_flash_code_reload : [0, "Need cfgSM to reload the code when M4 waking up from SD (Mode1)"]
+    AP_Reboot_enable_N:
+      ap_code_reload : [0, "Need AP to reload the code when M4 waking up from SD (Mode1)"]
+  CHIP_STA_1:
+    FFE0_BUSY:
+      not_busy: [0, "FFE0 is not busy"]
+      busy: [1, "FFE0 is busy"]
+    Code_Source_Cfg:
+      spi_flash: [0, "From SPI Flash, if SWD_Mode_Cfg is 1, CfgSM will not be kicked off."]
+      ap: [1, "From AP"]
+    Debug_Port_Cfg:
+      swd_pads_5_6: [0, "SW_CLK @pad[5], SW_IO @pad[6] "]
+      swd_pads_27_26: [1, "SW_CLK @pad[27], SW_IO @pad[26]"]
+    SWD_Mode_Cfg: 
+      if_swd_release_m4_on_rest: [1, "SWD debugger is attached. Release the M4 Core reset once System Reset released."]
+    CLOCK_BYPASS_Cfg:
+      external_clock_configured: [1, "The System Clock Source is from the I/O PAD instead of OSC if Debug_port_cfg is 1 as well."]
+  PWR_DWN_SCH:
+    FFEFB_WU:
+      secuential : [0, "If FFE and FB WU event happen at same time, FB will wake up first, then FFE. "]
+      parallel: [1, "If FFE and FB WU event happen at same time, FFE and FB will wake up in parallel"]
+    SRAM_WU:
+      secuential : [0, "If more than one SRAM (M4S1 ~ M4S15) WU event happen at same time, these SRAMs will wake up in the following priority.  M4S1->M4S2->….->M4S14-> M4S15 (M4S1 has the highest priority and M4S15 has the lowest priority)"]
+      parallel: [1, "If more than one SRAM(M4S1 ~ M4S15, NOT include M4S0) WU event happen at same time, these SRAMs will wake up in parallel. "]
+    AUDIO_WU:
+      secuential : [0, "If more than one AUDIO Blocks (AD0 ~ AD5) WU event happen at same time,  these Blocks will wake up in the following priority. AD5->AD1->AD2->AD0->AD3->AD4. (AD5 has the highest priority and AD4 has the lowest priority)"]
+      parallel: [1, "If more than one AUDIO Blocks (AD0 ~ AD5) WU event happen at same time, these AUDIO power domain will wake up in parallel"]
+    M4M4S0_WU:
+      secuential : [0, "Not defined. guess: First M4 then M4S0"]
+      parallel: [1, "If M4 and M4S0 WU event happen at same time, then M4 and M4S0 will wake up at same time"]
+    FFEFB_PD:
+      secuential : [0, "If FFE and FB PD event happen at same time, FB will power down first, then FFE. "]
+      parallel: [1, "If FFE and FB PD event happen at same time, FFE and FB will power down in parallel"]
+    SRAM_PD:
+      secuential : [0, "If more than one SRAM (M4S1 ~ M4S15) PD event happen at same time, these SRAMs will power down in the following priority.  M4S1->M4S2->….->M4S14-> M4S15 (M4S1 has the highest priority and M4S15 has the lowest priority)"]
+      parallel: [1, "If more than one SRAM (M4S1 ~ M4S15, NOT include M4S0) PD event happen at same time, these SRAMs will power down in parallel. "]
+    AUDIO_PD:
+      secuential : [0, "If more than one AUDIO Blocks (AD0 ~ AD5) PD event happen at same time,  these Blocks will power down in the following priority. AD5->AD1->AD2->AD0->AD3->AD4. (AD5 has the highest priority and AD4 has the lowest priority)"]
+      parallel: [1, "If more than one AUDIO Blocks (AD0 ~ AD5) PD event happen at same time, these AUDIO power domain will power down in parallel"]
+    M4M4S0_PD:
+      secuential : [0, "Not defined. guess: First M4 then M4S0"]
+      parallel: [1, "If M4 and M4S0 PD event happen at same time, then M4 and M4S0 will put into power saving mode at same time"]
+  SDMA_POWER_MODE_CFG:
+    SDMA_Power_Mode_Cfg: 
+      retention_mode: [1, "Retention Mode"]
+      shut_down_mode: [2, "Shut Down Mode "]
+  SDMA_PD_SRC_MASK_N:
+    SDMA_PD_EVENT:
+        mask : [0, "SDMA HW Power Down Event will be masked."]
+        undefined : [1, "Undefined Behaviour. Probably unmasks the Power Down event."]
+  M4_PWR_MODE_CFG:
+    M4_Power_Mode_Cfg: 
+      shut_down_mode : [2, "Configure power down event for shut down mode"]
+  FFE_PWR_MODE_CFG:
+    FFE_Power_Mode_Cfg: 
+      deep_sleep_mode : [1, "Configure power down event for deep sleep mode"]
+      shut_down_mode : [2, "Configure power down event for shut down mode"]
+  FFE_PD_SRC_MASK_N:
+    FFE_PD_Event_Mask:
+      mask: [0, "Masks the busy signal sources"]
+      unmask : [1, "Will unmask the busy signal sources"]
+  FFE_WU_SRC_MASK_N:
+    "*": 
+      mask: ["0","Mask the interrupt as a wake-up event source"]
+      unmask: ["1","Unmask the interrupt as a wake-up event source"]
+  FB_PWR_MODE_CFG:
+    FB_Power_Mode_Cfg: 
+      deep_sleep_mode : [1, "Configure power down event for deep sleep mode"]
+      shut_down_mode : [2, "Configure power down event for shut down mode"]
+
+  FB_PD_SRC_MASK_N:
+    "Interface_Signal_*":
+      mask: ["0","Mask the signal as a power-down event source"]
+      unmask: ["1","Unmask the signal as a power-down event source"]
+  FB_WU_SRC_MASK_N:
+    "*": 
+      mask: ["0","Mask the interrupt as a wake-up event source"]
+      unmask: ["1","Unmask the interrupt as a wake-up event source"]
+  PF_PWR_MODE_CFG:
+    PF_Power_Mode_Cfg: 
+      deep_sleep_mode : [1, "Configure power down event for deep sleep mode"]
+      shut_down_mode : [2, "Configure power down event for shut down mode"]
+  M4S0_PWR_MODE_CFG:
+    M4S0_Power_Mode_Cfg: 
+      shut_down_mode : [2, "Configure power down event for shut down mode"]
+  M4S0_PD_SRC_MASK_N:
+    M4S0_PD_Event_Mask:
+        mask : [0, "M4S0 SRAM Power Down Event will be masked."]
+        undefined : [1, "Undefined Behaviour. Probably unmasks the Power Down event."]
+  A1_PWR_MODE_CFG:
+    A1_Power_Mode_Cfg: 
+      retention_mode: [1, "Retention Mode"]
+      shut_down_mode: [2, "Shut Down Mode "]
+  A1_WU_SRC_MASK_N:
+    A1_WU_EVENT_MASK_M:
+      mask: ["0","Mask the M4 Wakeup event as the trigger for the A1 wake-up event "]
+      unmask: ["1","Unmask M4 wake-up event as the trigger for the A1 wake-up"]
+  AUDIO_WU_SRC_MASK_N:
+    "AD*_WU_Event_Mask_N":
+      mask: ["0","Mask the external interrupts from pads 9 or 30 as wake-up event triggers"]
+      unmask: ["1","Unmask the external interrupts from pads 9 or 30 as wake-up event triggers"]
+  M4_MEM_CTRL_0:
+    "CTRL_M4_SRAM_DS_*":
+      disable_deep_sleep: [0,"Disable the Deep Sleep function of SRAM Macro, Memory content will be kept. "]
+      enable_deep_sleep: [1,"Enable the Deep Sleep function of SRAM Macro, Memory content will be kept. " ]
+  M4_MEM_CTRL_1:
+    "CTRL_M4_SRAM_SD_*":
+      disable_shut_down: [0,"Disable the shut down function of SRAM Macro. "]
+      enable_shut_down: [1,"Enable the shut down function of SRAM Macro, Memory content will be lost. " ]
+  PF_MEM_CTRL_1:
+    "CTRL_PF_SRAM_SD_*":
+      disable_shut_down: [0,"Disable the shut down function of SRAM Macro."]
+      enable_shut_down: [1,"Enable the shut down function of SRAM Macro, Memory content will be lost. " ]
+  FFE_MEM_CTRL_0:
+    "CTRL_FFE_SRAM_DS_*":
+      disable_deep_sleep: [0,"Disable the Deep Sleep function of SRAM Macro, Memory content will be kept. "]
+      enable_deep_sleep: [1,"Enable the Deep Sleep function of SRAM Macro, Memory content will be kept. " ]
+  FFE_MEM_CTRL_1:
+    "CTRL_FFE_SRAM_SD_*":
+      disable_shut_down: [0,"Disable the shut down function of SRAM Macro. "]
+      enable_shut_down: [1,"Enable the shut down function of SRAM Macro, Memory content will be lost. " ]
+
+

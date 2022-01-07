@@ -97,29 +97,7 @@ impl A0_PMU_DEBUG_MON_SEL_R {
     #[doc = r"Get enumerated values variant"]
     #[inline(always)]
     pub fn variant(&self) -> Option<A0_PMU_DEBUG_MON_SEL_A> {
-        match self.bits {
-            0 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_M4STM_KICKOFF_AND_BUSY_PLUS_0X000000),
-            1 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_A1),
-            2 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_M4),
-            3 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_M4S0),
-            4 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_AD5),
-            5 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_AD4),
-            6 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_AD3),
-            7 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_AD2),
-            8 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_AD1),
-            9 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_AD0),
-            10 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_FBST_KICKOFF_AND_BUSY_PLUS_0X000000),
-            11 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_I2S),
-            13 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_M4S15),
-            14 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_M4S11),
-            15 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_M4S7),
-            16 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_M4S3),
-            17 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_PF),
-            18 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_SDMA),
-            19 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_FFE),
-            20 => Some(A0_PMU_DEBUG_MON_SEL_A::SHOW_FB),
-            _ => None,
-        }
+        match self . bits { 0 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_M4STM_KICKOFF_AND_BUSY_PLUS_0X000000 ) , 1 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_A1 ) , 2 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_M4 ) , 3 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_M4S0 ) , 4 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_AD5 ) , 5 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_AD4 ) , 6 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_AD3 ) , 7 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_AD2 ) , 8 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_AD1 ) , 9 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_AD0 ) , 10 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_FBST_KICKOFF_AND_BUSY_PLUS_0X000000 ) , 11 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_I2S ) , 13 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_M4S15 ) , 14 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_M4S11 ) , 15 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_M4S7 ) , 16 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_M4S3 ) , 17 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_PF ) , 18 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_SDMA ) , 19 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_FFE ) , 20 => Some ( A0_PMU_DEBUG_MON_SEL_A :: SHOW_FB ) , _ => None , }
     }
     #[doc = "Checks if the value of the field is `SHOW_M4STM_KICKOFF_AND_BUSY_PLUS_0X000000`"]
     #[inline(always)]
