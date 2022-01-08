@@ -132,10 +132,10 @@ impl crate::Readable for MISC_POR_3_SPEC {
 impl crate::Writable for MISC_POR_3_SPEC {
     type Writer = W;
 }
-#[doc = "`reset()` method sets MISC_POR_3 to value 0"]
+#[doc = "`reset()` method sets MISC_POR_3 to value 0xff00"]
 impl crate::Resettable for MISC_POR_3_SPEC {
     #[inline(always)]
     fn reset_value() -> Self::Ux {
-        0
+        0xff00
     }
 }

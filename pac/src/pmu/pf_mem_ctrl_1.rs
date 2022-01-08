@@ -191,7 +191,7 @@ impl W {
         self
     }
 }
-#[doc = "Control SD pin of varios FIFOs intances in the PF subsystem. For each one: 1'b1 : Enable the Shut Down function of SRAM Macro, Memory content will be lost\n\nThis register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [pf_mem_ctrl_1](index.html) module"]
+#[doc = "Control Shut Down pin of various FIFOs intances in the PF subsystem. For each one: 1'b1 : Enable the Shut Down function of SRAM Macro, Memory content will be lost\n\nThis register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [pf_mem_ctrl_1](index.html) module"]
 pub struct PF_MEM_CTRL_1_SPEC;
 impl crate::RegisterSpec for PF_MEM_CTRL_1_SPEC {
     type Ux = u32;

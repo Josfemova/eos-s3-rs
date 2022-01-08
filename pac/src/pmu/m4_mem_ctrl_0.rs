@@ -931,10 +931,10 @@ impl crate::Readable for M4_MEM_CTRL_0_SPEC {
 impl crate::Writable for M4_MEM_CTRL_0_SPEC {
     type Writer = W;
 }
-#[doc = "`reset()` method sets M4_MEM_CTRL_0 to value 0"]
+#[doc = "`reset()` method sets M4_MEM_CTRL_0 to value 0xfffe"]
 impl crate::Resettable for M4_MEM_CTRL_0_SPEC {
     #[inline(always)]
     fn reset_value() -> Self::Ux {
-        0
+        0xfffe
     }
 }

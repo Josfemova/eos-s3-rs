@@ -110,9 +110,78 @@ pub struct RegisterBlock {
     pub m4_mem_ctrl_1: crate::Reg<m4_mem_ctrl_1::M4_MEM_CTRL_1_SPEC>,
     #[doc = "0x108 - RESERVED"]
     pub pf_mem_ctrl_0: crate::Reg<pf_mem_ctrl_0::PF_MEM_CTRL_0_SPEC>,
-    #[doc = "0x10c - Control SD pin of varios FIFOs intances in the PF subsystem. For each one: 1'b1 : Enable the Shut Down function of SRAM Macro, Memory content will be lost"]
+    #[doc = "0x10c - Control Shut Down pin of various FIFOs intances in the PF subsystem. For each one: 1'b1 : Enable the Shut Down function of SRAM Macro, Memory content will be lost"]
     pub pf_mem_ctrl_1: crate::Reg<pf_mem_ctrl_1::PF_MEM_CTRL_1_SPEC>,
-    _reserved_48_ffe_mem_ctrl_: [u8; 0x04],
+    #[doc = "0x110 - Control the Deep Sleep pin of various elements in the Flexible Fusion Engine power domain. For each: 1'b1 : Enable the Deep Sleep function of SRAM Macro, Memory content will be kept."]
+    pub ffe_mem_ctrl_0: crate::Reg<ffe_mem_ctrl_0::FFE_MEM_CTRL_0_SPEC>,
+    #[doc = "0x114 - Control the Shut Down pin of various elements in the Flexible Fusion Engine power domain. For each: 1'b1 : Enable the Deep Sleep function of SRAM Macro, Memory content will be kept."]
+    pub ffe_mem_ctrl_1: crate::Reg<ffe_mem_ctrl_1::FFE_MEM_CTRL_1_SPEC>,
+    #[doc = "0x118 - Control the Deep Sleep pin of Audio channels. For each: 1'b1 : Enable the Deep Sleep function of SRAM Macro, Memory content will be kept."]
+    pub audio_mem_ctrl_0: crate::Reg<audio_mem_ctrl_0::AUDIO_MEM_CTRL_0_SPEC>,
+    #[doc = "0x11c - Control the shut down pin of Audio channels. For each: 1'b1 : Enable the Deep Sleep function of SRAM Macro, Memory content will be kept."]
+    pub audio_mem_ctrl_1: crate::Reg<audio_mem_ctrl_1::AUDIO_MEM_CTRL_1_SPEC>,
+    #[doc = "0x120 - Reserved"]
+    pub m4_mem_cfg: crate::Reg<m4_mem_cfg::M4_MEM_CFG_SPEC>,
+    #[doc = "0x124 - Reserved"]
+    pub pf_mem_cfg: crate::Reg<pf_mem_cfg::PF_MEM_CFG_SPEC>,
+    #[doc = "0x128 - Control Light Sleep pin of different FFE SRAM power domains"]
+    pub ffe_mem_cfg: crate::Reg<ffe_mem_cfg::FFE_MEM_CFG_SPEC>,
+    #[doc = "0x12c - Reserved"]
+    pub audio_mem_cfg: crate::Reg<audio_mem_cfg::AUDIO_MEM_CFG_SPEC>,
+    #[doc = "0x130 - Reserved"]
+    pub m4_mem_ctrl_pwr_0:
+        crate::Reg<m4_mem_ctrl_pwr_0::M4_MEM_CTRL_PWR_0_SPEC>,
+    #[doc = "0x134 - Reserved"]
+    pub m4_mem_ctrl_pwr_1:
+        crate::Reg<m4_mem_ctrl_pwr_1::M4_MEM_CTRL_PWR_1_SPEC>,
+    #[doc = "0x138 - Reserved"]
+    pub m4_mem_ctrl_pwr_2:
+        crate::Reg<m4_mem_ctrl_pwr_2::M4_MEM_CTRL_PWR_2_SPEC>,
+    _reserved59: [u8; 0x04],
+    #[doc = "0x140 - Control the Deep Sleep function of SRAM Macro for the SDMA power domain"]
+    pub sdma_mem_ctrl_0: crate::Reg<sdma_mem_ctrl_0::SDMA_MEM_CTRL_0_SPEC>,
+    #[doc = "0x144 - Control the Shut Down function of SRAM Macro for the SDMA power domain"]
+    pub sdma_mem_ctrl_1: crate::Reg<sdma_mem_ctrl_1::SDMA_MEM_CTRL_1_SPEC>,
+    _reserved61: [u8; 0x38],
+    #[doc = "0x180 - Memory Power Down Control"]
+    pub mem_pwr_dwn_ctrl: crate::Reg<mem_pwr_dwn_ctrl::MEM_PWR_DWN_CTRL_SPEC>,
+    #[doc = "0x184 - Configuration for the PMU timer time-out period"]
+    pub pmu_timer_cfg_0: crate::Reg<pmu_timer_cfg_0::PMU_TIMER_CFG_0_SPEC>,
+    #[doc = "0x188 - Control wether the PMU timer is enabled or disabled"]
+    pub pmu_timer_cfg_1: crate::Reg<pmu_timer_cfg_1::PMU_TIMER_CFG_1_SPEC>,
+    #[doc = "0x18c - Control the delay for power-on after wake-up event. Applies to all power domains"]
+    pub pdwu_timer_cfg: crate::Reg<pdwu_timer_cfg::PDWU_TIMER_CFG_SPEC>,
+    _reserved65: [u8; 0x70],
+    #[doc = "0x200 - Registers for triggering power-down events in the FFE, FB and PF power domains."]
+    pub ffe_fb_pf_sw_pd: crate::Reg<ffe_fb_pf_sw_pd::FFE_FB_PF_SW_PD_SPEC>,
+    #[doc = "0x204 - Register for triggering power-down events in M4 SRAM power domains. (RWHC)"]
+    pub m4_sram_sw_pd: crate::Reg<m4_sram_sw_pd::M4_SRAM_SW_PD_SPEC>,
+    #[doc = "0x208 - Register for triggering power down events in MISC power domains + some general purpose SFR's (RWHC)"]
+    pub misc_sw_pd: crate::Reg<misc_sw_pd::MISC_SW_PD_SPEC>,
+    #[doc = "0x20c - Register for triggering power-down events in Audio power domains. (RWHC)"]
+    pub audio_sw_pd: crate::Reg<audio_sw_pd::AUDIO_SW_PD_SPEC>,
+    #[doc = "0x210 - Registers for triggering wake-up events in the FFE, FB and PF power domains."]
+    pub ffe_fb_pf_sw_wu: crate::Reg<ffe_fb_pf_sw_wu::FFE_FB_PF_SW_WU_SPEC>,
+    #[doc = "0x214 - Register for triggering wake-up events in M4 SRAM power domains. (RWHC)"]
+    pub m4_sram_sw_wu: crate::Reg<m4_sram_sw_wu::M4_SRAM_SW_WU_SPEC>,
+    #[doc = "0x218 - Register for triggering wake up events in MISC power domains + some general purpose SFR's (RWHC)"]
+    pub misc_sw_wu: crate::Reg<misc_sw_wu::MISC_SW_WU_SPEC>,
+    #[doc = "0x21c - Register for triggering wake-up events in Audio power domains. (RWHC)"]
+    pub audio_sram_sw_wu: crate::Reg<audio_sram_sw_wu::AUDIO_SRAM_SW_WU_SPEC>,
+    #[doc = "0x220 - Power Management Unit Software Test Mode priority control"]
+    pub pmu_stm_priority: crate::Reg<pmu_stm_priority::PMU_STM_PRIORITY_SPEC>,
+    _reserved74: [u8; 0x0c],
+    #[doc = "0x230 - Control for M4SRAM power domain light sleep mode"]
+    pub m4sram_ssw_lpmf: crate::Reg<m4sram_ssw_lpmf::M4SRAM_SSW_LPMF_SPEC>,
+    #[doc = "0x234 - Control masking for the LPMH (Low Power Mode header - deep sleep circuit)"]
+    pub m4sram_ssw_lpmh_mask_n:
+        crate::Reg<m4sram_ssw_lpmh_mask_n::M4SRAM_SSW_LPMH_MASK_N_SPEC>,
+    _reserved76: [u8; 0x01b0],
+    #[doc = "0x3e8 - Configuration for the amount of IDLE cycles before powering on the FB domain"]
+    pub fbvlpmin_width: crate::Reg<fbvlpmin_width::FBVLPMINWIDTH_SPEC>,
+    #[doc = "0x3ec - Indicates if AP nees to reload the code to SRAM"]
+    pub apreboot_status: crate::Reg<apreboot_status::APREBOOTSTATUS_SPEC>,
+    _reserved_78_fb_isolation: [u8; 0x08],
 }
 impl RegisterBlock {
     #[doc = "0x80 - PF SRAM Power Domain status"]
@@ -131,24 +200,32 @@ impl RegisterBlock {
                 as *const crate::Reg<m4_status::M4_STATUS_SPEC>)
         }
     }
-    #[doc = "0x110 - Control de Shut Down pin of various elements in the Flexible Fusion Engine power domain. For each: 1'b1 : Enable the Deep Sleep function of SRAM Macro, Memory content will be kept."]
+    #[doc = "0x3f0 - Configure FB config enable and wether Audio SRAM can be put into Deep Sleep by the Audio hardware"]
     #[inline(always)]
-    pub fn ffe_mem_ctrl_1(
+    pub fn gen_purpose_0(
         &self,
-    ) -> &crate::Reg<ffe_mem_ctrl_1::FFE_MEM_CTRL_1_SPEC> {
+    ) -> &crate::Reg<gen_purpose_0::GEN_PURPOSE_0_SPEC> {
         unsafe {
-            &*(((self as *const Self) as *const u8).add(272usize)
-                as *const crate::Reg<ffe_mem_ctrl_1::FFE_MEM_CTRL_1_SPEC>)
+            &*(((self as *const Self) as *const u8).add(1008usize)
+                as *const crate::Reg<gen_purpose_0::GEN_PURPOSE_0_SPEC>)
         }
     }
-    #[doc = "0x110 - Control de Deep Sleep pin of various elements in the Flexible Fusion Engine power domain. For each: 1'b1 : Enable the Deep Sleep function of SRAM Macro, Memory content will be kept."]
+    #[doc = "0x3f3 - Control for: Wether ext-interrupt can be used to wake up FFE, and clock switching for FFE/M4 power domains"]
     #[inline(always)]
-    pub fn ffe_mem_ctrl_0(
+    pub fn gen_purpose_1(
         &self,
-    ) -> &crate::Reg<ffe_mem_ctrl_0::FFE_MEM_CTRL_0_SPEC> {
+    ) -> &crate::Reg<gen_purpose_1::GEN_PURPOSE_1_SPEC> {
         unsafe {
-            &*(((self as *const Self) as *const u8).add(272usize)
-                as *const crate::Reg<ffe_mem_ctrl_0::FFE_MEM_CTRL_0_SPEC>)
+            &*(((self as *const Self) as *const u8).add(1011usize)
+                as *const crate::Reg<gen_purpose_1::GEN_PURPOSE_1_SPEC>)
+        }
+    }
+    #[doc = "0x3f4 - Control the FB Isolation"]
+    #[inline(always)]
+    pub fn fb_isolation(&self) -> &crate::Reg<fb_isolation::FB_ISOLATION_SPEC> {
+        unsafe {
+            &*(((self as *const Self) as *const u8).add(1012usize)
+                as *const crate::Reg<fb_isolation::FB_ISOLATION_SPEC>)
         }
     }
 }
@@ -357,13 +434,141 @@ pub type PF_MEM_CTRL_0 = crate::Reg<pf_mem_ctrl_0::PF_MEM_CTRL_0_SPEC>;
 pub mod pf_mem_ctrl_0;
 #[doc = "PF_MEM_CTRL_1 register accessor: an alias for `Reg<PF_MEM_CTRL_1_SPEC>`"]
 pub type PF_MEM_CTRL_1 = crate::Reg<pf_mem_ctrl_1::PF_MEM_CTRL_1_SPEC>;
-#[doc = "Control SD pin of varios FIFOs intances in the PF subsystem. For each one: 1'b1 : Enable the Shut Down function of SRAM Macro, Memory content will be lost"]
+#[doc = "Control Shut Down pin of various FIFOs intances in the PF subsystem. For each one: 1'b1 : Enable the Shut Down function of SRAM Macro, Memory content will be lost"]
 pub mod pf_mem_ctrl_1;
 #[doc = "FFE_MEM_CTRL_0 register accessor: an alias for `Reg<FFE_MEM_CTRL_0_SPEC>`"]
 pub type FFE_MEM_CTRL_0 = crate::Reg<ffe_mem_ctrl_0::FFE_MEM_CTRL_0_SPEC>;
-#[doc = "Control de Deep Sleep pin of various elements in the Flexible Fusion Engine power domain. For each: 1'b1 : Enable the Deep Sleep function of SRAM Macro, Memory content will be kept."]
+#[doc = "Control the Deep Sleep pin of various elements in the Flexible Fusion Engine power domain. For each: 1'b1 : Enable the Deep Sleep function of SRAM Macro, Memory content will be kept."]
 pub mod ffe_mem_ctrl_0;
 #[doc = "FFE_MEM_CTRL_1 register accessor: an alias for `Reg<FFE_MEM_CTRL_1_SPEC>`"]
 pub type FFE_MEM_CTRL_1 = crate::Reg<ffe_mem_ctrl_1::FFE_MEM_CTRL_1_SPEC>;
-#[doc = "Control de Shut Down pin of various elements in the Flexible Fusion Engine power domain. For each: 1'b1 : Enable the Deep Sleep function of SRAM Macro, Memory content will be kept."]
+#[doc = "Control the Shut Down pin of various elements in the Flexible Fusion Engine power domain. For each: 1'b1 : Enable the Deep Sleep function of SRAM Macro, Memory content will be kept."]
 pub mod ffe_mem_ctrl_1;
+#[doc = "AUDIO_MEM_CTRL_0 register accessor: an alias for `Reg<AUDIO_MEM_CTRL_0_SPEC>`"]
+pub type AUDIO_MEM_CTRL_0 = crate::Reg<audio_mem_ctrl_0::AUDIO_MEM_CTRL_0_SPEC>;
+#[doc = "Control the Deep Sleep pin of Audio channels. For each: 1'b1 : Enable the Deep Sleep function of SRAM Macro, Memory content will be kept."]
+pub mod audio_mem_ctrl_0;
+#[doc = "AUDIO_MEM_CTRL_1 register accessor: an alias for `Reg<AUDIO_MEM_CTRL_1_SPEC>`"]
+pub type AUDIO_MEM_CTRL_1 = crate::Reg<audio_mem_ctrl_1::AUDIO_MEM_CTRL_1_SPEC>;
+#[doc = "Control the shut down pin of Audio channels. For each: 1'b1 : Enable the Deep Sleep function of SRAM Macro, Memory content will be kept."]
+pub mod audio_mem_ctrl_1;
+#[doc = "M4_MEM_CFG register accessor: an alias for `Reg<M4_MEM_CFG_SPEC>`"]
+pub type M4_MEM_CFG = crate::Reg<m4_mem_cfg::M4_MEM_CFG_SPEC>;
+#[doc = "Reserved"]
+pub mod m4_mem_cfg;
+#[doc = "PF_MEM_CFG register accessor: an alias for `Reg<PF_MEM_CFG_SPEC>`"]
+pub type PF_MEM_CFG = crate::Reg<pf_mem_cfg::PF_MEM_CFG_SPEC>;
+#[doc = "Reserved"]
+pub mod pf_mem_cfg;
+#[doc = "FFE_MEM_CFG register accessor: an alias for `Reg<FFE_MEM_CFG_SPEC>`"]
+pub type FFE_MEM_CFG = crate::Reg<ffe_mem_cfg::FFE_MEM_CFG_SPEC>;
+#[doc = "Control Light Sleep pin of different FFE SRAM power domains"]
+pub mod ffe_mem_cfg;
+#[doc = "AUDIO_MEM_CFG register accessor: an alias for `Reg<AUDIO_MEM_CFG_SPEC>`"]
+pub type AUDIO_MEM_CFG = crate::Reg<audio_mem_cfg::AUDIO_MEM_CFG_SPEC>;
+#[doc = "Reserved"]
+pub mod audio_mem_cfg;
+#[doc = "M4_MEM_CTRL_PWR_0 register accessor: an alias for `Reg<M4_MEM_CTRL_PWR_0_SPEC>`"]
+pub type M4_MEM_CTRL_PWR_0 =
+    crate::Reg<m4_mem_ctrl_pwr_0::M4_MEM_CTRL_PWR_0_SPEC>;
+#[doc = "Reserved"]
+pub mod m4_mem_ctrl_pwr_0;
+#[doc = "M4_MEM_CTRL_PWR_1 register accessor: an alias for `Reg<M4_MEM_CTRL_PWR_1_SPEC>`"]
+pub type M4_MEM_CTRL_PWR_1 =
+    crate::Reg<m4_mem_ctrl_pwr_1::M4_MEM_CTRL_PWR_1_SPEC>;
+#[doc = "Reserved"]
+pub mod m4_mem_ctrl_pwr_1;
+#[doc = "M4_MEM_CTRL_PWR_2 register accessor: an alias for `Reg<M4_MEM_CTRL_PWR_2_SPEC>`"]
+pub type M4_MEM_CTRL_PWR_2 =
+    crate::Reg<m4_mem_ctrl_pwr_2::M4_MEM_CTRL_PWR_2_SPEC>;
+#[doc = "Reserved"]
+pub mod m4_mem_ctrl_pwr_2;
+#[doc = "SDMA_MEM_CTRL_0 register accessor: an alias for `Reg<SDMA_MEM_CTRL_0_SPEC>`"]
+pub type SDMA_MEM_CTRL_0 = crate::Reg<sdma_mem_ctrl_0::SDMA_MEM_CTRL_0_SPEC>;
+#[doc = "Control the Deep Sleep function of SRAM Macro for the SDMA power domain"]
+pub mod sdma_mem_ctrl_0;
+#[doc = "SDMA_MEM_CTRL_1 register accessor: an alias for `Reg<SDMA_MEM_CTRL_1_SPEC>`"]
+pub type SDMA_MEM_CTRL_1 = crate::Reg<sdma_mem_ctrl_1::SDMA_MEM_CTRL_1_SPEC>;
+#[doc = "Control the Shut Down function of SRAM Macro for the SDMA power domain"]
+pub mod sdma_mem_ctrl_1;
+#[doc = "MEM_PWR_DWN_CTRL register accessor: an alias for `Reg<MEM_PWR_DWN_CTRL_SPEC>`"]
+pub type MEM_PWR_DWN_CTRL = crate::Reg<mem_pwr_dwn_ctrl::MEM_PWR_DWN_CTRL_SPEC>;
+#[doc = "Memory Power Down Control"]
+pub mod mem_pwr_dwn_ctrl;
+#[doc = "PMU_TIMER_CFG_0 register accessor: an alias for `Reg<PMU_TIMER_CFG_0_SPEC>`"]
+pub type PMU_TIMER_CFG_0 = crate::Reg<pmu_timer_cfg_0::PMU_TIMER_CFG_0_SPEC>;
+#[doc = "Configuration for the PMU timer time-out period"]
+pub mod pmu_timer_cfg_0;
+#[doc = "PMU_TIMER_CFG_1 register accessor: an alias for `Reg<PMU_TIMER_CFG_1_SPEC>`"]
+pub type PMU_TIMER_CFG_1 = crate::Reg<pmu_timer_cfg_1::PMU_TIMER_CFG_1_SPEC>;
+#[doc = "Control wether the PMU timer is enabled or disabled"]
+pub mod pmu_timer_cfg_1;
+#[doc = "PDWU_Timer_CFG register accessor: an alias for `Reg<PDWU_TIMER_CFG_SPEC>`"]
+pub type PDWU_TIMER_CFG = crate::Reg<pdwu_timer_cfg::PDWU_TIMER_CFG_SPEC>;
+#[doc = "Control the delay for power-on after wake-up event. Applies to all power domains"]
+pub mod pdwu_timer_cfg;
+#[doc = "FFE_FB_PF_SW_PD register accessor: an alias for `Reg<FFE_FB_PF_SW_PD_SPEC>`"]
+pub type FFE_FB_PF_SW_PD = crate::Reg<ffe_fb_pf_sw_pd::FFE_FB_PF_SW_PD_SPEC>;
+#[doc = "Registers for triggering power-down events in the FFE, FB and PF power domains."]
+pub mod ffe_fb_pf_sw_pd;
+#[doc = "M4_SRAM_SW_PD register accessor: an alias for `Reg<M4_SRAM_SW_PD_SPEC>`"]
+pub type M4_SRAM_SW_PD = crate::Reg<m4_sram_sw_pd::M4_SRAM_SW_PD_SPEC>;
+#[doc = "Register for triggering power-down events in M4 SRAM power domains. (RWHC)"]
+pub mod m4_sram_sw_pd;
+#[doc = "MISC_SW_PD register accessor: an alias for `Reg<MISC_SW_PD_SPEC>`"]
+pub type MISC_SW_PD = crate::Reg<misc_sw_pd::MISC_SW_PD_SPEC>;
+#[doc = "Register for triggering power down events in MISC power domains + some general purpose SFR's (RWHC)"]
+pub mod misc_sw_pd;
+#[doc = "AUDIO_SW_PD register accessor: an alias for `Reg<AUDIO_SW_PD_SPEC>`"]
+pub type AUDIO_SW_PD = crate::Reg<audio_sw_pd::AUDIO_SW_PD_SPEC>;
+#[doc = "Register for triggering power-down events in Audio power domains. (RWHC)"]
+pub mod audio_sw_pd;
+#[doc = "FFE_FB_PF_SW_WU register accessor: an alias for `Reg<FFE_FB_PF_SW_WU_SPEC>`"]
+pub type FFE_FB_PF_SW_WU = crate::Reg<ffe_fb_pf_sw_wu::FFE_FB_PF_SW_WU_SPEC>;
+#[doc = "Registers for triggering wake-up events in the FFE, FB and PF power domains."]
+pub mod ffe_fb_pf_sw_wu;
+#[doc = "M4_SRAM_SW_WU register accessor: an alias for `Reg<M4_SRAM_SW_WU_SPEC>`"]
+pub type M4_SRAM_SW_WU = crate::Reg<m4_sram_sw_wu::M4_SRAM_SW_WU_SPEC>;
+#[doc = "Register for triggering wake-up events in M4 SRAM power domains. (RWHC)"]
+pub mod m4_sram_sw_wu;
+#[doc = "MISC_SW_WU register accessor: an alias for `Reg<MISC_SW_WU_SPEC>`"]
+pub type MISC_SW_WU = crate::Reg<misc_sw_wu::MISC_SW_WU_SPEC>;
+#[doc = "Register for triggering wake up events in MISC power domains + some general purpose SFR's (RWHC)"]
+pub mod misc_sw_wu;
+#[doc = "AUDIO_SRAM_SW_WU register accessor: an alias for `Reg<AUDIO_SRAM_SW_WU_SPEC>`"]
+pub type AUDIO_SRAM_SW_WU = crate::Reg<audio_sram_sw_wu::AUDIO_SRAM_SW_WU_SPEC>;
+#[doc = "Register for triggering wake-up events in Audio power domains. (RWHC)"]
+pub mod audio_sram_sw_wu;
+#[doc = "PMU_STM_PRIORITY register accessor: an alias for `Reg<PMU_STM_PRIORITY_SPEC>`"]
+pub type PMU_STM_PRIORITY = crate::Reg<pmu_stm_priority::PMU_STM_PRIORITY_SPEC>;
+#[doc = "Power Management Unit Software Test Mode priority control"]
+pub mod pmu_stm_priority;
+#[doc = "M4SRAM_SSW_LPMF register accessor: an alias for `Reg<M4SRAM_SSW_LPMF_SPEC>`"]
+pub type M4SRAM_SSW_LPMF = crate::Reg<m4sram_ssw_lpmf::M4SRAM_SSW_LPMF_SPEC>;
+#[doc = "Control for M4SRAM power domain light sleep mode"]
+pub mod m4sram_ssw_lpmf;
+#[doc = "M4SRAM_SSW_LPMH_MASK_N register accessor: an alias for `Reg<M4SRAM_SSW_LPMH_MASK_N_SPEC>`"]
+pub type M4SRAM_SSW_LPMH_MASK_N =
+    crate::Reg<m4sram_ssw_lpmh_mask_n::M4SRAM_SSW_LPMH_MASK_N_SPEC>;
+#[doc = "Control masking for the LPMH (Low Power Mode header - deep sleep circuit)"]
+pub mod m4sram_ssw_lpmh_mask_n;
+#[doc = "FBVLPMinWidth register accessor: an alias for `Reg<FBVLPMINWIDTH_SPEC>`"]
+pub type FBVLPMINWIDTH = crate::Reg<fbvlpmin_width::FBVLPMINWIDTH_SPEC>;
+#[doc = "Configuration for the amount of IDLE cycles before powering on the FB domain"]
+pub mod fbvlpmin_width;
+#[doc = "APRebootStatus register accessor: an alias for `Reg<APREBOOTSTATUS_SPEC>`"]
+pub type APREBOOTSTATUS = crate::Reg<apreboot_status::APREBOOTSTATUS_SPEC>;
+#[doc = "Indicates if AP nees to reload the code to SRAM"]
+pub mod apreboot_status;
+#[doc = "GEN_PURPOSE_0 register accessor: an alias for `Reg<GEN_PURPOSE_0_SPEC>`"]
+pub type GEN_PURPOSE_0 = crate::Reg<gen_purpose_0::GEN_PURPOSE_0_SPEC>;
+#[doc = "Configure FB config enable and wether Audio SRAM can be put into Deep Sleep by the Audio hardware"]
+pub mod gen_purpose_0;
+#[doc = "FB_ISOLATION register accessor: an alias for `Reg<FB_ISOLATION_SPEC>`"]
+pub type FB_ISOLATION = crate::Reg<fb_isolation::FB_ISOLATION_SPEC>;
+#[doc = "Control the FB Isolation"]
+pub mod fb_isolation;
+#[doc = "GEN_PURPOSE_1 register accessor: an alias for `Reg<GEN_PURPOSE_1_SPEC>`"]
+pub type GEN_PURPOSE_1 = crate::Reg<gen_purpose_1::GEN_PURPOSE_1_SPEC>;
+#[doc = "Control for: Wether ext-interrupt can be used to wake up FFE, and clock switching for FFE/M4 power domains"]
+pub mod gen_purpose_1;
