@@ -1,442 +1,441 @@
 _add:
   AIP:
-    description:  Analog IP block
+    description: Analog IP block
     baseAddress: 0x40005400
-    addressBlocks: 
+    addressBlocks:
       - offset: 0
         size: 0x218
-        usage: registers 
+        usage: registers
     registers:
-        RTC_CTRL_1:
-          description: "RTC control register 1" 
-          addressOffset: 0x004 
-          access: read-write 
-          size: 32 
-          resetValue: 0x0000_0000 
-          fields: 
-            clkdiv:
-              description: "5'b00000 : 32.768 Khz Please refer to the Technical Reference Manual for others (No SYNC Needed)"
-              bitOffset: 0
-              bitWidth: 5
-        RTC_CTRL_2:
-          description: "RTC control register 2"
-          addressOffset: 0x008
-          access: read-write
-          size: 32
-          resetValue: 0x0000_0001
-          fields: 
-            clke:
-              description: "1'b1 RTC Clock Output Enable (No SYNC Needed)"
-              bitOffset: 0 
-              bitWidth: 1 
-            byp16k: 
-              description: "Changes internal clock division for 16384 Hz bypass compatibility -- 1'b0 : xtal is 32KHz - 1'b1 : xtal is 16KHz"
-              bitOffset: 1
-              bitWidth: 1
-            test_ctrl:
-              description: "RTC test[4:3] control for rtc bypass mode -- 0: test[4:3] will be forced to 2'b11 when pad8 is strapped to 1, and forced to 2'b00 when pad8 is strapped to 0 , 1: normal mode; test[4:0] controlled from 0x1C"
-              bitOffset: 2
-              bitWidth: 1
-        RTC_CTRL_3:
-          description: "RTC control register 3"
-          addressOffset: 0x00C
-          access: read-write
-          size: 32 
-          resetValue: 0x0000_0000
-          fields: 
-            ce:
-              description: "3'b000 Normal Function. Please refer to the Technical Reference Manual for detail" 
-              bitOffset: 0
-              bitWidth: 3
-        RTC_CTRL_4:
-          description: "RTC Control register 4"
-          addressOffset: 0x010 
-          access: read-write
-          size: 32 
-          resetValue: 0x0000_0000
-          fields: 
-            wr:
-              description: "Write Pulse to program the RTC internal Register. Please refer to the Technical Reference Manual for detail"
-              bitOffset: 0
-              bitWidth: 1
-        RTC_CTRL_5:
-          description: "RTC control register 5"
-          addressOffset: 0x014
-          access: read-write
-          size: 32 
-          resetValue: 0x0000_0000
-          fields: 
-            c:
-              description: "Serial Input clock"
-              bitOffset: 0
-              bitWidth: 1
-        RTC_CTRL_6:
-          description: "RTC control register 6"
-          addressOffset: 0x018
-          access: read-write
-          size: 32 
-          resetValue: 0x0000_0000
-          fields: 
-            PI:
-              description: "Parallel Input data. Please refer to the Technical Reference Manual for detail" 
-              bitOffset: 0
-              bitWidth: 32
-        RTC_CTRL_7:
-          description: "RTC control register 7 "
-          addressOffset: 0x01C
-          access: read-write
-          size: 32 
-          resetValue: 0x0000_0000
-          fields: 
-            test:
-              description: "Please refer to the Technical Reference Manual for detail"
-              bitOffset: 0
-              bitWidth: 5
-        RTC_STA_0:
-          description: "Incomplete information. Probably related to AIP RTC hardware status"
-          addressOffset: 0x020 
-          access: read-only
-          size: 32 
-          fields: 
-            alarm:
-              description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
-              bitOffset: 0
-              bitWidth: 1
-            testreq:
-              description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
-              bitOffset: 1
-              bitWidth: 1
-            digtestbus:
-              description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
-              bitOffset: 2
-              bitWidth: 1
-            oscok:
-              description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
-              bitOffset: 3
-              bitWidth: 1
-        RTC_STA_1:
-          description: "Incomplete information. Probably related to AIP RTC hardware status"
-          addressOffset: 0x024 
-          access: read-only
-          size: 32 
-          fields: 
-            PO:
-              description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
-              bitOffset: 0
-              bitWidth: 32
-        OSC_CTRL_0:
-          description: "Oscilator control register 0"
-          addressOffset: 0x080 
-          access: read-write 
-          resetValue: 0x0000_0001
-          size: 32 
-          fields: 
-            en: 
-              description: "1'b0 : OSC OFF  -- 1'b1 : OSC ON , (NO SYNC needed, OSC guarantee there is no Glitch)" 
-              bitOffset: 0 
-              bitWidth: 1
-            fref16k_sel: 
-              description: "Reference clock selection" 
-              bitOffset: 1
-              bitWidth: 1
-        OSC_CTRL_1:
-          description: "Oscilator control register 1"
-          addressOffset: 0x084 
-          access: read-write 
-          resetValue: 0x0000_092D
-          size: 32 
-          fields: 
-            prog: 
-              description: "Please refer to the Technical Reference Manual for others (No SYNC Needed). Power On Default Value is 76.97 MHz. No Support on 'Delta Mode'."
-              bitOffset: 0 
-              bitWidth: 13
-            General_Purpos_SFR: 
-              description: "No description given"
-              bitOffset: 13 
-              bitWidth: 3
-        OSC_CTRL_2:
-          description: "Oscilator control register 2"
-          addressOffset: 0x088 
-          access: read-write
-          resetValue: 0x0000_0000
-          size: 32 
-          fields: 
-            delta: 
-              description: "Write 1, trigger delta mode, Note : This feature is NOT going to support, Keep it Low"
-              bitOffset: 0 
-              bitWidth: 1
-        OSC_CTRL_3:
-          description: "Oscilator control register 3"
-          addressOffset: 0x08C 
-          access: read-write 
-          resetValue: 0x0000_0008
-          size: 32 
-          fields: 
-            refok: 
-              description: "If 1'b1, will force the refok pin to 1, otherwise, it is control by the RTC/oscok" 
-              bitOffset: 0 
-              bitWidth: 1
-            enmon: 
-              description: "Turn on Monitor function by default"
-              bitOffset: 3 
-              bitWidth: 1
-            General_Purpos_SFR: 
-              description: "No description given"
-              bitOffset: 4  
-              bitWidth: 4
-        OSC_CTRL_4:
-          description: "Oscilator control register 4"
-          addressOffset: 0x090 
-          access: read-write 
-          resetValue: 0x0000_0000
-          size: 32 
-          fields: 
-            test: 
-              description: "Please refer to the Technical Reference Manual for detail"
-              bitOffset: 0 
-              bitWidth: 3
-            ce: 
-              description: "Please refer to the Technical Reference Manual for detail"
-              bitOffset: 3 
-              bitWidth: 2
-            wr: 
-              description: "Please refer to the Technical Reference Manual for detail"
-              bitOffset: 5 
-              bitWidth: 1
-        OSC_CTRL_5:
-          description: "Oscilator control register 5"
-          addressOffset: 0x094 
-          access: read-write 
-          resetValue: 0x0000_0000
-          size: 32 
-          fields: 
-            sdi: 
-              description: "Please refer to the Technical Reference Manual for detail"
-              bitOffset: 0 
-              bitWidth: 1
-        OSC_CTRL_6:
-          description: "Oscilator control register 6"
-          addressOffset: 0x098 
-          access: read-write 
-          resetValue: 0x0000_0000
-          size: 32 
-          fields: 
-            sck: 
-              description: "Please refer to the Technical Reference Manual for detail"
-              bitOffset: 0 
-              bitWidth: 1
-        OSC_CTRL_7:
-          description: "Oscilator control register 7"
-          addressOffset: 0x09C 
-          access: read-write 
-          resetValue: 0x0000_0000
-          size: 32 
-        #all bits reserved 
-        OSC_STA_0:
-          description: "Contains information about oscilator status"
-          addressOffset: 0x0A0
-          access: read-only
-          size: 32
-          fields: 
-            lock:
-              description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
-              bitOffset: 0
-              bitWidth: 1
-            anatestreq_:
-              description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
-              bitOffset: 1
-              bitWidth: 1
-        OSC_STA_1:
-          description: "Contains information about oscilator status"
-          addressOffset: 0x0A4
-          access: read-only
-          size: 32
-          fields: 
-            sdo:
-              description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
-              bitOffset: 0
-              bitWidth: 1
-        APC_CTRL_0:
-          description: "APC control register 0"
-          addressOffset: 0x100
-          access: read-only
-          size: 32 
-          fields: 
-            dis: 
-              description: "1'b0 : APC ON, Always ON"
-              bitOffset: 0 
-              bitWidth: 1
-        APC_CTRL_1:
-          description: "APC control register 1"
-          addressOffset: 0x104
-          access: read-write
-          resetValue: 0x0000_0000
-          size: 32 
-          fields: 
-            tt: 
-              description: "Please refer to the Technical Reference Manual for others (No SYNC Needed)"
-              bitOffset: 0 
-              bitWidth: 3
-            vt: 
-              description: "Please refer to the Technical Reference Manual for others (No SYNC Needed)"
-              bitOffset: 3 
-              bitWidth: 5
-        APC_CTRL_2:
-          description: "APC control register 2"
-          addressOffset: 0x108
-          access: read-write
-          resetValue: 0x0000_0000
-          size: 32 
-          fields: 
-            it: 
-              description: "Please refer to the Technical Reference Manual for others (No SYNC Needed)"
-              bitOffset: 0 
-              bitWidth: 3
-            test: 
-              description: "Please refer to the Technical Reference Manual for others (No SYNC Needed)"
-              bitOffset: 3 
-              bitWidth: 4
-        APC_CTRL_3:
-          description: "APC control register 3 // Reserved"
-          addressOffset: 0x10C
-          access: read-only
-          size: 32 
-        APC_CTRL_4:
-          description: "APC control register 4 // Reserved"
-          addressOffset: 0x110
-          access: read-only
-          size: 32 
-        APC_CTRL_5:
-          description: "APC control register 5 // Reserved"
-          addressOffset: 0x114
-          access: read-only
-          size: 32 
-        APC_CTRL_6:
-          description: "APC control register 6 // Reserved"
-          addressOffset: 0x118
-          access: read-only
-          size: 32 
-        APC_CTRL_7:
-          description: "APC control register 7 // Reserved"
-          addressOffset: 0x11C
-          access: read-only
-          size: 32 
-        APC_STA_0:
-          description: "APC status register 0"
-          addressOffset: 0x120
-          access: read-only
-          size: 32 
-          fields: 
-            porz: 
-              description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
-              bitOffset: 2
-              bitWidth: 1
-            digtestbus: 
-              description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
-              bitOffset: 3 
-              bitWidth: 1
-            testreq: 
-              description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
-              bitOffset: 4 
-              bitWidth: 1
-        APC_STA_1:
-          description: "APC status register 1"
-          addressOffset: 0x124
-          access: read-only
-          size: 32 
-        RING_OSC:
-          description: "Ring oscilator control register"
-          addressOffset: 0x180
-          access: read-write 
-          size: 32
-          fields: 
-            RING_OSC_EN: 
-              description: "1'b1 : Turn on the RING OSC,  Ring OSC will be always on despite the HW control."
-              bitOffset: 0 
-              bitWidth: 1
-            General_Purpos_SFR: 
-              description: "1'b1 : Turn on the RING OSC,  Ring OSC will be always on despite the HW control."
-              bitOffset: 1 
-              bitWidth: 7
-        LDO_30_CTRL_0: 
-          description: "LDO_30 control register 0"
-          addressOffset: 0x200
-          access: read-write 
-          size: 32
-          resetValue: 0b0010_0010_1100
-          fields:
-            DIS:
-              description: "Used to disable LDO_30 "
-              bitOffset: 0 
-              bitWidth: 1
-            DISPG:
-              description: "Used to disable the power good comparator "
-              bitOffset: 1 
-              bitWidth: 1
-            IMAX:
-              description: "Configures the control for maximum expected current imax current (mA)"
-              bitOffset: 2 
-              bitWidth: 3
-            DI:
-              description: "Output voltage programming. Note: Please keep LDO_30_DI and LDO_50_DI to be equal values for proper operation and lower power consumption."
-              bitOffset: 5 
-              bitWidth: 5
-        LDO_30_CTRL_1: 
-          description: "LDO_30 control register 1"
-          addressOffset: 0x204
-          size: 32
-          fields:
-            TEST:
-              description: "Lab test and internal block characterization test control pins."
-              access: read-write
-              bitOffset: 0 
-              bitWidth: 4
-            TESTREQ:
-              description: "Request of connection of the anatestbus to an external pin for characterization"
-              access: read-only
-              bitOffset: 4 
-              bitWidth: 1
-        LDO_50_CTRL_0: 
-          description: "LDO_50 control register 0"
-          addressOffset: 0x210
-          access: read-write 
-          size: 32
-          resetValue: 0b0010_0010_1100
-          fields:
-            DIS:
-              description: "Used to disable LDO_30 "
-              bitOffset: 0 
-              bitWidth: 1
-            DISPG:
-              description: "Used to disable the power good comparator "
-              bitOffset: 1 
-              bitWidth: 1
-            IMAX:
-              description: "Configures the control for maximum expected current imax current (mA)"
-              bitOffset: 2 
-              bitWidth: 3
-            DI:
-              description: "Output voltage programming. Note: Please keep LDO_30_DI and LDO_50_DI to be equal values for proper operation and lower power consumption."
-              bitOffset: 5 
-              bitWidth: 5
-        LDO_50_CTRL_1: 
-          description: "LDO_50 control register 1"
-          addressOffset: 0x214
-          size: 32
-          fields:
-            TEST:
-              description: "Lab test and internal block characterization test control pins."
-              access: read-write
-              bitOffset: 0 
-              bitWidth: 4
-            TESTREQ:
-              description: "Request of connection of the anatestbus to an external pin for characterization"
-              access: read-only
-              bitOffset: 4 
-              bitWidth: 1
+      RTC_CTRL_1:
+        description: "RTC control register 1"
+        addressOffset: 0x004
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0000
+        fields:
+          clkdiv:
+            description: "5'b00000 : 32.768 Khz Please refer to the Technical Reference Manual for others (No SYNC Needed)"
+            bitOffset: 0
+            bitWidth: 5
+      RTC_CTRL_2:
+        description: "RTC control register 2"
+        addressOffset: 0x008
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0001
+        fields:
+          clke:
+            description: "1'b1 RTC Clock Output Enable (No SYNC Needed)"
+            bitOffset: 0
+            bitWidth: 1
+          byp16k:
+            description: "Changes internal clock division for 16384 Hz bypass compatibility -- 1'b0 : xtal is 32KHz - 1'b1 : xtal is 16KHz"
+            bitOffset: 1
+            bitWidth: 1
+          test_ctrl:
+            description: "RTC test[4:3] control for rtc bypass mode -- 0: test[4:3] will be forced to 2'b11 when pad8 is strapped to 1, and forced to 2'b00 when pad8 is strapped to 0 , 1: normal mode; test[4:0] controlled from 0x1C"
+            bitOffset: 2
+            bitWidth: 1
+      RTC_CTRL_3:
+        description: "RTC control register 3"
+        addressOffset: 0x00C
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0000
+        fields:
+          ce:
+            description: "3'b000 Normal Function. Please refer to the Technical Reference Manual for detail"
+            bitOffset: 0
+            bitWidth: 3
+      RTC_CTRL_4:
+        description: "RTC Control register 4"
+        addressOffset: 0x010
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0000
+        fields:
+          wr:
+            description: "Write Pulse to program the RTC internal Register. Please refer to the Technical Reference Manual for detail"
+            bitOffset: 0
+            bitWidth: 1
+      RTC_CTRL_5:
+        description: "RTC control register 5"
+        addressOffset: 0x014
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0000
+        fields:
+          c:
+            description: "Serial Input clock"
+            bitOffset: 0
+            bitWidth: 1
+      RTC_CTRL_6:
+        description: "RTC control register 6"
+        addressOffset: 0x018
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0000
+        fields:
+          PI:
+            description: "Parallel Input data. Please refer to the Technical Reference Manual for detail"
+            bitOffset: 0
+            bitWidth: 32
+      RTC_CTRL_7:
+        description: "RTC control register 7 "
+        addressOffset: 0x01C
+        access: read-write
+        size: 32
+        resetValue: 0x0000_0000
+        fields:
+          test:
+            description: "Please refer to the Technical Reference Manual for detail"
+            bitOffset: 0
+            bitWidth: 5
+      RTC_STA_0:
+        description: "Incomplete information. Probably related to AIP RTC hardware status"
+        addressOffset: 0x020
+        access: read-only
+        size: 32
+        fields:
+          alarm:
+            description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
+            bitOffset: 0
+            bitWidth: 1
+          testreq:
+            description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
+            bitOffset: 1
+            bitWidth: 1
+          digtestbus:
+            description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
+            bitOffset: 2
+            bitWidth: 1
+          oscok:
+            description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
+            bitOffset: 3
+            bitWidth: 1
+      RTC_STA_1:
+        description: "Incomplete information. Probably related to AIP RTC hardware status"
+        addressOffset: 0x024
+        access: read-only
+        size: 32
+        fields:
+          PO:
+            description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
+            bitOffset: 0
+            bitWidth: 32
+      OSC_CTRL_0:
+        description: "Oscilator control register 0"
+        addressOffset: 0x080
+        access: read-write
+        resetValue: 0x0000_0001
+        size: 32
+        fields:
+          en:
+            description: "1'b0 : OSC OFF  -- 1'b1 : OSC ON , (NO SYNC needed, OSC guarantee there is no Glitch)"
+            bitOffset: 0
+            bitWidth: 1
+          fref16k_sel:
+            description: "Reference clock selection"
+            bitOffset: 1
+            bitWidth: 1
+      OSC_CTRL_1:
+        description: "Oscilator control register 1"
+        addressOffset: 0x084
+        access: read-write
+        resetValue: 0x0000_092D
+        size: 32
+        fields:
+          prog:
+            description: "Please refer to the Technical Reference Manual for others (No SYNC Needed). Power On Default Value is 76.97 MHz. No Support on 'Delta Mode'."
+            bitOffset: 0
+            bitWidth: 13
+          General_Purpos_SFR:
+            description: "No description given"
+            bitOffset: 13
+            bitWidth: 3
+      OSC_CTRL_2:
+        description: "Oscilator control register 2"
+        addressOffset: 0x088
+        access: read-write
+        resetValue: 0x0000_0000
+        size: 32
+        fields:
+          delta:
+            description: "Write 1, trigger delta mode, Note : This feature is NOT going to support, Keep it Low"
+            bitOffset: 0
+            bitWidth: 1
+      OSC_CTRL_3:
+        description: "Oscilator control register 3"
+        addressOffset: 0x08C
+        access: read-write
+        resetValue: 0x0000_0008
+        size: 32
+        fields:
+          refok:
+            description: "If 1'b1, will force the refok pin to 1, otherwise, it is control by the RTC/oscok"
+            bitOffset: 0
+            bitWidth: 1
+          enmon:
+            description: "Turn on Monitor function by default"
+            bitOffset: 3
+            bitWidth: 1
+          General_Purpos_SFR:
+            description: "No description given"
+            bitOffset: 4
+            bitWidth: 4
+      OSC_CTRL_4:
+        description: "Oscilator control register 4"
+        addressOffset: 0x090
+        access: read-write
+        resetValue: 0x0000_0000
+        size: 32
+        fields:
+          test:
+            description: "Please refer to the Technical Reference Manual for detail"
+            bitOffset: 0
+            bitWidth: 3
+          ce:
+            description: "Please refer to the Technical Reference Manual for detail"
+            bitOffset: 3
+            bitWidth: 2
+          wr:
+            description: "Please refer to the Technical Reference Manual for detail"
+            bitOffset: 5
+            bitWidth: 1
+      OSC_CTRL_5:
+        description: "Oscilator control register 5"
+        addressOffset: 0x094
+        access: read-write
+        resetValue: 0x0000_0000
+        size: 32
+        fields:
+          sdi:
+            description: "Please refer to the Technical Reference Manual for detail"
+            bitOffset: 0
+            bitWidth: 1
+      OSC_CTRL_6:
+        description: "Oscilator control register 6"
+        addressOffset: 0x098
+        access: read-write
+        resetValue: 0x0000_0000
+        size: 32
+        fields:
+          sck:
+            description: "Please refer to the Technical Reference Manual for detail"
+            bitOffset: 0
+            bitWidth: 1
+      OSC_CTRL_7:
+        description: "Oscilator control register 7"
+        addressOffset: 0x09C
+        access: read-write
+        resetValue: 0x0000_0000
+        size: 32
+      #all bits reserved
+      OSC_STA_0:
+        description: "Contains information about oscilator status"
+        addressOffset: 0x0A0
+        access: read-only
+        size: 32
+        fields:
+          lock:
+            description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
+            bitOffset: 0
+            bitWidth: 1
+          anatestreq_:
+            description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
+            bitOffset: 1
+            bitWidth: 1
+      OSC_STA_1:
+        description: "Contains information about oscilator status"
+        addressOffset: 0x0A4
+        access: read-only
+        size: 32
+        fields:
+          sdo:
+            description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
+            bitOffset: 0
+            bitWidth: 1
+      APC_CTRL_0:
+        description: "APC control register 0"
+        addressOffset: 0x100
+        access: read-only
+        size: 32
+        fields:
+          dis:
+            description: "1'b0 : APC ON, Always ON"
+            bitOffset: 0
+            bitWidth: 1
+      APC_CTRL_1:
+        description: "APC control register 1"
+        addressOffset: 0x104
+        access: read-write
+        resetValue: 0x0000_0000
+        size: 32
+        fields:
+          tt:
+            description: "Please refer to the Technical Reference Manual for others (No SYNC Needed)"
+            bitOffset: 0
+            bitWidth: 3
+          vt:
+            description: "Please refer to the Technical Reference Manual for others (No SYNC Needed)"
+            bitOffset: 3
+            bitWidth: 5
+      APC_CTRL_2:
+        description: "APC control register 2"
+        addressOffset: 0x108
+        access: read-write
+        resetValue: 0x0000_0000
+        size: 32
+        fields:
+          it:
+            description: "Please refer to the Technical Reference Manual for others (No SYNC Needed)"
+            bitOffset: 0
+            bitWidth: 3
+          test:
+            description: "Please refer to the Technical Reference Manual for others (No SYNC Needed)"
+            bitOffset: 3
+            bitWidth: 4
+      APC_CTRL_3:
+        description: "APC control register 3 // Reserved"
+        addressOffset: 0x10C
+        access: read-only
+        size: 32
+      APC_CTRL_4:
+        description: "APC control register 4 // Reserved"
+        addressOffset: 0x110
+        access: read-only
+        size: 32
+      APC_CTRL_5:
+        description: "APC control register 5 // Reserved"
+        addressOffset: 0x114
+        access: read-only
+        size: 32
+      APC_CTRL_6:
+        description: "APC control register 6 // Reserved"
+        addressOffset: 0x118
+        access: read-only
+        size: 32
+      APC_CTRL_7:
+        description: "APC control register 7 // Reserved"
+        addressOffset: 0x11C
+        access: read-only
+        size: 32
+      APC_STA_0:
+        description: "APC status register 0"
+        addressOffset: 0x120
+        access: read-only
+        size: 32
+        fields:
+          porz:
+            description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
+            bitOffset: 2
+            bitWidth: 1
+          digtestbus:
+            description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
+            bitOffset: 3
+            bitWidth: 1
+          testreq:
+            description: "Please refer to the Technical Reference Manual for detail, NO SYNC, FW need to read it twice to ensure the value."
+            bitOffset: 4
+            bitWidth: 1
+      APC_STA_1:
+        description: "APC status register 1"
+        addressOffset: 0x124
+        access: read-only
+        size: 32
+      RING_OSC:
+        description: "Ring oscilator control register"
+        addressOffset: 0x180
+        access: read-write
+        size: 32
+        fields:
+          RING_OSC_EN:
+            description: "1'b1 : Turn on the RING OSC,  Ring OSC will be always on despite the HW control."
+            bitOffset: 0
+            bitWidth: 1
+          General_Purpos_SFR:
+            description: "1'b1 : Turn on the RING OSC,  Ring OSC will be always on despite the HW control."
+            bitOffset: 1
+            bitWidth: 7
+      LDO_30_CTRL_0:
+        description: "LDO_30 control register 0"
+        addressOffset: 0x200
+        access: read-write
+        size: 32
+        resetValue: 0b0010_0010_1100
+        fields:
+          DIS:
+            description: "Used to disable LDO_30 "
+            bitOffset: 0
+            bitWidth: 1
+          DISPG:
+            description: "Used to disable the power good comparator "
+            bitOffset: 1
+            bitWidth: 1
+          IMAX:
+            description: "Configures the control for maximum expected current imax current (mA)"
+            bitOffset: 2
+            bitWidth: 3
+          DI:
+            description: "Output voltage programming. Note: Please keep LDO_30_DI and LDO_50_DI to be equal values for proper operation and lower power consumption."
+            bitOffset: 5
+            bitWidth: 5
+      LDO_30_CTRL_1:
+        description: "LDO_30 control register 1"
+        addressOffset: 0x204
+        size: 32
+        fields:
+          TEST:
+            description: "Lab test and internal block characterization test control pins."
+            access: read-write
+            bitOffset: 0
+            bitWidth: 4
+          TESTREQ:
+            description: "Request of connection of the anatestbus to an external pin for characterization"
+            access: read-only
+            bitOffset: 4
+            bitWidth: 1
+      LDO_50_CTRL_0:
+        description: "LDO_50 control register 0"
+        addressOffset: 0x210
+        access: read-write
+        size: 32
+        resetValue: 0b0010_0010_1100
+        fields:
+          DIS:
+            description: "Used to disable LDO_30 "
+            bitOffset: 0
+            bitWidth: 1
+          DISPG:
+            description: "Used to disable the power good comparator "
+            bitOffset: 1
+            bitWidth: 1
+          IMAX:
+            description: "Configures the control for maximum expected current imax current (mA)"
+            bitOffset: 2
+            bitWidth: 3
+          DI:
+            description: "Output voltage programming. Note: Please keep LDO_30_DI and LDO_50_DI to be equal values for proper operation and lower power consumption."
+            bitOffset: 5
+            bitWidth: 5
+      LDO_50_CTRL_1:
+        description: "LDO_50 control register 1"
+        addressOffset: 0x214
+        size: 32
+        fields:
+          TEST:
+            description: "Lab test and internal block characterization test control pins."
+            access: read-write
+            bitOffset: 0
+            bitWidth: 4
+          TESTREQ:
+            description: "Request of connection of the anatestbus to an external pin for characterization"
+            access: read-only
+            bitOffset: 4
+            bitWidth: 1
 
-
-AIP: 
+AIP:
   OSC_CTRL_0:
     en:
       oscillator_off: [0, "Disable the oscillator"]
@@ -456,39 +455,45 @@ AIP:
       enable: [0, "Enable LDO_30 power good comparator"]
       disable: [1, "Disable LDO_30 power good comparator"]
     IMAX:
-      max_30mA_current  : [0,"Configure the maximum current for LDO_30 as 30mA"]  
-      max_18mA_current  : [1,"Configure the maximum current for LDO_30 as 18mA"]  
-      max_12mA_current  : [2,"Configure the maximum current for LDO_30 as 12mA"]  
-      max_7_2mA_current : [3,"Configure the maximum current for LDO_30 as 7.2mA (default)"] 
-      max_4_8mA_current : [4,"Configure the maximum current for LDO_30 as 4.8mA"]  
-      max_2_4mA_current : [5,"Configure the maximum current for LDO_30 as 2.4mA"] 
-      max_1_2mA_current : [6,"Configure the maximum current for LDO_30 as 1.2mA"]   
-      max_0_6mA_current : [7,"Configure the maximum current for LDO_30 as 0.6mA"] 
-    DI: 
-      as_0_75v_output : [0, "Configures the LDO_30 output voltage as 0.75v"] 
-      as_0_77v_output : [1, "Configures the LDO_30 output voltage as 0.77v"] 
-      as_0_79v_output : [2, "Configures the LDO_30 output voltage as 0.79v"] 
-      as_0_81v_output : [3, "Configures the LDO_30 output voltage as 0.81v"] 
-      as_0_83v_output : [4, "Configures the LDO_30 output voltage as 0.83v"] 
-      as_0_85v_output : [5, "Configures the LDO_30 output voltage as 0.85v"] 
-      as_0_87v_output : [6, "Configures the LDO_30 output voltage as 0.87v"] 
-      as_0_89v_output : [7, "Configures the LDO_30 output voltage as 0.89v"]
-      as_0_91v_output : [8, "Configures the LDO_30 output voltage as 0.91v"]  
-      as_0_93v_output : [9, "Configures the LDO_30 output voltage as 0.93v"] 
-      as_0_95v_output : [10, "Configures the LDO_30 output voltage as 0.95v"] 
-      as_0_97v_output : [11, "Configures the LDO_30 output voltage as 0.97v"] 
-      as_0_99v_output : [12, "Configures the LDO_30 output voltage as 0.99v"]
-      as_1_01v_output : [13, "Configures the LDO_30 output voltage as 1.01v"]
-      as_1_03v_output : [14, "Configures the LDO_30 output voltage as 1.03v"]
-      as_1_05v_output : [15, "Configures the LDO_30 output voltage as 1.05v"]
-      as_1_07v_output : [16, "Configures the LDO_30 output voltage as 1.07v"]
-      as_1_09v_output : [17, "Configures the LDO_30 output voltage as 1.09v (default)"]
-      as_1_11v_output : [18, "Configures the LDO_30 output voltage as 1.11v"]
-      as_1_13v_output : [19, "Configures the LDO_30 output voltage as 1.13v"]
-      as_1_15v_output : [20, "Configures the LDO_30 output voltage as 1.15v"]
-      as_1_17v_output : [21, "Configures the LDO_30 output voltage as 1.17v"]
-      as_1_19v_output : [22, "Configures the LDO_30 output voltage as 1.19v"]
-      as_1_21v_output : [23, "Configures the LDO_30 output voltage as 1.21v"]
+      max_30mA_current: [0, "Configure the maximum current for LDO_30 as 30mA"]
+      max_18mA_current: [1, "Configure the maximum current for LDO_30 as 18mA"]
+      max_12mA_current: [2, "Configure the maximum current for LDO_30 as 12mA"]
+      max_7_2mA_current:
+        [3, "Configure the maximum current for LDO_30 as 7.2mA (default)"]
+      max_4_8mA_current:
+        [4, "Configure the maximum current for LDO_30 as 4.8mA"]
+      max_2_4mA_current:
+        [5, "Configure the maximum current for LDO_30 as 2.4mA"]
+      max_1_2mA_current:
+        [6, "Configure the maximum current for LDO_30 as 1.2mA"]
+      max_0_6mA_current:
+        [7, "Configure the maximum current for LDO_30 as 0.6mA"]
+    DI:
+      as_0_75v_output: [0, "Configures the LDO_30 output voltage as 0.75v"]
+      as_0_77v_output: [1, "Configures the LDO_30 output voltage as 0.77v"]
+      as_0_79v_output: [2, "Configures the LDO_30 output voltage as 0.79v"]
+      as_0_81v_output: [3, "Configures the LDO_30 output voltage as 0.81v"]
+      as_0_83v_output: [4, "Configures the LDO_30 output voltage as 0.83v"]
+      as_0_85v_output: [5, "Configures the LDO_30 output voltage as 0.85v"]
+      as_0_87v_output: [6, "Configures the LDO_30 output voltage as 0.87v"]
+      as_0_89v_output: [7, "Configures the LDO_30 output voltage as 0.89v"]
+      as_0_91v_output: [8, "Configures the LDO_30 output voltage as 0.91v"]
+      as_0_93v_output: [9, "Configures the LDO_30 output voltage as 0.93v"]
+      as_0_95v_output: [10, "Configures the LDO_30 output voltage as 0.95v"]
+      as_0_97v_output: [11, "Configures the LDO_30 output voltage as 0.97v"]
+      as_0_99v_output: [12, "Configures the LDO_30 output voltage as 0.99v"]
+      as_1_01v_output: [13, "Configures the LDO_30 output voltage as 1.01v"]
+      as_1_03v_output: [14, "Configures the LDO_30 output voltage as 1.03v"]
+      as_1_05v_output: [15, "Configures the LDO_30 output voltage as 1.05v"]
+      as_1_07v_output: [16, "Configures the LDO_30 output voltage as 1.07v"]
+      as_1_09v_output:
+        [17, "Configures the LDO_30 output voltage as 1.09v (default)"]
+      as_1_11v_output: [18, "Configures the LDO_30 output voltage as 1.11v"]
+      as_1_13v_output: [19, "Configures the LDO_30 output voltage as 1.13v"]
+      as_1_15v_output: [20, "Configures the LDO_30 output voltage as 1.15v"]
+      as_1_17v_output: [21, "Configures the LDO_30 output voltage as 1.17v"]
+      as_1_19v_output: [22, "Configures the LDO_30 output voltage as 1.19v"]
+      as_1_21v_output: [23, "Configures the LDO_30 output voltage as 1.21v"]
   LDO_50_CTRL_0:
     DIS:
       enable: [0, "Enable LDO_50 output"]
@@ -497,36 +502,38 @@ AIP:
       enable: [0, "Enable LDO_50 power good comparator"]
       disable: [1, "Disable LDO_50 power good comparator"]
     IMAX:
-      max_50mA_current: [0,"Configure the maximum current for LDO_50 as 50mA"]  
-      max_30mA_current: [1,"Configure the maximum current for LDO_50 as 30mA"]  
-      max_20mA_current: [2,"Configure the maximum current for LDO_50 as 20mA"]  
-      max_12mA_current: [3,"Configure the maximum current for LDO_50 as 12mA (default)"] 
-      max_8mA_current : [4,"Configure the maximum current for LDO_50 as 8mA"]  
-      max_4mA_current : [5,"Configure the maximum current for LDO_50 as 4mA"] 
-      max_2mA_current : [6,"Configure the maximum current for LDO_50 as 2mA"]   
-      max_1mA_current : [7,"Configure the maximum current for LDO_50 as 1mA"] 
-    DI: 
-      as_0_75v_output : [0,  "Configures the LDO_50 output voltage as 0.75v"] 
-      as_0_77v_output : [1,  "Configures the LDO_50 output voltage as 0.77v"] 
-      as_0_79v_output : [2,  "Configures the LDO_50 output voltage as 0.79v"] 
-      as_0_81v_output : [3,  "Configures the LDO_50 output voltage as 0.81v"] 
-      as_0_83v_output : [4,  "Configures the LDO_50 output voltage as 0.83v"] 
-      as_0_85v_output : [5,  "Configures the LDO_50 output voltage as 0.85v"] 
-      as_0_87v_output : [6,  "Configures the LDO_50 output voltage as 0.87v"] 
-      as_0_89v_output : [7,  "Configures the LDO_50 output voltage as 0.89v"]
-      as_0_91v_output : [8,  "Configures the LDO_50 output voltage as 0.91v"]  
-      as_0_93v_output : [9,  "Configures the LDO_50 output voltage as 0.93v"] 
-      as_0_95v_output : [10, "Configures the LDO_50 output voltage as 0.95v"] 
-      as_0_97v_output : [11, "Configures the LDO_50 output voltage as 0.97v"] 
-      as_0_99v_output : [12, "Configures the LDO_50 output voltage as 0.99v"]
-      as_1_01v_output : [13, "Configures the LDO_50 output voltage as 1.01v"]
-      as_1_03v_output : [14, "Configures the LDO_50 output voltage as 1.03v"]
-      as_1_05v_output : [15, "Configures the LDO_50 output voltage as 1.05v"]
-      as_1_07v_output : [16, "Configures the LDO_50 output voltage as 1.07v"]
-      as_1_09v_output : [17, "Configures the LDO_50 output voltage as 1.09v (default)"]
-      as_1_11v_output : [18, "Configures the LDO_50 output voltage as 1.11v"]
-      as_1_13v_output : [19, "Configures the LDO_50 output voltage as 1.13v"]
-      as_1_15v_output : [20, "Configures the LDO_50 output voltage as 1.15v"]
-      as_1_17v_output : [21, "Configures the LDO_50 output voltage as 1.17v"]
-      as_1_19v_output : [22, "Configures the LDO_50 output voltage as 1.19v"]
-      as_1_21v_output : [23, "Configures the LDO_50 output voltage as 1.21v"]
+      max_50mA_current: [0, "Configure the maximum current for LDO_50 as 50mA"]
+      max_30mA_current: [1, "Configure the maximum current for LDO_50 as 30mA"]
+      max_20mA_current: [2, "Configure the maximum current for LDO_50 as 20mA"]
+      max_12mA_current:
+        [3, "Configure the maximum current for LDO_50 as 12mA (default)"]
+      max_8mA_current: [4, "Configure the maximum current for LDO_50 as 8mA"]
+      max_4mA_current: [5, "Configure the maximum current for LDO_50 as 4mA"]
+      max_2mA_current: [6, "Configure the maximum current for LDO_50 as 2mA"]
+      max_1mA_current: [7, "Configure the maximum current for LDO_50 as 1mA"]
+    DI:
+      as_0_75v_output: [0, "Configures the LDO_50 output voltage as 0.75v"]
+      as_0_77v_output: [1, "Configures the LDO_50 output voltage as 0.77v"]
+      as_0_79v_output: [2, "Configures the LDO_50 output voltage as 0.79v"]
+      as_0_81v_output: [3, "Configures the LDO_50 output voltage as 0.81v"]
+      as_0_83v_output: [4, "Configures the LDO_50 output voltage as 0.83v"]
+      as_0_85v_output: [5, "Configures the LDO_50 output voltage as 0.85v"]
+      as_0_87v_output: [6, "Configures the LDO_50 output voltage as 0.87v"]
+      as_0_89v_output: [7, "Configures the LDO_50 output voltage as 0.89v"]
+      as_0_91v_output: [8, "Configures the LDO_50 output voltage as 0.91v"]
+      as_0_93v_output: [9, "Configures the LDO_50 output voltage as 0.93v"]
+      as_0_95v_output: [10, "Configures the LDO_50 output voltage as 0.95v"]
+      as_0_97v_output: [11, "Configures the LDO_50 output voltage as 0.97v"]
+      as_0_99v_output: [12, "Configures the LDO_50 output voltage as 0.99v"]
+      as_1_01v_output: [13, "Configures the LDO_50 output voltage as 1.01v"]
+      as_1_03v_output: [14, "Configures the LDO_50 output voltage as 1.03v"]
+      as_1_05v_output: [15, "Configures the LDO_50 output voltage as 1.05v"]
+      as_1_07v_output: [16, "Configures the LDO_50 output voltage as 1.07v"]
+      as_1_09v_output:
+        [17, "Configures the LDO_50 output voltage as 1.09v (default)"]
+      as_1_11v_output: [18, "Configures the LDO_50 output voltage as 1.11v"]
+      as_1_13v_output: [19, "Configures the LDO_50 output voltage as 1.13v"]
+      as_1_15v_output: [20, "Configures the LDO_50 output voltage as 1.15v"]
+      as_1_17v_output: [21, "Configures the LDO_50 output voltage as 1.17v"]
+      as_1_19v_output: [22, "Configures the LDO_50 output voltage as 1.19v"]
+      as_1_21v_output: [23, "Configures the LDO_50 output voltage as 1.21v"]

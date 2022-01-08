@@ -5,7 +5,8 @@ IOMUX:
       addressOffset: 0x100
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0
+      resetMask:  0b1
       fields:
         SEL:
           description: Sel
@@ -16,7 +17,8 @@ IOMUX:
       addressOffset: 0x104
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b00
+      resetMask:  0b11
       fields:
         SEL:
           description: Sel
@@ -27,7 +29,8 @@ IOMUX:
       addressOffset: 0x108
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0
+      resetMask:  0b1
       fields:
         SEL:
           description: Sel
@@ -38,7 +41,8 @@ IOMUX:
       addressOffset: 0x10C
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0
+      resetMask:  0b1
       fields:
         SEL:
           description: Sel
@@ -49,7 +53,8 @@ IOMUX:
       addressOffset: 0x110
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b00
+      resetMask:  0b11
       fields:
         SEL:
           description: Sel
@@ -60,7 +65,8 @@ IOMUX:
       addressOffset: 0x114
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0
+      resetMask:  0b1
       fields:
         SEL:
           description: Sel
@@ -71,7 +77,8 @@ IOMUX:
       addressOffset: 0x118
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0
+      resetMask:  0b1
       fields:
         SEL:
           description: Sel
@@ -82,7 +89,8 @@ IOMUX:
       addressOffset: 0x11C
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0
+      resetMask:  0b1
       fields:
         SEL:
           description: Sel
@@ -93,7 +101,8 @@ IOMUX:
       addressOffset: 0x120
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0
+      resetMask:  0b1
       fields:
         SEL:
           description: Sel
@@ -104,19 +113,20 @@ IOMUX:
       addressOffset: 0x124
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0
+      resetMask:  0b1
       fields:
         SEL:
           description: Sel
           bitOffset: 0
           bitWidth: 1
-
     PDM_DATA_SELE:
       description: Select pad for PDM microphone data line
       addressOffset: 0x128
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b00
+      resetMask:  0b11
       fields:
         SEL:
           description: Sel
@@ -127,7 +137,8 @@ IOMUX:
       addressOffset: 0x12C
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b00
+      resetMask:  0b11
       fields:
         SEL:
           description: Sel
@@ -138,7 +149,8 @@ IOMUX:
       addressOffset: 0x134
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b000
+      resetMask:  0b111
       fields:
         SEL:
           description: Sel
@@ -149,7 +161,8 @@ IOMUX:
       addressOffset: 0x138
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b000
+      resetMask:  0b111
       fields:
         SEL:
           description: Sel
@@ -160,7 +173,8 @@ IOMUX:
       addressOffset: 0x13C
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0
+      resetMask:  0b1
       fields:
         SEL:
           description: Sel
@@ -171,7 +185,8 @@ IOMUX:
       addressOffset: 0x140
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b000
+      resetMask:  0b111
       fields:
         SEL:
           description: Sel
@@ -182,7 +197,8 @@ IOMUX:
       addressOffset: 0x144
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b000
+      resetMask:  0b111
       fields:
         SEL:
           description: Sel
@@ -193,7 +209,8 @@ IOMUX:
       addressOffset: 0x148
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b000
+      resetMask:  0b111
       fields:
         SEL:
           description: Sel
@@ -204,7 +221,8 @@ IOMUX:
       addressOffset: 0x14C
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b000
+      resetMask:  0b111
       fields:
         SEL:
           description: Sel
@@ -215,7 +233,8 @@ IOMUX:
       addressOffset: 0x150
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b000
+      resetMask:  0b111
       fields:
         SEL:
           description: Sel
@@ -226,7 +245,8 @@ IOMUX:
       addressOffset: 0x154
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b000
+      resetMask:  0b111
       fields:
         SEL:
           description: Sel
@@ -237,7 +257,8 @@ IOMUX:
       addressOffset: 0x158
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b000
+      resetMask:  0b111
       fields:
         SEL:
           description: Sel
@@ -248,7 +269,8 @@ IOMUX:
       addressOffset: 0x15C
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b00
+      resetMask:  0b11
       fields:
         SEL:
           description: Sel
@@ -259,7 +281,8 @@ IOMUX:
       addressOffset: 0x160
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0000_0000
+      resetMask:  0b1111_1111
       fields:
         IO_SEL_0:
           description: Select pad for IO maped to bit 0
@@ -298,7 +321,8 @@ IOMUX:
       addressOffset: 0x170
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0
+      resetMask:  0b1
       fields:
         SEL:
           description: Sel
@@ -309,29 +333,32 @@ IOMUX:
       addressOffset: 0x174
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0
+      resetMask:  0b1
       fields:
         SEL:
           description: Sel
           bitOffset: 0
           bitWidth: 1
     FBIO_SEL_1:
-      description: Lacking proper documentation. Configuration of pins 0-31 related to Fabric 
+      description: Lacking proper documentation. Configuration of pins 0-31 related to Fabric
       addressOffset: 0x180
       access: read-write
       size: 32
       resetValue: 0x0000_0000
+      resetMask:  0xFFFF_FFFF
       fields:
         SEL:
           description: Sel
           bitOffset: 0
           bitWidth: 32
     FBIO_SEL_2:
-      description: Lacking proper documentation. Configuration of pins 32-45 related to Fabric 
+      description: Lacking proper documentation. Configuration of pins 32-45 related to Fabric
       addressOffset: 0x184
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b00_0000_0000_0000
+      resetMask:  0b11_1111_1111_1111
       fields:
         SEL:
           description: Sel
@@ -343,7 +370,8 @@ IOMUX:
       addressOffset: 0x190
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b00
+      resetMask:  0b11
       fields:
         SEL:
           description: Sel
@@ -354,7 +382,8 @@ IOMUX:
       addressOffset: 0x194
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b00
+      resetMask:  0b11
       fields:
         SEL:
           description: Sel
@@ -365,7 +394,8 @@ IOMUX:
       addressOffset: 0x1A0
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0
+      resetMask:  0b1
       fields:
         SEL:
           description: Sel
@@ -376,7 +406,8 @@ IOMUX:
       addressOffset: 0x1A4
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0
+      resetMask:  0b1
       fields:
         SEL:
           description: Sel
@@ -387,24 +418,26 @@ IOMUX:
       addressOffset: 0x1A8
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b00
+      resetMask:  0b11
       fields:
         SEL:
           description: Sel
           bitOffset: 0
           bitWidth: 2
-    PDM_CLKIN_SEL: 
+    PDM_CLKIN_SEL:
       description: Selects pin for PDM CLKIN source (AP PDM CKO IN)
       addressOffset: 0x1AC
       access: read-write
       size: 32
-      resetValue: 0x0000_0000
+      resetValue: 0b0
+      resetMask:  0b1
       fields:
         SEL:
           description: Sel
           bitOffset: 0
           bitWidth: 1
-  
+
   "PAD_*_CTRL":
     CTRL_SEL:
       a0_registers: [0x0, "A0 registers"]
@@ -415,7 +448,7 @@ IOMUX:
       a0_registers: [0x0, "A0 registers"]
       others: [0x1, "Others"]
   "PAD_*_CTRL*":
-    #Similar to how ATSAMD cores multiplex stuff, Check TechRef Manual Section 19 
+    #Similar to how ATSAMD cores multiplex stuff, Check TechRef Manual Section 19
     FUNC_SEL:
       alternative_0: [0, "Select alternative function 0"]
       alternative_1: [1, "Select alternative function 1"]
@@ -445,65 +478,89 @@ IOMUX:
       enable_trigger: [1, "Enable the Schmitt trigger"]
   SDA0_SEL_REG:
     SEL:
-      default_undefined: [0, "Documentation lacking, guessed meaning: Selects pad #1 for the SDA function in I2C0"]
+      default_undefined:
+        [
+          0,
+          "Documentation lacking, guessed meaning: Selects pad #1 for the SDA function in I2C0",
+        ]
       pad_01: [1, "Selects pad #1 for the SDA function in I2C0"]
   SDA1_SEL_REG:
     SEL:
-      default_undefined: [0, "Documentation lacking, guessed meaning: Select pad #15 for the SDA function in I2C1"]
+      default_undefined:
+        [
+          0,
+          "Documentation lacking, guessed meaning: Select pad #15 for the SDA function in I2C1",
+        ]
       pad_15: [1, "Select pad #15 for the SDA function in I2C1"]
       pad_32: [2, "Select pad #32 for the SDA function in I2C1"]
       pad_44: [3, "Select pad #44 for the SDA function in I2C1"]
   SDA2_SEL_REG:
     SEL:
-      default_undefined: [0, "Documentation lacking, guessed meaning: Selects pad #41 for the SDA function in I2C2"]
+      default_undefined:
+        [
+          0,
+          "Documentation lacking, guessed meaning: Selects pad #41 for the SDA function in I2C2",
+        ]
       pad_41: [1, "Selects pad #41 for the SDA function in I2C2"]
   SCL0_SEL_REG:
     SEL:
-      default_undefined: [0, "Documentation lacking, guessed meaning: Selects pad #0 for the SCL function in I2C0"]
+      default_undefined:
+        [
+          0,
+          "Documentation lacking, guessed meaning: Selects pad #0 for the SCL function in I2C0",
+        ]
       pad_00: [1, "Selects pad #0 for the SCL function in I2C0"]
   SCL1_SEL_REG:
     SEL:
-      default_undefined: [0, "Documentation lacking, guessed meaning: Select pad #14 for the SCL function in I2C1"]
+      default_undefined:
+        [
+          0,
+          "Documentation lacking, guessed meaning: Select pad #14 for the SCL function in I2C1",
+        ]
       pad_14: [1, "Select pad #14 for the SCL function in I2C1"]
       pad_33: [2, "Select pad #33 for the SCL function in I2C1"]
       pad_45: [3, "Select pad #45 for the SCL function in I2C1"]
   SCL2_SEL_REG:
     SEL:
-      default_undefined: [0, "Documentation lacking, guessed meaning: Selects pad #40 for the SCL function in I2C2"]
+      default_undefined:
+        [
+          0,
+          "Documentation lacking, guessed meaning: Selects pad #40 for the SCL function in I2C2",
+        ]
       pad_40: [1, "Selects pad #40 for the SCL function in I2C2"]
   PDM_DATA_SELE:
-    SEL: 
+    SEL:
       undefined: [0, "undefined (0:0 in documentation)"]
       pad_10: [1, "Selects pad #10 for PDM data line"]
       pad_28: [2, "Selects pad #28 for PDM data line"]
   I2S_DATA_SELECT:
-    SEL: 
+    SEL:
       undefined: [0, "undefined (0:0 in documentation)"]
       pad_10: [1, "Selects pad #10 for I2S data line"]
       pad_28: [2, "Selects pad #28 for I2S data line"]
   UART_rxd_SEL:
-    SEL: 
+    SEL:
       undefined: [0, "undefined (0:0 in documentation)"]
       pad_14: [1, "Selects pad #14 for UART RXD line"]
       pad_16: [2, "Selects pad #16 for UART RXD line"]
       pad_25: [3, "Selects pad #25 for UART RXD line"]
       pad_45: [4, "Selects pad #45 for UART RXD line"]
   IrDA_Sirin_SEL:
-    SEL: 
+    SEL:
       undefined: [0, "undefined (0:0 in documentation)"]
-      pad_06 : [1, "Selects pad #14 for Siren in line"]
-      pad_15 : [2, "Selects pad #15 for Siren in line"]
-      pad_21 : [3, "Selects pad #21 for Siren in line"]
-      pad_24 : [4, "Selects pad #24 for Siren in line"]
-      pad_28 : [5, "Selects pad #28 for Siren in line"]
-      pad_40 : [6, "Selects pad #40 for Siren in line"]
-      pad_44 : [7, "Selects pad #44 for Siren in line"]
+      pad_06: [1, "Selects pad #14 for Siren in line"]
+      pad_15: [2, "Selects pad #15 for Siren in line"]
+      pad_21: [3, "Selects pad #21 for Siren in line"]
+      pad_24: [4, "Selects pad #24 for Siren in line"]
+      pad_28: [5, "Selects pad #28 for Siren in line"]
+      pad_40: [6, "Selects pad #40 for Siren in line"]
+      pad_44: [7, "Selects pad #44 for Siren in line"]
   S_INTR_0_SEL_REG:
-    SEL: 
+    SEL:
       undefined: [0, "undefined (0:0 in documentation)"]
-      pad_03 : [1, "Selects pad #3 as the trigger"]
+      pad_03: [1, "Selects pad #3 as the trigger"]
   S_INTR_1_SEL_REG:
-    SEL: 
+    SEL:
       undefined: [0, "undefined (0:0 in documentation)"]
       pad_02: [1, "Selects pad #2 as the trigger"]
       pad_06: [2, "Selects pad #6 as the trigger"]
@@ -512,33 +569,33 @@ IOMUX:
       pad_35: [5, "Selects pad #35 as the trigger"]
       pad_36: [6, "Selects pad #36 as the trigger"]
   S_INTR_2_SEL:
-    SEL: 
+    SEL:
       undefined: [0, "undefined (0:0 in documentation)"]
-      pad_04 : [1, "Selects pad #4 as the trigger"]
-      pad_08 : [2, "Selects pad #8 as the trigger"]
+      pad_04: [1, "Selects pad #4 as the trigger"]
+      pad_08: [2, "Selects pad #8 as the trigger"]
       pad_21: [3, "Selects pad #21 as the trigger"]
       pad_25: [4, "Selects pad #25 as the trigger"]
       pad_37: [5, "Selects pad #37 as the trigger"]
       pad_38: [6, "Selects pad #38 as the trigger"]
   S_INTR_3_SEL:
-    SEL: 
+    SEL:
       undefined: [0, "undefined (0:0 in documentation)"]
-      pad_05 : [1, "Selects pad #2 as the trigger"]
-      pad_09 : [2, "Selects pad #9 as the trigger"]
+      pad_05: [1, "Selects pad #2 as the trigger"]
+      pad_09: [2, "Selects pad #9 as the trigger"]
       pad_22: [3, "Selects pad #22 as the trigger"]
       pad_28: [4, "Selects pad #28 as the trigger"]
       pad_39: [5, "Selects pad #39 as the trigger"]
       pad_40: [6, "Selects pad #40 as the trigger"]
   S_INTR_4_SEL:
-    SEL: 
+    SEL:
       undefined: [0, "undefined (0:0 in documentation)"]
-      pad_07 : [1, "Selects pad #7 as the trigger"]
+      pad_07: [1, "Selects pad #7 as the trigger"]
       pad_10: [2, "Selects pad #10 as the trigger"]
       pad_26: [3, "Selects pad #26 as the trigger"]
       pad_29: [4, "Selects pad #29 as the trigger"]
       pad_44: [5, "Selects pad #44 as the trigger"]
   S_INTR_5_SEL:
-    SEL: 
+    SEL:
       undefined: [0, "undefined (0:0 in documentation)"]
       pad_11: [1, "Selects pad #11 as the trigger"]
       pad_14: [2, "Selects pad #14 as the trigger"]
@@ -546,7 +603,7 @@ IOMUX:
       pad_30: [4, "Selects pad #30 as the trigger"]
       pad_45: [5, "Selects pad #45 as the trigger"]
   S_INTR_6_SEL:
-    SEL: 
+    SEL:
       undefined: [0, "undefined (0:0 in documentation)"]
       pad_12: [1, "Selects pad #12 as the trigger"]
       pad_15: [2, "Selects pad #15 as the trigger"]
@@ -554,7 +611,7 @@ IOMUX:
       pad_32: [4, "Selects pad #32 as the trigger"]
       pad_41: [5, "Selects pad #41 as the trigger"]
   S_INTR_7_SEL:
-    SEL: 
+    SEL:
       undefined: [0, "undefined (0:0 in documentation)"]
       pad_13: [1, "Selects pad #13 as the trigger"]
       pad_23: [2, "Selects pad #23 as the trigger"]
@@ -587,28 +644,46 @@ IOMUX:
       pad_23: [0, "Enable pad #23 as GPIO"]
       pad_45: [1, "Enable pad #45 as GPIO"]
   SW_CLK_SEL:
-    SEL: 
-      select_strap_pad_14_45: [0,"pad #14/#45 (pad selection will depend on pad #8, See ch. 30 of TechRef Manual)"]
-      undefined: [1, "Lacking documentation. Might mean the same as `select_strap_pad`"]
+    SEL:
+      select_strap_pad_14_45:
+        [
+          0,
+          "pad #14/#45 (pad selection will depend on pad #8, See ch. 30 of TechRef Manual)",
+        ]
+      undefined:
+        [1, "Lacking documentation. Might mean the same as `select_strap_pad`"]
   SW_IO_SEL:
-    SEL: 
-      select_strap_pad_15_44: [0,"pad #15/#44 (pad selection will depend on pad #8, See ch. 30 of TechRef Manual)"]
-      undefined: [1, "Lacking documentation. Might mean the same as `select_strap_pad`"]
+    SEL:
+      select_strap_pad_15_44:
+        [
+          0,
+          "pad #15/#44 (pad selection will depend on pad #8, See ch. 30 of TechRef Manual)",
+        ]
+      undefined:
+        [1, "Lacking documentation. Might mean the same as `select_strap_pad`"]
   FBIO_SEL_1:
-    SEL: 
+    SEL:
       undefined: [0, "Lacking documentation. Guess: Leaves pad unselected"]
-      select_pad: [1, "Lacking documentation. Guess: Activates some sort of FPGA Fabric control for pads 0-31"]
+      select_pad:
+        [
+          1,
+          "Lacking documentation. Guess: Activates some sort of FPGA Fabric control for pads 0-31",
+        ]
   FBIO_SEL_2:
-    SEL: 
+    SEL:
       undefined: [0, "Lacking documentation. Guess: Leaves pad unselected"]
-      select_pad: [1, "Lacking documentation. Guess: Activates some sort of FPGA Fabric control for pads 32-45"]
+      select_pad:
+        [
+          1,
+          "Lacking documentation. Guess: Activates some sort of FPGA Fabric control for pads 32-45",
+        ]
   SPI_SENSOR_MISO_SEL:
     SEL:
       undefined: [0, "undefined (0:0 in documentation)"]
-      pad_08 : [1, "Selects pad #8 for sensor SPI MISO"]
-      pad_29 : [2, "Selects pad #29 for sensor SPI MISO"]
+      pad_08: [1, "Selects pad #8 for sensor SPI MISO"]
+      pad_29: [2, "Selects pad #29 for sensor SPI MISO"]
   SPI_SENSOR_MOSI_SEL:
     SEL:
       undefined: [0, "undefined (0:0 in documentation)"]
-      pad_06 : [1, "Selects pad #6 for sensor SPI MISO"]
-      pad_28 : [2, "Selects pad #28 for sensor SPI MISO"]
+      pad_06: [1, "Selects pad #6 for sensor SPI MISO"]
+      pad_28: [2, "Selects pad #28 for sensor SPI MISO"]

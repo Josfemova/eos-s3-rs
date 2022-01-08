@@ -12,7 +12,8 @@ A1_Regs:
         description: Configuration Control
         addressOffset: 0x0
         access: read-write
-        resetValue: 0x0000_0000
+        resetValue: 0x0
+        resetMask:  0x1
         fields:
           CFG_IN_SEL:
             description: Selects source APB master to SPI Master between M4/AP and Fabric

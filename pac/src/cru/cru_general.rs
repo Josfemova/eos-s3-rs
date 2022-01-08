@@ -142,7 +142,7 @@ impl<'a> GENERAL_W<'a> {
     #[inline(always)]
     pub unsafe fn bits(self, value: u8) -> &'a mut W {
         self.w.bits =
-            (self.w.bits & !(0xff << 1)) | ((value as u32 & 0xff) << 1);
+            (self.w.bits & !(0x7f << 1)) | ((value as u32 & 0x7f) << 1);
         self.w
     }
 }
@@ -152,10 +152,10 @@ impl R {
     pub fn spiclk_always_on(&self) -> SPICLK_ALWAYS_ON_R {
         SPICLK_ALWAYS_ON_R::new((self.bits & 0x01) != 0)
     }
-    #[doc = "Bits 1:8 - General purpose register"]
+    #[doc = "Bits 1:7 - General purpose register"]
     #[inline(always)]
     pub fn general(&self) -> GENERAL_R {
-        GENERAL_R::new(((self.bits >> 1) & 0xff) as u8)
+        GENERAL_R::new(((self.bits >> 1) & 0x7f) as u8)
     }
 }
 impl W {
@@ -164,7 +164,7 @@ impl W {
     pub fn spiclk_always_on(&mut self) -> SPICLK_ALWAYS_ON_W {
         SPICLK_ALWAYS_ON_W { w: self }
     }
-    #[doc = "Bits 1:8 - General purpose register"]
+    #[doc = "Bits 1:7 - General purpose register"]
     #[inline(always)]
     pub fn general(&mut self) -> GENERAL_W {
         GENERAL_W { w: self }

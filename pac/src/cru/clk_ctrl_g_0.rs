@@ -191,10 +191,10 @@ impl crate::Readable for CLK_CTRL_G_0_SPEC {
 impl crate::Writable for CLK_CTRL_G_0_SPEC {
     type Writer = W;
 }
-#[doc = "`reset()` method sets CLK_CTRL_G_0 to value 0x021e"]
+#[doc = "`reset()` method sets CLK_CTRL_G_0 to value 0x020e"]
 impl crate::Resettable for CLK_CTRL_G_0_SPEC {
     #[inline(always)]
     fn reset_value() -> Self::Ux {
-        0x021e
+        0x020e
     }
 }

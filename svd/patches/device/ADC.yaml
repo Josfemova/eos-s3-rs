@@ -13,7 +13,6 @@ _add:
         addressOffset: 0x000
         access: read-only 
         size: 32
-        resetValue: 0x0000_0000
         fields: 
           OUT: 
             description: Stored last sampled value 
@@ -22,9 +21,8 @@ _add:
       ADC_Status:
         description: Status 
         addressOffset: 0x004
-        access: read-only 
         size: 32
-        resetValue: 0x0000_0000
+        access: read-only 
         fields:
           EOC:
             description: End of Conversion. Rises when data is valid
@@ -35,7 +33,8 @@ _add:
         addressOffset: 0x008 
         access: read-write
         size: 32
-        resetValue: 0x0000_0000    
+        resetValue: 0b000
+        resetMask:  0b111
         fields:
           SOC: 
             description: Asynchronous start-of-conversion. Needs to rise and be held high for each conversion 

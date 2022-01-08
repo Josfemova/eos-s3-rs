@@ -12,7 +12,8 @@ _add:
         addressOffset: 0x000
         access: read-only
         size: 32
-        resetValue: 0x0000_0000
+        resetValue: 0x00
+        resetMask:  0xFF
         fields:
           DEBUG_MON:
             description: Reads the debug status/information
@@ -23,7 +24,8 @@ _add:
         addressOffset: 0x004
         access: read-write
         size: 32
-        resetValue: 0x0000_0000
+        resetValue: 0b000
+        resetMask:  0b111
         fields:
           SUBSYS_DEBUG_MON_SEL:
             description: Select which subsystem the debug monitors are routed from
@@ -34,7 +36,8 @@ _add:
         addressOffset: 0x008
         access: read-write
         size: 32
-        resetValue: 0x0000_0000
+        resetValue: 0b000
+        resetMask:  0b111
         fields:
           A0_DEBUG_MON_SEL:
             description: Select debug monitors
@@ -45,7 +48,8 @@ _add:
         addressOffset: 0x00C
         access: read-write
         size: 32
-        resetValue: 0x0000_0000
+        resetValue: 0b00_0000
+        resetMask:  0b11_1111
         fields:
           A0_PMU_DEBUG_MON_SEL:
             description: Select data to be shown in the PMU debug monitor
@@ -55,7 +59,6 @@ _add:
         description: Reads the value of the IO pins
         addressOffset: 0x100
         access: read-only
-        resetValue: 0x0000_0000
         fields:
           IO_0:
             description: Read digital value of pin mapped to IO bit 0
@@ -94,7 +97,8 @@ _add:
         addressOffset: 0x104
         access: read-write
         size: 32
-        resetValue: 0x0000_0000
+        resetValue: 0b0000_0000
+        resetMask:  0b1111_1111
         fields:
           IO_0:
             description: Write digital value of pin mapped to IO bit 0
@@ -145,7 +149,8 @@ _add:
         addressOffset: 0x200
         access: read-write
         size: 32
-        resetValue: 0x0000_0000
+        resetValue: 0b0000
+        resetMask:  0b1111
         fields:
           TOP_BANK_0:
             description: bit for top bank 0
@@ -167,7 +172,8 @@ _add:
         description: Memory Configuration
         addressOffset: 0x210
         size: 32
-        resetValue: 0b010000100001000010
+        resetValue: 0b0001_0000_1000_0100_0010
+        resetMask:  0b1111_1111_1111_1111_1111
         fields:
           MEM0_32K_RM:
             description: Read and write margin control. Recommended setting is 2'b10. 2'b00 provides the most margin (slowest speed). 2'b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation.
@@ -210,35 +216,32 @@ _add:
             bitOffset: 19
             bitWidth: 1
       LOCK_KEY_CTRL:
-        description: Control value and status of LOCK_KEY 
+        description: Control value and status of LOCK_KEY
         addressOffset: 0x310
         size: 32
-        resetValue: 0x1ACCE551
+        resetValue: 0x1ACC_E551
+        resetMask:  0xFFFF_FFFF
         fields:
           LOCK_KEY_EN:
             description: "0: lock disabled, write to register enabled, 1: lock enable, write to register disabled"
             access: read-write
             bitOffset: 0
-            bitWidth: 1 
-          LOCK_KEY: 
+            bitWidth: 1
+          LOCK_KEY:
             description: "Enable write access to all below registers by writing 0x1ACCE551. Disable write access by writing any other value. M4 WDT Intr/reset clear - 0x4000_4830[4:3], M4 WDT Intr/reset enable AP - 0x4000_4834[4:3], Pad #43 (AP_INTR) - 0x40004CAC[12:0], M4 Low Power Configuration - 0x40004484[1:0], M4 WDT Clock Gate - 0x40004054[0]"
             access: write-only
             bitOffset: 1
-            bitWidth: 31 
+            bitWidth: 31
       FB_DEVICE_ID:
-        description: Fabric device ID 
-        addressOffset: 0x3FC 
-        access: read-only 
+        description: Fabric device ID
+        addressOffset: 0x3FC
+        access: read-only
         size: 32
-        resetValue: 0x0000_0000
-        fields: 
-          ID: 
-            description: Fabric device ID 
+        fields:
+          ID:
+            description: Fabric device ID
             bitOffset: 0
             bitWidth: 16
-            
-
-
 
 MISC:
   SUBSYS_DBG_MON_SEL:

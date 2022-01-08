@@ -11,7 +11,8 @@ _add:
         description: "For Clock 10 (SYNC Up on A0 and AHB Interface of Batching Memory, AUDIO DMA, M4 SRAMs,M4 Bus Matrix and Trace block)"
         addressOffset: 0x000
         size: 32
-        resetValue: 0b0010_0000_0100
+        resetValue: 0b10_0000_0100
+        resetMask: 0b11_1111_1111
         fields:
           Clock_Divider_Ratio: 
             description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2. default div is 6"
@@ -27,7 +28,8 @@ _add:
         description: "For Clock 10 (SYNC Up on A0 and AHB Interface of Batching Memory, AUDIO DMA, M4 SRAMs,M4 Bus Matrix and Trace block)"
         addressOffset: 0x004
         size: 32
-        resetValue: 0x0
+        resetValue: 0b00
+        resetMask: 0b11
         fields:
           Clock_Source_Selection: 
             description: "Select the clock source"
@@ -38,7 +40,8 @@ _add:
         description: "For Clock 2 (FB, A1 (Including CFGSM))"
         addressOffset: 0x008
         size: 32
-        resetValue: 0b0010_0000_0100
+        resetValue: 0b10_0000_0100
+        resetMask: 0b11_1111_1111
         fields:
           Clock_Divider_Ratio: 
             description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2. default div is 6"
@@ -54,7 +57,8 @@ _add:
         description: "For Clock 2 (FB, A1 (Including CFGSM))"
         addressOffset: 0x00C
         size: 32
-        resetValue: 0x0
+        resetValue: 0b00
+        resetMask: 0b11
         fields:
           Clock_Source_Selection: 
             description: "Select the clock source"
@@ -65,7 +69,8 @@ _add:
         description: "For Clock 8 X4 (FFE X4 clk)"
         addressOffset: 0x010
         size: 32
-        resetValue: 0b0010_0000_0100
+        resetValue: 0b10_0000_0100
+        resetMask: 0b11_1111_1111
         fields:
           Clock_Divider_Ratio: 
             description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2. default div is 6"
@@ -81,7 +86,8 @@ _add:
         description: "For Clock 11 (To M4 peripherals - AHB/APB bridge, UART, WDT and TIMER)"
         addressOffset: 0x014
         size: 32
-        resetValue: 0b0010_0000_1110
+        resetValue: 0b10_0000_1110
+        resetMask: 0b11_1111_1111
         fields:
           Clock_Divider_Ratio: 
             description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2, default div is 16"
@@ -101,7 +107,6 @@ _add:
         description: "For Clock 12"
         addressOffset: 0x01C
         size: 32
-        resetValue: 0x0
         access: read-only
         fields:
           Clock_Source_Selection: 
@@ -112,7 +117,8 @@ _add:
         description: "For Clock 16 (FB)"
         addressOffset: 0x020
         size: 32
-        resetValue: 0b0010_0000_1110
+        resetValue: 0b10_0000_1110
+        resetMask: 0b11_1111_1111
         fields:
           Clock_Divider_Ratio: 
             description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2, default div is 16"
@@ -128,7 +134,8 @@ _add:
         description: "For Clock 16 (FB)"
         addressOffset: 0x024
         size: 32
-        resetValue: 0x0
+        resetValue: 0b00
+        resetMask: 0b11
         fields:
           Clock_Source_Selection: 
             description: "Select the clock source"
@@ -139,7 +146,8 @@ _add:
         description: "For Clock 30 (PDM LEFT/RIGHT clk, I2S Master clk)"
         addressOffset: 0x028
         size: 32
-        resetValue: 0b0010_0001_1110
+        resetValue: 0b10_0000_1110
+        resetMask: 0b11_1111_1111
         fields:
           Clock_Divider_Ratio: 
             description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2, default div is 32"
@@ -155,7 +163,8 @@ _add:
         description: "For Clock 19 (ADC)"
         addressOffset: 0x02C
         size: 32
-        resetValue: 0b0010_0000_1110
+        resetValue: 0b10_0000_1110
+        resetMask: 0b11_1111_1111
         fields:
           Clock_Divider_Ratio: 
             description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2, default div is 16"
@@ -171,7 +180,6 @@ _add:
         description: "For Clock 19 (ADC)"
         addressOffset: 0x030
         size: 32
-        resetValue: 0x0
         access: read-only
         fields:
           Clock_Source_Selection: 
@@ -182,7 +190,8 @@ _add:
         description: "For Clock 21 (FB - additional clk)"
         addressOffset: 0x034
         size: 32
-        resetValue: 0b0010_0000_1110
+        resetValue: 0b10_0000_1110
+        resetMask: 0b11_1111_1111
         fields:
           Clock_Divider_Ratio: 
             description: "High Speed Clock Divider Ratio. Ratio equals value in register + 2, default div is 16"
@@ -198,7 +207,8 @@ _add:
         description: "For Clock 21 (FB - additional clk)"
         addressOffset: 0x038
         size: 32
-        resetValue: 0x0
+        resetValue: 0b00
+        resetMask: 0b11
         fields:
           Clock_Source_Selection: 
             description: "Select the clock source"
@@ -209,7 +219,8 @@ _add:
         description: "Gating control for Clock 1"
         addressOffset:  0x040 
         size: 32
-        resetValue: 0b0010_1001_0001
+        resetValue: 0b10_1001_0001
+        resetMask: 0b11_1111_1111
         fields:
           Path_0_Gating_Control:
             description: "To A0" 
@@ -260,7 +271,8 @@ _add:
         description: "Gating control for Clock 2"
         addressOffset:  0x044 
         size: 32
-        resetValue: 0b0101
+        resetValue: 0b101
+        resetMask: 0b111
         fields:
           Path_0_Gating_Control:
             description: "To A1 (including CFGSM)" 
@@ -281,7 +293,8 @@ _add:
         description: "Gating control for FFE X4 clock"
         addressOffset:  0x048 
         size: 32
-        resetValue: 0x0
+        resetValue: 0b0
+        resetMask: 0b1
         fields:
           Path_0_Gating_Control:
             description: "To FFE X4 clk" 
@@ -292,7 +305,8 @@ _add:
         description: "Gating control for FFE X1  clock"
         addressOffset:  0x04C 
         size: 32
-        resetValue: 0x0
+        resetValue: 0b000
+        resetMask: 0b111
         fields:
           Path_0_Gating_Control:
             description: "To FFE X1 clk" 
@@ -313,7 +327,8 @@ _add:
         description: "Gating control for Clock 10"
         addressOffset:  0x050 
         size: 32
-        resetValue: 0b0100_0011
+        resetValue: 0b100_0011
+        resetMask: 0b111_1111
         fields:
           Path_0_Gating_Control:
             description: "To M4 Bus Matrix and Trace block" 
@@ -354,7 +369,8 @@ _add:
         description: "Gating control for clock 11"
         addressOffset:  0x054 
         size: 32
-        resetValue: 0x0
+        resetValue: 0b0
+        resetMask: 0b1
         fields:
           Path_0_Gating_Control:
             description: "To M4 peripherals - AHB/APB bridge, UART, WDT and TIMER" 
@@ -370,7 +386,8 @@ _add:
         description: "Gating control for SWD CS clock U"
         addressOffset:  0x05C 
         size: 32
-        resetValue: 0x0
+        resetValue: 0b0
+        resetMask: 0b1
         fields:
           Path_0_Gating_Control:
             description: "To SWD Clk from PIN" 
@@ -386,7 +403,8 @@ _add:
         description: "Gating control for FB clock 16"
         addressOffset:  0x064 
         size: 32
-        resetValue: 0x0
+        resetValue: 0b0
+        resetMask: 0b1
         fields:
           Path_0_Gating_Control:
             description: "To SWD Clk from PIN" 
@@ -402,7 +420,8 @@ _add:
         description: "Gating control for ADC clock 19"
         addressOffset:  0x06C 
         size: 32
-        resetValue: 0x0
+        resetValue: 0b0
+        resetMask: 0b1
         fields:
           Path_0_Gating_Control:
             description: "To ADC" 
@@ -413,7 +432,8 @@ _add:
         description: "Gating control for FB additional clock 21"
         addressOffset:  0x070 
         size: 32
-        resetValue: 0x0
+        resetValue: 0b0
+        resetMask: 0b1
         fields:
           Path_0_Gating_Control:
             description: "To FB (additional CLK)" 
@@ -425,7 +445,8 @@ _add:
         addressOffset: 0x080
         size: 32
         access: read-write
-        resetValue: 0x0000_0000
+        resetValue: 0b000_0000
+        resetMask: 0b111_1111
         fields:
           PF_FIFO_0_SW_RESET: 
             description: "1'b1 : Enable the Software Reset. FW need to disable it manually."
@@ -455,7 +476,8 @@ _add:
         description: "Once Program the SW Reset Bit to 1, the corresponding reset will be asserted immediately. Once Program the SW Reset Bit to 0, the corresponding reset will be de-asserted synchronous even the corresponding clock is not running. (Turn off by Clock gating cell)"
         addressOffset:  0x084 
         size: 32
-        resetValue: 0x0
+        resetValue: 0b00
+        resetMask: 0b11
         fields:
           FFE_0_X1_SW_Reset: 
             description: "1'b1 : Enable the Software Reset. FW need to disable it manually. (R01_P3_FFE as well)"
@@ -472,7 +494,8 @@ _add:
         addressOffset: 0x088
         size: 32
         access: read-write
-        resetValue: 0x0
+        resetValue: 0b00_0000
+        resetMask: 0b11_1111
         fields:
           FB_C02_Domain_SW_Reset:
             description: "1'b1 : Enable the Software Reset. FW need to disable it manually."
@@ -495,7 +518,8 @@ _add:
         addressOffset: 0x08C
         size: 32
         access: read-write
-        resetValue: 0x0
+        resetValue: 0b000
+        resetMask: 0b111
         fields:
           SPT_SW_RESET:
             description: "1'b1 : Enable the Software Reset. FW need to disable it manually. -> This is used to Reset the SPT"
@@ -510,7 +534,8 @@ _add:
         addressOffset: 0x090
         size: 32
         access: read-write
-        resetValue: 0x0
+        resetValue: 0x00
+        resetMask: 0xFF
         fields:
           AD0_SW_RESET:
             description: "1'b1 : Enable the Software Reset. FW need to disable it manually. ==> For DMA Power Domain."
@@ -550,7 +575,8 @@ _add:
         addressOffset: 0x094
         size: 32
         access: read-write
-        resetValue: 0x0
+        resetValue: 0b00
+        resetMask: 0b11
         fields:
           AHBWB_SW_RESET:
             description: "1'b1 : Enable the Software Reset. FW need to disable it manually. ==> For R40"
@@ -565,7 +591,8 @@ _add:
         addressOffset: 0x100
         size: 32
         access: read-write
-        resetValue: 0b0010_0011_1110
+        resetValue: 0b10_0011_1110
+        resetMask: 0b11_1111_1111
         fields:
           Clock_Divider_Ratio:
             description: "High Speed Clock Divider Ratio. Ratio is reg value + 2. default div is 64"
@@ -580,7 +607,8 @@ _add:
         addressOffset: 0x104
         size: 32
         access: read-write
-        resetValue: 0x0
+        resetValue: 0b0000_0000
+        resetMask: 0b1111_1111
         fields:
           SPICLK_ALWAYS_ON:
             description: "Controls wether the SPI clock is always on or not"
@@ -589,13 +617,14 @@ _add:
           General:
             description: "General purpose register"
             bitOffset: 1
-            bitWidth: 8
+            bitWidth: 7
       CRU_DEBUG:
         description: "CRU Debug registers" 
         addressOffset: 0x108
         size: 32
         access: read-write
-        resetValue: 0x0
+        resetValue: 0b0000
+        resetMask: 0b1111
         fields:
           CRU_DEBUG_Select:
             description: "Select the clock to be monitored"
@@ -607,7 +636,8 @@ If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0
         addressOffset: 0x110
         size: 32
         access: read-write
-        resetValue: 0b0001_0001
+        resetValue: 0b1_0001
+        resetMask: 0b1_1111
         fields:
           C01_CLK_DIV:
             description: "The input clock frequency will be divided and generate the corresponding clock output. div is reg value + 1"
@@ -622,7 +652,8 @@ If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0
         addressOffset: 0x114
         size: 32
         access: read-write
-        resetValue: 0b0001_0001
+        resetValue: 0b1_0001
+        resetMask: 0b1_1111
         fields:
           C01_CLK_DIV:
             description: "The input clock frequency will be divided and generate the corresponding clock output. div is reg value + 1"
@@ -637,7 +668,8 @@ If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0
         addressOffset: 0x118
         size: 32
         access: read-write
-        resetValue: 0b0001_0011
+        resetValue: 0b1_0011
+        resetMask: 0b1_1111
         fields:
           C01_CLK_DIV:
             description: "The input clock frequency will be divided and generate the corresponding clock output. div is reg value + 1"
@@ -651,7 +683,8 @@ If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0
         description: "Gating control for clock 09"
         addressOffset:  0x11C 
         size: 32
-        resetValue: 0x0
+        resetValue: 0b000
+        resetMask: 0b111
         fields:
           Path_0_Gating_Control:
             description: "To voice APB interface" 
@@ -672,7 +705,8 @@ If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0
         description: "Gating control for clocks 30-31"
         addressOffset:  0x120 
         size: 32
-        resetValue: 0x0
+        resetValue: 0b0000
+        resetMask: 0b1111
         fields:
           C30_Path_0_Gating_Control:
             description: "To PDM LEFT CLK" 
@@ -698,7 +732,8 @@ If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0
         description: "Control for divider gates in different clocks"
         addressOffset:  0x124 
         size: 32
-        resetValue: 0b0011_1111_1111
+        resetValue: 0b11_1111_1111
+        resetMask: 0b11_1111_1111
         fields:
           CLK_DIVIDER_A_CG:
             description: "To C10,C01,C09 (SYNC Up on A0, AHB Interface of Batching Memory, AUDIO DMA, M4 SRAMs,M4 Bus Matrix , M4 Trace block, Debug controller, SDMA,I2S module Inside A1, AHB2APB Bridge /CFG DMA Bridge inside A1 , FFE, Packet FIFO,SDMA,A0, Voice APB interface, PIF, FB). Note: Firmware Should NOT program this bit to 0." 
@@ -749,7 +784,8 @@ If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0
         description: "For Clock 2 (FB, A1 (Including CFGSM))" 
         addressOffset: 0x130
         size: 32
-        resetValue: 0x0
+        resetValue: 0b0
+        resetMask: 0b1
         fields:
           Clock_Source_Selection:
             description: "Choose between High Speed Clock or 32Khz oscillator"
@@ -760,7 +796,8 @@ If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0
         description: "For Clock 8 X4 (FFE X4 clk)" 
         addressOffset: 0x134
         size: 32
-        resetValue: 0x0
+        resetValue: 0b0
+        resetMask: 0b1
         fields:
           Clock_Source_Selection:
             description: "Choose between High Speed Clock or 32Khz oscillator"
@@ -771,7 +808,8 @@ If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0
         description: "For Clock 11 (To M4 peripherals - AHB/APB bridge, UART, WDT and TIMER)" 
         addressOffset: 0x138
         size: 32
-        resetValue: 0x0
+        resetValue: 0b0
+        resetMask: 0b1
         fields:
           Clock_Source_Selection:
             description: "Choose between High Speed Clock or 32Khz oscillator"
@@ -782,7 +820,8 @@ If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0
         description: "For Clock 19 (ADC)" 
         addressOffset: 0x13C
         size: 32
-        resetValue: 0x0
+        resetValue: 0b0
+        resetMask: 0b1
         fields:
           Clock_Source_Selection:
             description: "Choose between High Speed Clock or 32Khz oscillator"
@@ -793,7 +832,8 @@ If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0
         description: "For CLK 23 (PMU clk gating control)" 
         addressOffset: 0x140
         size: 32
-        resetValue: 0x0
+        resetValue: 0b0
+        resetMask: 0b1
         fields:
           Clock_Source_Selection:
             description: "Choose between High Speed Clock or 32Khz oscillator"
@@ -804,16 +844,14 @@ If Bit 4 is 0, any change on Bit 3:0 will not take effect. And bit 4 and bit 3:0
         description: "To C30(PDM LEFT/RIGHT Clk, I2S_MASTER)" 
         addressOffset: 0x144
         size: 32
-        resetValue: 0x0
+        resetValue: 0b0
+        resetMask: 0b1
         fields:
           Clock_Source_Selection:
             description: "Choose between High Speed Clock or 32Khz oscillator"
             bitOffset: 0
             bitWidth: 1
             access: read-write
-
-
-
 
 CRU:
   CLK_CTRL_A_0:

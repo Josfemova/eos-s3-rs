@@ -1,17 +1,18 @@
 _add:
-  TIMER: 
+  TIMER:
     description: ""
     baseAddress: 0x4001_3000
     addressBlocks:
-      - offset: 0 
+      - offset: 0
         size: 0x1000
         usage: registers
     registers:
       CTRL:
-        description: "Timer control register" 
+        description: "Timer control register"
         addressOffset: 0x000
         size: 32
-        resetValue: 0x0
+        resetValue: 0b0000
+        resetMask:  0b1111
         fields:
           ENABLE:
             description: "Enable"
@@ -34,18 +35,19 @@ _add:
             bitWidth: 1
             access: read-write
       VALUE:
-        description: "Current Value" 
+        description: "Current Value"
         addressOffset: 0x004
         size: 32
         access: read-write
-        resetValue: 0x0
+        resetValue: 0x0000_0000
+        resetMask: 0xFFFF_FFFF
         fields:
           VALUE:
             description: "Current Value"
             bitOffset: 0
             bitWidth: 32
       RELOAD:
-        description: "Reload value. A write to this register sets the current value" 
+        description: "Reload value. A write to this register sets the current value"
         addressOffset: 0x008
         size: 32
         access: read-write
@@ -56,148 +58,134 @@ _add:
             bitOffset: 0
             bitWidth: 32
       INTSTATUS_INTCLEAR:
-        description: "Timer interrupt. Write one to clear" 
+        description: "Timer interrupt. Write one to clear"
         addressOffset: 0x00C
         size: 32
         access: read-write
-        resetValue: 0x0
+        resetValue: 0b0
+        resetMask: 0b1
         fields:
           INTSTATUS_INTCLEAR:
             description: "Timer interrupt, Write one to clear"
             bitOffset: 0
-            bitWidth: 1 
+            bitWidth: 1
       PID4:
-        description: "Peripheral ID register 4: [7:4] Block count. [3:0] jep106_c_code." 
+        description: "Peripheral ID register 4: [7:4] Block count. [3:0] jep106_c_code."
         addressOffset: 0xFD0
         size: 32
         access: read-only
-        resetValue: 0x0
         fields:
           PID:
             description: "Peripheral ID"
             bitOffset: 0
             bitWidth: 8
       PID5:
-        description: "Peripheral ID register 5" 
+        description: "Peripheral ID register 5"
         addressOffset: 0xFD4
         size: 32
         access: read-only
-        resetValue: 0x0
         fields:
           PID:
             description: "Peripheral ID"
             bitOffset: 0
             bitWidth: 8
       PID6:
-        description: "Peripheral ID register 6" 
+        description: "Peripheral ID register 6"
         addressOffset: 0xFD8
         size: 32
         access: read-only
-        resetValue: 0x0
         fields:
           PID:
             description: "Peripheral ID"
             bitOffset: 0
             bitWidth: 8
       PID7:
-        description: "Peripheral ID register 7" 
+        description: "Peripheral ID register 7"
         addressOffset: 0xFDC
         size: 32
         access: read-only
-        resetValue: 0x0
         fields:
           PID:
             description: "Peripheral ID"
             bitOffset: 0
             bitWidth: 8
       PID0:
-        description: "Peripheral ID Register 0: [7:0] Part Number[7:0]." 
+        description: "Peripheral ID Register 0: [7:0] Part Number[7:0]."
         addressOffset: 0xFE0
         size: 32
         access: read-only
-        resetValue: 0x0
         fields:
           PID:
             description: "Peripheral ID"
             bitOffset: 0
             bitWidth: 8
       PID1:
-        description: "Peripheral ID register 1: [7:0] jep106_id_3_0. [3:0] Par number[11:8]." 
+        description: "Peripheral ID register 1: [7:0] jep106_id_3_0. [3:0] Par number[11:8]."
         addressOffset: 0xFE4
         size: 32
         access: read-only
-        resetValue: 0x0
         fields:
           PID:
             description: "Peripheral ID"
             bitOffset: 0
             bitWidth: 8
       PID2:
-        description: "Peripheral ID register 2: [7:4] Revision. [3] jedec_used. [2:0] jep106_id_6_4." 
+        description: "Peripheral ID register 2: [7:4] Revision. [3] jedec_used. [2:0] jep106_id_6_4."
         addressOffset: 0xFE8
         size: 32
         access: read-only
-        resetValue: 0x0
         fields:
           PID:
             description: "Peripheral ID"
             bitOffset: 0
             bitWidth: 8
       PID3:
-        description: "Peripheral ID register 3: [7:4] ECO revision number. [3:0] Customer modification number." 
+        description: "Peripheral ID register 3: [7:4] ECO revision number. [3:0] Customer modification number."
         addressOffset: 0xFEC
         size: 32
         access: read-only
-        resetValue: 0x0
         fields:
           PID:
             description: "Peripheral ID"
             bitOffset: 0
             bitWidth: 8
       CID0:
-        description: "Component ID register 0" 
+        description: "Component ID register 0"
         addressOffset: 0xFF0
         size: 32
         access: read-only
-        resetValue: 0x0
         fields:
           PID:
             description: "Component ID"
             bitOffset: 0
             bitWidth: 8
       CID1:
-        description: "Component ID register 1" 
+        description: "Component ID register 1"
         addressOffset: 0xFF4
         size: 32
         access: read-only
-        resetValue: 0x0
         fields:
           PID:
             description: "Component ID"
             bitOffset: 0
             bitWidth: 8
       CID2:
-        description: "Component ID register 2" 
+        description: "Component ID register 2"
         addressOffset: 0xFF8
         size: 32
         access: read-only
-        resetValue: 0x0
         fields:
           PID:
             description: "Component ID"
             bitOffset: 0
             bitWidth: 8
       CID3:
-        description: "Component ID register 3" 
+        description: "Component ID register 3"
         addressOffset: 0xFFC
         size: 32
         access: read-only
-        resetValue: 0x0
         fields:
           PID:
             description: "Component ID"
             bitOffset: 0
             bitWidth: 8
-
-
-
