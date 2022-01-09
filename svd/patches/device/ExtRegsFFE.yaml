@@ -1,8 +1,832 @@
 _add: 
-  ExtM4Regs:
-    description: Additional core registers 
-    baseAddress: 0x4000_0000
+  ExtRegsFFE:
+    description: Flexible Fusion Engine registers 
+    baseAddress: 0x4004_A000
     addressBlocks: 
       - offset: 0
-        size: 12 
+        size: 0x170 
         usage: registers
+    registers:
+      ADDR:
+        description: "Wishbone master address selection" 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          Addr:
+            description: "Slave address register via Wishbone master"
+            bitOffset: 0
+            bitWidth: 3
+          slave_sel:
+            description: "MSB to select which which slave accessed by WB master"
+            bitOffset: 6
+            bitWidth: 2
+            access: read-write
+      WDATA:
+        description: "I2C slave data register via WishBone master" 
+        addressOffset: 0x004
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          WDATA:
+            description: "I2C slave data via WB"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      CSR:
+        description: "Control and status register" 
+        addressOffset: 0x008
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          wb_ms_start:
+            description: "Wishbone master start transactions. This bit is self clearing."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          wb_ms_wen:
+            description: "Wishbone master write enable."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          mux_wb_sm:
+            description: "Mux select between SM and WB masters."
+            bitOffset: 2
+            bitWidth: 1
+            access: write-only
+          BUSY:
+            description: "Indicates if the Wishbone is busy"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-only
+          OVFL:
+            description: "Indicates if there's a FFE push operation overflow"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-only
+          i2c0_mux_sel:
+            description: "I2C_0 wishbone control mux select"
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-write
+          i2c1_mux_sel:
+            description: "I2C_1 wishbone control mux select"
+            bitOffset: 6
+            bitWidth: 1
+            access: read-write
+          spi0_mux_sel:
+            description: "spi_0 wishbone control mux select"
+            bitOffset: 7
+            bitWidth: 1
+            access: read-write
+      RDATA:
+        description: "Read data from I2C to Wishbone master is registered" 
+        addressOffset: 0x00C
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          RDATA:
+            description: "Read data from I2C to Wishbone master is registered"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      SRAM_TEST_REG1:
+        description: "SRAM test control register 1" 
+        addressOffset: 0x014
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SM1_TEST1:
+            description: "SM1_TEST1 control for FFE SRAM"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          SM1_RME:
+            description: "SM1_RME control for FFE SRAM"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          SM1_RM:
+            description: "SM1_RM control for FFE SRAM"
+            bitOffset: 2
+            bitWidth: 4
+            access: read-write
+          SM0_TEST1:
+            description: "SM0_TEST1 control for FFE SRAM"
+            bitOffset: 6
+            bitWidth: 1
+            access: read-write
+          SM0_RME:
+            description: "SM0_RME control for FFE SRAM"
+            bitOffset:  7 
+            bitWidth: 1
+            access: read-write
+          SM0_RM:
+            description: "SM0_RM control for FFE SRAM"
+            bitOffset: 8
+            bitWidth: 4
+            access: read-write
+          CM8k_TEST1:
+            description: "CM8k_TEST1 control for FFE SRAM"
+            bitOffset: 12
+            bitWidth: 1
+            access: read-write
+          CM8k_RME:
+            description: "CM8k_RME control for FFE SRAM"
+            bitOffset: 13
+            bitWidth: 1
+            access: read-write
+          CM8k_RM:
+            description: "CM8k_RM control for FFE SRAM"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          CM2k_TEST1:
+            description: "CM2k_TEST1 control for FFE SRAM"
+            bitOffset: 18
+            bitWidth: 1
+            access: read-write
+          CM2k_RME:
+            description: "CM2k_RME control for FFE SRAM"
+            bitOffset: 19
+            bitWidth: 1
+            access: read-write
+          CM2k_RM:
+            description: "CM2k_RM control for FFE SRAM"
+            bitOffset: 20
+            bitWidth: 4
+            access: read-write
+          DM0_TEST1:
+            description: "DM0_TEST1 control for FFE SRAM"
+            bitOffset: 24
+            bitWidth: 1
+            access: read-write
+          DM0_RME:
+            description: "DM0_RME control for FFE SRAM"
+            bitOffset:  25 
+            bitWidth: 1
+            access: read-write
+          DM0_RM:
+            description: "DM0_RM control for FFE SRAM"
+            bitOffset: 26
+            bitWidth: 4
+            access: read-write
+          DM1_TEST1:
+            description: "DM1_TEST1 control for FFE SRAM"
+            bitOffset: 30
+            bitWidth: 1
+            access: read-write
+          DM1_RME:
+            description: "DM1_RME control for FFE SRAM"
+            bitOffset: 31
+            bitWidth: 1
+            access: read-write
+
+      SRAM_TEST_REG2:
+        description: "SRAM test control register 2" 
+        addressOffset: 0x018
+        size: 32
+        resetValue: 0x0000
+        resetMask:  0xFFFF
+        fields:
+          DM1_RM:
+            description: "DM0_RM control for FFE SRAM"
+            bitOffset: 0
+            bitWidth: 4
+            access: read-write
+          DM2_TEST1:
+            description: "DM2_TEST1 control for FFE SRAM"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          DM2_RME:
+            description: "DM2_RME control for FFE SRAM"
+            bitOffset:  5 
+            bitWidth: 1
+            access: read-write
+          DM2_RM:
+            description: "DM0_RM control for FFE SRAM"
+            bitOffset: 6
+            bitWidth: 4
+            access: read-write
+          DM3_TEST1:
+            description: "DM3_TEST1 control for FFE SRAM"
+            bitOffset: 10
+            bitWidth: 1
+            access: read-write
+          DM3_RME:
+            description: "DM3_RME control for FFE SRAM"
+            bitOffset:  11
+            bitWidth: 1
+            access: read-write
+          DM3_RM:
+            description: "DM3_RM control for FFE SRAM"
+            bitOffset: 12
+            bitWidth: 4
+            access: read-write
+      FFE_CSR:
+        description: "Flexible Fusion Engine status and control register" 
+        addressOffset: 0x020
+        size: 32
+        resetValue: 0b0000
+        resetMask:  0b1111
+        fields:
+          i2c2_sel:
+            description: "Select wich i2c is taken as i2c"
+            bitOffset: 0
+            bitWidth:  1
+            access: read-write
+          i2c0_dyn_pullup_en:
+            description: "i2c0 dynamic pull-up enable"
+            bitOffset: 1
+            bitWidth:  1
+            access: read-write
+          i2c1_dyn_pullup_en:
+            description: "i2c1 dynamic pull-up enable"
+            bitOffset: 2
+            bitWidth:  1
+            access: read-write
+          i2c2_dyn_pullup_en:
+            description: "i2c2 dynamic pull-up enable"
+            bitOffset: 3
+            bitWidth:  1
+            access: read-write
+      FFE_DBG_COMBINED:
+        description: "Combined Flexible Fusion Engine debug signals" 
+        addressOffset: 0x038
+        size: 32
+        fields:
+          sm0_SM_debug:
+            description: "Sensor memory 0 debug signals"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+          sm1_SM_debug:
+            description: "Sensor memory 1 debug signals"
+            bitOffset: 8
+            bitWidth: 8
+            access: read-only
+          ffe0_debug:
+            description: "ffe0 debug signals"
+            bitOffset: 16
+            bitWidth: 8
+            access: read-only
+      CMD:
+        description: "Commands for the Flexible Fusion Engine" 
+        addressOffset: 0x100
+        size: 32
+        resetValue: 0b0000
+        resetMask:  0b1111
+        fields:
+          RUN_FFE0_ONCE:
+            description: "When a '1' is written to this location, causes the FFE to execute one complete run of its algorithm; reads as 0" 
+            bitOffset: 0
+            bitWidth: 1
+            access: write-only
+          RUN_FFE1:
+            description: "When a '1' is written to this location, causes the FFE1 to start; reads as 0"
+            bitOffset: 1
+            bitWidth: 1
+            access: write-only
+          #excel sheet is confusing here
+          RUN_SM0_ONCE:
+            description: "When a '1' is written to this location, causes the SM0 to run once; reads as 0"
+            bitOffset: 2
+            bitWidth: 1
+            access: write-only
+          RUN_SM1_ONCE:
+            description: "When a '1' is written to this location, causes the SM1 to run once; reads as 0"
+            bitOffset: 3
+            bitWidth: 1
+            access: write-only
+      INTERRUPT:
+        description: "Varied interrupt configurations" 
+        addressOffset: 0x108
+        size: 32
+        resetValue: 0b000_0000_0000_0000_0000_0000
+        resetMask:  0b111_1111_1111_1111_1111_0011
+        fields:
+          SM_MULT_WR_INTR:
+            description: "This bit is set when an FFE tries to write to more that one FIFO simultaneously.  The FIFO PUSH value must be one hot, with only one pushd asserted."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          PFE0_OVERRUN:
+            description: "This bit is set when the FFE does not complete the algorithm by the time the next sample period begins. This bit can only be cleared by issuing a device reset (software reset, or global reset via the Reset pin)."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          FFE0_SM1_OBERRUN:
+            description: "This bit is set when the SM does not complete the algorithm by the time the next sample period begins. This bit can only be cleared by issuing a device reset (software reset, or global reset via the Reset pin)."
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          FFE0_SM0_OBERRUN:
+            description: "This bit is set when the SM does not complete the algorithm by the time the next sample period begins. This bit can only be cleared by issuing a device reset (software reset, or global reset via the Reset pin)."
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+          I2C_MS_1_ERROR:
+            description: "This bit is set when the I2C Master receives a NACK when transmitting a device address. The I2C Master is used by the Sensor Manager to retrieve sensor data."
+            bitOffset: 6
+            bitWidth: 1
+            access: read-write
+          I2C_MS_0_ERROR:
+            description: "This bit is set when the I2C Master receives a NACK when transmitting a device address. The I2C Master is used by the Sensor Manager to retrieve sensor data."
+            bitOffset: 7
+            bitWidth: 1
+            access: read-write
+          CM_8k_LP_INTR:
+            description: "This bit is set when there is an access to the memory while it is in low power (deep sleep or shut down)"
+            bitOffset: 8
+            bitWidth: 1
+            access: read-write
+          DM0_LP_INTR:
+            description: "This bit is set when there is an access to the memory while it is in low power (deep sleep or shut down)"
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          DM1_LP_INTR:
+            description: "This bit is set when there is an access to the memory while it is in low power (deep sleep or shut down)"
+            bitOffset: 10
+            bitWidth: 1
+            access: read-write
+          SM0_LP_INTR:
+            description: "This bit is set when there is an access to the memory while it is in low power (deep sleep or shut down)"
+            bitOffset: 11
+            bitWidth: 1
+            access: read-write
+          SM1_LP_INTR:
+            description: "This bit is set when there is an access to the memory while it is in low power (deep sleep or shut down)"
+            bitOffset: 12
+            bitWidth: 1
+            access: read-write
+          FFE0_BP_MATCH_INTR:
+            description: "This bit is set when there is a break point match in FFE0"
+            bitOffset: 13
+            bitWidth: 1
+            access: read-write
+          FFE1_OVERRUN:
+            description: "This bit is set when the FFE does not complete the algorithm by the time the next sample period begins. "
+            bitOffset: 14
+            bitWidth: 1
+            access: read-write
+          PKFB_OVF_INTR:
+            description: "This bit is set when the FFE pushes to the PKFB causing an overflow"
+            bitOffset: 15
+            bitWidth: 1
+            access: read-write
+          SM0_BP_MATCH_INTR:
+            description: "This bit is set when there is a break point match in SM0"
+            bitOffset: 16
+            bitWidth: 1
+            access: read-write
+          SM1_BP_MATCH_INTR:
+            description: "This bit is set when there is a break point match in SM1"
+            bitOffset: 17
+            bitWidth: 1
+            access: read-write
+          SPI_MS_INTR:
+            description: "This bit is set when there is an interrupt request from SPI_MS for sensor"
+            bitOffset: 18
+            bitWidth: 1
+            access: read-write
+          CM_2k_LP_INTR:
+            description: "This bit is set when there is an access to the memory while it is in low power (deep sleep or shut down)"
+            bitOffset: 19
+            bitWidth: 1
+            access: read-write
+          DM2_LP_INTR:
+            description: "This bit is set when there is an access to the memory while it is in low power (deep sleep or shut down)"
+            bitOffset: 20
+            bitWidth: 1
+            access: read-write
+          DM3_LP_INTR:
+            description: "This bit is set when there is an access to the memory while it is in low power (deep sleep or shut down)"
+            bitOffset: 21
+            bitWidth: 1
+            access: read-write
+          ahbm_bus_error_INTR:
+            description: "This bit is set when there is a bus error on the AHB bus (HRESP=1)."
+            bitOffset: 22
+            bitWidth: 1
+            access: read-write
+      INTERRUPT_EN:
+        description: "Control the masking for different Flexible Fusion Engine interrupts" 
+        addressOffset: 0x10C
+        size: 32
+        resetValue: 0b000_0000_0000_0000_0000_0000
+        resetMask:  0b111_1111_1111_1111_1111_0011
+        fields:
+          SM_MULT_WR_INTR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          FFE0_OVERRUN_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          FFE0_SM1_OVERRUN_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          FFE0_SM0_OVERRUN_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+          I2C_MS_1_ERROR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 6
+            bitWidth: 1
+            access: read-write
+          I2C_MS_0_ERROR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 7
+            bitWidth: 1
+            access: read-write
+          CM_8k_LP_INTR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 8
+            bitWidth: 1
+            access: read-write
+          DM0_LP_INTR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          DM1_LP_INTR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 10
+            bitWidth: 1
+            access: read-write
+          SM0_LP_INTR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 11
+            bitWidth: 1
+            access: read-write
+          SM1_LP_INTR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 12
+            bitWidth: 1
+            access: read-write
+          FFE0_BP_MATCH_INTR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 13
+            bitWidth: 1
+            access: read-write
+          FFE1_OVERRUN_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 14
+            bitWidth: 1
+            access: read-write
+          PKFB_OVF_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 15
+            bitWidth: 1
+            access: read-write
+          SM0_BP_MATCH_INTR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 16
+            bitWidth: 1
+            access: read-write
+          SM1_BP_MATCH_INTR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 17
+            bitWidth: 1
+            access: read-write
+          SPI_MS_INTR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 18
+            bitWidth: 1
+            access: read-write
+          CM_2k_LP_INTR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 19
+            bitWidth: 1
+            access: read-write
+          DM2_LP_INTR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 20
+            bitWidth: 1
+            access: read-write
+          DM3_LP_INTR_EN:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 21
+            bitWidth: 1
+            access: read-write
+          ahbm_bus_error_intr_en:
+            description: "Set to enable the interrupt, leave cleared to mask"
+            bitOffset: 22
+            bitWidth: 1
+            access: read-write
+      STATUS:
+        description: "FFE status register" 
+        addressOffset: 0x110
+        size: 32
+        fields:
+          SM0_BUSY:
+            description: "This bit is set whenever the Sensor Manager is busy."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+          SM1_BUSY:
+            description: "This bit is set whenever the Sensor Manager is busy."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-only
+          FFE0_BUSY:
+            description: "This bit is set whenever the FFE0 is busy."
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          FFE1_BUSY:
+            description: "This bit is set whenever the FFE1 is busy."
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          FFE0_BG_FLAG:
+            description: "This is the ffe0 background thread status"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          FFE0_FG_FLAG:
+            description: "This is the ffe0 background thread status"
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+      MAILBOX_TO_FFE0:
+        description: "Mailbox register to the FFE. This register can be set by system software to send a message or configuration information to the FFE as it runs its algorithm, thus affecting the algorithm while it is running. A special instruction may be used in the algorithm to read this mailbox register." 
+        addressOffset: 0x114
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          MAILBOX_TO_FFE0:
+            description: "Mailbox register to the FFE. This register can be set by system software to send a message or configuration information to the FFE as it runs its algorithm, thus affecting the algorithm while it is running. A special instruction may be used in the algorithm to read this mailbox register."
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      SM_RUNTIME_ADDR:
+        description: "SM0/SM1 run time address" 
+        addressOffset: 0x120
+        size: 32
+        resetValue: 0b00_0000_0000
+        resetMask:  0b11_1111_1111
+        fields:
+          SM_RUNTIME_ADDR:
+            description: "SM0/SM1 run time address"
+            bitOffset: 0
+            bitWidth: 10
+            access: read-write
+      SM0_RUNTIME_ADDR_CTRL:
+        description: "Used to toggle signal used to signal when a new value has been written." 
+        addressOffset: 0x124
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          SM0_RUNTIME_ADDR_CTRL:
+            description: "Write a '1' to Toggle signal used to signal when a new value has been written"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      SM1_RUNTIME_ADDR_CTRL:
+        description: "Used to toggle signal used to signal when a new value has been written." 
+        addressOffset: 0x128
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          SM1_RUNTIME_ADDR_CTRL:
+            description: "Write a '1' to Toggle signal used to signal when a new value has been written"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      SM0_RUNTIME_ADDR_CUR:
+        description: "SM current program counter" 
+        addressOffset: 0x12C
+        size: 32
+        resetValue: 0b00_0000_0000
+        resetMask:  0b11_1111_1111
+        fields:
+          SM0_RUNTIME_ADDR_CUR:
+            description: "SM current program counter"
+            bitOffset: 0
+            bitWidth: 10
+            access: read-write
+      SM1_RUNTIME_ADDR_CUR:
+        description: "SM current program counter" 
+        addressOffset: 0x130
+        size: 32
+        resetValue: 0b00_0000_0000
+        resetMask:  0b11_1111_1111
+        fields:
+          SM1_RUNTIME_ADDR_CUR:
+            description: "SM current program counter"
+            bitOffset: 0
+            bitWidth: 10
+            access: read-write
+      SM0_DEBUG_SEL:
+        description: "SM Debug selection" 
+        addressOffset: 0x140
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          SM0_DEBUG_SEL:
+            description: "SM Debug selection"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      SM1_DEBUG_SEL:
+        description: "SM Debug selection" 
+        addressOffset: 0x144
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          SM1_DEBUG_SEL:
+            description: "SM Debug selection"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      FFE_DEBUG_SEL:
+        description: "Debug Selection" 
+        addressOffset: 0x148
+        size: 32
+        resetValue: 0x00_0000
+        resetMask:  0xFF_FFFF
+        fields:
+          FFE_DEBUG_SEL_SM0:
+            description: "SM0 LS debug slection"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+          FFE_DEBUG_SEL_SM1:
+            description: "SM1 LS debug slection"
+            bitOffset: 8
+            bitWidth: 8
+            access: read-write
+          FFE_DEBUG_SEL_FFE0:
+            description: "FFE0 LS debug slection"
+            bitOffset: 16
+            bitWidth: 8
+            access: read-write
+          FFE_TOP_DEBUG_SEL:
+            description: "FFE_TOP_MS debug slection"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+      FFE0_BREAK_POINT_CFG:
+        description: "Break point control" 
+        addressOffset: 0x150
+        size: 32
+        resetValue: 0b000
+        resetMask:  0b111
+        fields:
+          FFE0_BP_EN:
+            description: "break point execution -- 0 : Disabled -- 1 : Enabled "
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          FFE0_FORCE_STOP:
+            description: "This causes the FFE to immediately halt execution."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          FFE0_BreakPt_Sw-Brk:
+            description: "Causes the signal to toggle when written with a '1' in this bit position."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+      FFE0_BREAK_POINT_CONT:
+        description: "Seems to be another breakpoint control register" 
+        addressOffset: 0x154
+        size: 32
+        resetValue: 0b000
+        resetMask:  0b111
+        fields:
+          FFE0_BP_CONT:
+            description: "This restarts FFE code execution following a pause due to reaching a 'break point'."
+            bitOffset: 0
+            bitWidth:  1
+            access: read-write
+          SM0_BP_CONT:
+            description: "This is a single, host controlled input toggle signal, Break Point Match Continue. Software uses this toggle signal to resume code execution from the Break Point condition."
+            bitOffset: 1
+            bitWidth:  1
+            access: read-write
+          SM1_BP_CONT:
+            description: "This is a single, host controlled input toggle signal, Break Point Match Continue. Software uses this toggle signal to resume code execution from the Break Point condition."
+            bitOffset: 2
+            bitWidth:  1
+            access: read-write
+      FFE0_BREAK_POINT_STAT:
+        description: "FFE break point status register" 
+        addressOffset: 0x158
+        size: 32
+        resetValue: 0b000
+        resetMask:  0b111
+        fields:
+          FFE0_BP_MATCH:
+            description: "This signals that a 'break point' has been reached and FFE execution is paused."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+          SM0_BP_MATCH:
+            description: "SM Break Point Match signal output to the host that notifies the host that the break point condition has been detected."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-only
+          SM1_BP_MATCH:
+            description: "SM Break Point Match signal output to the host that notifies the host that the break point condition has been detected."
+            bitOffset: 2
+            bitWidth: 1
+            access: read-only
+      FFE0_BP_XPC_0:
+        description: "These registers hold the xPC (program counter) address 'break points'." 
+        addressOffset: 0x160
+        size: 32
+        resetValue: 0b00_0000_0000_0000
+        resetMask:  0b11_1111_1111_1111
+        fields:
+          FFE0_BP_XPC_0:
+            description: "These registers hold the xPC (program counter) address 'break points'."
+            bitOffset: 0
+            bitWidth:  14
+            access: read-write
+      FFE0_BP_XPC_1:
+        description: "These registers hold the xPC (program counter) address 'break points'." 
+        addressOffset: 0x164
+        size: 32
+        resetValue: 0b00_0000_0000_0000
+        resetMask:  0b11_1111_1111_1111
+        fields:
+          FFE0_BP_XPC_1:
+            description: "These registers hold the xPC (program counter) address 'break points'."
+            bitOffset: 0
+            bitWidth:  14
+            access: read-write
+      FFE0_BP_XPC_2:
+        description: "These registers hold the xPC (program counter) address 'break points'." 
+        addressOffset: 0x168
+        size: 32
+        resetValue: 0b00_0000_0000_0000
+        resetMask:  0b11_1111_1111_1111
+        fields:
+          FFE0_BP_XPC_2:
+            description: "These registers hold the xPC (program counter) address 'break points'."
+            bitOffset: 0
+            bitWidth:  14
+            access: read-write
+      FFE0_BP_XPC_3:
+        description: "These registers hold the xPC (program counter) address 'break points'." 
+        addressOffset: 0x16C
+        size: 32
+        resetValue: 0b00_0000_0000_0000
+        resetMask:  0b11_1111_1111_1111
+        fields:
+          FFE0_BP_XPC_3:
+            description: "These registers hold the xPC (program counter) address 'break points'."
+            bitOffset: 0
+            bitWidth:  14
+            access: read-write
+
+ExtRegsFFE:
+  ADDR:
+    slave_sel: 
+      i2c_0: [0, "Select i2c_0 as the sensor that will be accessed by the Wishbone Master"] 
+      i2c_1: [1, "Select i2c_1 as the sensor that will be accessed by the Wishbone Master"] 
+      spi_0: [2, "Select spi_0 as the sensor that will be accessed by the Wishbone Master"] 
+  CSR:
+    wb_ms_wen:
+      read: [0, "read"]
+      write: [1, "write"]
+    mux_wb_sm:
+      sm_wishbone_master: [0,"Select SM WB Master." ]
+      wishbone_master: [1, "Select WB Master."]
+    "*_mux_sel":
+      sm1_as_controller: [0, "Let SM1 control the port."]
+      wb_master_as_controller: [1, "Let Wishbone Master control the port"]
+  FFE_CSR:
+    i2c2_sel:
+      i2c1: [0, "Select i2c1 as i2c2"]
+      i2c2: [1, "Select i2c2 as i2c2"]
+  INTERRUPT_EN:
+    "*":
+      mask: [0, "Mask the interrupt event"]
+      unmask: [1, "Unmask the interrupt event"]
+  FFE_DEBUG_SEL:
+    FFE_TOP_DEBUG_SEL:
+      sm0: [0, "Select sm0"]
+      sm1: [1, "Select sm1"]
+      ffe0: [2, "Select ffe0"]

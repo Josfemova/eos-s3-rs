@@ -452,6 +452,34 @@ impl core::fmt::Debug for AIP {
 }
 #[doc = "Analog IP block"]
 pub mod aip;
+#[doc = "PIF Register (FPGA Programming interface)"]
+pub struct CFG_CTL {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for CFG_CTL {}
+impl CFG_CTL {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const cfg_ctl::RegisterBlock = 0x4001_4000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const cfg_ctl::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for CFG_CTL {
+    type Target = cfg_ctl::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for CFG_CTL {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("CFG_CTL").finish()
+    }
+}
+#[doc = "PIF Register (FPGA Programming interface)"]
+pub mod cfg_ctl;
 #[doc = "Clock Reset Unit"]
 pub struct CRU {
     _marker: PhantomData<*const ()>,
@@ -480,6 +508,34 @@ impl core::fmt::Debug for CRU {
 }
 #[doc = "Clock Reset Unit"]
 pub mod cru;
+#[doc = "Flexible Fusion Engine registers"]
+pub struct EXTREGSFFE {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for EXTREGSFFE {}
+impl EXTREGSFFE {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const ext_regs_ffe::RegisterBlock = 0x4004_a000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const ext_regs_ffe::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for EXTREGSFFE {
+    type Target = ext_regs_ffe::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for EXTREGSFFE {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("EXTREGSFFE").finish()
+    }
+}
+#[doc = "Flexible Fusion Engine registers"]
+pub mod ext_regs_ffe;
 #[doc = "MISC registers"]
 pub struct MISC {
     _marker: PhantomData<*const ()>,
@@ -508,6 +564,34 @@ impl core::fmt::Debug for MISC {
 }
 #[doc = "MISC registers"]
 pub mod misc;
+#[doc = "Packet FFO Bank control"]
+pub struct PKFB {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for PKFB {}
+impl PKFB {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const pkfb::RegisterBlock = 0x4000_2000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const pkfb::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for PKFB {
+    type Target = pkfb::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for PKFB {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("PKFB").finish()
+    }
+}
+#[doc = "Packet FFO Bank control"]
+pub mod pkfb;
 #[doc = "Power Management Unit"]
 pub struct PMU {
     _marker: PhantomData<*const ()>,
@@ -605,10 +689,16 @@ pub struct Peripherals {
     pub ADC: ADC,
     #[doc = "AIP"]
     pub AIP: AIP,
+    #[doc = "CFG_CTL"]
+    pub CFG_CTL: CFG_CTL,
     #[doc = "CRU"]
     pub CRU: CRU,
+    #[doc = "EXTREGSFFE"]
+    pub EXTREGSFFE: EXTREGSFFE,
     #[doc = "MISC"]
     pub MISC: MISC,
+    #[doc = "PKFB"]
+    pub PKFB: PKFB,
     #[doc = "PMU"]
     pub PMU: PMU,
     #[doc = "TIMER"]
@@ -645,10 +735,19 @@ impl Peripherals {
             AIP: AIP {
                 _marker: PhantomData,
             },
+            CFG_CTL: CFG_CTL {
+                _marker: PhantomData,
+            },
             CRU: CRU {
                 _marker: PhantomData,
             },
+            EXTREGSFFE: EXTREGSFFE {
+                _marker: PhantomData,
+            },
             MISC: MISC {
+                _marker: PhantomData,
+            },
+            PKFB: PKFB {
                 _marker: PhantomData,
             },
             PMU: PMU {

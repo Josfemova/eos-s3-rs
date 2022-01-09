@@ -1,8 +1,170 @@
 _add:
   CFG_CTL:
-    description: ""
+    description: "PIF Register (FPGA Programming interface)"
     baseAddress: 0x4001_4000
     addressBlocks:
       - offset: 0
         size: 0xB000
         usage: registers
+    registers:
+      CFG_CTL:
+        description: "Fabric Configuration Control Register" 
+        addressOffset: 0x0000
+        size: 32
+        resetValue: 0b1000_0000_0000_0000_0011_1101_1111_1110
+        resetMask:  0b1000_0000_0000_0000_1111_1111_1111_1111
+        fields:
+          APB_SEL_CFG:
+            description: "ARM firmware/software sets this register 1'b1 to Get the Control Right of Cfg_Ctl"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          APB_TRM_SEL:
+            description: "ARM firmware/software sets this register 1'b1 to Select TRM Block"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          APB_TR_SEL:
+            description: "ARM firmware/software sets this register 1'b1 to Select TR Block"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          APB_TLM_SEL:
+            description: "ARM firmware/software sets this register 1'b1 to Select TLM Block"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          APB_TL_SEL:
+            description: "ARM firmware/software sets this register 1'b1 to Select TL Block"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          APB_BRM_SEL:
+            description: "ARM firmware/software sets this register 1'b1 to Select BRM Block"
+            bitOffset: 5
+            bitWidth:  1
+            access: read-write
+          APB_BR_SEL: 
+            description: "ARM firmware/software sets this register 1'b1 to Select BR Block"
+            bitOffset: 6
+            bitWidth:  1
+            access: read-write
+          APB_BLM_SEL:
+            description: "ARM firmware/software sets this register 1'b1 to Select BLM Block"
+            bitOffset: 7
+            bitWidth: 1
+            access: read-write
+          APB_BL_SEL:
+            description: "ARM firmware/software sets this register 1'b1 to Select BL Block"
+            bitOffset: 8
+            bitWidth: 1
+            access: read-write
+          APB_PARTIAL_LOAD:
+            description: "ARM firmware/software sets this register 1'b1 to enable Partial Load"
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          APB_WL_DIN:
+            description: "ARM firmware/software sets this register to set Word Line Data In"
+            bitOffset: 10 
+            bitWidth: 4
+            access: read-write
+          APB_CFG_RD:
+            description: "ARM firmware/software sets this register 1'b1 and APB_CFG_WR 1'b0 to perform Configuration Read"
+            bitOffset: 14 
+            bitWidth: 1
+            access: read-write
+          APB_CFG_WR:
+            description: "ARM firmware/software sets this register 1'b1 and APB_CFG_RD 1'b0 to perform Configuration Write"
+            bitOffset: 15
+            bitWidth: 1
+            access: read-write
+          SW_PWR_GATE:
+            description: "Shift Register Power Gate Status: 1 in configuration mode, 0 in normal mode"
+            bitOffset: 31
+            bitWidth: 1
+            access: read-write
+      MAX_BL_CNT:
+        description: "Maximum Bit Length Count: ARM firmware/software sets this register 1'b1 to set the Maximum Bit Line Count" 
+        addressOffset: 0x0004
+        size: 32
+        resetValue: 0x0000_002D
+        resetMask:  0xFFFF_FFFF
+        fields:
+          MAX_BL_CNT:
+            description: "Maximum Bit Length Count: ARM firmware/software sets this register 1'b1 to set the Maximum Bit Line Count"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      MAX_WL_CNT:
+        description: "Maximum Word Length Count: ARM firmware/software sets this register 1'b1 to set the Maximum Word Line Count" 
+        addressOffset: 0x0008
+        size: 32
+        resetValue: 0x0000_01A6
+        resetMask:  0xFFFF_FFFF
+        fields:
+          MAX_WL_CNT:
+            description: "Maximum Word Length Count: ARM firmware/software sets this register 1'b1 to set the Maximum Word Line Count"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CFG_DATA:
+        description: "Configuration Data: ARM firmware/software Access this register to Read/Write the configuration bit cells." 
+        addressOffset: 0x0FFC
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          CFG_DATA:
+            description: "Configuration Data: ARM firmware/software Access this register to Read/Write the configuration bit cells."
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      RAMFIFO0:
+        description: "RAMFIFO0 Address: ARM firmware/software Access these registers to Read/Write the RAMFIFO0. From 0x8000 to 0x8FFC." 
+        addressOffset: 0x4000
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          RAMFIFO0:
+            description: "RAMFIFO0 Address: ARM firmware/software Access these registers to Read/Write the RAMFIFO0. From 0x8000 to 0x8FFC."
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      RAMFIFO1:
+        description: "RAMFIFO1 Address: ARM firmware/software Access these registers to Read/Write the RAMFIFO1. From 0x9000 to 0x9FFC." 
+        addressOffset: 0x5000
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          RAMFIFO1:
+            description: "RAMFIFO1 Address: ARM firmware/software Access these registers to Read/Write the RAMFIFO1. From 0x9000 to 0x9FFC."
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      RAMFIFO2:
+        description: "RAMFIFO2 Address: ARM firmware/software Access these registers to Read/Write the RAMFIFO2. From 0xA000 to 0xAFFC." 
+        addressOffset: 0x6000
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          RAMFIFO2:
+            description: "RAMFIFO2 Address: ARM firmware/software Access these registers to Read/Write the RAMFIFO2. From 0xA000 to 0xAFFC."
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      RAMFIFO3:
+        description: "RAMFIFO3 Address: ARM firmware/software Access these registers to Read/Write the RAMFIFO3. From 0xB000 to 0xBFFC." 
+        addressOffset: 0x7000
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          RAMFIFO3:
+            description: "RAMFIFO3 Address: ARM firmware/software Access these registers to Read/Write the RAMFIFO3. From 0xB000 to 0xBFFC."
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write

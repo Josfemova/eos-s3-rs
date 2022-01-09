@@ -5,10 +5,10 @@ _include:
   - "device/ADC.yaml" #done 
   - "device/AIP.yaml" #done
   - "device/AUD.yaml"
-  - "device/CFG_CTL.yaml"
+  - "device/CFG_CTL.yaml" #done
   - "device/CRU.yaml" #done
   - "device/DMA.yaml"
-  - "device/ExtRegsFFE.yaml"
+  - "device/ExtRegsFFE.yaml" #done
   - "device/I2S_Slave.yaml"
   - "device/INTR_CTRL.yaml"
   - "device/IO_MUX.yaml" #done
@@ -20,7 +20,7 @@ _include:
   - "device/SPI.yaml"
   - "device/SPT.yaml"
   - "device/TIMER.yaml" #done
-  - "device/UART.yaml"
+  - "device/UART.yaml" #done
   - "device/WDT.yaml"
   - "core/DWT.yaml"
   - "core/EXTM4Regs.yaml"

@@ -1,8 +1,442 @@
 _add:
   PKFB: 
-    description: ""
+    description: "Packet FFO Bank control"
     baseAddress: 0x4000_2000
     addressBlocks:
       - offset: 0 
         size: 0x58
         usage: registers 
+    registers:
+      PKFB_FIFOCTRL:
+        description: "Packet FIFO Bank control" 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pf0_en:
+            description: "Set to enable the Packet FIFO"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          pf0_push_mux:
+            description: "Select which subsystem controls the push operation"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          pf0_pop_mux:
+            description: "Select which subsystem controls the pop operation"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          pf0_push_int_mux:
+            description: "Select which subsystem manages the push interrupt"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          pf0_pop_int_mux:
+            description: "Select which subsystem manages the pop interrupt"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          pf0_ffe_sel:
+            description: "If FFE is the controller, select which instance of FFE will be used for control"
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+          pf1_en:
+            description: "Set to enable the Packet FIFO"
+            bitOffset: 8
+            bitWidth: 1
+            access: read-write
+          pf1_push_mux:
+            description: "Select which subsystem controls the push operation"
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          pf1_pop_mux:
+            description: "Select which subsystem controls the pop operation"
+            bitOffset: 10
+            bitWidth: 1
+            access: read-write
+          pf1_push_int_mux:
+            description: "Select which subsystem manages the push interrupt"
+            bitOffset: 11
+            bitWidth: 1
+            access: read-write
+          pf1_pop_int_mux:
+            description: "Select which subsystem manages the pop interrupt"
+            bitOffset: 12
+            bitWidth: 1
+            access: read-write
+          pf1_ffe_sel:
+            description: "If FFE is the controller, select which instance of FFE will be used for control"
+            bitOffset: 13
+            bitWidth: 1
+            access: read-write
+          pf2_en:
+            description: "Set to enable the Packet FIFO"
+            bitOffset: 16
+            bitWidth: 1
+            access: read-write
+          pf2_push_mux:
+            description: "Select which subsystem controls the push operation"
+            bitOffset: 17
+            bitWidth: 1
+            access: read-write
+          pf2_pop_mux:
+            description: "Select which subsystem controls the pop operation"
+            bitOffset: 18
+            bitWidth: 1
+            access: read-write
+          pf2_push_int_mux:
+            description: "Select which subsystem manages the push interrupt"
+            bitOffset: 19
+            bitWidth: 1
+            access: read-write
+          pf2_pop_int_mux:
+            description: "Select which subsystem manages the pop interrupt"
+            bitOffset: 20
+            bitWidth: 1
+            access: read-write
+          pf2_ffe_sel:
+            description: "If FFE is the controller, select which instance of FFE will be used for control"
+            bitOffset: 21
+            bitWidth: 1
+            access: read-write
+          pf8k_en:
+            description: "Set to enable the Packet FIFO"
+            bitOffset: 24
+            bitWidth: 1
+            access: read-write
+          pf8k_push_mux:
+            description: "Select which subsystem controls the push operation"
+            bitOffset: 25
+            bitWidth: 1
+            access: read-write
+          pf8k_pop_mux:
+            description: "Select which subsystem controls the pop operation"
+            bitOffset: 26
+            bitWidth: 1
+            access: read-write
+          pf8k_push_int_mux:
+            description: "Select which subsystem manages the push interrupt"
+            bitOffset: 27
+            bitWidth: 1
+            access: read-write
+          pf8k_pop_int_mux:
+            description: "Select which subsystem manages the pop interrupt"
+            bitOffset: 28
+            bitWidth: 1
+            access: read-write
+          pf8k_ffe_sel:
+            description: "If FFE is the controller, select which instance of FFE will be used for control"
+            bitOffset: 29
+            bitWidth: 1
+            access: read-write
+      PKFB_FIFOSRAMCTRL0:
+        description: "SRAM Test Control 0" 
+        addressOffset: 0x004
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pf0_test1a:
+            description: "Set this bit to disable test capabilities"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          pf0_rmea:
+            description: "Set this bit to disable SRAM timing adjust"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          pf0_rma:
+            description: "SRAM Adjust timing value"
+            bitOffset: 2
+            bitWidth: 4
+            access: read-write
+          pf0_test1b:
+            description: "Set this bit to disable test capabilities"
+            bitOffset: 8
+            bitWidth: 1
+            access: read-write
+          pf0_rmeb:
+            description: "Set this bit to disable SRAM timing adjust"
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          pf0_rmb:
+            description: "SRAM Adjust timing value"
+            bitOffset: 10
+            bitWidth: 4
+            access: read-write
+          pf1_test1a:
+            description: "Set this bit to disable test capabilities"
+            bitOffset: 16
+            bitWidth: 1
+            access: read-write
+          pf1_rmea:
+            description: "Set this bit to disable SRAM timing adjust"
+            bitOffset: 17
+            bitWidth: 1
+            access: read-write
+          pf1_rma:
+            description: "SRAM Adjust timing value"
+            bitOffset: 18
+            bitWidth: 4
+            access: read-write
+          pf1_test1b:
+            description: "Set this bit to disable test capabilities"
+            bitOffset: 24
+            bitWidth: 1
+            access: read-write
+          pf1_rmeb:
+            description: "Set this bit to disable SRAM timing adjust"
+            bitOffset: 25
+            bitWidth: 1
+            access: read-write
+          pf1_rmb:
+            description: "SRAM Adjust timing value"
+            bitOffset: 26
+            bitWidth: 4
+            access: read-write
+      PKFB_FIFOSRAMCTRL1:
+        description: "SRAM Test Control 1" 
+        addressOffset: 0x008
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pf2_test1a:
+            description: "Set this bit to disable test capabilities"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          pf2_rmea:
+            description: "Set this bit to disable SRAM timing adjust"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          pf2_rma:
+            description: "SRAM Adjust timing value"
+            bitOffset: 2
+            bitWidth: 4
+            access: read-write
+          pf2_test1b:
+            description: "Set this bit to disable test capabilities"
+            bitOffset: 8
+            bitWidth: 1
+            access: read-write
+          pf2_rmeb:
+            description: "Set this bit to disable SRAM timing adjust"
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          pf2_rmb:
+            description: "SRAM Adjust timing value"
+            bitOffset: 10
+            bitWidth: 4
+            access: read-write
+          pf8k_test1a:
+            description: "Set this bit to disable test capabilities"
+            bitOffset: 16
+            bitWidth: 1
+            access: read-write
+          pf8k_rmea:
+            description: "Set this bit to disable SRAM timing adjust"
+            bitOffset: 17
+            bitWidth: 1
+            access: read-write
+          pf8k_rma:
+            description: "SRAM Adjust timing value"
+            bitOffset: 18
+            bitWidth: 4
+            access: read-write
+          pf8k_test1b:
+            description: "Set this bit to disable test capabilities"
+            bitOffset: 24
+            bitWidth: 1
+            access: read-write
+          pf8k_rmeb:
+            description: "Set this bit to disable SRAM timing adjust"
+            bitOffset: 25
+            bitWidth: 1
+            access: read-write
+          pf8k_rmb:
+            description: "SRAM Adjust timing value"
+            bitOffset: 26
+            bitWidth: 4
+            access: read-write
+      PKFB_FIFOSTATUS:
+        description: "Packet FIFO Status register" 
+        addressOffset: 0x00C
+        size: 32
+        fields:
+          pf0_sram_sleep:
+            description: "SRAM Sleep Status"
+            bitOffset: 0
+            bitWidth: 2
+            access: read-write
+          pf0_push_int_over:
+            description: "Bit is set if there's an interrupt set for overflow (pktFIFO or FFE FIFO)"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          pf0_push_int_thresh:
+            description: "Bit is set if there's an interrupt set for push threshold"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          pf0_push_int_sleep:
+            description: "Bit is set if there's an interrupt set for push on SRAM sleep"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          pf0_pop_int_under:
+            description: "Bit is set if there's an interrupt set for underflow"
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+          pf0_pop_int_thresh:
+            description: "Bit is set if there's an interrupt set for pop threshold"
+            bitOffset: 6
+            bitWidth: 1
+            access: read-write
+          pf0_pop_int_sleep:
+            description: "Bit is set if there's an interrupt set for pop on SRAM sleep"
+            bitOffset: 7
+            bitWidth: 1
+            access: read-write
+          pf1_sram_sleep:
+            description: "SRAM Sleep Status"
+            bitOffset: 8
+            bitWidth: 2
+            access: read-write
+          pf1_push_int_over:
+            description: "Bit is set if there's an interrupt set for overflow (pktFIFO or FFE FIFO)"
+            bitOffset: 10
+            bitWidth: 1
+            access: read-write
+          pf1_push_int_thresh:
+            description: "Bit is set if there's an interrupt set for push threshold"
+            bitOffset: 11
+            bitWidth: 1
+            access: read-write
+          pf1_push_int_sleep:
+            description: "Bit is set if there's an interrupt set for push on SRAM sleep"
+            bitOffset: 12
+            bitWidth: 1
+            access: read-write
+          pf1_pop_int_under:
+            description: "Bit is set if there's an interrupt set for underflow"
+            bitOffset: 13
+            bitWidth: 1
+            access: read-write
+          pf1_pop_int_thresh:
+            description: "Bit is set if there's an interrupt set for pop threshold"
+            bitOffset: 14
+            bitWidth: 1
+            access: read-write
+          pf1_pop_int_sleep:
+            description: "Bit is set if there's an interrupt set for pop on SRAM sleep"
+            bitOffset: 15
+            bitWidth: 1
+            access: read-write
+          pf2_sram_sleep:
+            description: "SRAM Sleep Status"
+            bitOffset: 16
+            bitWidth: 2
+            access: read-write
+          pf2_push_int_over:
+            description: "Bit is set if there's an interrupt set for overflow (pktFIFO or FFE FIFO)"
+            bitOffset: 18
+            bitWidth: 1
+            access: read-write
+          pf2_push_int_thresh:
+            description: "Bit is set if there's an interrupt set for push threshold"
+            bitOffset: 19
+            bitWidth: 1
+            access: read-write
+          pf2_push_int_sleep:
+            description: "Bit is set if there's an interrupt set for push on SRAM sleep"
+            bitOffset: 20
+            bitWidth: 1
+            access: read-write
+          pf2_pop_int_under:
+            description: "Bit is set if there's an interrupt set for underflow"
+            bitOffset: 21
+            bitWidth: 1
+            access: read-write
+          pf2_pop_int_thresh:
+            description: "Bit is set if there's an interrupt set for pop threshold"
+            bitOffset: 22
+            bitWidth: 1
+            access: read-write
+          pf2_pop_int_sleep:
+            description: "Bit is set if there's an interrupt set for pop on SRAM sleep"
+            bitOffset: 23
+            bitWidth: 1
+            access: read-write
+          pf8k_sram_sleep:
+            description: "SRAM Sleep Status"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          pf8k_push_int_over:
+            description: "Bit is set if there's an interrupt set for overflow (pktFIFO or FFE FIFO)"
+            bitOffset: 26
+            bitWidth: 1
+            access: read-write
+          pf8k_push_int_thresh:
+            description: "Bit is set if there's an interrupt set for push threshold"
+            bitOffset: 27
+            bitWidth: 1
+            access: read-write
+          pf8k_push_int_sleep:
+            description: "Bit is set if there's an interrupt set for push on SRAM sleep"
+            bitOffset: 28
+            bitWidth: 1
+            access: read-write
+          pf8k_pop_int_under:
+            description: "Bit is set if there's an interrupt set for underflow"
+            bitOffset: 29
+            bitWidth: 1
+            access: read-write
+          pf8k_pop_int_thresh:
+            description: "Bit is set if there's an interrupt set for pop threshold"
+            bitOffset: 30
+            bitWidth: 1
+            access: read-write
+          pf8k_pop_int_sleep:
+            description: "Bit is set if there's an interrupt set for pop on SRAM sleep"
+            bitOffset: 31
+            bitWidth: 1
+            access: read-write
+
+PKFB:
+  PKFB_FIFOCTRL:
+    "*_en": 
+      disable: [0, "Disable the packet FIFO"]
+      enable: [1, "Enable the packet FIFO"]
+    "*_push_mux":
+      m4: [0, "Select the M4 subsystem to control the FIFO"]
+      ffe: [1, "Select the FFE subsystem to control the FIFO"]
+    "*_pop_mux":
+      m4: [0, "Select the M4 subsystem to control the FIFO"]
+      ap: [1, "Select the AP subsystem to control the FIFO"]
+    "*_push_int_mux":
+      m4: [0, "Select the M4 subsystem to control the FIFO"]
+      ap: [1, "Select the AP subsystem to control the FIFO"]
+    "*_pop_int_mux":
+      m4: [0, "Select the M4 subsystem to control the FIFO"]
+      ap: [1, "Select the AP subsystem to control the FIFO"]
+    "*_ffe_sel":
+      ffe0: [0, "when FFE is the controller of the FIFO, select FFE0 as the controller"]
+      ffe1: [1, "when FFE is the controller of the FIFO, select FFE1 as the controller"]
+  PKFB_FIFOSTATUS:
+    "pf*_sram_sleep":
+      active: [0, "SRAM is in active mode"]
+      light_sleep: [1, "SRAM is in Light Sleep mode"]
+      deep_sleep: [2, "SRAM is in Deep Sleep mode"]
+      shutdown: [3, "SRAM is in Shutdown mode"]

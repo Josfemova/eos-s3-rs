@@ -1,7 +1,7 @@
 _add:
   MISC:
     description: MISC registers
-    baseAddress: 0x40005000
+    baseAddress: 0x4000_5000
     addressBlocks:
       - offset: 0
         size: 0x400

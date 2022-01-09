@@ -20,8 +20,7 @@ _add:
             bitWidth: 8
             access: read-write
           FE:
-            description: "Framing error. When set to 1, it indicates that the received character did not have a valid stop bit (a valid
-stop bit is 1). In FIFO mode, this error is associated with the character at the top of the FIFO."
+            description: "Framing error. When set to 1, it indicates that the received character did not have a valid stop bit (a valid stop bit is 1). In FIFO mode, this error is associated with the character at the top of the FIFO."
             bitOffset: 8
             bitWidth: 1
             access: read-write
@@ -176,8 +175,7 @@ stop bit is 1). In FIFO mode, this error is associated with the character at the
             bitWidth: 1
             access: read-write
           STP2:
-            description: "Two stop bits select. If this bit is set to 1, two stop bits are transmitted at the end of the frame. The receive
-logic does not check for two stop bits being received."
+            description: "Two stop bits select. If this bit is set to 1, two stop bits are transmitted at the end of the frame. The receive logic does not check for two stop bits being received."
             bitOffset: 3
             bitWidth: 1
             access: read-write
@@ -732,13 +730,10 @@ UART:
       enable_stick_parity: [1, "If EPS = 1 => parity bit is trasmitted and checked as a 1, If EPS = 0 => parity bit is trasmitted an checked as a 0"]
   UART_CR:
     UARTEN: 
-      uart_disable: [0, "UART is disabled. If the UART is disabled in the middle of transmission or reception, it
-completes the current character before stopping."]
-      uart_enable: [1, "the UART is enabled. Data transmission and reception occurs for either UART signals or SIR
-signals depending on the setting of the SIREN bit."]
+      uart_disable: [0, "UART is disabled. If the UART is disabled in the middle of transmission or reception, it completes the current character before stopping."]
+      uart_enable: [1, "the UART is enabled. Data transmission and reception occurs for either UART signals or SIR signals depending on the setting of the SIREN bit."]
     SIREN:
-      siren_disable: [0, "IrDA SIR ENDEC is disabled. nSIROUT remains LOW (no light pulse generated), and signal
-transitions on SIRIN have no effect."]
+      siren_disable: [0, "IrDA SIR ENDEC is disabled. nSIROUT remains LOW (no light pulse generated), and signal transitions on SIRIN have no effect."]
       siren_enable: [1, "IrDA SIR ENDEC is enabled. Data is transmitted and received on nSIROUT and SIRIN. UARTTXD remains HIGH, in the marking state. Signal transitions on UARTRXD or modem status inputs have no effect."] 
   UART_IFLS:
     "*":
