@@ -564,6 +564,34 @@ impl core::fmt::Debug for TIMER {
 }
 #[doc = "TIMER"]
 pub mod timer;
+#[doc = "UART"]
+pub struct UART {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for UART {}
+impl UART {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const uart::RegisterBlock = 0x4001_0000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const uart::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for UART {
+    type Target = uart::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for UART {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("UART").finish()
+    }
+}
+#[doc = "UART"]
+pub mod uart;
 #[no_mangle]
 static mut DEVICE_PERIPHERALS: bool = false;
 #[doc = r"All the peripherals"]
@@ -585,6 +613,8 @@ pub struct Peripherals {
     pub PMU: PMU,
     #[doc = "TIMER"]
     pub TIMER: TIMER,
+    #[doc = "UART"]
+    pub UART: UART,
 }
 impl Peripherals {
     #[doc = r"Returns all the peripherals *once*"]
@@ -625,6 +655,9 @@ impl Peripherals {
                 _marker: PhantomData,
             },
             TIMER: TIMER {
+                _marker: PhantomData,
+            },
+            UART: UART {
                 _marker: PhantomData,
             },
         }

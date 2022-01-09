@@ -6,3 +6,745 @@ _add:
       - offset: 0 
         size: 0x1000
         usage: registers
+    registers:  
+      UART_DR:
+        description: "Uart Data register" 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DATA:
+            description: "Receive (read) data character. Transmit (write) data character."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+          FE:
+            description: "Framing error. When set to 1, it indicates that the received character did not have a valid stop bit (a valid
+stop bit is 1). In FIFO mode, this error is associated with the character at the top of the FIFO."
+            bitOffset: 8
+            bitWidth: 1
+            access: read-write
+          PE:
+            description: "Parity error. When set to 1, it indicates that the parity of the received data character does not match the parity that the EPS and SPS bits in the Line Control Register, UARTLCR_H on page 3-12 select. In FIFO mode, this error is associated with the character at the top of the FIFO."
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          BE:
+            description: "Break error. This bit is set to 1 if a break condition was detected, indicating that the received data input was held LOW for longer than a full-word transmission time (defined as start, data, parity and stop  bits).  In FIFO mode, this error is associated with the character at the top of the FIFO. When a break occurs, only one 0 character is loaded into the FIFO. The next character is only enabled after the receive data input goes to a 1 (marking state), and the next valid start bit is received."
+            bitOffset: 10
+            bitWidth: 1 
+            access: read-write
+          OE:
+            description: "Overrun error. This bit is set to 1 if data is received and the receive FIFO is already full.  This is cleared to 0 once there is an empty space in the FIFO and a new character can be written to it."
+            bitOffset: 11
+            bitWidth: 1
+            access: read-write
+      UART_RSR:
+        description: "UART receive status register/error clear register. (WC)" 
+        addressOffset: 0x004
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          FE:
+            description: "Framing error. When set to 1, it indicates that the received character did not have a valid stop bit (a valid stop bit is 1). This bit is cleared to 0 by a write to UARTECR. In FIFO mode, this error is associated with the character at the top of the FIFO"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          PE:
+            description: "Parity error. When set to 1, it indicates that the parity of the received data character does not match the parity that the EPS and SPS bits in the Line Control Register, UARTLCR_H on page 3-12 select. This bit is cleared to 0 by a write to UARTECR. In FIFO mode, this error is associated with the character at the top of the FIFO."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          BE:
+            description: "Break error. This bit is set to 1 if a break condition was detected, indicating that the received data input was held LOW for longer than a full-word transmission time (defined as start, data, parity, and stop bits). This bit is cleared to 0 after a write to UARTECR. In FIFO mode, this error is associated with the character at the top of the FIFO. When a break occurs, only one 0 character is loaded into the FIFO. The next character is only enabled after the receive data input goes to a 1 (marking state) and the next valid start bit is received."
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          OE:
+            description: "Overrun error. This bit is set to 1 if data is received and the FIFO is already full. This bit is cleared to 0 by a write to UARTECR. The FIFO contents remain valid because no more data is written when the FIFO is full, only the contents of the shift register are overwritten. The CPU must now read the data, to empty the FIFO."
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+      UART_TFR:
+        description: "UART Flag Register" 
+        addressOffset: 0x018
+        size: 32
+        fields:
+          CTS:
+            description: "Clear to send. This bit is the complement of the UART clear to send, nUARTCTS, modem status input. That is, the bit is 1 when nUARTCTS is LOW."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+          DSR:
+            description: "Data set ready. This bit is the complement of the UART data set ready, nUARTDSR, modem status input. That is, the bit is 1 when nUARTDSR is LOW."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-only
+          DCD:
+            description: "Data carrier detect. This bit is the complement of the UART data carrier detect, nUARTDCD, modem status input. That is, the bit is 1 when nUARTDCD is LOW."
+            bitOffset: 2
+            bitWidth: 1
+            access: read-only
+          BUSY:
+            description: "UART busy. If this bit is set to 1, the UART is busy transmitting data. This bit remains set until the complete byte, including all the stop bits, has been sent from the shift register. This bit is set as soon as the transmit FIFO becomes non-empty, regardless of whether the UART is enabled or not."
+            bitOffset: 3
+            bitWidth: 1
+            access: read-only
+          RXFE:
+            description: "Receive FIFO empty. The meaning of this bit depends on the state of the FEN bit in the UARTLCR_H Register. If the FIFO is disabled, this bit is set when the receive holding register is empty. If the FIFO is enabled, the RXFE bit is set when the receive FIFO is empty."
+            bitOffset: 4
+            bitWidth: 1
+            access: read-only
+          TXFF:
+            description: "Transmit FIFO full. The meaning of this bit depends on the state of the FEN bit in the UARTLCR_H Register. If the FIFO is disabled, this bit is set when the transmit holding register is full. If the FIFO is enabled, the TXFF bit is set when the transmit FIFO is full."
+            bitOffset: 5
+            bitWidth: 1
+            access: read-only
+          RXFF:
+            description: "Receive FIFO full. The meaning of this bit depends on the state of the FEN bit in the UARTLCR_H Register. If the FIFO is disabled, this bit is set when the receive holding register is full. If the FIFO is enabled, the RXFF bit is set when the receive FIFO is full."
+            bitOffset: 6
+            bitWidth: 1
+            access: read-only
+          TXFE:
+            description: "Transmit FIFO empty. The meaning of this bit depends on the state of the FEN bit in the Line Control Register, UARTLCR_H on page 3-12. If the FIFO is disabled, this bit is set when the transmit holding register is empty. If the FIFO is enabled, the TXFE bit is set when the transmit FIFO is empty. This bit does not indicate if there is data in the transmit shift register."
+            bitOffset: 7
+            bitWidth: 1
+            access: read-only
+          RI:
+            description: "Ring indicator. This bit is the complement of the UART ring indicator, nUARTRI, modem status input. That is, the bit is 1 when nUARTRI is LOW."
+            bitOffset: 8
+            bitWidth: 1
+            access: read-only
+      UART_ILPR:
+        description: "8-bit low-power divisor value." 
+        addressOffset: 0x020
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          UART_ILPR:
+            description: "8-bit low-power divisor value."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      UART_IBRD:
+        description: "The integer baud rate divisor." 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0x0000
+        resetMask:  0xFFFF
+        fields:
+          UART_IBRD:
+            description: "The integer baud rate divisor."
+            bitOffset: 0
+            bitWidth: 16
+            access: read-write
+      UART_FBRD:
+        description: "The fractional baud rate divisor." 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0b00_0000
+        resetMask:  0b11_1111
+        fields:
+          UART_FBRD:
+            description: "The fractional baud rate divisor."
+            bitOffset: 0 
+            bitWidth: 6
+            access: read-write
+      UART_LCR_H:
+        description: "UART Line Control Register. This register accesses bit 29 to 22 of the UART Line Control Register, UARTLCR." 
+        addressOffset: 0x02C
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          BRK:
+            description: "Send break. If this bit is set to 1, a low-level is continually output on the UARTTXD output, after completing transmission of the current character. For the proper execution of the break command, the software must set this bit for at least two complete frames. For normal use, this bit must be cleared to 0."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          PEN:
+            description: "Parity enable. See Table 3-11 on page 3-14 for the parity truth table."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          EPS:
+            description: "Even parity select. Controls the type of parity the UART uses during transmission and reception. This bit has no effect when the PEN bit disables parity checking and generation. See Table 3-11 on page 3-14 for the parity truth table."
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          STP2:
+            description: "Two stop bits select. If this bit is set to 1, two stop bits are transmitted at the end of the frame. The receive
+logic does not check for two stop bits being received."
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          FEN:
+            description: "Enable FIFOs:"
+            bitOffset: 4
+            bitWidth: 2
+            access: read-write
+          WLEN:
+            description: "Word length. These bits indicate the number of data bits transmitted or received in a frame"
+            bitOffset: 5
+            bitWidth: 2
+            access: read-write
+          SPS:
+            description: "Stick parity select. This bit has no effect when the PEN bit disables parity checking and generation. See Table 3-11 on  page 3-14 for the parity truth table."
+            bitOffset: 7
+            bitWidth: 1
+            access: read-write
+      UART_CR:
+        description: "UART Control Register" 
+        addressOffset: 0x030
+        size: 32
+        resetValue: 0x0000
+        resetMask:  0xFFFF
+        fields:
+          UARTEN:
+            description: "UART enable"
+            bitOffset: 0
+            bitWidth:  1
+            access: read-write
+          SIREN:
+            description: "Siren enable. This bit has no effect if the UARTEN bit disables the UART."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          SIRLP:
+            description: "SIR low-power IrDA mode. This bit selects the IrDA encoding mode. If this bit is cleared to 0, low-level bits are transmitted as an active high pulse with a width of 3/16th of the bit period. If this bit is set to 1, low-level bits are transmitted with a pulse width that is 3 times the period of the IrLPBaud16 input signal, regardless of the selected bit rate. Setting this bit uses less power, but might reduce transmission distances."
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          LBE:
+            description: "Loopback enable. If this bit is set to 1 and the SIREN bit is set to 1 and the SIRTEST bit in the Test Control Register, UARTTCR on page 4-5 is set to 1, then the nSIROUT path is inverted, and fed through to the SIRIN path. The SIRTEST bit in the test register must be set to 1 to override the normal half-duplex SIR operation. This must be the requirement for accessing the test registers during normal operation, and SIRTEST must be cleared to 0 when loopback testing is finished. This feature reduces the amount of external coupling required during system test. If this bit is set to 1, and the SIRTEST bit is set to 0, the UARTTXD path is fed through to the UARTRXD path. In either SIR mode or UART mode, when this bit is set, the modem outputs are also fed through to the modem inputs. This bit is cleared to 0 on reset, to disable loopback."
+            bitOffset: 7
+            bitWidth: 1
+            access: read-write
+          TXE:
+            description: "Transmit enable. If this bit is set to 1, the transmit section of the UART is enabled. Data transmission occurs for either UART signals, or SIR signals depending on the setting of the SIREN bit. When the UART is disabled in the middle of transmission, it completes the current character before stopping."
+            bitOffset: 8
+            bitWidth: 1
+            access: read-write
+          RXE:
+            description: "Receive enable. If this bit is set to 1, the receive section of the UART is enabled. Data reception occurs for either UART signals or SIR signals depending on the setting of the SIREN bit. When the UART is disabled in the middle of reception, it completes the current character before stopping."
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          DTR:
+            description: "Receive enable. If this bit is set to 1, the receive section of the UART is enabled. Data reception occurs for either UART signals or SIR signals depending on the setting of the SIREN bit. When the UART is disabled in the middle of reception, it completes the current character before stopping."
+            bitOffset: 10
+            bitWidth: 1 
+            access: read-write
+          RTS:
+            description: "Request to send. This bit is the complement of the UART request to send, nUARTRTS, modem status output. That is, when the bit is programmed to a 1 then nUARTRTS is LOW."
+            bitOffset: 11
+            bitWidth: 1
+            access: read-write
+          Out1:
+            description: "This bit is the complement of the UART Out1 (nUARTOut1) modem status output. That is, when the bit is programmed to a 1 the output is 0. For DTE this can be used as Data Carrier Detect (DCD)."
+            bitOffset: 12
+            bitWidth: 1 
+            access: read-write
+          Out2:
+            description: "This bit is the complement of the UART Out2 (nUARTOut2) modem status output. That is, when the bit is programmed to a 1, the output is 0. For DTE this can be used as Ring Indicator (RI)."
+            bitOffset: 13
+            bitWidth: 1
+            access: read-write
+          RTSEn:
+            description: "RTS hardware flow control enable. If this bit is set to 1, RTS hardware flow control is enabled. Data is only requested when there is space in the receive FIFO for it to be received."
+            bitOffset: 14
+            bitWidth: 1
+            access: read-write
+          CTSEn:
+            description: "CTS hardware flow control enable. If this bit is set to 1, CTS hardware flow control is enabled. Data is only transmitted when the nUARTCTS signal is asserted."
+            bitOffset: 15
+            bitWidth: 1
+            access: read-write
+      UART_IFLS:
+        description: "Interrupt FIFO Level Select Register" 
+        addressOffset: 0x034
+        size: 32
+        resetValue: 0b01_0010
+        resetMask:  0b11_1111
+        fields:
+          TXIFLSEL:
+            description: "Transmit interrupt FIFO level select. The trigger points for the receive interrupt are as follows"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          RXIFLSEL:
+            description: "Receive interrupt FIFO level select. The trigger points for the receive interrupt are as follows"
+            bitOffset: 3
+            bitWidth: 3
+            access: read-write
+      UART_IMSC:
+        description: "Interrupt Mask Set/Clear Register" 
+        addressOffset: 0x038
+        size: 32
+        resetValue: 0b000_0000_0000
+        resetMask:  0b111_1111_1111
+        fields:
+          RMIMIM:
+            description: "nUARTRI modem interrupt mask."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          CTSMIM:
+            description: "nUARTCTS modem interrupt mask."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          DCDMIM:
+            description: "nUARTDCD modem interrupt mask."
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          DSRMIM:
+            description: "nUARTDSR interrupt mask."
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          RXIM:
+            description: "Receive interrupt mask."
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          TXMIM:
+            description: "Transmit interrupt mask."
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+          RTIM:
+            description: "Receive timeout interrupt mask."
+            bitOffset: 6
+            bitWidth: 1
+            access: read-write
+          FEIM:
+            description: "Framing error interrupt mask."
+            bitOffset: 7
+            bitWidth: 1
+            access: read-write
+          PEIM:
+            description: "Parity error interrupt mask."
+            bitOffset: 8
+            bitWidth: 1
+            access: read-write
+          BEIM:
+            description: "Break error interrupt mask."
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          OEIM:
+            description: "Overrun error interrupt mask."
+            bitOffset: 10
+            bitWidth: 1
+            access: read-write
+      UART_RIS:
+        description: "Raw interrupt status register" 
+        addressOffset: 0x03C
+        size: 32
+        fields:
+          RIRMIS:
+            description: "nUARTRI interrupt status (raw interrupt state) "
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+          CTSRMIS:
+            description: "nUARTCTS interrupt status (raw interrupt state) "
+            bitOffset: 1
+            bitWidth: 1
+            access: read-only
+          DCDRMIS:
+            description: "nUARTDCD interrupt status (raw interrupt state) "
+            bitOffset: 2
+            bitWidth: 1
+            access: read-only
+          DSRRMIS:
+            description: "nUARTDSR interrupt status (raw interrupt state) "
+            bitOffset: 3
+            bitWidth: 1
+            access: read-only
+          RXRMIS:
+            description: "Receive interrupt status (raw interrupt state) "
+            bitOffset: 4
+            bitWidth: 1
+            access: read-only
+          TXRMIS:
+            description: "Transmit interrupt status (raw interrupt state) "
+            bitOffset: 5
+            bitWidth: 1
+            access: read-only
+          RTRIS:
+            description: "Receive timeout interrupt status (raw interrupt state) "
+            bitOffset: 6
+            bitWidth: 1
+            access: read-only
+          FEIS:
+            description: "Framing error interrupt status (raw interrupt state) "
+            bitOffset: 7
+            bitWidth: 1
+            access: read-only
+          PEIS:
+            description: "Parity error interrupt status (raw interrupt state) "
+            bitOffset: 8
+            bitWidth: 1
+            access: read-only
+          BEIS:
+            description: "Break error interrupt status (raw interrupt state) "
+            bitOffset: 9
+            bitWidth: 1
+            access: read-only
+          OERMIS:
+            description: "Overrun error interrupt status (raw interrupt state) "
+            bitOffset: 10
+            bitWidth: 1
+            access: read-only
+      UART_MIS:
+        description: "Masked interrupt status register" 
+        addressOffset: 0x040
+        size: 32
+        fields:
+          RIMMIS:
+            description: "nUARTRI modem masked interrupt status (masked interrupt state) "
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+          CTSMMIS:
+            description: "nUARTCTS modem masked interrupt status (masked interrupt state) "
+            bitOffset: 1
+            bitWidth: 1
+            access: read-only
+          DCDMMIS:
+            description: "nUARTDCD modem masked interrupt status (masked interrupt state) "
+            bitOffset: 2
+            bitWidth: 1
+            access: read-only
+          DSRMMIS:
+            description: "nUARTDSR modem masked interrupt status (masked interrupt state) "
+            bitOffset: 3
+            bitWidth: 1
+            access: read-only
+          RXMIS:
+            description:  "Receive masked interrupt status (masked interrupt state) "
+            bitOffset: 4
+            bitWidth: 1
+            access: read-only
+          TXMIS:
+            description: "Transmit masked interrupt status (masked interrupt state) "
+            bitOffset: 5
+            bitWidth: 1
+            access: read-only
+          RTMIS:
+            description: "Receive timeout masked interrupt status (masked interrupt state) "
+            bitOffset: 6
+            bitWidth: 1
+            access: read-only
+          FEMIS:
+            description: "Framing error masked interrupt status (masked interrupt state) "
+            bitOffset: 7
+            bitWidth: 1
+            access: read-only
+          PEMIS:
+            description: "Parity error masked interrupt status (masked interrupt state) "
+            bitOffset: 8
+            bitWidth: 1
+            access: read-only
+          BEMIS:
+            description: "Break error masked interrupt status (masked interrupt state) "
+            bitOffset: 9
+            bitWidth: 1
+            access: read-only
+          OEMIS:
+            description: "Overrun error masked interrupt status (masked interrupt state) "
+            bitOffset: 10
+            bitWidth: 1
+            access: read-only
+      UART_ICR:
+        description: "Interrupt clear register" 
+        addressOffset: 0x044
+        size: 32
+        fields:
+          RIMIC:
+            description: "nUARTRI modem interrupt clear. Writing a 1 clears the interrupt. "
+            bitOffset: 0
+            bitWidth: 1
+            access: write-only
+          CTSMIC:
+            description: "nUARTCTS modem interrupt clear. Writing a 1 clears the interrupt. "
+            bitOffset: 1
+            bitWidth: 1
+            access: write-only
+          DCDMIC:
+            description: "nUARTDCD modem interrupt clear. Writing a 1 clears the interrupt. "
+            bitOffset: 2
+            bitWidth: 1
+            access: write-only
+          DSRMIC:
+            description: "nUARTDSR modem interrupt clear. Writing a 1 clears the interrupt. "
+            bitOffset: 3
+            bitWidth: 1
+            access: write-only
+          RXIC:
+            description:  "Receive interrupt clear. Writing a 1 clears the interrupt. "
+            bitOffset: 4
+            bitWidth: 1
+            access: write-only
+          TXIC:
+            description: "Transmit interrupt clear. Writing a 1 clears the interrupt. "
+            bitOffset: 5
+            bitWidth: 1
+            access: write-only
+          RTIC:
+            description: "Receive timeout interrupt clear. Writing a 1 clears the interrupt. "
+            bitOffset: 6
+            bitWidth: 1
+            access: write-only
+          FEIC:
+            description: "Framing error interrupt clear. Writing a 1 clears the interrupt. "
+            bitOffset: 7
+            bitWidth: 1
+            access: write-only
+          PEIC:
+            description: "Parity error interrupt clear. Writing a 1 clears the interrupt. "
+            bitOffset: 8
+            bitWidth: 1
+            access: write-only
+          BEIC:
+            description: "Break error interrupt clear. Writing a 1 clears the interrupt. "
+            bitOffset: 9
+            bitWidth: 1
+            access: write-only
+          OEIC:
+            description: "Overrun error interrupt clear. Writing a 1 clears the interrupt. "
+            bitOffset: 10
+            bitWidth: 1
+            access: write-only
+      UART_TCR:
+        description: "Test Control Register" 
+        addressOffset: 0x080
+        size: 32
+        resetValue: 0b000
+        resetMask:  0b111
+        fields:
+          ITEN:
+            description: "Integration test enable."
+            bitOffset: 0
+            bitWidth: 1 
+            access: write-only
+          TESTFINFO:
+            description: "Test FIFO enable."
+            bitOffset: 1
+            bitWidth: 1 
+            access: write-only
+          SIRTEST:
+            description: "Siren test enable."
+            bitOffset: 2
+            bitWidth: 1 
+            access: write-only
+      UART_ITIP:
+        description: "Integration test input register" 
+        addressOffset: 0x084
+        size: 32
+        resetValue: 0b0000_0000
+        resetMask:  0b1111_1111
+        fields:
+          UARTRXD:
+            description: ""
+            bitOffset: 0
+            bitWidth:  1
+            access: read-only
+          SIRIN:
+            description: ""
+            bitOffset: 1
+            bitWidth:  1
+            access: read-only
+          nUARTDSR:
+            description: ""
+            bitOffset: 2
+            bitWidth:  1
+            access: read-only
+          nUARTCTS:
+            description: ""
+            bitOffset: 3
+            bitWidth:  1
+            access: read-only
+          nUARTDCD:
+            description: ""
+            bitOffset: 4
+            bitWidth:  1
+            access: read-only
+          nUARTRI:
+            description: ""
+            bitOffset: 5
+            bitWidth:  1
+            access: read-only
+          UARTRXDMACLR:
+            description: ""
+            bitOffset: 6
+            bitWidth: 1
+            access: read-write
+          UARTTXDMACLR:
+            description: ""
+            bitOffset: 7
+            bitWidth: 1
+            access: read-write
+      UART_ITOP:
+        description: "Integration test output register" 
+        addressOffset: 0x088
+        size: 32
+        resetValue: 0x0000
+        resetMask:  0xFFFF
+        fields:
+          UART_ITOP:
+            description: "Integration test output."
+            bitOffset: 0 
+            bitWidth: 16
+            access: read-write
+      UART_TDR:
+        description: "Test data register" 
+        addressOffset: 0x08C
+        size: 32
+        resetValue: 0b000_0000_0000
+        resetMask:  0b111_1111_1111
+        fields:
+          UART_TDR:
+            description: "Test data"
+            bitOffset: 0 
+            bitWidth: 11
+            access: read-write
+      UART_PeriphID0:
+        description: "UART Peripheral ID 0 register" 
+        addressOffset: 0xFE0
+        size: 32
+        resetValue: 0x00
+        resetMask:  0x11
+        fields:
+          UART_PeriphID0:
+            description: "UART Peripheral ID 0 register" 
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      UART_PeriphID1:
+        description: "UART Peripheral ID 1 register" 
+        addressOffset: 0xFE4
+        size: 32
+        resetValue: 0x10
+        resetMask:  0xFF
+        fields:
+          UART_PeriphID1:
+            description: "UART Peripheral ID 1 register" 
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      UART_PeriphID2:
+        description: "UART Peripheral ID 2 register" 
+        addressOffset: 0xFE8
+        size: 32
+        resetValue: 0x34
+        resetMask:  0xFF
+        fields:
+          UART_PeriphID2:
+            description: "UART Peripheral ID 2 register" 
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      UART_PeriphID3:
+        description: "UART Peripheral ID 3 register" 
+        addressOffset: 0xFEC
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          UART_PeriphID3:
+            description: "UART Peripheral ID 3 register" 
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      UART_PCellID0:
+        description: "UART PCell ID 0 register" 
+        addressOffset: 0xFF0
+        size: 32
+        resetValue: 0x0D
+        resetMask:  0xFF
+        fields:
+          UART_PCellID0:
+            description: "UART PCell ID 0 register" 
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      UART_PCellID1:
+        description: "UART PCell ID 1 register" 
+        addressOffset: 0xFF4
+        size: 32
+        resetValue: 0xF0
+        resetMask:  0xFF
+        fields:
+          UART_PCellID1:
+            description: "UART PCell ID 1 register" 
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      UART_PCellID2:
+        description: "UART PCell ID 2 register" 
+        addressOffset: 0xFF8
+        size: 32
+        resetValue: 0x05
+        resetMask:  0xFF
+        fields:
+          UART_PCellID2:
+            description: "UART PCell ID 2 register" 
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      UART_PCellID4:
+        description: "UART PCell ID 4 register" 
+        addressOffset: 0xFFC
+        size: 32
+        resetValue: 0xB1
+        resetMask:  0xFF
+        fields:
+          UART_PCellID4:
+            description: "UART PCell ID 4 register" 
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+UART:
+  UART_LCR_H:
+    PEN:
+      parity_disable: [0, "parity is disabled and no parity bit added to the data frame"]
+      parity_enable: [1, "parity checking and generation is enabled."]
+    EPS: 
+      odd_parity: [0, "Select odd parity. The UART generates or checks for an odd number of 1s in the data and parity bits."]
+      even_parity: [1, "Select even parity. The UART generates or checks for an even number of 1s in the data and parity bits."]
+    FEN:
+      disable_fifos: [0, "FIFOs are disabled (character mode) that is, the FIFOs become 1-byte-deep holding registers"]
+      enable_fifos: [1, "transmit and receive FIFO buffers are enabled (FIFO mode)."]
+    WLEN:
+      use_5_bit_word: [0, "Word lenght of data bits is will be configured as 5 bit"]
+      use_6_bit_word: [1, "Word lenght of data bits is will be configured as 6 bit"]
+      use_7_bit_word: [2, "Word lenght of data bits is will be configured as 7 bit"]
+      use_8_bit_word: [3, "Word lenght of data bits is will be configured as 8 bit"]
+    SPS: 
+      disable_stick_parity: [0, "Stick parity is disabled"]
+      enable_stick_parity: [1, "If EPS = 1 => parity bit is trasmitted and checked as a 1, If EPS = 0 => parity bit is trasmitted an checked as a 0"]
+  UART_CR:
+    UARTEN: 
+      uart_disable: [0, "UART is disabled. If the UART is disabled in the middle of transmission or reception, it
+completes the current character before stopping."]
+      uart_enable: [1, "the UART is enabled. Data transmission and reception occurs for either UART signals or SIR
+signals depending on the setting of the SIREN bit."]
+    SIREN:
+      siren_disable: [0, "IrDA SIR ENDEC is disabled. nSIROUT remains LOW (no light pulse generated), and signal
+transitions on SIRIN have no effect."]
+      siren_enable: [1, "IrDA SIR ENDEC is enabled. Data is transmitted and received on nSIROUT and SIRIN. UARTTXD remains HIGH, in the marking state. Signal transitions on UARTRXD or modem status inputs have no effect."] 
+  UART_IFLS:
+    "*":
+      one_eight:      [0,"Trigger when corresponding FIFO becomes ≤ 1/8 full"]
+      one_quarter:    [1,"Trigger when corresponding FIFO becomes ≤ 1/4 full"]
+      one_half:       [2,"Trigger when corresponding FIFO becomes ≤ 1/2 full"]
+      three_quarters: [3,"Trigger when corresponding FIFO becomes ≤ 3/4 full"]
+      seven_eights:   [4,"Trigger when corresponding FIFO becomes ≤ 7/8 full"]
+

@@ -14,7 +14,7 @@ _include:
   - "device/IO_MUX.yaml" #done
   - "device/MISC.yaml" #done
   - "device/PKFB.yaml"
-  - "device/PMU.yaml"
+  - "device/PMU.yaml" #done
   - "device/SDMA_Bridge.yaml"
   - "device/SDMA.yaml"
   - "device/SPI.yaml"
