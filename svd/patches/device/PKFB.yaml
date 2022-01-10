@@ -414,6 +414,528 @@ _add:
             bitWidth: 1
             access: read-write
 
+      PKFB_PF0PUSHCTL:
+        description: "FIFO 0 Push Control" 
+        addressOffset: 0x010
+        size: 32
+        resetValue: 0b0_0000_0000_0000_0000_0000_0000
+        resetMask:  0b1_1111_1111_0000_0000_0001_1111
+        fields:
+          pf0_push_sleep_en:
+            description: "Set this bit to enable sleep"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          pf0_push_sleep_type:
+            description: "Select the type of sleep mode"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          pf0_push_int_en_ov:
+            description: "Control whether the push interrupt for FIFO overflow is enabled or masked"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          pf0_push_int_en_thresh:
+            description: "Control whether the push interrupt for FIFO threshold is enabled or masked"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          pf0_push_int_en_sram_sleep:
+            description: "Control whether the push interrupt for push on SRAM sleep is enabled or masked"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          pf0_push_thresh:
+            description: "PUSH counter threshold (x32 count)"
+            bitOffset: 16
+            bitWidth: 9
+            access: read-write
+      PKFB_PF0POPCTL:
+        description: "FIFO 0 Pop Control" 
+        addressOffset: 0x014
+        size: 32
+        resetValue: 0b0_0000_0000_0000_0000_0000_0000
+        resetMask:  0b1_1111_1111_0000_0000_0001_1111
+        fields:
+          pf0_pop_sleep_en:
+            description: "Set this bit to enable sleep"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          pf0_pop_sleep_type:
+            description: "Select the type of sleep mode"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          pf0_pop_int_en_ov:
+            description: "Control whether the push interrupt for FIFO overflow is enabled or masked"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          pf0_pop_int_en_thresh:
+            description: "Control whether the push interrupt for FIFO threshold is enabled or masked"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          pf0_pop_int_en_sram_sleep:
+            description: "Control whether the push interrupt for pop on SRAM sleep is enabled or masked"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          pf0_pop_thresh:
+            description: "POP counter threshold (x32 count)"
+            bitOffset: 16
+            bitWidth: 9
+            access: read-write
+      PKFB_PF0CNT:
+        description: "FIFO 0 Count" 
+        addressOffset: 0x018
+        size: 32
+        resetValue: 0x0100_8000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pf0_pop_cnt:
+            description: "FIFO 0 Pop Count (x32 count) Number of available entries for pop"
+            bitOffset: 0
+            bitWidth: 9
+            access: read-only
+          pf0_empty:
+            description: "FIFO 0 Empty"
+            bitOffset: 15
+            bitWidth: 1
+            access: read-only
+          pf0_push_cnt:
+            description: "FIFO 0 Push Count (x32 count) Number of available entries for push"
+            bitOffset: 16
+            bitWidth: 9
+            access: read-only
+          pf0_full:
+            description: "FIFO 0 Full"
+            bitOffset: 31
+            bitWidth: 1
+            access: read-only
+      PKFB_PF0DATA:
+        description: "FIFO 0 Push/POP Data Register" 
+        addressOffset: 0x01C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pf0_data_reg:
+            description: "FIFO 0 Push/POP Data Register" 
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      PKFB_PF1PUSHCTL:
+        description: "FIFO 1 Push Control" 
+        addressOffset: 0x020
+        size: 32
+        resetValue: 0b0000_0000_0000_0000_0000_0000
+        resetMask:  0b1111_1111_0000_0000_0001_1111
+        fields:
+          pf1_push_sleep_en:
+            description: "Set this bit to enable sleep"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          pf1_push_sleep_type:
+            description: "Select the type of sleep mode"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          pf1_push_int_en_ov:
+            description: "Control whether the push interrupt for FIFO overflow is enabled or masked"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          pf1_push_int_en_thresh:
+            description: "Control whether the push interrupt for FIFO threshold is enabled or masked"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          pf1_push_int_en_sram_sleep:
+            description: "Control whether the push interrupt for push on SRAM sleep is enabled or masked"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          pf1_push_thresh:
+            description: "PUSH counter threshold (x32 count)"
+            bitOffset: 16
+            bitWidth: 8
+            access: read-write
+      PKFB_PF1POPCTL:
+        description: "FIFO 1 Pop Control" 
+        addressOffset: 0x024
+        size: 32
+        resetValue: 0b0000_0000_0000_0000_0000_0000
+        resetMask:  0b1111_1111_0000_0000_0001_1111
+        fields:
+          pf1_pop_sleep_en:
+            description: "Set this bit to enable sleep"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          pf1_pop_sleep_type:
+            description: "Select the type of sleep mode"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          pf1_pop_int_en_ov:
+            description: "Control whether the push interrupt for FIFO overflow is enabled or masked"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          pf1_pop_int_en_thresh:
+            description: "Control whether the push interrupt for FIFO threshold is enabled or masked"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          pf1_pop_int_en_sram_sleep:
+            description: "Control whether the push interrupt for pop on SRAM sleep is enabled or masked"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          pf1_pop_thresh:
+            description: "POP counter threshold (x32 count)"
+            bitOffset: 16
+            bitWidth: 8
+            access: read-write
+      PKFB_PF1CNT:
+        description: "FIFO 1 Count" 
+        addressOffset: 0x028
+        size: 32
+        resetValue: 0x0080_8000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pf1_pop_cnt:
+            description: "FIFO 1 Pop Count (x32 count) Number of available entries for pop"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+          pf1_empty:
+            description: "FIFO 1 Empty"
+            bitOffset: 15
+            bitWidth: 1
+            access: read-only
+          pf1_push_cnt:
+            description: "FIFO 1 Push Count (x32 count) Number of available entries for push"
+            bitOffset: 16
+            bitWidth: 8
+            access: read-only
+          pf1_full:
+            description: "FIFO 1 Full"
+            bitOffset: 31
+            bitWidth: 1
+            access: read-only
+      PKFB_PF1DATA:
+        description: "FIFO 1 Push/POP Data Register" 
+        addressOffset: 0x02C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pf1_data_reg:
+            description: "FIFO 1 Push/POP Data Register" 
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      PKFB_PF2PUSHCTL:
+        description: "FIFO 2 Push Control" 
+        addressOffset: 0x030
+        size: 32
+        resetValue: 0b0000_0000_0000_0000_0000_0000
+        resetMask:  0b1111_1111_0000_0000_0001_1111
+        fields:
+          pf2_push_sleep_en:
+            description: "Set this bit to enable sleep"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          pf2_push_sleep_type:
+            description: "Select the type of sleep mode"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          pf2_push_int_en_ov:
+            description: "Control whether the push interrupt for FIFO overflow is enabled or masked"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          pf2_push_int_en_thresh:
+            description: "Control whether the push interrupt for FIFO threshold is enabled or masked"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          pf2_push_int_en_sram_sleep:
+            description: "Control whether the push interrupt for push on SRAM sleep is enabled or masked"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          pf2_push_thresh:
+            description: "PUSH counter threshold (x32 count)"
+            bitOffset: 16
+            bitWidth: 8
+            access: read-write
+      PKFB_PF2POPCTL:
+        description: "FIFO 2 Pop Control" 
+        addressOffset: 0x034
+        size: 32
+        resetValue: 0b0000_0000_0000_0000_0000_0000
+        resetMask:  0b1111_1111_0000_0000_0001_1111
+        fields:
+          pf2_pop_sleep_en:
+            description: "Set this bit to enable sleep"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          pf2_pop_sleep_type:
+            description: "Select the type of sleep mode"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          pf2_pop_int_en_ov:
+            description: "Control whether the push interrupt for FIFO overflow is enabled or masked"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          pf2_pop_int_en_thresh:
+            description: "Control whether the push interrupt for FIFO threshold is enabled or masked"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          pf2_pop_int_en_sram_sleep:
+            description: "Control whether the push interrupt for pop on SRAM sleep is enabled or masked"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          pf2_pop_thresh:
+            description: "POP counter threshold (x32 count)"
+            bitOffset: 16
+            bitWidth: 8
+            access: read-write
+      PKFB_PF2CNT:
+        description: "FIFO 2 Count" 
+        addressOffset: 0x318
+        size: 32
+        resetValue: 0x0080_8000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pf2_pop_cnt:
+            description: "FIFO 2 Pop Count (x32 count) Number of available entries for pop"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+          pf2_empty:
+            description: "FIFO 2 Empty"
+            bitOffset: 15
+            bitWidth: 1
+            access: read-only
+          pf2_push_cnt:
+            description: "FIFO 2 Push Count (x32 count) Number of available entries for push"
+            bitOffset: 16
+            bitWidth: 8
+            access: read-only
+          pf2_full:
+            description: "FIFO 2 Full"
+            bitOffset: 31
+            bitWidth: 1
+            access: read-only
+      PKFB_PF2DATA:
+        description: "FIFO 2 Push/POP Data Register" 
+        addressOffset: 0x03C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pf2_data_reg:
+            description: "FIFO 2 Push/POP Data Register" 
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      PKFB_PF8KPUSHCTL:
+        description: "FIFO 8k Push Control" 
+        addressOffset: 0x040
+        size: 32
+        resetValue: 0b0_0000_0000_0000_0000_0000_0000
+        resetMask:  0b1_1111_1111_0000_0000_0001_1111
+        fields:
+          pf8k_push_sleep_en:
+            description: "Set this bit to enable sleep"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          pf8k_push_sleep_type:
+            description: "Select the type of sleep mode"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          pf8k_push_int_en_ov:
+            description: "Control whether the push interrupt for FIFO overflow is enabled or masked"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          pf8k_push_int_en_thresh:
+            description: "Control whether the push interrupt for FIFO threshold is enabled or masked"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          pf8k_push_int_en_sram_sleep:
+            description: "Control whether the push interrupt for push on SRAM sleep is enabled or masked"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          pf8k_push_thresh:
+            description: "PUSH counter threshold (x16 count)"
+            bitOffset: 16
+            bitWidth: 13
+            access: read-write
+      PKFB_PF8KPOPCTL:
+        description: "FIFO 8k Pop Control" 
+        addressOffset: 0x044
+        size: 32
+        resetValue: 0b0_0000_0000_0000_0000_0000_0000_0000
+        resetMask:  0b1_1111_1111_1111_0000_0000_0111_1111
+        fields:
+          pf8k_pop_sleep_en:
+            description: "Set this bit to enable sleep"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          pf8k_pop_sleep_type:
+            description: "Select the type of sleep mode"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          pf8k_pop_int_en_ov:
+            description: "Control whether the push interrupt for FIFO overflow is enabled or masked"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          pf8k_pop_int_en_thresh:
+            description: "Control whether the push interrupt for FIFO threshold is enabled or masked"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          pf8k_pop_int_en_sram_sleep:
+            description: "Control whether the push interrupt for pop on SRAM sleep is enabled or masked"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          pf8k_fifo_pkt_mode:
+            description: "FIFO Packet Mode"
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+          pf8k_fifo_ring_buff_mode:
+            description: "Ring buffer mode"
+            bitOffset: 6
+            bitWidth: 1
+            access: read-write
+          pf8k_pop_thresh:
+            description: "POP counter threshold (x16 count)"
+            bitOffset: 16
+            bitWidth: 8
+            access: read-write
+      PKFB_PF8KCNT:
+        description: "FIFO 8k Count" 
+        addressOffset: 0x048
+        size: 32
+        resetValue: 0x0100_8000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pf8k_pop_cnt:
+            description: "FIFO 8k Pop Count (x16 count) Number of available entries for pop"
+            bitOffset: 0
+            bitWidth: 13
+            access: read-only
+          pf8k_empty:
+            description: "FIFO 8k Empty"
+            bitOffset: 15
+            bitWidth: 1
+            access: read-only
+          pf8k_push_cnt:
+            description: "FIFO 8k Push Count (x32 count) Number of available entries for push"
+            bitOffset: 16
+            bitWidth: 13
+            access: read-only
+          pf8k_full:
+            description: "FIFO 8k Full"
+            bitOffset: 31
+            bitWidth: 1
+            access: read-only
+      PKFB_PF8kDATA:
+        description: "FIFO 8k Push/POP Data Register" 
+        addressOffset: 0x04C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pf8k_data_reg:
+            description: "FIFO 8k Push/POP Data Register. In ringbuffer mode, [16] is treated as SOP (start-of-packet) by autodrain logic" 
+            bitOffset: 0
+            bitWidth: 17
+            access: read-write
+          pf8k_push_eop:
+            description: "FIFO 8k Push EOP (end of packet)" 
+            bitOffset: 17
+            bitWidth: 1
+            access: write-only
+      PKFB_FIFO_COLL_INTR:
+        description: "Control for collision interrupts" 
+        addressOffset: 0x050
+        size: 32
+        resetValue: 0b0000
+        resetMask:  0b1111
+        fields:
+          pf0_coll_intr:
+            description: "Interrupt is triggered when bot FFE0 and FFE1 try to push into packet FIFO 0"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          pf1_coll_intr:
+            description: "Interrupt is triggered when bot FFE0 and FFE1 try to push into packet FIFO 1"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          pf2_coll_intr:
+            description: "Interrupt is triggered when bot FFE0 and FFE1 try to push into packet FIFO 0"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          pf8k_coll_intr:
+            description: "Interrupt is triggered when bot FFE0 and FFE1 try to push into packet FIFO 8k"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+      PKFB_FIFO_COLL_INTR_EN:
+        description: "Control register for enabling or masking the collisione interrupts" 
+        addressOffset: 0x054
+        size: 32
+        resetValue: 0b0000
+        resetMask:  0b1111
+        fields:
+          pf0_coll_intr_en:
+            description: "Set bit to enable interrupt"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          pf1_coll_intr_en:
+            description: "Set bit to enable interrupt"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          pf2_coll_intr_en:
+            description: "Set bit to enable interrupt"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          pf8k_coll_intr_en:
+            description: "Set bit to enable interrupt"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+
 PKFB:
   PKFB_FIFOCTRL:
     "*_en": 
@@ -440,3 +962,14 @@ PKFB:
       light_sleep: [1, "SRAM is in Light Sleep mode"]
       deep_sleep: [2, "SRAM is in Deep Sleep mode"]
       shutdown: [3, "SRAM is in Shutdown mode"]
+  "PKFB_PF*CTL":
+    "pf*_sleep_type":
+      deep_sleep: [0, "Select deep sleep as sleep type for the FIFO"]
+      shut_down: [1, "Select shutdown as the sleep type for the FIFO"]
+    "pf*_int_*":
+      mask: [0, "Mask the interrupt event"]
+      unmask: [1, "Unmask the interrupt event"]
+  PKFB_FIFO_COLL_INTR_EN:
+    "*":
+      mask: [0, "Mask the interrupt event"]
+      unmask: [1, "Unmask the interrupt event"]

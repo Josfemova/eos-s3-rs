@@ -13,7 +13,7 @@ _include:
   - "device/INTR_CTRL.yaml"
   - "device/IO_MUX.yaml" #done
   - "device/MISC.yaml" #done
-  - "device/PKFB.yaml"
+  - "device/PKFB.yaml" #done
   - "device/PMU.yaml" #done
   - "device/SDMA_Bridge.yaml"
   - "device/SDMA.yaml"
