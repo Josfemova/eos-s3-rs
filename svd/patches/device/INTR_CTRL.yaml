@@ -157,4 +157,1149 @@ _add:
       DMIC_VOICE_OFF:
         description: ""
         value: 52
+    registers:
+      GPIO_INTR:
+        description: "Indicators of interrupt triggers detected" 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          GPIO_0_INTR:
+            description: "Active high edge interrupt detected for GPIO_0. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          GPIO_1_INTR:
+            description: "Active high edge interrupt detected for GPIO_1. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          GPIO_2_INTR:
+            description: "Active high edge interrupt detected for GPIO_2. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          GPIO_3_INTR:
+            description: "Active high edge interrupt detected for GPIO_3. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+          GPIO_4_INTR:
+            description: "Active high edge interrupt detected for GPIO_4. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 4
+            bitWidth: 1 
+            access: read-write
+          GPIO_5_INTR:
+            description: "Active high edge interrupt detected for GPIO_5. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-write
+          GPIO_6_INTR:
+            description: "Active high edge interrupt detected for GPIO_6. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 6
+            bitWidth: 1 
+            access: read-write
+          GPIO_7_INTR:
+            description: "Active high edge interrupt detected for GPIO_7. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 7
+            bitWidth: 1 
+            access: read-write
+      GPIO_INTR_RAW:
+        description: "GPIO raw interrupt indicators" 
+        addressOffset: 0x004
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          GPIO_0_INTR_RAW:
+            description: "Raw interrupt for GPIO_0. This register will reflect the value of the IO regardless of the type/polarity"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-only
+          GPIO_1_INTR_RAW:
+            description: "Raw interrupt for GPIO_1. This register will reflect the value of the IO regardless of the type/polarity"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-only
+          GPIO_2_INTR_RAW:
+            description: "Raw interrupt for GPIO_2. This register will reflect the value of the IO regardless of the type/polarity"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-only
+          GPIO_3_INTR_RAW:
+            description: "Raw interrupt for GPIO_3. This register will reflect the value of the IO regardless of the type/polarity"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-only
+          GPIO_4_INTR_RAW:
+            description: "Raw interrupt for GPIO_4. This register will reflect the value of the IO regardless of the type/polarity"
+            bitOffset: 4
+            bitWidth: 1 
+            access: read-only
+          GPIO_5_INTR_RAW:
+            description: "Raw interrupt for GPIO_5. This register will reflect the value of the IO regardless of the type/polarity"
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-only
+          GPIO_6_INTR_RAW:
+            description: "Raw interrupt for GPIO_6. This register will reflect the value of the IO regardless of the type/polarity"
+            bitOffset: 6
+            bitWidth: 1 
+            access: read-only
+          GPIO_7_INTR_RAW:
+            description: "Raw interrupt for GPIO_7. This register will reflect the value of the IO regardless of the type/polarity"
+            bitOffset: 7
+            bitWidth: 1 
+            access: read-only
+      GPIO_INTR_TYPE:
+        description: "Indicators of interrupt trigger types" 
+        addressOffset: 0x008
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          GPIO_O_INTR_TYPE:
+            description: "GPIO_0 interrupt type {0: level, 1: edge}"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          GPIO_1_INTR_TYPE:
+            description: "GPIO_1 interrupt type {0: level, 1: edge}"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          GPIO_2_INTR_TYPE:
+            description: "GPIO_2 interrupt type {0: level, 1: edge}"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          GPIO_3_INTR_TYPE:
+            description: "GPIO_3 interrupt type {0: level, 1: edge}"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+          GPIO_4_INTR_TYPE:
+            description: "GPIO_4 interrupt type {0: level, 1: edge}"
+            bitOffset: 4
+            bitWidth: 1 
+            access: read-write
+          GPIO_5_INTR_TYPE:
+            description: "GPIO_5 interrupt type {0: level, 1: edge}"
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-write
+          GPIO_6_INTR_TYPE:
+            description: "GPIO_6 interrupt type {0: level, 1: edge}"
+            bitOffset: 6
+            bitWidth: 1 
+            access: read-write
+          GPIO_7_INTR_TYPE:
+            description: "GPIO_7 interrupt type {0: level, 1: edge}"
+            bitOffset: 7
+            bitWidth: 1 
+            access: read-write
+      GPIO_INTR_POL:
+        description: "Indicators of interrupt trigger polarities (will depend on the type of interrupt)" 
+        addressOffset: 0x00C
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          GPIO_0_INTR_POL:
+            description: "GPIO_0 interrupt polarity (depends on interrupt type): type = level => {0:low, 1:hi}  --- type = edge => {0:fall, 1:rise}"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          GPIO_1_INTR_POL:
+            description: "GPIO_1 interrupt polarity (depends on interrupt type): type = level => {0:low, 1:hi}  --- type = edge => {0:fall, 1:rise}"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          GPIO_2_INTR_POL:
+            description: "GPIO_2 interrupt polarity (depends on interrupt type): type = level => {0:low, 1:hi}  --- type = edge => {0:fall, 1:rise}"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          GPIO_3_INTR_POL:
+            description: "GPIO_3 interrupt polarity (depends on interrupt type): type = level => {0:low, 1:hi}  --- type = edge => {0:fall, 1:rise}"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+          GPIO_4_INTR_POL:
+            description: "GPIO_4 interrupt polarity (depends on interrupt type): type = level => {0:low, 1:hi}  --- type = edge => {0:fall, 1:rise}"
+            bitOffset: 4
+            bitWidth: 1 
+            access: read-write
+          GPIO_5_INTR_POL:
+            description: "GPIO_5 interrupt polarity (depends on interrupt type): type = level => {0:low, 1:hi}  --- type = edge => {0:fall, 1:rise}"
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-write
+          GPIO_6_INTR_POL:
+            description: "GPIO_6 interrupt polarity (depends on interrupt type): type = level => {0:low, 1:hi}  --- type = edge => {0:fall, 1:rise}"
+            bitOffset: 6
+            bitWidth: 1 
+            access: read-write
+          GPIO_7_INTR_POL:
+            description: "GPIO_7 interrupt polarity (depends on interrupt type): type = level => {0:low, 1:hi}  --- type = edge => {0:fall, 1:rise}"
+            bitOffset: 7
+            bitWidth: 1 
+            access: read-write
+      GPIO_INTR_EN_AP:
+        description: "GPIO interrupt enable for AP" 
+        addressOffset: 0x010
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          GPIO_0_INTR_EN_AP:
+            description: "GPIO_0 interrupt enable for AP"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          GPIO_1_INTR_EN_AP:
+            description: "GPIO_1 interrupt enable for AP"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          GPIO_2_INTR_EN_AP:
+            description: "GPIO_2 interrupt enable for AP"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          GPIO_3_INTR_EN_AP:
+            description: "GPIO_3 interrupt enable for AP"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+          GPIO_4_INTR_EN_AP:
+            description: "GPIO_4 interrupt enable for AP"
+            bitOffset: 4
+            bitWidth: 1 
+            access: read-write
+          GPIO_5_INTR_EN_AP:
+            description: "GPIO_5 interrupt enable for AP"
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-write
+          GPIO_6_INTR_EN_AP:
+            description: "GPIO_6 interrupt enable for AP"
+            bitOffset: 6
+            bitWidth: 1 
+            access: read-write
+          GPIO_7_INTR_EN_AP:
+            description: "GPIO_7 interrupt enable for AP"
+            bitOffset: 7
+            bitWidth: 1 
+            access: read-write
+      GPIO_INTR_EN_M4:
+        description: "GPIO interrupt enable for M4" 
+        addressOffset: 0x014
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          GPIO_1_INTR_EN_M4:
+            description: "GPIO_0 interrupt enable for M4"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          GPIO_2_INTR_EN_M4:
+            description: "GPIO_1 interrupt enable for M4"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          GPIO_3_INTR_EN_M4:
+            description: "GPIO_2 interrupt enable for M4"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          GPIO_3_INTR_EN_M4:
+            description: "GPIO_3 interrupt enable for M4"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+          GPIO_4_INTR_EN_M4:
+            description: "GPIO_4 interrupt enable for M4"
+            bitOffset: 4
+            bitWidth: 1 
+            access: read-write
+          GPIO_5_INTR_EN_M4:
+            description: "GPIO_5 interrupt enable for M4"
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-write
+          GPIO_6_INTR_EN_M4:
+            description: "GPIO_6 interrupt enable for M4"
+            bitOffset: 6
+            bitWidth: 1 
+            access: read-write
+          GPIO_7_INTR_EN_M4:
+            description: "GPIO_7 interrupt enable for M4"
+            bitOffset: 7
+            bitWidth: 1 
+            access: read-write
+      GPIO_INTR_EN_FFE0:
+        description: "GPIO interrupt enable for FFE0" 
+        addressOffset: 0x018
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          GPIO_0_INTR_EN_FFE0:
+            description: "GPIO_0 interrupt enable for FFE0"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          GPIO_1_INTR_EN_FFE0:
+            description: "GPIO_1 interrupt enable for FFE0"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          GPIO_2_INTR_EN_FFE0:
+            description: "GPIO_2 interrupt enable for FFE0"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          GPIO_3_INTR_EN_FFE0:
+            description: "GPIO_3 interrupt enable for FFE0"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+          GPIO_4_INTR_EN_FFE0:
+            description: "GPIO_4 interrupt enable for FFE0"
+            bitOffset: 4
+            bitWidth: 1 
+            access: read-write
+          GPIO_5_INTR_EN_FFE0:
+            description: "GPIO_5 interrupt enable for FFE0"
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-write
+          GPIO_6_INTR_EN_FFE0:
+            description: "GPIO_6 interrupt enable for FFE0"
+            bitOffset: 6
+            bitWidth: 1 
+            access: read-write
+          GPIO_7_INTR_EN_FFE0:
+            description: "GPIO_7 interrupt enable for FFE0"
+            bitOffset: 7
+            bitWidth: 1 
+            access: read-write
+      GPIO_INTR_EN_FFE1:
+        description: "GPIO interrupt enable for FFE1" 
+        addressOffset: 0x01C
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          GPIO_0_INTR_EN_FFE1:
+            description: "GPIO_0 interrupt enable for FFE1"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          GPIO_1_INTR_EN_FFE1:
+            description: "GPIO_1 interrupt enable for FFE1"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          GPIO_2_INTR_EN_FFE1:
+            description: "GPIO_2 interrupt enable for FFE1"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          GPIO_3_INTR_EN_FFE1:
+            description: "GPIO_3 interrupt enable for FFE1"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+          GPIO_4_INTR_EN_FFE1:
+            description: "GPIO_4 interrupt enable for FFE1"
+            bitOffset: 4
+            bitWidth: 1 
+            access: read-write
+          GPIO_5_INTR_EN_FFE1:
+            description: "GPIO_5 interrupt enable for FFE1"
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-write
+          GPIO_6_INTR_EN_FFE1:
+            description: "GPIO_6 interrupt enable for FFE1"
+            bitOffset: 6
+            bitWidth: 1 
+            access: read-write
+          GPIO_7_INTR_EN_FFE1:
+            description: "GPIO_7 interrupt enable for FFE1"
+            bitOffset: 7
+            bitWidth: 1 
+            access: read-write
+      OTHER_INTR:
+        description: "Indicators of interrupt triggers detected" 
+        addressOffset: 0x030
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          M4_SRAM_INTR:
+            description: "Interrupt detected for M4 SRAM (access during low power)"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          UART_INTR:
+            description: "Interrupt detected for UART"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          TIMER_INTR:
+            description: "Interrupt detected for timer"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          WDOG_INTR:
+            description: "Interrupt detected for WDT M4"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+          WDOG_RST:
+            description: "Interrupt detected for WDT M4 Reset"
+            bitOffset: 4
+            bitWidth: 1 
+            access: read-write
+          TIMEOUT_INTR:
+            description: "Interrupt detected for bus timeout"
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-write
+          FPU_INTR:
+            description: "Interrupt detected for M4 FPU"
+            bitOffset: 6
+            bitWidth: 1 
+            access: read-write
+          PKFB_INTR:
+            description: "Interrupt detected for Packet FIFO Bank"
+            bitOffset: 7
+            bitWidth: 1 
+            access: read-write
+          SPI_MS_INTR:
+            description: "Interrupt detected for SPI Master"
+            bitOffset: 10
+            bitWidth: 1 
+            access: read-write
+          CFG_DMA_INTR:
+            description: "Interrupt detected for Config DMA"
+            bitOffset: 11
+            bitWidth: 1 
+            access: read-write
+          PMU_TMR_INTR:
+            description: "Interrupt detected for PMU Timer"
+            bitOffset: 12
+            bitWidth: 1 
+            access: read-write
+          ADC_INTR:
+            description: "Interrupt detected for ADC"
+            bitOffset: 13
+            bitWidth: 1 
+            access: read-write
+          RTC_INTR:
+            description: "Interrupt detected for RTC"
+            bitOffset: 14
+            bitWidth: 1 
+            access: read-write
+          RST_INTR:
+            description: "Interrupt detected for Reset"
+            bitOffset: 15
+            bitWidth: 1 
+            access: read-write
+          FFE0_INTR_OTHERS:
+            description: "Interrupt detected for FFE0 other interrupts"
+            bitOffset: 16
+            bitWidth: 1 
+            access: read-write
+          APBOOT_EN_INTR:
+            description: "Interrupt detected for AP boot"
+            bitOffset: 18
+            bitWidth: 1 
+            access: read-write
+          LDO30_PG_INTR:
+            description: "Interrupt detected for absence of LDO30 power good"
+            bitOffset: 19
+            bitWidth: 1 
+            access: read-write
+          LDO50_PG_INTR:
+            description: "Interrupt detected for absence of LDO30 power good"
+            bitOffset: 20
+            bitWidth: 1 
+            access: read-write
+          LPSD_VOICE_DET:
+            description: "Interrupt detected for LPSD Voice"
+            bitOffset: 22
+            bitWidth: 1 
+            access: read-write
+          DMIC_VOICE_DET:
+            description: "Interrupt detected for Digital MIC"
+            bitOffset: 23
+            bitWidth: 1 
+            access: read-write
+      OTHER_INTR_EN_AP:
+        description: "Various interrupt enable for AP" 
+        addressOffset: 0x034
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          M4_SRAM_INTR_EN_AP:
+            description: "M4 SRAM (access during low power)  interrupt enable for AP"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          UART_INTR_EN_AP:
+            description: "UART interrupt enable for AP"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          TIMER_INTR_EN_AP:
+            description: "Timer interrupt enable for AP"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          WDOG_INTR_EN_AP:
+            description: "WDT M4 interrupt enable for AP"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+          WDOG_RST_EN_AP:
+            description: "WDT M4 Reset interrupt enable for AP"
+            bitOffset: 4
+            bitWidth: 1 
+            access: read-write
+          TIMEOUT_INTR_EN_AP:
+            description: "Bus Timeout interrupt enable for AP"
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-write
+          FPU_INTR_EN_AP:
+            description: "M4 FPU interrupt enable for AP"
+            bitOffset: 6
+            bitWidth: 1 
+            access: read-write
+          PKFB_INTR_EN_AP:
+            description: "Packet FIFO Bank interrupt enable for AP"
+            bitOffset: 7
+            bitWidth: 1 
+            access: read-write
+          SPI_MS_INTR_EN_AP:
+            description: "SPI Master interrupt enable for AP"
+            bitOffset: 10
+            bitWidth: 1 
+            access: read-write
+          CFG_DMA_DONE_INTR_EN_AP:
+            description: "Config DMA interrupt enable for AP"
+            bitOffset: 11
+            bitWidth: 1 
+            access: read-write
+          PMU_TMR_INTR_EN_AP:
+            description: "PMU Timer interrupt enable for AP"
+            bitOffset: 12
+            bitWidth: 1 
+            access: read-write
+          ADC_INTR_EN_AP:
+            description: "ADC interrupt enable for AP"
+            bitOffset: 13
+            bitWidth: 1 
+            access: read-write
+          RTC_INTR_EN_AP:
+            description: "RTC interrupt enable for AP"
+            bitOffset: 14
+            bitWidth: 1 
+            access: read-write
+          RST_INTR_EN_AP:
+            description: "Reset interrupt enable for AP"
+            bitOffset: 15
+            bitWidth: 1 
+            access: read-write
+          FFE0_INTR_OTHERS_EN_AP:
+            description: "FFE0 Other interrupt enable for AP"
+            bitOffset: 16
+            bitWidth: 1 
+            access: read-write
+          APBOOT_EN_AP:
+            description: "AP Boot interrupt enable for AP"
+            bitOffset: 18
+            bitWidth: 1 
+            access: read-write
+          LDO30_PG_INTR_EN_AP:
+            description: "LDO30 absence of power good interrupt enable for AP"
+            bitOffset: 19
+            bitWidth: 1 
+            access: read-write
+          LDO50_PG_INTR_EN_AP:
+            description: "LDO50 absence of power good interrupt enable for AP"
+            bitOffset: 20
+            bitWidth: 1 
+            access: read-write
+          SRAM_128KB_TIMEOUT_INTR_EN_AP:
+            description: "SRAM_128KB_TIMEOUT interrupt enable for AP"
+            bitOffset: 21
+            bitWidth: 1 
+            access: read-write
+          LPSD_VOICE_DET_EN_AP:
+            description: "LPSD Voice detected interrupt enable for AP"
+            bitOffset: 22
+            bitWidth: 1 
+            access: read-write
+          DMIC_VOICE_DET_EN_AP:
+            description: "Digital Mic interrupt enable for AP"
+            bitOffset: 23
+            bitWidth: 1 
+            access: read-write
+      OTHER_INTR_EN_M4:
+        description: "Various interrupt enable for M4" 
+        addressOffset: 0x038
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          M4_SRAM_INTR_EN_M4:
+            description: "M4 SRAM (access during low power) interrupt enable for M4"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          UART_INTR_EN_M4:
+            description: "UART interrupt enable for M4"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          TIMER_INTR_EN_M4:
+            description: "Timer interrupt enable for M4"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          WDOG_INTR_EN_M4:
+            description: "WDOG M4 interrupt enable for M4"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+          WDOG_RST_EN_M4:
+            description: "WDOG M4 Reset interrupt enable for M4"
+            bitOffset: 4
+            bitWidth: 1 
+            access: read-write
+          TIMEOUT_INTR_EN_M4:
+            description: "bus timeout interrupt enable for M4"
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-write
+          FPU_INTR_EN_M4:
+            description: "M4 FPU interrupt enable for M4"
+            bitOffset: 6
+            bitWidth: 1 
+            access: read-write
+          PKFB_INTR_EN_M4:
+            description: "Packet FIFO Bank interrupt enable for M4"
+            bitOffset: 7
+            bitWidth: 1 
+            access: read-write
+          SPI_MS_INTR_EN_M4:
+            description: "SPI Master interrupt enable for M4"
+            bitOffset: 10
+            bitWidth: 1 
+            access: read-write
+          CFG_DMA_INTR_EN_M4:
+            description: "Config DMA interrupt enable for M4"
+            bitOffset: 11
+            bitWidth: 1 
+            access: read-write
+          PMU_TMR_INTR_EN_M4:
+            description: "PMU Timer interrupt enable for M4"
+            bitOffset: 12
+            bitWidth: 1 
+            access: read-write
+          ADC_INTR_EN_M4:
+            description: "ADC interrupt enable for M4"
+            bitOffset: 13
+            bitWidth: 1 
+            access: read-write
+          RTC_INTR_EN_M4:
+            description: "RTC interrupt enable for M4"
+            bitOffset: 14
+            bitWidth: 1 
+            access: read-write
+          RST_INTR_EN_M4:
+            description: "Reset interrupt enable for M4"
+            bitOffset: 15
+            bitWidth: 1 
+            access: read-write
+          FFE0_INTR_OTHERS_EN_M4:
+            description: "FFE0 other interrupts enable for M4"
+            bitOffset: 16
+            bitWidth: 1 
+            access: read-write
+          APBOOT_INTR_EN_M4:
+            description: "AP Boot interrupt enable for M4"
+            bitOffset: 18
+            bitWidth: 1 
+            access: read-write
+          LDO30_PG_INTR_EN_M4:
+            description: "Absence of LDO30 power good interrupt enable for M4"
+            bitOffset: 19
+            bitWidth: 1 
+            access: read-write
+          LDO50_PG_INTR_EN_M4:
+            description: "Absence of LDO50 power good interrupt enable for M4"
+            bitOffset: 20
+            bitWidth: 1 
+            access: read-write
+          LPSD_VOICE_DET_EN_M4:
+            description: "LPSD Voice detected interrupt enable for M4"
+            bitOffset: 22
+            bitWidth: 1 
+            access: read-write
+          DMIC_VOICE_DET_EN_M4:
+            description: "Digital Mic Voice detected interrupt enable for M4"
+            bitOffset: 23
+            bitWidth: 1 
+            access: read-write
+      SOFTWARE_INTR_1:
+        description: " Indicators of General purpose software interrupt 1 triggers detected" 
+        addressOffset: 0x040
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          SW_INTR_1:
+            description: "Active high edge interrupt detected for Software Interrupt 1. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+      SOFTWARE_INTR_1_EN_AP:
+        description: "General purpose Software interrupt 1 enable for AP" 
+        addressOffset: 0x044
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          SW_INTR_1_EN_AP:
+            description: "Software interrupt 1 enable for AP"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+      SOFTWARE_INTR_EN_M4:
+        description: "General purpose Software interrupt 1 enable for M4" 
+        addressOffset: 0x048
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          SW_INTR_1_EN_M4:
+            description: "Interrupt interrupt 1 enable for M4"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+      SOFTWARE_INTR_2:
+        description: "Indicators of General purpose software interrupt 2 triggers detected" 
+        addressOffset: 0x050
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          SW_INTR_2:
+            description: "Active high edge interrupt detected for Software Interrupt 2. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+      SOFTWARE_INTR_2_EN_AP:
+        description: "General purpose Software interrupt 2 enable for AP" 
+        addressOffset: 0x054
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          SW_INTR_2_EN_AP:
+            description: "Software interrupt 2 enable for AP"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+      SOFTWARE_INTR_EN_M4:
+        description: "General purpose Software interrupt 2 enable for M4" 
+        addressOffset: 0x058
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          SW_INTR_2_EN_M4:
+            description: "Software interrupt 2 enable for M4"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+      FFE_INTR:
+        description: "Indicators of FFE0 interrupt triggers detected" 
+        addressOffset: 0x060
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          FFE0_0_INTR:
+            description: "Active high edge interrupt detected for FFE0_0. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          FFE0_1_INTR:
+            description: "Active high edge interrupt detected for FFE0_1. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          FFE0_2_INTR:
+            description: "Active high edge interrupt detected for FFE0_2. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          FFE0_3_INTR:
+            description: "Active high edge interrupt detected for FFE0_3. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+          FFE0_4_INTR:
+            description: "Active high edge interrupt detected for FFE0_4. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 4
+            bitWidth: 1 
+            access: read-write
+          FFE0_5_INTR:
+            description: "Active high edge interrupt detected for FFE0_5. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-write
+          FFE0_6_INTR:
+            description: "Active high edge interrupt detected for FFE0_6. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 6
+            bitWidth: 1 
+            access: read-write
+          FFE0_7_INTR:
+            description: "Active high edge interrupt detected for FFE0_7. When  interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 7
+            bitWidth: 1 
+            access: read-write
+      FFE_INTR_EN_AP:
+        description: "FFE0 interrupt enable for AP" 
+        addressOffset: 0x064
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          FFE0_0_INTR_EN_AP:
+            description: "FFE0_0 interrupt enable for AP"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          FFE0_1_INTR_EN_AP:
+            description: "FFE0_1 interrupt enable for AP"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          FFE0_2_INTR_EN_AP:
+            description: "FFE0_2 interrupt enable for AP"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          FFE0_3_INTR_EN_AP:
+            description: "FFE0_3 interrupt enable for AP"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+          FFE0_4_INTR_EN_AP:
+            description: "FFE0_4 interrupt enable for AP"
+            bitOffset: 4
+            bitWidth: 1 
+            access: read-write
+          FFE0_5_INTR_EN_AP:
+            description: "FFE0_5 interrupt enable for AP"
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-write
+          FFE0_6_INTR_EN_AP:
+            description: "FFE0_6 interrupt enable for AP"
+            bitOffset: 6
+            bitWidth: 1 
+            access: read-write
+          FFE0_7_INTR_EN_AP:
+            description: "FFE0_7 interrupt enable for AP"
+            bitOffset: 7
+            bitWidth: 1 
+            access: read-write
+      FFE_INTR_EN_M4:
+        description: "FFE0 interrupt enable for M4" 
+        addressOffset: 0x068
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          FFE0_0_INTR_EN_M4:
+            description: "FFE0_0 interrupt enable for M4"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          FFE0_1_INTR_EN_M4:
+            description: "FFE0_1 interrupt enable for M4"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          FFE0_2_INTR_EN_M4:
+            description: "FFE0_2 interrupt enable for M4"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          FFE0_3_INTR_EN_M4:
+            description: "FFE0_3 interrupt enable for M4"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+          FFE0_4_INTR_EN_M4:
+            description: "FFE0_4 interrupt enable for M4"
+            bitOffset: 4
+            bitWidth: 1 
+            access: read-write
+          FFE0_5_INTR_EN_M4:
+            description: "FFE0_5 interrupt enable for M4"
+            bitOffset: 5
+            bitWidth: 1 
+            access: read-write
+          FFE0_6_INTR_EN_M4:
+            description: "FFE0_6 interrupt enable for M4"
+            bitOffset: 6
+            bitWidth: 1 
+            access: read-write
+          FFE0_7_INTR_EN_M4:
+            description: "FFE0_7 interrupt enable for M4"
+            bitOffset: 7
+            bitWidth: 1 
+            access: read-write
+      FB_INTR:
+        description: "Indicators of interrupt triggers detected" 
+        addressOffset: 0x080
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          FB_0_INTR:
+            description: "Active high edge interrupt detected for Fabric. When interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          FB_1_INTR:
+            description: "Active high edge interrupt detected for Fabric. When interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          FB_2_INTR:
+            description: "Active high edge interrupt detected for Fabric. When interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          FB_3_INTR:
+            description: "Active high edge interrupt detected for Fabric. When interrupt type is selected as edge detect, this register will return high when triggered, write 1 to clear."
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+      FB_INTR_RAW:
+        description: "FB raw interrupt indicators" 
+        addressOffset: 0x084
+        size: 32
+        resetValue: 0x0
+        resetMask:  0xF
+        fields:
+          FB_0_INTR_RAW:
+            description: "Raw interrupt for Fabric. This register will reflect the value of the Fabric regardless of the type/polarity"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-only
+          FB_1_INTR_RAW:
+            description: "Raw interrupt for Fabric. This register will reflect the value of the Fabric regardless of the type/polarity"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-only
+          FB_2_INTR_RAW:
+            description: "Raw interrupt for Fabric. This register will reflect the value of the Fabric regardless of the type/polarity"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-only
+          FB_3_INTR_RAW:
+            description: "Raw interrupt for Fabric. This register will reflect the value of the Fabric regardless of the type/polarity"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-only
+      FB_INTR_TYPE:
+        description: "Indicators of interrupt trigger types" 
+        addressOffset: 0x088
+        size: 32
+        resetValue: 0x0
+        resetMask:  0xF
+        fields:
+          FB_0_INTR_TYPE:
+            description: "FB_0 interrupt type {0: level, 1: edge}"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          FB_1_INTR_TYPE:
+            description: "FB_1 interrupt type {0: level, 1: edge}"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          FB_2_INTR_TYPE:
+            description: "FB_2 interrupt type {0: level, 1: edge}"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          FB_3_INTR_TYPE:
+            description: "FB_3 interrupt type {0: level, 1: edge}"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+      FB_INTR_POL:
+        description: "Indicators of interrupt trigger polarities (will depend on the type of interrupt)" 
+        addressOffset: 0x08C
+        size: 32
+        resetValue: 0x0
+        resetMask:  0xF
+        fields:
+          FB_0_INTR_POL:
+            description: "FB_0 interrupt polarity (depends on interrupt type): type = level => {0:low, 1:hi}  --- type = edge => {0:fall, 1:rise}"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          FB_1_INTR_POL:
+            description: "FB_1 interrupt polarity (depends on interrupt type): type = level => {0:low, 1:hi}  --- type = edge => {0:fall, 1:rise}"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          FB_2_INTR_POL:
+            description: "FB_2 interrupt polarity (depends on interrupt type): type = level => {0:low, 1:hi}  --- type = edge => {0:fall, 1:rise}"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          FB_3_INTR_POL:
+            description: "FB_3 interrupt polarity (depends on interrupt type): type = level => {0:low, 1:hi}  --- type = edge => {0:fall, 1:rise}"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+      FB_INTR_EN_AP:
+        description: "FB interrupt enable for AP" 
+        addressOffset: 0x090
+        size: 32
+        resetValue: 0x0
+        resetMask:  0xF
+        fields:
+          FB_0_INTR_EN_AP:
+            description: "FB_0 interrupt enable for AP"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          FB_1_INTR_EN_AP:
+            description: "FB_1 interrupt enable for AP"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          FB_2_INTR_EN_AP:
+            description: "FB_2 interrupt enable for AP"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          FB_3_INTR_EN_AP:
+            description: "FB_3 interrupt enable for AP"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+      FB_INTR_EN_M4:
+        description: "FB interrupt enable for M4" 
+        addressOffset: 0x094
+        size: 32
+        resetValue: 0x0
+        resetMask:  0xF
+        fields:
+          FB_0_INTR_EN_M4:
+            description: "FB_0 interrupt enable for M4"
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          FB_1_INTR_EN_M4:
+            description: "FB_1 interrupt enable for M4"
+            bitOffset: 1
+            bitWidth: 1 
+            access: read-write
+          FB_2_INTR_EN_M4:
+            description: "FB_2 interrupt enable for M4"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          FB_3_INTR_EN_M4:
+            description: "FB_3 interrupt enable for M4"
+            bitOffset: 3
+            bitWidth: 1 
+            access: read-write
+      M4_MEM_AON_INTR:
+        description: "Indicator of detected SRAM access while shut down or sleep mode interrupts " 
+        addressOffset: 0x0A0
+        size: 32
+        resetValue: 0x0
+        resetMask:  0xF
+        fields:
+          MEM3_AON_INTR0:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 0 32KB_0)  while it in deep sleep or shut down mode"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          MEM3_AON_INTR1:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 1 32KB_0)  while it in deep sleep or shut down mode"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          MEM3_AON_INTR2:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 2 32KB_0)  while it in deep sleep or shut down mode"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          MEM3_AON_INTR3:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 3 32KB_0)  while it in deep sleep or shut down mode"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+      M4_MEM_AON_INTR_EN:
+        description: "Interrupt enable for SRAM access while in shut down or deep sleep modes" 
+        addressOffset: 0x0A4
+        size: 32
+        resetValue: 0x0
+        resetMask:  0xF
+        fields:
+          MEM3_AON_INTR0_EN:
+            description: "Interrupt enable (M4 SRAM segment 0 32KB_0) "
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          MEM3_AON_INTR1_EN:
+            description: "Interrupt enable (M4 SRAM segment 1 32KB_0) "
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          MEM3_AON_INTR2_EN:
+            description: "Interrupt enable (M4 SRAM segment 2 32KB_0) "
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          MEM3_AON_INTR3_EN:
+            description: "Interrupt enable (M4 SRAM segment 3 32KB_0) "
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+INTR_CTRL:
+  "*_INTR_TYPE":
+    "*":
+      level: [0, "Interrupt is triggered by a certain level (High or Low)"]
+      edge: [1, "Interrupt is triggered by a signal edge (Falling or Rising)"]
+  "*_INTR_POL":
+    "*":
+      low_fall: [0, "Depending on the type, if the interrupt is triggered by level, this indicates the interrupt is triggered by a reading low value, if it is an edge trigger, this value indicates that the interrupt polarity is falling edge"]
+      high_rise: [1, "Depending on the type, if the interrupt is triggered by level, this indicates the interrupt is triggered by a reading high value, if it is an edge trigger, this value indicates that the interrupt polarity is rising edge"]
 
+  "*_INTR_EN_*":
+    "*":
+      enable: [0, "Disable the interrupt for the power domain"]
+      disable: [1, "Enable the interrupt for the power domain"]

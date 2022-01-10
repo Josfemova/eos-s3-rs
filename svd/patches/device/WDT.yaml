@@ -1,8 +1,278 @@
 _add:
   WDT: 
-    description: ""
+    description: "WatchDog Timer"
     baseAddress: 0x4001_2000
     addressBlocks:
       - offset: 0 
         size: 0x1000
         usage: registers 
+    registers:
+      WDOGLOAD:
+        description: "The WDOGLOAD Register contains the value from which the counter is to decrement. When this register is written to, the count is immediately restarted from the new value. The minimum valid value for WDOGLOAD is 1." 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0xFFFF_FFFF
+        resetMask:  0xFFFF_FFFF
+        fields:
+          WDGLOAD:
+            description: "Load value of the WhatchDog timer"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      WDOGVALUE:
+        description: "The WDOGVALUE Register gives the current value of the decrementing counter." 
+        addressOffset: 0x004
+        size: 32
+        resetValue: 0xFFFF_FFFF
+        resetMask:  0xFFFF_FFFF
+        fields:
+          WDGVALUE:
+            description: "The WDOGVALUE Register gives the current value of the decrementing counter."
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      WDOGCONTROL:
+        description: "Control register for the WatchDog timer" 
+        addressOffset: 0x008
+        size: 32
+        resetValue: 0b00
+        resetMask:  0b11
+        fields:
+          INTEN:
+            description: "Enable the interrupt event, WDOGINT. Set HIGH to enable the counter and the interrupt, or LOW to diable the counter and interrupt. Reloads the counter from the value in WDOGLAND when the interrupt is enabled, after previously being disabled."
+            bitOffset: 0
+            bitWidth: 1 
+            access: read-write
+          RESEN:
+            description: "Enable watchdog reset output, WDOGRES. Acts as a mask for the reset output. Set HIGH to enable the reset or LOW to disable the reset."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+      WDOGINTCLR:
+        description: "A write of any value to the WDOGINTCLR Register clears the watchdog interrupt, and reloads the counter from the value in WDOGLOAD." 
+        addressOffset: 0x00C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          WDOGINTCLR:
+            description: "A write of any value to the WDOGINTCLR Register clears the watchdog interrupt, and reloads the counter from the value in WDOGLOAD."
+            bitOffset: 0
+            bitWidth: 32
+            access: write-only
+      WDOGRIS:
+        description: "The WDOGRIS Register indicates the raw interrupt status from the counter. This value is ANDed with the interrupt enable bit from the control register to create the masked interrupt, that is passed to the interrupt output pin. " 
+        addressOffset: 0x010
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          WDOGRIS:
+            description: "The WDOGRIS Register indicates the raw interrupt status from the counter. This value is ANDed with the interrupt enable bit from the control register to create the masked interrupt, that is passed to the interrupt output pin. "
+            bitOffset: 0
+            bitWidth: 1
+            access: read-onlonly
+      WDOGMIS:
+        description: "The WDOGMIS Register indicates the masked interrupt status from the counter. This value is the logical AND of the raw interrupt status with the INTEN bit from the control register, and is the same value that is passed to the interrupt output pin. Enabled interrupt status from the counter." 
+        addressOffset: 0x014
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          WDOGMIS:
+            description: "The WDOGMIS Register indicates the masked interrupt status from the counter. This value is the logical AND of the raw interrupt status with the INTEN bit from the control register, and is the same value that is passed to the interrupt output pin. Enabled interrupt status from the counter."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+      WDOGLOCK:
+        description: "The WDOGLOCK Register diables write accesses to all other registers. This is to prevent rogue software from diabling the watchdog functionality. Writing a value 0x1ACCE551 enables write access to all other registers. Writing any other value disables write accesses. " 
+        addressOffset: 0xC00
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          WDOGLOCK:
+            description: "The WDOGLOCK Register diables write accesses to all other registers. This is to prevent rogue software from diabling the watchdog functionality. Writing a value 0x1ACCE551 enables write access to all other registers. Writing any other value disables write accesses. "
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      WDOGITCR:
+        description: "The WDOGITCR Register enables integration test mode. When in this more, the test output register directly controls the masted interrup output, WDOGINT, and reset output, WDOGRES. Integration Test mode Enable [0] When set HIGH, places th watchdog into integration test mode." 
+        addressOffset: 0xF00
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          WDOGITCR:
+            description: "The WDOGITCR Register enables integration test mode. When in this more, the test output register directly controls the masted interrup output, WDOGINT, and reset output, WDOGRES. Integration Test mode Enable [0] When set HIGH, places th watchdog into integration test mode."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      WDOGITOP:
+        description: "Watchdog Integration Test Output Set Register
+When the WDOGITOP Register is in integration test mode, the values in this register directly drive the enabled interrupt output and reset output." 
+        addressOffset: 0xF04
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          WDOGITOP:
+            description: "Watchdog Integration Test Output Set Register
+When the WDOGITOP Register is in integration test mode, the values in this register directly drive the enabled interrupt output and reset output."
+            bitOffset: 0
+            bitWidth: 2
+            access: write-only
+      WDOGPERIPHID4:
+        description: "Peripheral ID Register 4: [7:4] Block count. [3:0] jep106_c_code." 
+        addressOffset: 0xFD0
+        size: 32
+        resetValue: 0x04
+        resetMask:  0xFF
+        fields:
+          WDOGPERIPHID4:
+            description: "Peripheral ID Register 4: [7:4] Block count. [3:0] jep106_c_code."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      WDOGPERIPHID5:
+        description: "Peripheral ID Register 5." 
+        addressOffset: 0xFD4
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          WDOGPERIPHID5:
+            description: "Peripheral ID Register 5."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      WDOGPERIPHID6:
+        description: "Peripheral ID Register 6." 
+        addressOffset: 0xFD8
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          WDOGPERIPHID6:
+            description: "Peripheral ID Register 6."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      WDOGPERIPHID7:
+        description: "Peripheral ID Register 7." 
+        addressOffset: 0xFDC
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          WDOGPERIPHID7:
+            description: "Peripheral ID Register 7."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      WDOGPERIPHID0:
+        description: "Periperhal ID Register 0. [7:0] Part number[7:0]." 
+        addressOffset: 0xFE0
+        size: 32
+        resetValue: 0x24
+        resetMask:  0xFF
+        fields:
+          WDOGPERIPHID0:
+            description: "Periperhal ID Register 0. [7:0] Part number[7:0]."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      WDOGPERIPHID1:
+        description: "Peripheral ID Register 1. [7:4] jep106_id_3_0. [3:0] Part number [11:8]." 
+        addressOffset: 0xFE4
+        size: 32
+        resetValue: 0xB8
+        resetMask:  0xFF
+        fields:
+          WDOGPERIPHID1:
+            description: "Peripheral ID Register 1. [7:4] jep106_id_3_0. [3:0] Part number [11:8]."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      WDOGPERIPHID2:
+        description: "Peripheral ID Register 2. [7:4] Revision. [3] jedec_used. [2:0] jep106_id_6_4." 
+        addressOffset: 0xFE8
+        size: 32
+        resetValue: 0x1B
+        resetMask:  0xFF
+        fields:
+          WDOGPERIPHID2:
+            description: "Peripheral ID Register 2. [7:4] Revision. [3] jedec_used. [2:0] jep106_id_6_4."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      WDOGPERIPHID3:
+        description: "Peripherial ID Register 3. [7:4] ECO revision number. [3:0] Customer modification number." 
+        addressOffset: 0xFEC
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          WDOGPERIPHID3:
+            description: "Peripherial ID Register 3. [7:4] ECO revision number. [3:0] Customer modification number."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      WDOGPCELLID0:
+        description: "Component ID Register 0." 
+        addressOffset: 0xFF0
+        size: 32
+        resetValue: 0x0D
+        resetMask:  0xFF
+        fields:
+          WDOGPCELLID0:
+            description: "Component ID Register 0."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      WDOGPCELLID1:
+        description: "Component ID Register 1." 
+        addressOffset: 0xFF4
+        size: 32
+        resetValue: 0xF0
+        resetMask:  0xFF
+        fields:
+          WDOGPCELLID1:
+            description: "Component ID Register 1."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      WDOGPCELLID2:
+        description: "Component ID Register 2." 
+        addressOffset: 0xFF8
+        size: 32
+        resetValue: 0x05
+        resetMask:  0xFF
+        fields:
+          WDOGPCELLID2:
+            description: "Component ID Register 2."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      WDOGPCELLID3:
+        description: "Component ID Register 3." 
+        addressOffset: 0xFFC
+        size: 32
+        resetValue: 0xB1
+        resetMask:  0xFF
+        fields:
+          WDOGPCELLID3:
+            description: "Component ID Register 3."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+
+WDT:
+  WDOGLOCK:
+    WDOGLOCK:
+      locked: [0, "Write access is enabled, not locked"]
+      not_locked: [1, "Write access is disabled, locked"]
+  WDOGITOP:
+    WDOGITOP:
+      wdocres: [0, "Select integration Test with WDOCRES value"]
+      wdogint: [1, "Select integration Test with WDOGINT value"]

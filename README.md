@@ -12,7 +12,7 @@ Bringing support for the EOS-S3 in Rust
 - [x] serial UART 
 - [x] I2C 
 - [ ] SPI 
-- [ ] watchdog 
+- [x] watchdog 
 
 Traits like CAN and PWN cannot be implemented for the M4 subsystem which is the app we can modify from Rust, but it would be nice to have examples in which such things are implemented on the eFPGA.
 

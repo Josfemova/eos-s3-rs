@@ -536,6 +536,34 @@ impl core::fmt::Debug for EXTREGSFFE {
 }
 #[doc = "Flexible Fusion Engine registers"]
 pub mod ext_regs_ffe;
+#[doc = "Interrupt Controller"]
+pub struct INTR_CTRL {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for INTR_CTRL {}
+impl INTR_CTRL {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const intr_ctrl::RegisterBlock = 0x4000_4800 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const intr_ctrl::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for INTR_CTRL {
+    type Target = intr_ctrl::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for INTR_CTRL {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("INTR_CTRL").finish()
+    }
+}
+#[doc = "Interrupt Controller"]
+pub mod intr_ctrl;
 #[doc = "MISC registers"]
 pub struct MISC {
     _marker: PhantomData<*const ()>,
@@ -676,6 +704,34 @@ impl core::fmt::Debug for UART {
 }
 #[doc = "UART"]
 pub mod uart;
+#[doc = "WatchDog Timer"]
+pub struct WDT {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for WDT {}
+impl WDT {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const wdt::RegisterBlock = 0x4001_2000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const wdt::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for WDT {
+    type Target = wdt::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for WDT {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("WDT").finish()
+    }
+}
+#[doc = "WatchDog Timer"]
+pub mod wdt;
 #[no_mangle]
 static mut DEVICE_PERIPHERALS: bool = false;
 #[doc = r"All the peripherals"]
@@ -695,6 +751,8 @@ pub struct Peripherals {
     pub CRU: CRU,
     #[doc = "EXTREGSFFE"]
     pub EXTREGSFFE: EXTREGSFFE,
+    #[doc = "INTR_CTRL"]
+    pub INTR_CTRL: INTR_CTRL,
     #[doc = "MISC"]
     pub MISC: MISC,
     #[doc = "PKFB"]
@@ -705,6 +763,8 @@ pub struct Peripherals {
     pub TIMER: TIMER,
     #[doc = "UART"]
     pub UART: UART,
+    #[doc = "WDT"]
+    pub WDT: WDT,
 }
 impl Peripherals {
     #[doc = r"Returns all the peripherals *once*"]
@@ -744,6 +804,9 @@ impl Peripherals {
             EXTREGSFFE: EXTREGSFFE {
                 _marker: PhantomData,
             },
+            INTR_CTRL: INTR_CTRL {
+                _marker: PhantomData,
+            },
             MISC: MISC {
                 _marker: PhantomData,
             },
@@ -757,6 +820,9 @@ impl Peripherals {
                 _marker: PhantomData,
             },
             UART: UART {
+                _marker: PhantomData,
+            },
+            WDT: WDT {
                 _marker: PhantomData,
             },
         }
