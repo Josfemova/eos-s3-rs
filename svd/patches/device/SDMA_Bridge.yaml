@@ -6,3 +6,79 @@ _add:
       - offset: 0 
         size: 0x14
         usage: registers 
+    registers:
+      DMA_REQ:
+        description: "DMA request" 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          dma_req:
+            description: "Burst DMA request send to System DMA"
+            bitOffset: 0
+            bitWidth: 11
+            access: write-only
+          dma_sreq:
+            description: "Single DMA request send to System DMA"
+            bitOffset: 16
+            bitWidth: 11 
+            access: write-only
+      DMA_WAITONREQ_REG:
+        description: "DMA wait on request register" 
+        addressOffset: 0x004
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          dma_waitonreq:
+            description: "waitonreq signal send to System DMA"
+            bitOffset: 0
+            bitWidth: 11
+            access: read-write
+      DMA_ACTIVE_REG:
+        description: "dma_active signal status from System DMA" 
+        addressOffset: 0x008
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          dma_active:
+            description: "dma_active signal status from System DMA"
+            bitOffset: 0
+            bitWidth: 11
+            access: read-only
+      SDMA_PWRD_CNT:
+        description: "sdma power down event threshold. If sdma stays in idle cycles longer than the threshold, sdma will be automaticlly put into power down to save power." 
+        addressOffset: 0x00C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          sdma_pwrdn_cnt:
+            description: "sdma power down event threshold. If sdma stays in idle cycles longer than the threshold, sdma will be automaticlly put into power down to save power."
+            bitOffset: 0
+            bitWidth: 14
+            access: read-write
+      SDMA_SRAM_CTL:
+        description: "Control register for System DMA SRAM" 
+        addressOffset: 0x010
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          sdma_sram_test1:
+            description: "Set this bit to enable test mode"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          sdma_sram_rme:
+            description: "Set to enable SRAM timing adjust enable"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          sdma_sram_rm:
+            description: "SRAM adjust timing value"
+            bitOffset: 2
+            bitWidth: 4
+            access: read-write

@@ -1,8 +1,317 @@
 _add:
   SPT: 
-    description: ""
+    description: "Simple Periodic Timer"
     baseAddress: 0x4000_5C00
     addressBlocks:
       - offset: 0 
         size: 0x40
         usage: registers 
+    registers:
+      SPT_CFG:
+        description: "Configuration register for the simple periodic timer" 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SPT_EN:
+            description: "Field to enable the timer/counter"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          CLK_SRC_SEL:
+            description: "Select the clock source"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          INT_MASK_N_0:
+            description: "Activate or deactive interrupt trigger signal 0"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          INT_MASK_N_1:
+            description: "Activate or deactive interrupt trigger signal 1"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          INT_MASK_N_2:
+            description: "Activate or deactive interrupt trigger signal 2"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          INT_MASK_N_3:
+            description: "Activate or deactive interrupt trigger signal 3"
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+          INT_MASK_N_4:
+            description: "Activate or deactive interrupt trigger signal 4"
+            bitOffset: 6
+            bitWidth: 1
+            access: read-write
+          INT_MASK_N_5:
+            description: "Activate or deactive interrupt trigger signal 5"
+            bitOffset: 7
+            bitWidth: 1
+            access: read-write
+          INT_MASK_N_6:
+            description: "Activate or deactive interrupt trigger signal 6"
+            bitOffset: 8
+            bitWidth: 1
+            access: read-write
+          INT_MASK_N_7:
+            description: "Activate or deactive interrupt trigger signal 7"
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          FFE_TO_PERIOD:
+            description: "FFE Kick Off (timeout) perdiod configuration (value in registers = period, max value is 100). NOTE : If 0x0, The Event Counter will be turn off and all the Signals to PMU will be de-asserted. NOTE : If PMU_TO_PERIOD is 0x0, FFE Kick off signal will not trigger until FFE is alive."
+            bitOffset: 10
+            bitWidth: 8
+            access: read-write
+          PMU_TO_PERIO:
+            description: "PMU Kick Off (Time out Period) Configuration PMU Kick Off signal will assert N cycles (value in field) before FFE kick signal asserting. NOTE : For 0x0, FFE Time out Event will be used to wake up FFE power domain."
+            bitOffset: 18
+            bitWidth: 4
+            access: read-write
+      SLEEP_MODE:
+        description: "Allows blocking the PMU and FFE kickoff signal" 
+        addressOffset: 0x004
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          SLEEP_MODE:
+            description: "If set, the PMU and FFE kick off signal will be blocked. This bit will be cleared by HW if any of non-Mask INT triggered"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      ERROR_CMP_40M:
+        description: "40 msec increment error compensation register" 
+        addressOffset: 0x008
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ERROR_CMP_40M:
+            description: "Each 40ms period contains sub-events. For each sub-event, you can add 1ms when it triggers. Theres a sub-event every odd number, with each bit of this field corresponding to that event, so: [bit 0 = 1st ms event, bit 1 = 3rd ms event ... bit 19 = 39th ms event]"
+            bitOffset: 0
+            bitWidth: 20
+            access: read-write
+      ERROR_CMP_1S_0:
+        description: "1 sec Increment Error Compensation 0 Register" 
+        addressOffset: 0x00C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ERROR_CMP_1S_0:
+            description: "Each 1s period contains sub-events for every 40ms counted, and a subevent for the first ms counted. Each bit-pair in this field corresponds to one of those sub-events. Values of 0 or 2 in bit pairs do nothing. A value of 3 means the counter should decrease 1ms everytime the subevent is triggered, and a value of 1 means the counter should increment 1ms every time the event is triggered. [bits 1:0 = 1st 1ms event, bit 3:2 = 1st 40ms event ... 31:30 = 15th 40ms event]"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ERROR_CMP_1S_1:
+        description: "1 sec Incremente Error Compensation 1 Register" 
+        addressOffset: 0x010
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ERROR_CMP_1S_1:
+            description: "Each 1s period contains sub-events for every 40ms counted. Each bit-pair in this field corresponds to one of those sub-events. Values of 0 or 2 in bit pairs do nothing. A value of 3 means the counter should decrease 1ms everytime the sub-event is triggered, and a value of 1 means the counter should increment 1ms every time the event is triggered. Starts from the 16th 40ms event. [bits 1:0 = 16st 40ms event, bit 3:2 = 17st 40ms event ... 17:16 = 24th 40ms event]"
+            bitOffset: 0
+            bitWidth: 18
+            access: read-write
+      ERROR_CMP_1S_2:
+        description: "1 sec Incremente Error Compensation 2 Register" 
+        addressOffset: 0x014
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ERROR_CMP_1S_2:
+            description: "Each 1s period contains sub-events for every 80ms counted. Each bit-pair in this field corresponds to one of those sub-events. Values of 0 or 2 in bit pairs do nothing. A value of 3 means the counter should decrease 1ms everytime the sub-event is triggered, and a value of 1 means the counter should increment 1ms every time the event is triggered. [bits 1:0 = 1st 80ms event, bit 3:2 = 2nd 80ms event ... 23:22 = 12th 80ms event]"
+            bitOffset: 0
+            bitWidth: 24
+            access: read-write
+      ERROR_CMP_1S_3:
+        description: "1 sec Incremente Error Compensation 3 Register" 
+        addressOffset: 0x018
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ERROR_CMP_1S_3:
+            description: "Each 1s period contains sub-events for every 150ms counted. Each bit-pair in this field corresponds to one of those sub-events. Values of 0 or 2 in bit pairs do nothing. A value of 3 means the counter should decrease 1ms everytime the sub-event is triggered, and a value of 1 means the counter should increment 1ms every time the event is triggered. [bits 1:0 = 1st 150ms event, bit 3:2 = 2nd 150ms event ... 11:10 = 6th 150ms event]"
+            bitOffset: 0
+            bitWidth: 12
+            access: read-write
+      ERROR_CMP_RTC_0:
+        description: "2, 4, 6, 8, 16 sec Increment Error Compensation Register" 
+        addressOffset: 0x01C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ERROT_CMP_RTC_0_16:
+            description: "Every 16s there are 4 sub-events. Each bit pair in this field corresponds to those sub-events. Values of 0 and 2 do nothing. A value of 3 means the counter should decrement 1ms, and a value of 1 means the counter must add 1ms. [bits 1:0 4002ms event, bits 3:2 4450ms event, bits 5:4 6002ms event, bits 7:6 6450ms event]"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+          ERROT_CMP_RTC_0_8:
+            description: "Every 8s there are 4 sub-events. Each bit pair in this field corresponds to those sub-events. Values of 0 and 2 do nothing. A value of 3 means the counter should decrement 1ms, and a value of 1 means the counter must add 1ms. [bits 9:8 4002ms event, bits 11:10 4450ms event, bits 13:12 6002ms event, bits 15:14 6450ms event]"
+            bitOffset: 8
+            bitWidth: 8
+            access: read-write
+          ERROT_CMP_RTC_0_4:
+            description: "Every 4s there are 4 sub-events. Each bit pair in this field corresponds to those sub-events. Values of 0 and 2 do nothing. A value of 3 means the counter should decrement 1ms, and a value of 1 means the counter must add 1ms. [bits 17:16 2002ms event, bits 19:18 2450ms event, bits 21:20 3002ms event, bits 23:22 3450ms event]"
+            bitOffset: 16
+            bitWidth: 8
+            access: read-write
+          ERROT_CMP_RTC_0_2:
+            description: "Every 2s there are 2 sub-events. Each bit pair in this field corresponds to those sub-events. Values of 0 and 2 do nothing. A value of 3 means the counter should decrement 1ms, and a value of 1 means the counter must add 1ms. [bits 25:24 1002ms event, bits 27:26 1450ms event]"
+            bitOffset: 24
+            bitWidth: 4
+            access: read-write
+      ERROR_CMP_RTC_1:
+        description: "32, 64, 128, 256 sec Increment Error Compensation Register" 
+        addressOffset: 0x020
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ERROT_CMP_RTC_0_256:
+            description: "Every 256s there are 4 sub-events. Each bit pair in this field corresponds to those sub-events. Values of 0 and 2 do nothing. A value of 3 means the counter should decrement 1ms, and a value of 1 means the counter must add 1ms. [bits 1:0 128002ms event, bits 3:2 128450ms event, bits 5:4 192002ms event, bits 7:6 192450ms event]"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+          ERROT_CMP_RTC_0_128:
+            description: "Every 128s there are 4 sub-events. Each bit pair in this field corresponds to those sub-events. Values of 0 and 2 do nothing. A value of 3 means the counter should decrement 1ms, and a value of 1 means the counter must add 1ms. [bits 9:8 64002ms event, bits 11:10 64450ms event, bits 13:12 96002ms event, bits 15:14 96450ms event]"
+            bitOffset: 8
+            bitWidth: 8
+            access: read-write
+          ERROT_CMP_RTC_0_64:
+            description: "Every 64s there are 4 sub-events. Each bit pair in this field corresponds to those sub-events. Values of 0 and 2 do nothing. A value of 3 means the counter should decrement 1ms, and a value of 1 means the counter must add 1ms. [bits 17:16 32002ms event, bits 19:18 32450ms event, bits 21:20 48002ms event, bits 23:22 48450ms event]"
+            bitOffset: 16
+            bitWidth: 8
+            access: read-write
+          ERROT_CMP_RTC_0_32:
+            description: "Every 32s there are 4 sub-events. Each bit pair in this field corresponds to those sub-events. Values of 0 and 2 do nothing. A value of 3 means the counter should decrement 1ms, and a value of 1 means the counter must add 1ms. [bits 25:24 16002ms event, bits 27:26 16450ms event, bits 29:28 24450 event, bits 31:30 24450 event]" #this should be checked, I would expect 29:28 to be 24002 instead
+            bitOffset: 24
+            bitWidth: 8
+            access: read-write
+      ERROR_CMP_RTC_2:
+        description: "512, 1024, 2048, 4096 sec Increment Error Compensation Register." 
+        addressOffset: 0x024
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ERROT_CMP_RTC_0_4096:
+            description: "Every 4096s there are 4 sub-events. Each bit pair in this field corresponds to those sub-events. Values of 0 and 2 do nothing. A value of 3 means the counter should decrement 1ms, and a value of 1 means the counter must add 1ms. [bits 1:0 2048002ms event, bits 3:2 2048450ms event, bits 5:4 3072002ms event, bits 7:6 3072450ms event]"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+          ERROT_CMP_RTC_2_2048:
+            description: "Every 2048s there are 4 sub-events. Each bit pair in this field corresponds to those sub-events. Values of 0 and 2 do nothing. A value of 3 means the counter should decrement 1ms, and a value of 1 means the counter must add 1ms. [bits 9:8 1024002ms event, bits 11:10 1024450ms event, bits 13:12 1536002ms event, bits 15:14 1536450ms event]"
+            bitOffset: 8
+            bitWidth: 8
+            access: read-write
+          ERROT_CMP_RTC_0_1024:
+            description: "Every 1024s there are 4 sub-events. Each bit pair in this field corresponds to those sub-events. Values of 0 and 2 do nothing. A value of 3 means the counter should decrement 1ms, and a value of 1 means the counter must add 1ms. [bits 17:16 512002ms event, bits 19:18 512450ms event, bits 21:20 768002ms event, bits 23:22 768450ms event]"
+            bitOffset: 16
+            bitWidth: 8
+            access: read-write
+          ERROT_CMP_RTC_0_512:
+            description: "Every 512s there are 4 sub-events. Each bit pair in this field corresponds to those sub-events. Values of 0 and 2 do nothing. A value of 3 means the counter should decrement 1ms, and a value of 1 means the counter must add 1ms. [bits 25:24 256002ms event, bits 27:26 256450ms event, bits 29:28 384002 event, bits 31:30 384450 event]" 
+            bitOffset: 24
+            bitWidth: 8
+            access: read-write
+      ERROR_CMP_RTC_3:
+        description: "8192, 16384 sec Increment Error Compensation Register" 
+        addressOffset: 0x028
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ERROT_CMP_RTC_0_16384:
+            description: "Every 16384s there are 4 sub-events. Each bit pair in this field corresponds to those sub-events. Values of 0 and 2 do nothing. A value of 3 means the counter should decrement 1ms, and a value of 1 means the counter must add 1ms. [bits 1:0 8192002ms event, bits 3:2 8192450ms event, bits 5:4 12288002ms event, bits 7:6 12288450ms event]"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+          ERROT_CMP_RTC_2_8192:
+            description: "Every 8192s there are 4 sub-events. Each bit pair in this field corresponds to those sub-events. Values of 0 and 2 do nothing. A value of 3 means the counter should decrement 1ms, and a value of 1 means the counter must add 1ms. [bits 9:8 4096002ms event, bits 11:10 4096450ms event, bits 13:12 6144002ms event, bits 15:14 6144450ms event]"
+            bitOffset: 8
+            bitWidth: 8
+            access: read-write
+      UPDATE_TMR_VAL:
+        description: "Update the 30-Bit Timer once write. Note: Please programmed  SPT_EN (0x000, bit 0) to 0 before write this register to avoid any potential issue" 
+        addressOffset: 0x02C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          UPDATE_TIMER_VALUE:
+            description: "Update the 30-Bit Timer once write. Note: Please programmed  SPT_EN (0x000, bit 0) to 0 before write this register to avoid any potential issue"
+            bitOffset: 0
+            bitWidth: 30
+            access: read-write
+      SPARE_BITS:
+        description: "" 
+        addressOffset: 0x030
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          SPARE_BITS:
+            description: ""
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      TIMER_VALUE:
+        description: "Return the Value of 30-bits, in 1mS resoultion. This is the RTC  value" 
+        addressOffset: 0x034
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          TIMER_VALUE:
+            description: "Return the Value of 30-bits, in 1mS resoultion. This is the RTC  value"
+            bitOffset: 0
+            bitWidth: 30
+            access: read-only
+      EVENT_CNT_VALUE:
+        description: "Return the Value of the Event counter generating FFE Time out event It is an upcount counter, in 1mS resoultion." 
+        addressOffset: 0x038
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          EVENT_CNT_VALUE:
+            description: "Return the Value of the Event counter generating FFE Time out event It is an upcount counter, in 1mS resoultion."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      MS_CNT_VALUE:
+        description: "Return the Value of the 1mS counter which is generating the 1mS event. It is an downcount counter. Default is 0x40 (65-1). For 32KHz input, the resoultion is ~15uS. For 16KHz input, the resoultion is ~30uS" 
+        addressOffset: 0x038
+        size: 32
+        resetValue: 0x40
+        resetMask:  0xFF
+        fields:
+          MS_CNT_VALUE:
+            description: "Return the Value of the 1mS counter which is generating the 1mS event. It is an downcount counter. Default is 0x40 (65-1). For 32KHz input, the resoultion is ~15uS. For 16KHz input, the resoultion is ~30uS"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+SPT:
+  SPT_CFG:
+    SPT_EN:
+      disable: [0, "Except 30 bits Timer, all the counter will be reset to 0."]
+      enable: [1, "Turn on Counter/Timer"]
+    CLK_SRC_SEL:
+      clock_32khz: [0, "Clock source is 32KHz"]
+      clock_16khz: [1, "Clock source is 16KHz"]
+    "INT_MASK_N_*":
+      unmask: [0, "Unmask the interrupt"]
+      mask: [1, "Mask the interrupt"]

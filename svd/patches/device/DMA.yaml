@@ -1,8 +1,197 @@
 _add:
   DMA: 
-    description: ""
+    description: "Direct Memory Access peripheral"
     baseAddress: 0x4000_7400
     addressBlocks:
       - offset: 0 
         size: 0x1C
         usage: registers 
+    registers:
+      DMA_CTRL:
+        description: "DMA Control : this register is only accessable when the dma or cfg_sm is not selecting the dmas_mux." 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0b0000_0000
+        resetMask:  0b0000_0111
+        fields:
+          dma_start:
+            description: "write a 1: Enable, write a 0: no affect, reads dma_enb"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          dma_stop:
+            description: "write a 1: Stop DMA and disable, clears DMA_DONE, write a 0: no affect, reads dma_done"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          dma_ahb_sel:
+            description: "0: DMA to AHB, 1: DMA to header register"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          dma_hsel:
+            description: "1: AHB hsel is asserted, 0: not asserted"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-only
+          dma_htrans_0:
+            description: "1: AHB htrans[0] is asserted, 0: not asserted"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-only
+          dma_htrans_1:
+            description: "1: AHB htrans[1] is asserted, 0: not asserted"
+            bitOffset: 5
+            bitWidth: 1
+            access: read-only
+          dma_hready:
+            description: "1: AHB hready is asserted, 0: not asserted"
+            bitOffset: 6
+            bitWidth: 1
+            access: read-only
+          dma_xfr_pending:
+            description: "1: DMA transfer is pending, 0: nothing pending"
+            bitOffset: 7
+            bitWidth: 1
+            access: read-only
+          bridge_xfr_pending:
+            description: "1: AHB bridge transfer is pending, 0: nothing pending"
+            bitOffset: 8
+            bitWidth: 1
+            access: read-only
+      DMA_DEST_ADDR:
+        description: "DMA destination address : this register is only accessable when the dma or cfg_sm is not selecting the dmas_mux." 
+        addressOffset: 0x004
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          dma_dest_addr:
+            description: "DMA output data address : this register is only accessable when the dma or cfg_sm is not selecting the dmas_mux."
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DMA_XFER_CNT:
+        description: "DMA transfer count in frames (8 bit) (minus 1) : this register is only accessable when the dma or cfg_sm is not selecting the dmas_mux." 
+        addressOffset: 0x008
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          dma_xfr_cnt:
+            description: "number of frames for DMA to transfer (minus 1).  Max SPI transfer count is 2^16=64k frames"
+            bitOffset: 0
+            bitWidth: 26
+            access: read-write
+      CFG_FLASH_HEADER:
+        description: "Header values read from EEPROM : this register is only accessable when the dma or cfg_sm is not selecting the dmas_mux." 
+        addressOffset: 0x00C
+        size: 32
+        fields:
+          dma_boot_xfr_size:
+            description: "number of double words (8 bytes) for the SPI to transfer (minus 1)"
+            bitOffset: 0
+            bitWidth: 16
+            access: read-only
+          dma_spi_clik_divide:
+            description: "SPI data clock out divides the ssi_clk (value in bytes*2)"
+            bitOffset: 16
+            bitWidth: 8
+            access: read-only
+          dma_device_id:
+            description: "Device ID"
+            bitOffset: 24
+            bitWidth: 8
+            access: read-only
+      DMA_INTR:
+        description: "DMA interrupts" 
+        addressOffset: 0x010
+        size: 32
+        resetValue: 0b0_0000_000
+        resetMask:  0b1_1111_111
+        fields:
+          dma_herror:
+            description: "1: hresp=1, 0: hresp didn't go to 1, write one to clr"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+          rx_data_available:
+            description: "1: rx threshold was hit, 0:threshold was not hit.  This is before external mask bit."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-only
+          ahb_bridge_fifo_overflow:
+            description: "1: A ahb FIFO bridge overflow occurred, 0: no overflow occurred"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-only
+          spim_ssi_txe_intr:
+            description: "SPIM Transmit FIFO empty"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-only
+          spim_ssi_txo_intr:
+            description: "SPIM Transmit FIFO overflow"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-only
+          spim_ssi_rxf_intr:
+            description: "SPIM Receive FIFO threshold"
+            bitOffset: 5
+            bitWidth: 1
+            access: read-only
+          spim_ssi_rxo_intr:
+            description: "SPIM Receive FIFO overflow"
+            bitOffset: 6
+            bitWidth: 1
+            access: read-only
+          spim_ssi_rxu_intr:
+            description: "SPIM Receive FIFO underflow"
+            bitOffset: 7
+            bitWidth: 1
+            access: read-only
+          spim_ssi_mst_intr:
+            description: "SPIM master interrupt"
+            bitOffset: 8
+            bitWidth: 1
+            access: read-only
+      DMA_INTR_MASK:
+        description: "DMA interrupt mask" 
+        addressOffset: 0x014
+        size: 32
+        resetValue: 0b000
+        resetMask:  0b111
+        fields:
+          dma_herror_mask:
+            description: "1: disable interrupt, 0:enable interrupt"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          rx_data_available_mask:
+            description: "1: mask rx data available, 0:don't mask"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          ahb_bridge_fifo_overflow_mask:
+            description: "1: Mask the ahb FIFO bridge overflow, 0: interrupts are enabled"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+      CFG_MACHINE_ST_DELAY:
+        description: "This is the delay value used in the config state machine.  It is used for both deep sleep wakeup delay and between retries." 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0x1F4
+        resetMask:  0xFFF
+        fields:
+          delay_reg:
+            description: "Delay value used in the config SM state machine.  This is clocked at the APB pclk frequency. Default to decimal 500."
+            bitOffset: 0
+            bitWidth: 16
+            access: read-write
+  
+DMA:
+  DMA_INTR_MASK:
+    "*":
+      mask: [0, "Mask the interrupt"]
+      unmask: [1, "Unmask the interrupt"]

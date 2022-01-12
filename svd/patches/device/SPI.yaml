@@ -1,8 +1,479 @@
 _add:
   SPI: 
-    description: ""
+    description: "SPI peripheral control"
     baseAddress: 0x4000_7000
     addressBlocks:
       - offset: 0 
         size: 0x64
         usage: registers 
+    registers:
+      CTRLR0:
+        description: "Control Register 0: This register controls the serial data transfer. It is impossible to write to this register when the SPI Master is enabled. The SPI Master is enabled and disabled by writing to the SSIENR register (0x008)." 
+        addressOffset: 0x000
+        size: 21
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DFS:
+            description: "Data Frame Size. Dependencies: When SSI_HC_FRF=1, SCPH bit is a read-only bit, with its value set by SSI_DFLT_SCPH. Selects the data frame length. When the data frame size is programmed to be less than 16 bits, the receive data are automatically right-justified by the receive logic, with the upper bits of the receive FIFO zero-padded. You must right-justify transmit data before writing into the transmit FIFO. The transmit logic ignores the upper unused bits when transmitting the data. For the field decode, refer to Table 6-2."
+            bitOffset: 0
+            bitWidth: 4
+            access: read-write
+          FRF:
+            description: "00 - Motorola SPI only"
+            bitOffset: 4
+            bitWidth: 2
+            access: read-write
+          SCPH:
+            description: "Serial Clock Phase. Valid when the frame format (FRF) is set to Motorola SPI. The serial clock phase selects the relationship of the serial clock with the slave select signal. When SCPH = 0, data are captured on the first edge of the serial clock. When SCPH = 1, the serial clock starts toggling one cycle after the slave select line is activated, and data are captured on the second edge of the serial clock. Dependencies: When SSI_HC_FRF=1, SCPH bit is a read-only bit, with its value set by SSI_DFLT_SCPH.    "
+            bitOffset: 6
+            bitWidth: 1
+            access: read-write
+          SCPOL:
+            description: "Serial Clock Polarity. Valid when the frame format (FRF) is set to Motorola SPI. Used to select the polarity of the inactive serial clock, which is held inactive when the SPI Master is not actively transferring data on the serial bus. Dependencies: When SSI_HC_FRF=1, SCPOL bit is a read-only bit with its value set by SSI_DFLT_SCPOL."
+            bitOffset: 7
+            bitWidth: 1
+            access: read-write
+          TMOD:
+            description: "Transfer Mode. Selects the mode of transfer for serial communication. This field does not affect the transfer duplicity. Only indicates whether the receive or transmit data are valid. In transmit-only mode, data received from the external device is not valid and is not stored in the receive FIFO memory; it is overwritten on the next transfer. In receive-only mode, transmitted data are not valid. After the first write to the transmit FIFO, the same word is retransmitted for the duration of the transfer. In transmit-and-receive mode, both transmit and receive data are valid. The transfer continues until the transmit FIFO is empty. Data received from the external device are stored into the receive FIFO memory, where it can be accessed by the host processor. In eeprom-read mode, receive data is not valid while control data is being transmitted. When all control data is sent to the EEPROM, receive data becomes valid and transmit data becomes invalid. All data in the transmit FIFO is considered control data in this mode. This transfer mode is only valid when the SPI Master is configured as a master device."
+            bitOffset: 8
+            bitWidth: 2
+            access: read-write
+          SLV_OE:
+            description: "No function for SPI Master. Slave usage only."
+            bitOffset: 10
+            bitWidth: 1
+            access: read-write
+          SRL:
+            description: "Shift Register Loop. Used for testing purposes only. When internally active, connects the transmit shift register output to  the receive shift register input. Can be used in both serial slave and serial-master modes. When the SPI Master is  configured as a slave in loopback mode, the ss_in_n and ssi_clk signals must be provided by an external source. In this mode, the slave cannot generate these signals because there is nothing to which to loop back."
+            bitOffset: 11
+            bitWidth: 1
+            access: read-write
+          CFS:
+            description: "Control Frame Size. Selects the length of the control word for the Microwire frame format. For the field decode, refer to Table 6-3 on page 101 "
+            bitOffset: 12
+            bitWidth: 4
+            access: read-write
+          DFS_32:
+            description: "Data Frame Size in 32-bit mode. Used to select the data frame size in 32-bit mode. These bits are only valid when SSI_MAX_XFER_SIZE is configured to 32. When the data frame size is programmed to be less than 32 bits, the receive data is automatically right-justified by the receive logic, with the upper bits of the receive FIFO zero-padded. You are responsible for making sure the transmit data is right-justified before writing into the transmit FIFO. The transmit logic ignores the upper unused bits when transmitting the data. For the field decode value, refer to Table 6-3 on page 101."
+            bitOffset: 16
+            bitWidth: 5
+            access: read-only
+      CTRLR1:
+        description: "Control Register 1: CTRLR1 register controls the end of serial transfers when in receive-only mode. It is impossible to write to this register when the SPI Master is enabled. The SPI Master is enabled and disabled by writing to the SSIENR register (0x008)." 
+        addressOffset: 0x004
+        size: 16
+        resetValue: 0x0000
+        resetMask:  0xFFFF
+        fields:
+          NDF:
+            description: "Number of Data Frames. When TMOD = 10 or TMOD = 11, this register field sets the number of data frames to be continuously received by the SPI Master. The SPI Master continues to receive serial data until the number of data frames received is equal to this register value plus 1, which enables you to receive up to 64 KB of data in a continuous transfer. When the SPI Master is configured as a serial slave, the transfer continues for as long as the slave is selected. Therefore, this register serves no purpose and is not present when the SPI Master is configured as a serial slave."
+            bitOffset: 0
+            bitWidth: 16
+            access: read-write
+      SSIENR:
+        description: "SSI Enable Register: This register enables and disables the SPI Master.  The following SPI Master registers are NOT writeable when SPI Master is enabled =1: CTRLR0, CTRLR1, BAUDR.  You must set SSIENR = 0, before writing these 3 registers. 
+The following SPI Master registers are writeable ONLY when the SPI Master is enabled = 1: DR0. " 
+        addressOffset: 0x008
+        size: 1
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          SSI_EN:
+            description: "SSI Enable. Enables and disables all SPI Master operations. When disabled, all serial transfers are halted immediately. Transmit and receive FIFO buffers are cleared when the device is disabled. It is impossible to program some of the SPI Master control registers when enabled. When disabled, the ssi_sleep output is set (after delay) to inform the system that it is safe to remove the ssi_clk, thus saving power consumption in the system."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      SER:
+        description: "Slave Enable Register: This register enables the individual slave select output lines from the SPI Master. You cannot write to this register when SPI Master is busy." 
+        addressOffset: 0x010
+        size: 3
+        resetValue: 0b000
+        resetMask:  0b000
+        fields:
+          #split the filed in three
+          SER_SS1:
+            description: "Slave 1 Select Enable Flag. When set, the corresponding slave select line from the master is activated when a serial transfer begins. It should be noted that setting or clearing bits in this register have no effect on the corresponding slave select outputs until a transfer is started. Before beginning a transfer, you should enable the bit in this register. When not operating in broadcast mode, only one bit in the register should be set."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          SER_SS2:
+            description: "Slave 2 Select Enable Flag. When set, the corresponding slave select line from the master is activated when a serial transfer begins. It should be noted that setting or clearing bits in this register have no effect on the corresponding slave select outputs until a transfer is started. Before beginning a transfer, you should enable the bit in this register. When not operating in broadcast mode, only one bit in the register should be set."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          SER_SS3:
+            description: "Slave 3 Select Enable Flag. When set, the corresponding slave select line from the master is activated when a serial transfer begins. It should be noted that setting or clearing bits in this register have no effect on the corresponding slave select outputs until a transfer is started. Before beginning a transfer, you should enable the bit in this register. When not operating in broadcast mode, only one bit in the register should be set."
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+      BAUDR:
+        description: "Baud Rate Select Register: This register derives the frequency of the serial clock that regulates the data transfer. It is impossible to write to this register when the SPI Master is enabled. The SPI Master is enabled and disabled by writing the SSIENR register (0x008)." 
+        addressOffset: 0x014
+        size: 16
+        resetValue: 0x0000
+        resetMask:  0xFFFF
+        fields:
+          SCKDV_0:
+            description: "From description of `SCKDV_15_1`: 'The LSB for this field is always set to 0 and is unaffected by a write operation, which ensures an even value is held in this register. ' `SCKDV` is broken into `SCK_DV_15_1` and `SCK_DV_0`."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+          SCKDV_15_1:
+            description: "SSI Clock Divider. The LSB for this field is always set to 0 and is unaffected by a write operation, which ensures an even value is held in this register. If the value is 0, the serial output clock (sclk_out) is disabled. The frequency of the sclk_out is derived from the following equation: `Fsclk_out = Fssi_clk/SCKDV` where SCKDV is any even value between 2 and 65534. For example: for `Fssi_clk = 3.6864MHz` and `SCKDV` =2, `Fsclk_out = 3.6864/2 = 1.8432MHz`"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+      TXFTLR:
+        description: "Transmit FFIFO Threshold Level Register: This register controls the threshold value for the transmit FIFO memory." 
+        addressOffset: 0x018
+        size: 32
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          TFT:
+            description: "Transmit FIFO Threshold. Controls the level of entries (or below) at which the transmit FIFO controller triggers an interrupt ssi_txe_intr`. The FIFO depth is configurable in the range 2-256; this register is sized to the number of address bits needed to access the FIFO. If you attempt to set bits [7:0] of this register to a value greater than or equal to the depth of the FIFO, this field is not written and retains its current value. When the number of transmit FIFO entries is less than or equal to this value, the transmit FIFO empty interrupt is triggered. For field decode, refer to Table 6-4."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      RXFTLR:
+        description: "Receive FIFO Threshold Level Register: This register controls the threshold value for the receive FIFO memory." 
+        addressOffset: 0x01C
+        size: 32
+        resetValue: 0b000
+        resetMask:  0b111
+        fields:
+          RFT:
+            description: "Receive FIFO Threshold. Controls the level of entries (or above) at which the receive FIFO controller triggers an interrupt `ssi_rxf_intr`. The FIFO depth is configurable in the range 2-256. This register is sized to the number of address bits needed to access the FIFO. If you attempt to set this value greater than the depth of the FIFO, this field is not written and retains its current value. When the number of receive FIFO entries is greater than or equal to this value + 1, the receive FIFO full interrupt is triggered. For field decode, refer to Table 6-5."
+            bitOffset: 0
+            bitWidth: 3 #must check this is correct
+            access: read-write
+      TXFLR:
+        description: "Transmit FIFO Level Register: This register contains the number of valid data entries in the transmit FIFO memory." 
+        addressOffset: 0x020
+        size: 32
+        resetValue: 0b000
+        resetMask:  0b111
+        fields:
+          TXTFL:
+            description: "Transmit FIFO Level. Contains the number of valid data entries in the transmit FIFO."
+            bitOffset: 0
+            bitWidth: 3
+            access: read-only
+      RXFLR:
+        description: "Receive FIFO Level Register: This register contains the number of valid data entries in FIFO memory. This register can be read at any time." 
+        addressOffset: 0x024
+        size: 32
+        resetValue: 0b000
+        resetMask:  0b111
+        fields:
+          RXTFL:
+            description: "Receive FIFO Level. Contains the number of valid data entries in the receive FIFO."
+            bitOffset: 0 
+            bitWidth: 3
+            access: read-only
+      SR:
+        description: "Status Register: This is a read-only register used to indicate the current transfer status, FIFO status, and any  transmission/reception errors that may have occurred. This status register may be read at any time. None of the bits in this register request an interrupt." 
+        addressOffset: 0x028
+        size: 7
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          BUSY:
+            description: "SSI Busy Flag. When set, indicates that a serial transfer is in progress; when cleared indicates that the SPI Master is idle or disabled."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+          TFNF:
+            description: "Transmit FIFO Not Full. Set when the transmit FIFO contains one or more empty locations, and is cleared when the FIFO is full."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-only
+          TFE:
+            description: "Transmit FIFO Empty. When the transmit FIFO is completely empty, this bit is set. When the transmit FIFO contains one or more valid entries, this bit is cleared. This bit field does not request an interrupt."
+            bitOffset: 2
+            bitWidth: 1
+            access: read-only
+          RFNE:
+            description: "Receive FIFO Not Empty. Set when the receive FIFO contains one or more entries and is cleared when the receive FIFO is empty. This bit can be polled by software to completely empty the receive FIFO."
+            bitOffset: 3
+            bitWidth: 1
+            access: read-only
+          RFF:
+            description: "Receive FIFO Full. When the receive FIFO is completely full, this bit is set. When the receive FIFO contains one or more empty location, this bit is cleared."
+            bitOffset: 4
+            bitWidth: 1
+            access: read-only
+          TXE:
+            description: "No function for SPI Master. Slave usage only."
+            bitOffset: 5
+            bitWidth: 1
+            access: read-only
+          DCOL:
+            description: "Data Collision Error. Relevant only when the SPI Master is configured as a master device. This bit is set if the SPI Master is actively transmitting when another master selects this device as a slave. This informs the processor that the last data transfer was halted before completion. This bit is cleared when read."
+            bitOffset: 6
+            bitWidth: 1
+            access: read-only
+      IMR:
+        description: "Interrupt Mask Register: This read/write register masks or enables all interrupts generated by the SPI Master." 
+        addressOffset: 0x02C
+        size: 32
+        resetValue: 0b1_1111
+        resetMask:  0b1_1111
+        fields:
+          TXEIM:
+            description: "Transmit FIFO Empty Interrupt Mask"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          TXOIM:
+            description: "Transmit FIFO Overflow Interrupt Mask"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          RXUIM:
+            description: "Receive FIFO Underflow Interrupt Mask"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          RXFOIM:
+            description: "Receive FIFO Overflow Interrupt Mask"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          RXFIM:
+            description: "Receive FIFO Full Interrupt Mask"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          MSTIM:
+            description: "Multi-Master Contention Interrupt Mask. This bit field is not present if the SPI Master is configured as a serial-slave device."
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+      ISR:
+        description: "Interrupt Status Register: This register reports the status of SPI Master interrupts after they have been masked." 
+        addressOffset: 0x030
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          TXEIS:
+            description: "Transmit FIFO Empty Interrupt Status"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          TXOIS:
+            description: "Transmit FIFO Overflow Interrupt Status"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          RXUIS:
+            description: "Receive FIFO Underflow Interrupt Status"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          RXOIS:
+            description: "Receive FIFO Overflow Interrupt Status"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          RXFIS:
+            description: "Receive FIFO Full Interrupt Status"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          MSTIS:
+            description: "Multi-Master Contention Interrupt Status. This bit field is not present if the SPI Master is configured as a serial-slave device."
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+      RISR:
+        description: "Raw Interrupt Status Register: This read-only register reports the status of the SPI Master interrupts prior to masking." 
+        addressOffset: 0x034
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          TXEIS:
+            description: "Transmit FIFO Empty Raw Interrupt Status"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          TXOIS:
+            description: "Transmit FIFO Overflow Raw Interrupt Status"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          RXUIS:
+            description: "Receive FIFO Underflow Raw Interrupt Status"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          RXOIS:
+            description: "Receive FIFO Overflow Raw Interrupt Status"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          RXFIS:
+            description: "Receive FIFO Full Raw Interrupt Status"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          MSTIS:
+            description: "Multi-Master Contention Raw Interrupt Status. This bit field is not present if the SPI Master is configured as a serial-slave device."
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+      TXOICR:
+        description: "Transmit FIFO Overflow Interrupt Clear Register." 
+        addressOffset: 0x038
+        size: 1
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          TXOICR:
+            description: "Clear Transmit FIFO Overflow Interrupt. This register reflects the status of the interrupt. A read from this register clears the ssi_txo_intr interrupt; writing has no effect."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+      RXOICR:
+        description: "Receive FIFO Overflow Interrupt Clear Register." 
+        addressOffset: 0x03C
+        size: 1
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          TXOICR:
+            description: "Clear Receive FIFO Overflow Interrupt. This register reflects the status of the interrupt. A read from this register clears the ssi_txo_intr interrupt; writing has no effect."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+      RXUICR:
+        description: "Receive FIFO Underflow Interrupt Clear Register."
+        addressOffset: 0x040
+        size: 1
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          TXOICR:
+            description: "Clear Receive FIFO Underflow Interrupt. This register reflects the status of the interrupt. A read from this register clears the ssi_rxu_intr interrupt; writing has no effect."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+      MSTICR:
+        description: "Multi-Master Interrupt Clear Register." 
+        addressOffset: 0x044
+        size: 1
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          TXOICR:
+            description: "Clear Multi-Master Contention Interrupt. This register reflects the status of the interrupt. read from this register clears the ssi_mst_intr interrupt; writing has no effect."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+      ICR:
+        description: "Interrupt Clear Register." 
+        addressOffset: 0x048
+        size: 1
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          TXOICR:
+            description: "Clear Interrupts. This register is set if any of the interrupts below are active. A read clears the ssi_txo_intr, ssi_rxu_intr, ssi_rxo_intr, and the ssi_mst_intr interrupts. Writing to this register has no effect."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+      IDR:
+        description: "Identification Code. This register contains the peripherals identification code." 
+        addressOffset: 0x058
+        size: 32
+        resetValue: 0xFFFF_FFFF
+        resetMask:  0xFFFF_FFFF
+        fields:
+          IDCODE:
+            description: "Identification Code. This register contains the peripherals identification code."
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      SSI_COMP_VERSION:
+        description: "Contains the hex representation of the component version. Consists of ASCII value for each number in the version, followed by *. For example 32_30_31_2A represents the version 2.01*." 
+        addressOffset: 0x05C
+        size: 32
+        resetValue: 0x3332_332A
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SSI_COMP_VERSION:
+            description: "Contains the hex representation of the component version. Consists of ASCII value for each number in the version, followed by *. For example 32_30_31_2A represents the version 2.01*."
+            bitOffset: 0
+            bitWidth:  32
+            access: read-write
+      DR0:
+        description: "The SPI Master data register is a 16-bit read/write buffer for the transmit/receive FIFOs. When the register is read, data in the receive FIFO buffer is accessed. When it is written to, data are moved into the transmit FIFO buffer; a write can occur only when SSI_EN = 1. FIFOs are reset when SSI_EN = 0. Please refer to SSIENR register (0x008) to enable and disable the SPI Master.  The DR register in the SPI Master occupies 131(for TX)/8(for RX) 32-bit address locations of the memory map to facilitate AHB burst transfers. Writing to any of these address locations has the same effect as pushing the data from the pwdata bus into the transmit FIFO. Reading from any of these locations has the same effect as popping data from the receive FIFO onto the prdata bus. The FIFO buffers on the SPI Master are not addressable." 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0x0000
+        resetMask:  0xFFFF
+        fields:
+          DR:
+            description: "Data Register. When writing to this register, you must right-justify the data. Read
+data are automatically right-justified.
+Read = Receive FIFO buffer (SSI_RX_FIFO_DEPTH = 0x8)
+Write = Transmit FIFO buffer (SSI_TX_FIFO_DEPTH = 0x83)"
+            bitOffset: 0
+            bitWidth: 16
+            access: read-write
+
+SPI:
+  CTRLR0:
+    SCPH:
+      toggle_middle: [0,"Serial clock toggles in middle of first data bit"]
+      toggle_start: [1,"Serial clock toggles at start of first data bit"]
+    SCPOL:
+      inactive_low: [0, "Inactive state of serial clock is low"]
+      inactive_high: [1, "Inactive state of serial clock is high"]
+    TMOD:
+      tx_rx: [0, "Transmit and receive"]
+      tx: [1, "Transmit only"]
+      rx: [2, "Receive only"]
+      eeprom: [3, "EEPROM read"]
+    SRL:
+      normal: [0, "Normal mode operation"]
+      test: [1, "test mode operation"]
+    CFS:
+      word_1bit:  [0,  "1 bit control word "] 
+      word_2bit:  [1,  "2 bit control word "] 
+      word_3bit:  [2,  "3 bit control word "] 
+      word_4bit:  [3,  "4 bit control word "] 
+      word_5bit:  [4,  "5 bit control word "]
+      word_6bit:  [5,  "6 bit control word "]
+      word_7bit:  [6,  "7 bit control word "]
+      word_8bit:  [7,  "8 bit control word "]
+      word_9bit:  [8,  "9 bit control word "]
+      word_10bit: [9,  "10 bit control word "]
+      word_11bit: [10, "11 bit control word "]
+      word_12bit: [11, "12 bit control word "]
+      word_13bit: [12, "13 bit control word "]
+      word_14bit: [13, "14 bit control word "]
+      word_15bit: [14, "15 bit control word "]
+      word_16bit: [15, "16 bit control word "]
+
+    "DFS*":
+      word_4bit:  [3,  "4 bit serial data transfer"] 
+      word_5bit:  [4,  "5 bit serial data transfer"]
+      word_6bit:  [5,  "6 bit serial data transfer"]
+      word_7bit:  [6,  "7 bit serial data transfer"]
+      word_8bit:  [7,  "8 bit serial data transfer"]
+      word_9bit:  [8,  "9 bit serial data transfer"]
+      word_10bit: [9,  "10 bit serial data transfer"]
+      word_11bit: [10, "11 bit serial data transfer"]
+      word_12bit: [11, "12 bit serial data transfer"]
+      word_13bit: [12, "13 bit serial data transfer"]
+      word_14bit: [13, "14 bit serial data transfer"]
+      word_15bit: [14, "15 bit serial data transfer"]
+      word_16bit: [15, "16 bit serial data transfer"]
+  IMR:
+    "*":
+      mask: [0, "Mask the interrupt"]
+      unmask: [1, "Unmask the interrupt"]

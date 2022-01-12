@@ -11,19 +11,17 @@ Bringing support for the EOS-S3 in Rust
 - [x] delay/timer 
 - [x] serial UART 
 - [x] I2C 
-- [ ] SPI 
+- [x] SPI 
 - [x] watchdog 
 
 Traits like CAN and PWN cannot be implemented for the M4 subsystem which is the app we can modify from Rust, but it would be nice to have examples in which such things are implemented on the eFPGA.
 
 ### About other features
 
-- Implementing the FPGA loading sequence should be possible with the registers mapped so far in the pac
-- (S)DMA will soon be added in the SVD 
-- Audio functionality is yet to be transcribed
-- The registers mapped so far should be enought to implement the neccesary stuff for RTIC support
+- Implementing the FPGA loading sequence is already possible, just have to implement the function
+- The registers mapped so far should be enought to implement the stuff required for RTIC support
 - Sensors in the devboards don't seem to have Rust drivers as of now, so that's also on the backlog
-- I2S is somewhat low priority 
+- I2S & PDM is somewhat low priority, hal traits are the first stuff that I'll be working on.
 
 ### Additional notes
 

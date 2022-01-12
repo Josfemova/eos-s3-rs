@@ -6,3 +6,316 @@ _add:
       - offset: 0 
         size: 0x3FC
         usage: registers 
+    registers:
+      IER:
+        description: "I2S Enable Register" 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          IEN:
+            description: "DW_apb_i2s_enable. A disable on this bit overrides any other block or channel enables and flushes all FIFOs."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      ITER:
+        description: "I2S Transmitter Block Enable Register" 
+        addressOffset: 0x008
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          TXEN:
+            description: "Transmitter block enable. A disable on this bit overrides any individual transmit channel enables."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      TXFFR:
+        description: "Transmitter Block FIFO Reset Register" 
+        addressOffset: 0x018
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          TXFFR:
+            description: "Transmitter FIFO Reset. Writing a 1 to this register flushes all the TX FIFOs (this is a self clearing bit). The Transmitter Block must be disabled prior to writing this bit."
+            bitOffset: 0
+            bitWidth: 1
+            access: write-only
+      LTHR0:
+        description: "Left Transmit Holding Register" 
+        addressOffset: 0x020
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          LTHR0:
+            description: "The left stereo data to be transmitted serially through the transmit channel output (sdox) is written through this register. Writing is a two-stage process: (1) A write to this register passes the left stereo sample to the transmitter. (2) This MUST be followed by writing the right stereo sample to the RTHRx register. Data should only be written to the FIFO when it is not full. Any attempt to write to a full FIFO results in that data being lost and an overrun interrupt being generated."
+            bitOffset: 0
+            bitWidth: 32
+            access: write-only
+      RTHR0:
+        description: "Right Transmit Holding Register " 
+        addressOffset: 0x024
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          RTHR0:
+            description: "The right stereo data to be transmitted serially through the transmit channel output (sdox) is written through this register. Writing is a two-stage process: (1) A left stereo sample MUST first be written to the LTHRx register. (2) A write to this register passes the right stereo sample to the transmitter. Data should only be written to the FIFO when it is not full. Any attempt to write to a full FIFO results in that data being lost and an overrun interrupt being generated."
+            bitOffset: 0
+            bitWidth: 32
+            access: write-only
+      TER0:
+        description: "Transmit Enable Register" 
+        addressOffset: 0x02C
+        size: 32
+        resetValue: 0b1
+        resetMask:  0b1
+        fields:
+          TXCHEN0:
+            description: "Transmit channel enable. This bit enables/disables a transmit channel, independently of all other channels. On enable, the channel begins transmitting on the next left stereo cycle. A global disable of DW_apb_i2s (IER[0] = 0) or Transmitter block (ITER[0] =0) overrides this value."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      TCR0:
+        description: "Transmit Configuration Register " 
+        addressOffset: 0x034
+        size: 32
+        resetValue: 0b010
+        resetMask:  0b111
+        fields:
+          WLEN:
+            description: "These bits are used to program the data resolution of the transmitter and ensures the MSB of the data is transmitted first. Programmed resolution must be less than or equal to `I2S_TX_WORDSIZE_x`. If the selected resolution is greater than `I2S_TX_WORDSIZE_x`, the transmit channel defaults back to `I2S_TX_WORDSIZE_RESET_x` value. The channel must be disabled prior to any changes in this value (`TERx[0] = 0`)."
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+      ISR0:
+        description: "Interrupt Status Register" 
+        addressOffset: 0x038
+        size: 32
+        resetValue: 0b00_0000
+        resetMask:  0b11_0000
+        fields:
+          TXFE:
+            description: "Status of Transmit Empty Trigger interrupt. TX FIFO is empty."
+            bitOffset: 4
+            bitWidth: 1
+            access: read-only
+          TXFO:
+            description: "Status of Data Overrun interrupt for the TX channel. Attempt to write to full TX FIFO. Dependencies: I2S_TX_CHANNELS > x, where x is the number of transmit channel."
+            bitOffset: 5
+            bitWidth: 1
+            access: read-only
+      IMR0:
+        description: "Interrupt Mask Register" 
+        addressOffset: 0x03C
+        size: 32
+        resetValue: 0b00_0000
+        resetMask:  0b11_0000
+        fields:
+          RXFOM:
+            description: "Masks TX FIFO Overrun interrupt."
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          TXFOM:
+            description: "Masks TX FIFO Empty interrupt."
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+      TOR0:
+        description: "Transmit Overrun Register" 
+        addressOffset: 0x044
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          TXCHO:
+            description: "Read this bit to clear the TX FIFO Data Overrun interrupt."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+      TFCR0:
+        description: "Transmit FIFO Configuration Register" 
+        addressOffset: 0x04C
+        size: 32
+        resetValue: 0b0100
+        resetMask:  0b1111
+        fields:
+          TXCHET:
+            description: "Transmit Channel Empty Trigger. These bits program the trigger level in the TX FIFO at which the Empty Threshold Reached Interrupt is generated. Trigger Level = `TXCHET` `TXCHET` values: 0 to (`I2S_TX_FIFO_x – 1`) If an illegal value is programmed, these bits saturate to `(I2S_TX_FIFO_x – 1)`. The channel must be disabled prior to any changes in this value (that is, `TERx[0] = 0`)."
+            bitOffset: 0
+            bitWidth: 4
+            access: read-write
+      TFF0:
+        description: "Transmit FIFO Flush" 
+        addressOffset: 0x054
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          TXCHFR:
+            description: "Transmit Channel FIFO Reset. Writing a 1 to this register flushes channel’s TX FIFO. (This is a self clearing bit.) TX channel or block must be disabled prior to writing to this bit."
+            bitOffset: 0
+            bitWidth: 1
+            access: write-only
+      TXDMA:
+        description: "Transmitter Block DMA Register" 
+        addressOffset: 0x1C8
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          TXDMA:
+            description: "Transmitter Block DMA Register. This register can be used to cycle repeatedly through the enabled Transmit channels (from lowest numbered to highest) to allow writing of stereo data pairs"
+            bitOffset: 0
+            bitWidth: 32
+            access: write-only
+      RTXDMA:
+        description: "Reset Transmitter Block DMA Register" 
+        addressOffset: 0x1CC
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          RTXDMA:
+            description: "Reset Transmitter Block DMA Register. Writing a 1 to this self-clearing register resets the TXDMA register mid-cycle to point to the lowest enabled Transmit channel. NOTE: This register has no effect in the middle of a stereo pair write (such as,when left stereo data has been written but not right stereo data)"
+            bitOffset: 0
+            bitWidth: 1
+            access: write-only
+      I2S_COMP_PARAM_1:
+        description: "Component Parameter Register 1" 
+        addressOffset: 0x1F4
+        size: 32
+        resetValue: 0b000_0000_0001_0010_1010
+        resetMask:  0b111_1111_1111_1111_1111
+        fields:
+          APB_DATA_WIDTH:
+            description: "Data width of the APB"
+            bitOffset: 0
+            bitWidth: 2
+            access: read-only
+          I2S_FIFO_DEPTH_GLOBAL:
+            description: "Indicates the value of I2S_FIFO_DEPTH_GLOBAL"
+            bitOffset: 2
+            bitWidth: 2
+            access: read-only
+          I2S_MODE_EN:
+            description: "Enabled mode for the I2S peripheral"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-only
+          I2S_TRANSMITTER_BLOCK:
+            description: ""
+            bitOffset: 5
+            bitWidth: 1
+            access: read-only
+          I2S_TX_CHANNELS:
+            description: "Indicates how many I2S TX channels are active"
+            bitOffset: 9
+            bitWidth: 2
+            access: read-only
+          I2S_TX_WORDSIZE_0:
+            description: "Indicates the wordsize of I2S TX packets"
+            bitOffset: 16
+            bitWidth: 3
+            access: read-only
+      I2S_COMP_VERSION:
+        description: "Component version of the I2S peripheral." 
+        addressOffset: 0x1F8
+        size: 32
+        resetValue: 0x3130_382A
+        resetMask:  0xFFFF_FFFF
+        fields:
+          I2S_COMP_VERSION:
+            description: "Component version of the I2S peripheral."
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      I2S_COMP_TYPE:
+        description: "Component type of the I2S peripheral." 
+        addressOffset: 0x1FC
+        size: 32
+        resetValue: 0x4457_01A0
+        resetMask:  0xFFFF_FFFF
+        fields:
+          I2S_COMP_TYPE:
+            description: "Component type of the I2S peripheral."
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      I2S_STEREO_EN:
+        description: "Sound channel mode (mono or stereo)" 
+        addressOffset: 0x3F8
+        size: 32
+        resetValue: 0b0
+        resetMask:  0b1
+        fields:
+          I2S_STEREO_EN:
+            description: "Select between mono or stereo modes"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+
+I2S_Slave:
+  IER: 
+    IEN:
+      disable: [0, "Enable DW_APB_I2S."]
+      enable: [1, "Disable DW_APB_I2S."]
+  ITER:
+    TXEN:
+      disable: [0, "Disable the transmitter."]
+      enable: [1, "Enable the transmitter."]
+  TER0:
+    TXCHEN0:
+      disable: [0, "Disable the transmit channel."]
+      enable: [1, "Enable the transmit channel."]
+  TCR0:
+    WLEN:
+      ignore_word_len: [0, "Ignore word length."]
+      word_12bit: [1, "12 bit resolution."]
+      word_16bit: [2, "16 bit resolution."]
+      word_20bit: [3, "20 bit resolution."]
+      word_24bit: [4, "24 bit resolution."]
+      word_32bit: [5, "32 bit resolution."]
+  ISR0:
+    TXFE:
+      write_valid: [0, "TX FIFO write valid."]
+      write_overrun: [1, "TX FIFO write overrun."]
+    TXFO:
+      trigger_not_reached: [0, "Trigger level not reached."]
+      trigger_reached: [1, "Trigger level reached."]
+  IMR0:
+    "*":
+      unmask: [0, "Unmask the interrupt"]
+      mask: [1, "Mask the interrupt"]
+  I2S_COMP_PARAM_1:
+    APB_DATA_WIDTH:
+      x8bit:  [0,"APB data width is 8 bit"]
+      x16bit: [1,"APB data width is 16 bit"]
+      x32bit: [2,"APB data width is 32 bit"]
+    I2S_FIFO_DEPTH_GLOBAL:
+      depth_2:  [0, "I2S_FIFO_DEPTH_GLOBAL equals 2"]
+      depth_4:  [1, "I2S_FIFO_DEPTH_GLOBAL equals 4"]
+      depth_8:  [2, "I2S_FIFO_DEPTH_GLOBAL equals 8"]
+      depth_16: [3, "I2S_FIFO_DEPTH_GLOBAL equals 16"]
+    I2S_MODE_EN:
+      slave: [0, "I2S operating in slave mode."]
+      master: [1, "I2S operating in master mode"]
+    I2S_TX_CHANNELS: 
+      x1_channel: [0, "1 TX channel."]
+      x2_channel: [1, "2 TX channel."]
+      x3_channel: [2, "3 TX channel."]
+      x4_channel: [3, "4 TX channel."]
+    I2S_TX_WORDSIZE_0: 
+      x12bit: [0, "TX configured with 12bit wordsize"]
+      x16bit: [1, "TX configured with 16bit wordsize"]
+      x20bit: [2, "TX configured with 20bit wordsize"]
+      x24bit: [3, "TX configured with 24bit wordsize"]
+      x32bit: [4, "TX configured with 32bit wordsize"]
+  I2S_STEREO_EN:
+    I2S_STEREO_EN:
+      mono: [0, "Configure I2S for monoaural sound reproduction"]
+      stereo: [1, "Configure I2S for stereo sound reproduction"]

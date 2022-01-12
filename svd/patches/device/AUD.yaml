@@ -1,6 +1,6 @@
 _add:
   AUD:
-    description: ""
+    description: "Audio Subsystem"
     baseAddress: 0x4001_5000
     addressBlocks:
       - offset: 0

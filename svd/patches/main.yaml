@@ -7,22 +7,22 @@ _include:
   - "device/AUD.yaml"
   - "device/CFG_CTL.yaml" #done
   - "device/CRU.yaml" #done
-  - "device/DMA.yaml"
+  - "device/DMA.yaml" #done
   - "device/ExtRegsFFE.yaml" #done
-  - "device/I2S_Slave.yaml"
-  - "device/INTR_CTRL.yaml"
+  - "device/I2S_Slave.yaml" #done
+  - "device/INTR_CTRL.yaml" #done
   - "device/IO_MUX.yaml" #done
   - "device/MISC.yaml" #done
   - "device/PKFB.yaml" #done
   - "device/PMU.yaml" #done
-  - "device/SDMA_Bridge.yaml"
+  - "device/SDMA_Bridge.yaml" #done
   - "device/SDMA.yaml"
-  - "device/SPI.yaml"
-  - "device/SPT.yaml"
+  - "device/SPI.yaml" #done
+  - "device/SPT.yaml" #done
   - "device/TIMER.yaml" #done
   - "device/UART.yaml" #done
-  - "device/WDT.yaml"
-  - "core/DWT.yaml"
+  - "device/WDT.yaml" #done
+  - "core/DWT.yaml" 
   - "core/EXTM4Regs.yaml"
   - "core/FPB.yaml"
   - "core/ITM.yaml"

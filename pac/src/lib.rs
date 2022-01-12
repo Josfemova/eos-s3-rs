@@ -508,6 +508,34 @@ impl core::fmt::Debug for CRU {
 }
 #[doc = "Clock Reset Unit"]
 pub mod cru;
+#[doc = "Direct Memory Access peripheral"]
+pub struct DMA {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for DMA {}
+impl DMA {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const dma::RegisterBlock = 0x4000_7400 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const dma::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for DMA {
+    type Target = dma::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for DMA {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DMA").finish()
+    }
+}
+#[doc = "Direct Memory Access peripheral"]
+pub mod dma;
 #[doc = "Flexible Fusion Engine registers"]
 pub struct EXTREGSFFE {
     _marker: PhantomData<*const ()>,
@@ -536,6 +564,34 @@ impl core::fmt::Debug for EXTREGSFFE {
 }
 #[doc = "Flexible Fusion Engine registers"]
 pub mod ext_regs_ffe;
+#[doc = "I2S_Slave"]
+pub struct I2S_SLAVE {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for I2S_SLAVE {}
+impl I2S_SLAVE {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const i2s_slave::RegisterBlock = 0x4000_b000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const i2s_slave::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for I2S_SLAVE {
+    type Target = i2s_slave::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for I2S_SLAVE {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("I2S_SLAVE").finish()
+    }
+}
+#[doc = "I2S_Slave"]
+pub mod i2s_slave;
 #[doc = "Interrupt Controller"]
 pub struct INTR_CTRL {
     _marker: PhantomData<*const ()>,
@@ -648,6 +704,90 @@ impl core::fmt::Debug for PMU {
 }
 #[doc = "Power Management Unit"]
 pub mod pmu;
+#[doc = "SDMA_Bridge"]
+pub struct SDMA_BRIDGE {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SDMA_BRIDGE {}
+impl SDMA_BRIDGE {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const sdma_bridge::RegisterBlock = 0x4000_d000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const sdma_bridge::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for SDMA_BRIDGE {
+    type Target = sdma_bridge::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for SDMA_BRIDGE {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SDMA_BRIDGE").finish()
+    }
+}
+#[doc = "SDMA_Bridge"]
+pub mod sdma_bridge;
+#[doc = "SPI peripheral control"]
+pub struct SPI {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SPI {}
+impl SPI {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const spi::RegisterBlock = 0x4000_7000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const spi::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for SPI {
+    type Target = spi::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for SPI {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SPI").finish()
+    }
+}
+#[doc = "SPI peripheral control"]
+pub mod spi;
+#[doc = "Simple Periodic Timer"]
+pub struct SPT {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SPT {}
+impl SPT {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const spt::RegisterBlock = 0x4000_5c00 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const spt::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for SPT {
+    type Target = spt::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for SPT {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SPT").finish()
+    }
+}
+#[doc = "Simple Periodic Timer"]
+pub mod spt;
 #[doc = "TIMER"]
 pub struct TIMER {
     _marker: PhantomData<*const ()>,
@@ -749,8 +889,12 @@ pub struct Peripherals {
     pub CFG_CTL: CFG_CTL,
     #[doc = "CRU"]
     pub CRU: CRU,
+    #[doc = "DMA"]
+    pub DMA: DMA,
     #[doc = "EXTREGSFFE"]
     pub EXTREGSFFE: EXTREGSFFE,
+    #[doc = "I2S_SLAVE"]
+    pub I2S_SLAVE: I2S_SLAVE,
     #[doc = "INTR_CTRL"]
     pub INTR_CTRL: INTR_CTRL,
     #[doc = "MISC"]
@@ -759,6 +903,12 @@ pub struct Peripherals {
     pub PKFB: PKFB,
     #[doc = "PMU"]
     pub PMU: PMU,
+    #[doc = "SDMA_BRIDGE"]
+    pub SDMA_BRIDGE: SDMA_BRIDGE,
+    #[doc = "SPI"]
+    pub SPI: SPI,
+    #[doc = "SPT"]
+    pub SPT: SPT,
     #[doc = "TIMER"]
     pub TIMER: TIMER,
     #[doc = "UART"]
@@ -801,7 +951,13 @@ impl Peripherals {
             CRU: CRU {
                 _marker: PhantomData,
             },
+            DMA: DMA {
+                _marker: PhantomData,
+            },
             EXTREGSFFE: EXTREGSFFE {
+                _marker: PhantomData,
+            },
+            I2S_SLAVE: I2S_SLAVE {
                 _marker: PhantomData,
             },
             INTR_CTRL: INTR_CTRL {
@@ -814,6 +970,15 @@ impl Peripherals {
                 _marker: PhantomData,
             },
             PMU: PMU {
+                _marker: PhantomData,
+            },
+            SDMA_BRIDGE: SDMA_BRIDGE {
+                _marker: PhantomData,
+            },
+            SPI: SPI {
+                _marker: PhantomData,
+            },
+            SPT: SPT {
                 _marker: PhantomData,
             },
             TIMER: TIMER {
