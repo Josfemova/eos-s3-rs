@@ -716,7 +716,7 @@ _add:
             access: read-write
       PKFB_PF2CNT:
         description: "FIFO 2 Count" 
-        addressOffset: 0x318
+        addressOffset: 0x038
         size: 32
         resetValue: 0x0080_8000
         resetMask:  0xFFFF_FFFF

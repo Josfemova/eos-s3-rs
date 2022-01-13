@@ -1,0 +1,562 @@
+_add:
+  EXTM4Regs: 
+    description: "External registers to control M4 Subsystem (not a core peripheral)"
+    baseAddress: 0x4000_0000
+    addressBlocks:
+      - offset: 0 
+        size: 0x304
+        usage: registers 
+    registers:
+      SYSTICK_REG:
+        description: "System tick timer register" 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0x0200_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SYSTICK_TENMS:
+            description: "Provides an integer value to compute a 10ms (100Hz) delay. For example, apply the value 0x07A11F if no reference is implemented, and FCLK is 50MHz."
+            bitOffset: 0
+            bitWidth: 24
+            access: read-write
+          SYSTICK_SKEW:
+            description: "Systick clock is an exact multiple of 10ms"
+            bitOffset: 24
+            bitWidth: 1
+            access: read-write
+          SYSTICK_NOREF:
+            description: "Indicates that no alternative reference clock source has been integrated."
+            bitOffset: 25
+            bitWidth: 1
+            access: read-write
+      CONFIG1:
+        description: "Configuration register 1" 
+        addressOffset: 0x010
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        access: read-only
+        fields:
+          CURRPRI:
+            description: "Indicates what priority interrupt, or base boost, is being used now. CURRPRI represents the preemption priority, and does not indicate secondary priority."
+            bitOffset: 0
+            bitWidth: 8
+          BRCHSTAT:
+            description: "Branch status"
+            bitOffset: 8
+            bitWidth: 4
+          HALTED:
+            description: "In halting mode debug. HALTED remains asserted while the core is in debug."
+            bitOffset: 15
+            bitWidth: 1
+          MEMATTRS:
+            description: "Memory Attributes. \\n  \\n
+                          Bit 0 = Allocate \\n \\n
+                          Bit 1 = Shareable. "
+            bitOffset: 22
+            bitWidth: 2
+          MEMATTRD:
+            description: "Memory attributes. Always 0b01 for this bus. They are always Non-shareable, Non-allocate."
+            bitOffset: 24
+            bitWidth: 2
+          MEMATTRI:
+            description: "Memory attributes. Always 0b01 for this bus. They are always Non-shareable, Non-allocate."
+            bitOffset: 26
+            bitWidth: 2
+          EXREQS:
+            description: "Exclusive Request. EXREQS is an address phase control signal that indicates if the access is because of a LDREX or STREX:\\n \\n
+                          0 = No request \\n \\n
+                          1 = Exclusive request \\n \\n
+                          You can use EXREQS and EXRESPS to synchronize primitives and semaphores."
+            bitOffset: 30
+            bitWidth: 1
+          EXREQD:
+            description: "Exclusive Request. EXREQD is an address phase control signal that indicates if the access is because of a LDREX or STREX: \\n \\n 
+                          0 = No request \\n \\n 
+                          1 = Exclusive request. \\n \\n
+                          You can use EXREQD and EXRESPD to synchronize primitives and semaphores."
+            bitOffset: 31
+            bitWidth: 1
+      CONFIG2:
+        description: "Configuration register 2" 
+        addressOffset: 0x014
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          FPU_DISABLE:
+            description: "Set to disable the Floating Point Arithmetic Unit"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          MPU_DISABLE:
+            description: "Set to disable de Memory Protection Unit"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          DBG_DIS:
+            description: "Set to disable the M4 debugger"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          EDBGEQ:
+            description: "External debug request. Internal use only"
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+          DBGRESTART:
+            description: "Debugger restart. Internal use only"
+            bitOffset: 6
+            bitWidth: 1
+            access: read-write
+          BIGEND:
+            description: "Static endianness setting. This signal is sampled at reset, and cannot be changed when reset is inactive."
+            bitOffset: 8
+            bitWidth: 1
+            access: read-write
+          EXRESPS:
+            description: "Exclusive Response. EXRESPS is a data phase response like HRESPS, but is only valid for exclusive accesses and indicates the success or failure of an exclusive operation: \\n \\n
+                          0 = Exclusive request accepted \\n \\n
+                          1 = Exclusive request failed. \\n \\n
+                          You can use EXREQS and EXRESPS to synchronize primitives and semaphores."
+            bitOffset: 30
+            bitWidth: 1
+            access: read-write
+          EXRESPD:
+            description: "Exclusive Response. EXRESPD is a data phase response like HRESPD, but is 
+                          only valid for exclusive accesses and indicates the success or failure of an exclusive operation: \\n \\n
+                          0 = Exclusive request accepted \\n \\n 
+                          1 = Exclusive request failed. \\n \\n
+                          You can use EXREQD and EXRESPD to synchronize primitives and semaphores."
+            bitOffset: 31
+            bitWidth: 1
+            access: read-write
+      CONFIG_FP1:
+        description: "FPU configuration register 1" 
+        addressOffset: 0x100
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        access: read-only
+        fields:
+          FPIDC:
+            description: "Floating-point input denormal exception"
+            bitOffset: 0
+            bitWidth: 1
+          FPIZC:
+            description: "Floating-point divide-by-zero exception"
+            bitOffset: 1
+            bitWidth: 1
+          FPIOC:
+            description: "Floating-point invalid exception"
+            bitOffset: 2
+            bitWidth: 1
+          FPIFC:
+            description: "Floating-point underflow exception"
+            bitOffset: 3
+            bitWidth: 1
+          FPOFC:
+            description: "Floating-point overflow exception"
+            bitOffset: 4
+            bitWidth: 1
+          FPIXC:
+            description: "Floating-point inexact exception"
+            bitOffset: 5
+            bitWidth: 1
+      CONFIG_FP2:
+        description: "FPU configuration register 2" 
+        addressOffset: 0x104
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          FPIDC_EN:
+            description: "Mask exception to cpu; Floating-point input denormal exception"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          FPIDZC_EN:
+            description: "Mask exception to cpu; Floating-point divide-by-zero exception"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          FPIOC_EN:
+            description: "Mask exception to cpu; Floating-point invalid operation exception"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          FPIFC_EN:
+            description: "Mask exception to cpu; Floating-point underflow exception"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          FPIDC_EN:
+            description: "Mask exception to cpu; Floating-point overflow exception"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          FPIXC_EN:
+            description: "Mask exception to cpu; Floating-point inexact exception"
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+      CONFIG_MEM1:
+        description: "Memory configuration register 1" 
+        addressOffset: 0x200
+        size: 32
+        resetValue: 0b0000_0001_0000_1000_0100_0010
+        resetMask:  0b1111_1111_1111_1111_1111_1111
+        fields:
+          MEM0_32K_RM:
+            description: "Read and write margin control. Recommended setting is 2’b10. 2’b00 provides the most margin (slowest speed). 2’b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation."
+            bitOffset: 0
+            bitWidth: 2
+            access: read-write
+          MEM0_32K_DST:
+            description: "‘Disable-Self-Time’. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2’b00. This pin is intended for debug/FA purposes only."
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          MEM1_32K_RM:
+            description: "Read and write margin control. Recommended setting is 2’b10. 2’b00 provides the most margin (slowest speed). 2’b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation."
+            bitOffset: 5
+            bitWidth: 2
+            access: read-write
+          MEM1_32K_DST:
+            description: "‘Disable-Self-Time’. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2’b00. This pin is intended for debug/FA purposes only."
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          MEM2_32K_RM:
+            description: "Read and write margin control. Recommended setting is 2’b10. 2’b00 provides the most margin (slowest speed). 2’b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation."
+            bitOffset: 10
+            bitWidth: 2
+            access: read-write
+          MEM2_32K_DST:
+            description: "‘Disable-Self-Time’. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2’b00. This pin is intended for debug/FA purposes only."
+            bitOffset: 14
+            bitWidth: 1
+            access: read-write
+          MEM3_32K_RM:
+            description: "Read and write margin control. Recommended setting is 2’b10. 2’b00 provides the most margin (slowest speed). 2’b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation."
+            bitOffset: 15
+            bitWidth: 2
+            access: read-write
+          MEM4_32K_DST:
+            description: "‘Disable-Self-Time’. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2’b00. This pin is intended for debug/FA purposes only."
+            bitOffset: 19
+            bitWidth: 1
+            access: read-write
+      CONFIG_MEM2:
+        description: "Memory configuration register 2" 
+        addressOffset: 0x204
+        size: 32
+        resetValue: 0b0000_0001_0000_1000_0100_0010
+        resetMask:  0b1111_1111_1111_1111_1111_1111
+        fields:
+          MEM0_32K_RM:
+            description: "Read and write margin control. Recommended setting is 2’b10. 2’b00 provides the most margin (slowest speed). 2’b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation."
+            bitOffset: 0
+            bitWidth: 2
+            access: read-write
+          MEM0_32K_DST:
+            description: "‘Disable-Self-Time’. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2’b00. This pin is intended for debug/FA purposes only."
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          MEM1_32K_RM:
+            description: "Read and write margin control. Recommended setting is 2’b10. 2’b00 provides the most margin (slowest speed). 2’b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation."
+            bitOffset: 5
+            bitWidth: 2
+            access: read-write
+          MEM1_32K_DST:
+            description: "‘Disable-Self-Time’. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2’b00. This pin is intended for debug/FA purposes only."
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          MEM2_32K_RM:
+            description: "Read and write margin control. Recommended setting is 2’b10. 2’b00 provides the most margin (slowest speed). 2’b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation."
+            bitOffset: 10
+            bitWidth: 2
+            access: read-write
+          MEM2_32K_DST:
+            description: "‘Disable-Self-Time’. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2’b00. This pin is intended for debug/FA purposes only."
+            bitOffset: 14
+            bitWidth: 1
+            access: read-write
+          MEM3_32K_RM:
+            description: "Read and write margin control. Recommended setting is 2’b10. 2’b00 provides the most margin (slowest speed). 2’b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation."
+            bitOffset: 15
+            bitWidth: 2
+            access: read-write
+          MEM4_32K_DST:
+            description: "‘Disable-Self-Time’. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2’b00. This pin is intended for debug/FA purposes only."
+            bitOffset: 19
+            bitWidth: 1
+            access: read-write
+      CONFIG_MEM3:
+        description: "Memory configuration register 3" 
+        addressOffset: 0x208
+        size: 32
+        resetValue: 0b0000_0001_0000_1000_0100_0010
+        resetMask:  0b1111_1111_1111_1111_1111_1111
+        fields:
+          MEM0_32K_RM:
+            description: "Read and write margin control. Recommended setting is 2’b10. 2’b00 provides the most margin (slowest speed). 2’b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation."
+            bitOffset: 0
+            bitWidth: 2
+            access: read-write
+          MEM0_32K_DST:
+            description: "‘Disable-Self-Time’. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2’b00. This pin is intended for debug/FA purposes only."
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          MEM1_32K_RM:
+            description: "Read and write margin control. Recommended setting is 2’b10. 2’b00 provides the most margin (slowest speed). 2’b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation."
+            bitOffset: 5
+            bitWidth: 2
+            access: read-write
+          MEM1_32K_DST:
+            description: "‘Disable-Self-Time’. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2’b00. This pin is intended for debug/FA purposes only."
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          MEM2_32K_RM:
+            description: "Read and write margin control. Recommended setting is 2’b10. 2’b00 provides the most margin (slowest speed). 2’b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation."
+            bitOffset: 10
+            bitWidth: 2
+            access: read-write
+          MEM2_32K_DST:
+            description: "‘Disable-Self-Time’. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2’b00. This pin is intended for debug/FA purposes only."
+            bitOffset: 14
+            bitWidth: 1
+            access: read-write
+          MEM3_32K_RM:
+            description: "Read and write margin control. Recommended setting is 2’b10. 2’b00 provides the most margin (slowest speed). 2’b11 provides the least margin (fastest speed) memory. This setting is required for VDDMIN operation."
+            bitOffset: 15
+            bitWidth: 2
+            access: read-write
+          MEM4_32K_DST:
+            description: "‘Disable-Self-Time’. When asserted high, overrides the self-timed circuitry and causes the read margin to be controlled by the falling clk edge. Requires margin[] to be set to 2’b00. This pin is intended for debug/FA purposes only."
+            bitOffset: 19
+            bitWidth: 1
+            access: read-write
+      M4_MEM_INT:
+        description: "SRAM access while in low power mode interrupt flag register (Set bit to clear)"  
+        addressOffset: 0x21C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          MEMO_INTR0:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 0 32KB_0)  while it in deep sleep or shut down mode"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          MEMO_INTR1:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 0 32KB_1)  while it in deep sleep or shut down mode"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          MEMO_INTR2:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 0 32KB_2)  while it in deep sleep or shut down mode"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          MEMO_INTR3:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 0 32KB_3)  while it in deep sleep or shut down mode"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          MEM1_INTR0:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 1 32KB_0)  while it in deep sleep or shut down mode"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          MEM1_INTR1:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 1 32KB_1)  while it in deep sleep or shut down mode"
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+          MEM1_INTR2:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 1 32KB_2)  while it in deep sleep or shut down mode"
+            bitOffset: 6
+            bitWidth: 1
+            access: read-write
+          MEM1_INTR3:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 1 32KB_3)  while it in deep sleep or shut down mode"
+            bitOffset: 7
+            bitWidth: 1
+            access: read-write
+          MEM2_INTR0:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 2 32KB_0)  while it in deep sleep or shut down mode"
+            bitOffset: 8
+            bitWidth: 1
+            access: read-write
+          MEM2_INTR1:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 2 32KB_1)  while it in deep sleep or shut down mode"
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          MEM2_INTR2:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 2 32KB_2)  while it in deep sleep or shut down mode"
+            bitOffset: 10
+            bitWidth: 1
+            access: read-write
+          MEM2_INTR3:
+            description: "Interrupt caused by a SRAM access (M4 SRAM segment 2 32KB_3)  while it in deep sleep or shut down mode"
+            bitOffset: 11
+            bitWidth: 1
+            access: read-write
+      M4_MEM_INTR_EN:
+        description: "SRAM memory access while M4 in low power mode interrupts enable register" 
+        addressOffset: 0x220
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          MEM0_INTR0_EN:
+            description: "Interrupt enable (M4 SRAM segment 0 32KB_0) "
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          MEM0_INTR1_EN:
+            description: "Interrupt enable (M4 SRAM segment 0 32KB_1) "
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          MEM0_INTR2_EN:
+            description: "Interrupt enable (M4 SRAM segment 0 32KB_2) "
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          MEM0_INTR3_EN:
+            description: "Interrupt enable (M4 SRAM segment 0 32KB_3) "
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          MEM1_INTR0_EN:
+            description: "Interrupt enable (M4 SRAM segment 1 32KB_0) "
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          MEM1_INTR1_EN:
+            description: "Interrupt enable (M4 SRAM segment 1 32KB_1) "
+            bitOffset: 5
+            bitWidth: 1
+            access: read-write
+          MEM1_INTR2_EN:
+            description: "Interrupt enable (M4 SRAM segment 1 32KB_2) "
+            bitOffset: 6
+            bitWidth: 1
+            access: read-write
+          MEM1_INTR3_EN:
+            description: "Interrupt enable (M4 SRAM segment 1 32KB_3) "
+            bitOffset: 7
+            bitWidth: 1
+            access: read-write
+          MEM2_INTR0_EN:
+            description: "Interrupt enable (M4 SRAM segment 2 32KB_0) "
+            bitOffset: 8
+            bitWidth: 1
+            access: read-write
+          MEM2_INTR1_EN:
+            description: "Interrupt enable (M4 SRAM segment 2 32KB_1) "
+            bitOffset: 9
+            bitWidth: 1
+            access: read-write
+          MEM2_INTR2_EN:
+            description: "Interrupt enable (M4 SRAM segment 2 32KB_2) "
+            bitOffset: 10
+            bitWidth: 1
+            access: read-write
+          MEM2_INTR3_EN:
+            description: "Interrupt enable (M4 SRAM segment 2 32KB_3) "
+            bitOffset: 11
+            bitWidth: 1
+            access: read-write
+      TO_INTR:
+        description: "No description provided" 
+        addressOffset: 0x230
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          TO_INTR_TMR_MON:
+            description: ""
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          TO_INTR_UART_MON:
+            description: ""
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          TO_INTR_AON:
+            description: ""
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+      TO_INTR_EN:
+        description: "No description provided" 
+        addressOffset: 0x234
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          TO_INTR_TMR_MON_EN:
+            description: ""
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          TO_INTR_UART_MON_EN:
+            description: ""
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          TO_INTR_AON_EN:
+            description: ""
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+      A1_POWER_STAT:
+        description: "Status of the A1 subsystem power status" 
+        addressOffset: 0x250
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          A1_POWER_STAT:
+            description: "Status of the A1 subsystem power status"
+            bitOffset: 0
+            bitWidth: 2
+            access: read-only
+      FB_RAMFIFO:
+        description: "Sets Fabric in APB mode" 
+        addressOffset: 0x300
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          FB_RAMFIFO_MODE:
+            description: "Sets Fabric in APB mode"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+
+EXTM4Regs: 
+  CONFIG1:
+    BRCHSTAT:
+      no_hint: [0, "No hint."]
+      cond_backwards_decode: [1, "Conditional branch backwards in decode"]
+      cond_decode: [2, "Conditional branch in decode"]
+      cond_execute: [3, "Conditional branch in execute"]
+      uncond_decode: [4, "Unconditional branch in decode"]
+      uncond_execute: [5, "Unconditional branch in execute"]
+      cond_decode_taken: [8, "Conditional branch in decode taken
+(cycle after IHTRANS)"]
+  CONFIG2:
+    BIGEND:
+      little_endian: [0, "Select little endian as endiannes setting"]
+      big_endian: [1, "Select big endian as endiannes setting"]
+

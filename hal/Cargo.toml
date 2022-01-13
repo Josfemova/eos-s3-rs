@@ -2,8 +2,12 @@
 name = "eos-s3-hal"
 version = "0.1.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+authors = ["José Morales <josfemova@gmail.com>"]
+description = "Hardware Abstraction Layer crate for the QuickLogic EOS-S3 SoC"
+keywords = ["no-std", "arm", "cortex-m", "embedded-hal", "fpga"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/Josfemova/eos-s3-rs/"
+readme = "README.md"
 
 [dependencies]
 embedded-hal= "0.2"

@@ -6,3 +6,594 @@ _add:
       - offset: 0
         size: 0x34
         usage: registers
+    registers: 
+      VOICE_CONFIG:
+        description: "Audio system configure register" 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0b0000_0000_0100_0001_0000_0000_0000_0000
+        resetMask:  0b1111_1111_1111_1111_1111_1111_1111_1111
+        fields:
+          DMIC_SEL:
+            description: "Select the source for digital mic signal"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          LPSD_SEL:
+            description: "Select between external or internal sensory LSPD"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          MODE_SEL:
+            description: "Select either monoaural or stereo mode"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-write
+          MONO_CHN_SEL:
+            description: "Select either right channel in mono mode or left channel"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          I2S_DS_EN:
+            description: "Set to enable the I2S Deep Sleep mode"
+            bitOffset: 4
+            bitWidth: 1
+            access: read-write
+          PDM_VOICE_SCENARIO:
+            description: "Choose the PDM voice scenario"
+            bitOffset: 5
+            bitWidth: 3
+            access: read-write
+          PDM_MIC_SWITCH_TO_AP:
+            description: "Set to switch mic to AP"
+            bitOffset: 8
+            bitWidth:  1
+            access: read-write
+          LPSD_USE_DC_BLOCK:
+            description: "Set to use LPSD DC Block"
+            bitOffset: 9
+            bitWidth: 1 
+            access: read-write
+          LPSD_MUX:
+            description: "Choose the channel pcm data for LPSD in stereo mode"
+            bitOffset: 10
+            bitWidth:  1
+            access: read-write
+          LPSD_NO:
+            description: "Set to disable HW LPSD"
+            bitOffset: 11
+            bitWidth: 1 
+            access: read-write
+          I2S_FPGA_EN:
+            description: "Set to enable the FPGA I2S"
+            bitOffset: 12
+            bitWidth: 1
+            access: read-write
+          DIV_AP:
+            description: "AP_PDM_CKO_IN frequency divide-down ratio for AP clock detection"
+            bitOffset: 15
+            bitWidth: 3
+            access: read-write
+          DIV_WD:
+            description: "AP_PDM_CKO_IN clock detection window range"
+            bitOffset: 18 
+            bitWidth:  6
+            access: read-write
+          FIFO_0_CLEAR:
+            description: "Set to flush FIFO"
+            bitOffset: 24
+            bitWidth: 1 
+            access: read-write
+          FIFO_1_CLEAR:
+            description: "Set to Flush FIFO"
+            bitOffset: 25
+            bitWidth: 1
+            access: read-write
+          LPSD_VOICE_DETECTED_MASK:
+            description: "Control the masking of the interrupt"
+            bitOffset: 26
+            bitWidth:  1
+            access: read-write
+          DMIC_VOICE_DETECTED_MASK:
+            description: "Control the masking of the interrupt"
+            bitOffset: 27
+            bitWidth: 1
+            access: read-write
+          DMAC_BLK_DONE_MASK:
+            description: "Control the masking of the interrupt"
+            bitOffset: 28
+            bitWidth: 1
+            access: read-write
+          DMAC_BUF_DONE_MASK:
+            description: "Control the masking of the interrupt"
+            bitOffset: 29
+            bitWidth: 1
+            access: read-write
+          AP_PDM_CLK_IB_MASK:
+            description: "Control the masking of the interrupt"
+            bitOffset: 30
+            bitWidth:  1
+            access: read-write
+          AP_PDM_CLK_OFF_MASK:
+            description: "Control the masking of the interrupt"
+            bitOffset: 31
+            bitWidth: 1 
+            access: read-write
+      LPSD_CONFIG:
+        description: "LPSD config register" 
+        addressOffset: 0x004
+        size: 32
+        resetValue: 0x4D58_04B0
+        resetMask:  0xFFFF_FFFF
+        fields:
+          LPSD_THD:
+            description: "LPSD threshold parameter"
+            bitOffset: 0
+            bitWidth: 16 
+            access: read-write
+          LPSD_RATIO_STOP:
+            description: "LPSD threshold parameter"
+            bitOffset: 16
+            bitWidth: 8
+            access: read-write
+          LPSD_RATIO_RUN:
+            description: "LPSD run parameter"
+            bitOffset: 24
+            bitWidth: 8
+            access: read-write
+      VOICE_DMA_CONFIG:
+        description: "Audio DMAC configure register" 
+        addressOffset: 0x008
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DMAC_EN:
+            description: "Set to enable Voice DMAC"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          DMAC_START:
+            description: "Set to start DMA"
+            bitOffset: 1
+            bitWidth: 1 
+            access: write-only
+          DMAC_STOP:
+            description: "Set to Stop DMA"
+            bitOffset: 2
+            bitWidth: 1 
+            access: read-write
+          AHB_RDY:
+            description: "Set to indicate AHB clock is ready"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          AHB_BURST_LENGHT:
+            description: "Select the AHB Burst Lenght in words"
+            bitOffset: 4
+            bitWidth: 2
+            access: read-write
+          PINGPONG_MODE:
+            description: "Select the pingpong mode"
+            bitOffset: 6
+            bitWidth:  1
+            access: read-write
+          STEREO_DUAL_BUF_MODE:
+            description: "Select how to process stereo buffer data"
+            bitOffset: 7
+            bitWidth: 1
+            access: read-write
+          VOICE_DMAC_BURST_SPD:
+            description: "AHB cycles between two consecutive AHB Bursts"
+            bitOffset: 8
+            bitWidth: 8
+            access: read-write
+      VOICE_DMAC_LEN:
+        description: "Audio DMAC length register" 
+        addressOffset: 0x00C
+        size: 32
+        resetValue: 0x04B0_0078
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DMAC_BLK_LEN:
+            description: "DMA block transfer length in words"
+            bitOffset: 0
+            bitWidth: 16
+            access: read-write
+          DMAC_BUF_LEN:
+            description: "DMA buffer transfer length in words"
+            bitOffset: 16
+            bitWidth: 16
+            access: read-write
+      VOICE_DMAC_FIFO:
+        description: "Audio DMAC Buffer offset" 
+        addressOffset: 0x010
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_0000
+        fields:
+          DMAC_BUF_OFFSER:
+            description: "buffer offset address in dual buffer mode"
+            bitOffset: 16 
+            bitWidth:  16
+            access: read-write
+      VOICE_DMAC_DST_ADDR0:
+        description: "DMA0 dest address for the first buffer" 
+        addressOffset: 0x014
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          VOICE_DMAC_DST_ADDR0:
+            description: "DMA0 dest address for the first buffer" 
+            bitOffset: 0
+            bitWidth:  32
+            access: read-write
+      VOICE_DMAC_DST_ADDR1:
+        description: "DMA1 dest address for the first buffer" 
+        addressOffset: 0x018
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          VOICE_DMAC_DST_ADDR1:
+            description: "DMA1 dest address for the first buffer" 
+            bitOffset: 0
+            bitWidth:  32
+            access: read-write
+      PDM_CORE_CONFIG:
+        description: "PDM2PCM core configure register" 
+        addressOffset: 0x01C
+        size: 32
+        resetValue: 0b0001_0000_1000_0010_0110_0110_1100_1001
+        resetMask:  0b1111_1111_1111_1111_1111_1111_1111_1111
+        fields:
+          PDM_CORE_CONFIG:
+            description: "Set to enable PDM core"
+            bitOffset: 0
+            bitWidth:  1
+            access: read-write
+          SOFT_MUTE:
+            description: "Set to enable PDM Soft mute"
+            bitOffset: 1
+            bitWidth:  1
+            access: read-write
+          DIV_MODE:
+            description: "Select which divider to use in sampler"
+            bitOffset: 2
+            bitWidth:  1
+            access: read-write
+          S_CYCLES:
+            description: "Set number of PDM_CLK during gain setting changes or soft mute"
+            bitOffset: 3
+            bitWidth:  3
+            access: read-write
+          HP_GAIN:
+            description: "Adjust high pass filter coefficients"
+            bitOffset: 6
+            bitWidth:  4
+            access: read-write
+          ADCHPD:
+            description: "Set to disable high pass filter"
+            bitOffset: 10
+            bitWidth:  1
+            access: read-write
+          M_CLK_DIV:
+            description: "PDM_CLK frquency divisor"
+            bitOffset: 11
+            bitWidth:  2
+            access: read-write
+          SINC_RATE:
+            description: "SINC decimation rate"
+            bitOffset: 13
+            bitWidth:  7
+            access: read-write
+          PGA_L:
+            description: "Left channel PGA gain"
+            bitOffset: 20
+            bitWidth:  5
+            access: read-write
+          PGA_R:
+            description: "Right channel PGA gain"
+            bitOffset: 25
+            bitWidth:  5
+            access: read-write
+          DMICK_DLY:
+            description: "Input data sampling with PDM clock cycle delay"
+            bitOffset: 30
+            bitWidth:  1
+            access: read-write
+          DIV_WD_MODE:
+            description: "Status IN detection windows"
+            bitOffset: 31
+            bitWidth:  1
+            access: read-write
+      VOICE_STATUS:
+        description: "Audio Status Register" 
+        addressOffset: 0x020
+        size: 32
+        resetValue: 0b0000_0000_0000_0100_0001_0001_0001_0001
+        resetMask:  0b1111_1111_1111_1111_1111_1111_1111_1111
+        fields:
+          FIFO_0A_EMPTY:
+            description: "Set if the FIFO is empty"
+            bitOffset: 0
+            bitWidth:  1
+            access: read-only
+          FIFO_0A_FULL:
+            description: "Set if the FIFO is full"
+            bitOffset: 1
+            bitWidth:  1
+            access: read-write
+          FIFO_0A_OVERFLOW:
+            description: "Set if there's a FIFO overflow"
+            bitOffset: 2
+            bitWidth:  1
+            access: read-write
+          FIFO_0B_EMPTY:
+            description: "Set if the FIFO is empty"
+            bitOffset: 4
+            bitWidth:  1
+            access: read-only
+          FIFO_0B_FULL:
+            description: "Set if the FIFO is full"
+            bitOffset: 5
+            bitWidth:  1
+            access: read-write
+          FIFO_0B_OVERFLOW:
+            description: "Set if there's a FIFO overflow"
+            bitOffset: 6
+            bitWidth:  1
+            access: read-write
+          FIFO_1A_EMPTY:
+            description: "Set if the FIFO is empty"
+            bitOffset: 8
+            bitWidth:  1
+            access: read-only
+          FIFO_1A_FULL:
+            description: "Set if the FIFO is full"
+            bitOffset: 9
+            bitWidth:  1
+            access: read-write
+          FIFO_1A_OVERFLOW:
+            description: "Set if there's a FIFO overflow"
+            bitOffset: 10
+            bitWidth:  1
+            access: read-write
+          FIFO_1B_EMPTY:
+            description: "Set if the FIFO is empty"
+            bitOffset: 12
+            bitWidth:  1
+            access: read-only
+          FIFO_1B_FULL:
+            description: "Set if the FIFO is full"
+            bitOffset: 13
+            bitWidth:  1
+            access: read-write
+          FIFO_1B_OVERFLOW:
+            description: "Set if there's a FIFO overflow"
+            bitOffset: 14
+            bitWidth:  1
+            access: read-write
+          DMIC_VOICE_DETECTED_REG:
+            description: "Set if detected"
+            bitOffset: 16
+            bitWidth:  1
+            access: read-only
+          LPSD_VOICE_DETECTED_REG:
+            description: "Set if detected"
+            bitOffset: 17
+            bitWidth:  1
+            access: read-only
+          AP_PDM_CLK_OFF_REG:
+            description: "Set if AP PDM clock is off"
+            bitOffset: 18
+            bitWidth:  1
+            access: read-only
+          AP_PDM_CLK_ON_REG:
+            description: "Set if AP PDM clock is on"
+            bitOffset: 19
+            bitWidth:  1
+            access: read-only
+          DMAC1_BUF_DONE_REG:
+            description: "Set if done"
+            bitOffset: 20
+            bitWidth:  1
+            access: read-write
+          DMAC1_BLK_DONE_REG:
+            description: "Set if done"
+            bitOffset: 21
+            bitWidth:  1
+            access: read-write
+          DMAC0_BUF_DONE_REG:
+            description: "Set if done"
+            bitOffset: 22
+            bitWidth:  1
+            access: read-write
+          DMAC0_BLK_DONE_REG:
+            description: "Set if done"
+            bitOffset: 23
+            bitWidth:  1
+            access: read-write
+      I2S_CONFIG:
+        description: "I2S master configure register" 
+        addressOffset: 0x024
+        size: 32
+        resetValue: 0x0000_2040
+        resetMask:  0xFFFF_FFFF
+        fields:
+          I2S_LRCDIV:
+            description: "I2S_CLK divisor for WD_CLK generator"
+            bitOffset: 0
+            bitWidth:  12
+            access: read-write
+          I2S_BLKDIV:
+            description: "I2S_MASTER_CLK divisor for I2S_CLK generator"
+            bitOffset: 12
+            bitWidth: 6
+            access: read-write
+          I2S_CLK_INV:
+            description: "Set to activate inverting"
+            bitOffset: 18
+            bitWidth: 1
+            access: read-write
+          I2S_IWL:
+            description: "Input sample data bit shift"
+            bitOffset: 19
+            bitWidth: 2
+            access: read-write
+      FIFO_SRAM_CFG:
+        description: "FIFO SRAM configure register" 
+        addressOffset: 0x028
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRAM_0A_TEST1:
+            description: "Test pin to bypass self-timed circuit"
+            bitOffset: 0
+            bitWidth:  1
+            access: read-write
+          SRAM_0A_RME:
+            description: "Read-Write margin Enable input"
+            bitOffset: 1
+            bitWidth:  1
+            access: read-write
+          SRAM_0A_RM:
+            description: "Read-Write margin Input for Left Channel 8KB FIFO"
+            bitOffset: 2
+            bitWidth:  4
+            access: read-write
+          SRAM_0B_TEST1:
+            description: "Test pin to bypass self-timed circuit"
+            bitOffset: 6
+            bitWidth:  1
+            access: read-write
+          SRAM_0B_RME:
+            description: "Read-Write margin Enable input"
+            bitOffset: 7
+            bitWidth:  1
+            access: read-write
+          SRAM_0B_RM:
+            description: "Read-Write margin Input for Left Channel 512B FIFO"
+            bitOffset: 8
+            bitWidth:  4
+            access: read-write
+          SRAM_1A_TEST1:
+            description: "Test pin to bypass self-timed circuit"
+            bitOffset: 12
+            bitWidth:  1
+            access: read-write
+          SRAM_1A_RME:
+            description: "Read-Write margin Enable input"
+            bitOffset: 13
+            bitWidth:  1
+            access: read-write
+          SRAM_1A_RM:
+            description: "Read-Write margin Input for Right Channel 8KB FIFO"
+            bitOffset: 14
+            bitWidth:  4
+            access: read-write
+          SRAM_1B_TEST1:
+            description: "Test pin to bypass self-timed circuit"
+            bitOffset: 18
+            bitWidth:  1
+            access: read-write
+          SRAM_1B_RME:
+            description: "Read-Write margin Enable input"
+            bitOffset: 19
+            bitWidth:  1
+            access: read-write
+          SRAM_1B_RM:
+            description: "Read-Write margin Input for Right Channel 512B FIFO"
+            bitOffset: 20
+            bitWidth:  4
+            access: read-write
+      PDMA_SRAM_CFG:
+        description: "PDM core SRAM configure register"
+        addressOffset: 0x02C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          PDM_SRAM_L_TEST1:
+            description: "Test pin to bypass self-timed circuit"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+          PDM_SRAM_L_RME:
+            description: "Read-Write margin Enable Input"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-write
+          PDM_SRAM_L_RM:
+            description: "Read-Write margin Input for Right Channel PDM SRAM"
+            bitOffset: 2
+            bitWidth: 4
+            access: read-write
+      DBG_MUX_CFG:
+        description: "Audio Debug Register" 
+        addressOffset: 0x030
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DBG_MUX:
+            description: "\\n 0000 => dbg_tp[7:0] = dbg_fifo_0a_wptr[7:0] \\n
+                          0001 => dbg_tp[7:0] = dbg_fifo_0a_rptr[7:0] \\n
+                          0010 => dbg_tp[7:0] = {1'b0, dbg_fifo_0a_rptr[10:8], 1'b0, dbg_fifo_0a_wptr[10:8]} \\n\\n
+                          0011 => dbg_tp[7:0] = dbg_fifo_1a_wptr[7:0] \\n
+                          0100 => dbg_tp[7:0] = dbg_fifo_1a_rptr[7:0] \\n
+                          0101 => dbg_tp[7:0] = {1'b0, dbg_fifo_1a_rptr[10:8], 1'b0, dbg_fifo_1a_wptr[10:8]} \\n\\n
+                          0110 => dbg_tp[7:0] = {2'd0, dbg_fifo_0b_wptr[5:0]} \\n\\n
+                          0111 => dbg_tp[7:0] = {2'd0, dbg_fifo_0b_rptr[5:0]} \\n\\n
+                          1000 => dbg_tp[7:0] = {2'd0, dbg_fifo_1b_wptr[5:0]} \\n\\n
+                          1001 => dbg_tp[7:0] = {2'd0, dbg_fifo_1b_rptr[5:0]} \\n\\n
+                          1010 => dbg_tp[7:0] = {2'd0, dbg_afifo_0_rptr[1:0], 2'd0, dbg_afifo_0_wptr[1:0]}  \\n\\n
+                          1011 => dbg_tp[7:0] ={2'd0, dbg_afifo_1_rptr[1:0], 2'd0, dbg_afifo_1_wptr[1:0]} \\n\\n
+                          1100 => dbg_tp[7:0] = {PCM_DATA_L[7:1],VALID} \\n\\n
+                          1101 => dbg_tp[7:0] = {PCM_DATA_L[15:9],VALID}  \\n\\n
+                          1110 => dbg_tp[7:0] = {PCM_DATA_R[7:1],VALID} \\n\\n
+                          1111 => dbg_tp[7:0] = {PCM_DATA_R[15:9],VALID}"
+            bitOffset: 0
+            bitWidth: 4
+            access: read-write
+
+
+AUD:
+  VOICE_CONFIG: 
+    DMIC_SEL:
+      pdm: [0, "DMIC source is PDM"]
+      i2s: [1, "DMIC source is I2S"]
+    LPSD_SEL:
+      internal: [0, "Use internal sensory LPSD"]
+      external: [1, "Use external sensory LPSD"]
+    MODE_SEL:
+      mono: [0, "Audio mode selected as Mono"]
+      stereo: [1, "Audio mode selected as Stereo"]
+    MONO_CHN_SEL:
+      left_channel: [0, "Left channel in mono mode"]
+      right_channel: [1, "Right channel in mono mode"]
+    PDM_VOICE_SCENARIO:
+      scenario1: [0, "Choose voice scenario 1"]
+      scenario2: [1, "Choose voice scenario 2"]
+      scenario3_mode1: [2, "Choose voice scenario 3 mode 1"]
+      scenario3_mode2: [3, "Choose voice scenario 3 mode 2"]
+      scenario3_mode3: [4, "Choose voice scenario 3 mode 3"]
+    PDM_MIC_SWITCH_TO_AP:
+      no_switch: [0, "Don't switch to AP"] 
+      switch: [1, "Switch to AP"] 
+    LPSD_MUX:
+      left_channel: [0, "Left channel pcm data to LPSD in stereo mode"]
+      right_channel: [1, "Right channel pcm data to LPSD in stereo mode"]
+    LPSD_NO:
+      enable_hw: [0, "Enable hardware LPSD"]
+      disable_hw: [1, "Disable HW LPSD"]
+    "*_MASK":
+      unmask: [0, "Unmask the interrupt"]
+      mask: [1, "Mask the interrupt"]
+  PDM_CORE_CONFIG:
+    DIV_MODE:
+      left: [0, "Use PDM_LEFT in sampler"]
+      right: [1, "Use PDM_RIGHT in sampler"]
+

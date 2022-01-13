@@ -31,7 +31,8 @@ pub struct RegisterBlock {
     pub pkfb_pf2pushctl: crate::Reg<pkfb_pf2pushctl::PKFB_PF2PUSHCTL_SPEC>,
     #[doc = "0x34 - FIFO 2 Pop Control"]
     pub pkfb_pf2popctl: crate::Reg<pkfb_pf2popctl::PKFB_PF2POPCTL_SPEC>,
-    _reserved14: [u8; 0x04],
+    #[doc = "0x38 - FIFO 2 Count"]
+    pub pkfb_pf2cnt: crate::Reg<pkfb_pf2cnt::PKFB_PF2CNT_SPEC>,
     #[doc = "0x3c - FIFO 2 Push/POP Data Register"]
     pub pkfb_pf2data: crate::Reg<pkfb_pf2data::PKFB_PF2DATA_SPEC>,
     #[doc = "0x40 - FIFO 8k Push Control"]
@@ -48,9 +49,6 @@ pub struct RegisterBlock {
     #[doc = "0x54 - Control register for enabling or masking the collisione interrupts"]
     pub pkfb_fifo_coll_intr_en:
         crate::Reg<pkfb_fifo_coll_intr_en::PKFB_FIFO_COLL_INTR_EN_SPEC>,
-    _reserved21: [u8; 0x02c0],
-    #[doc = "0x318 - FIFO 2 Count"]
-    pub pkfb_pf2cnt: crate::Reg<pkfb_pf2cnt::PKFB_PF2CNT_SPEC>,
 }
 #[doc = "PKFB_FIFOCTRL register accessor: an alias for `Reg<PKFB_FIFOCTRL_SPEC>`"]
 pub type PKFB_FIFOCTRL = crate::Reg<pkfb_fifoctrl::PKFB_FIFOCTRL_SPEC>;

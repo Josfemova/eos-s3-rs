@@ -1,6 +1,6 @@
 _add:
   UART: 
-    description: ""
+    description: "Universal Asynchronous Receiver Transmitter"
     baseAddress: 0x4001_0000
     addressBlocks:
       - offset: 0 

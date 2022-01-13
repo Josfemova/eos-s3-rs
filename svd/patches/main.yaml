@@ -4,7 +4,7 @@ _include:
   - "device/A1_Regs.yaml" #done
   - "device/ADC.yaml" #done 
   - "device/AIP.yaml" #done
-  - "device/AUD.yaml"
+  - "device/AUD.yaml" #done
   - "device/CFG_CTL.yaml" #done
   - "device/CRU.yaml" #done
   - "device/DMA.yaml" #done
@@ -16,15 +16,17 @@ _include:
   - "device/PKFB.yaml" #done
   - "device/PMU.yaml" #done
   - "device/SDMA_Bridge.yaml" #done
-  - "device/SDMA.yaml"
+  - "device/SDMA_SRAM.yaml" #done
+  - "device/SDMA.yaml" #done
   - "device/SPI.yaml" #done
   - "device/SPT.yaml" #done
+  - "device/SPI_TLC.yaml" #done
   - "device/TIMER.yaml" #done
   - "device/UART.yaml" #done
   - "device/WDT.yaml" #done
-  - "core/DWT.yaml" 
-  - "core/EXTM4Regs.yaml"
-  - "core/FPB.yaml"
-  - "core/ITM.yaml"
-  - "core/SCS.yaml"
-  - "core/TPIU.yaml"
+  - "core/DWT.yaml" #core reg, ignore
+  - "core/EXTM4Regs.yaml" #done
+  - "core/FPB.yaml" #core reg, ignore
+  - "core/ITM.yaml" #core reg, ignore
+  - "core/SCS.yaml" #core reg, ignore
+  - "core/TPIU.yaml" #core reg, ignore

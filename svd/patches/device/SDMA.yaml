@@ -1,8 +1,423 @@
 _add:
   SDMA: 
-    description: ""
+    description: "System Direct Access Memory"
     baseAddress: 0x4000_C000
     addressBlocks:
       - offset: 0 
         size: 0x1000
         usage: registers 
+    registers:
+      DMA_STATUS:
+        description: "DMA Status register" 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0x100F_0000
+        resetMask:  0xFFFF_FFFF
+        access: read-only
+        fields:
+          master_enable:
+            description: "Set if controller is enabled"
+            bitOffset: 0
+            bitWidth: 1
+          state:
+            description: "Current state of the control state machine."
+            bitOffset: 4
+            bitWidth:  4
+          chnls_minus1:
+            description: "Number of available DMA channels (value in register + 1)"
+            bitOffset: 16
+            bitWidth:  5
+          test_status:
+            description: "To reduce the gate count you can configure the controller to exclude the integration test logic. If value = 1, the integration test logic is included. If 0, test logic is not included. Any other value is undefined"
+            bitOffset: 28
+            bitWidth: 4
+      DMA_CFG:
+        description: "DMA configuration register" 
+        addressOffset: 0x004
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          master_enable:
+            description: "Set to enable the controller"
+            bitOffset: 0
+            bitWidth: 1
+            access: write-only
+          chnl_prot_ctrl:
+            description: "Sets the AHB-Lite protection by controlling the HPROT[3:1] signal levels as follows:        \\n \\n
+                          Bit [7] Controls HPROT[3] to indicate if a cacheable access is occurring.      \\n \\n
+                          Bit [6] Controls HPROT[2] to indicate if a bufferable access is occurring.      \\n \\n
+                          Bit [5] Controls HPROT[1] to indicate if a privileged access is occurring.      \\n \\n
+                          Note\\n \\n
+                          When bit [n] = 1 then the corresponding HPROT is HIGH. \\n     \\n
+                          When bit [n] = 0 then the corresponding HPROT is LOW."      
+            bitOffset: 5
+            bitWidth: 3
+            access: write-only
+      CTRL_BASE_PTR:
+        description: "Control the pointer to the base address of the primary data structure" 
+        addressOffset: 0x008
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ctrl_base_ptr:
+            description: "Pointer to the base address of the primary data structure"
+            bitOffset: 9
+            bitWidth: 23
+            access: read-write
+      ALT_CTRL_BASE_PTR:
+        description: "Base address of the alternate data structure." 
+        addressOffset: 0x00C
+        size: 32
+        resetValue: 0x0000_0100
+        resetMask:  0xFFFF_FFFF
+        fields:
+          alt_ctrl_base_ptr:
+            description: "Base address of the alternate data structure"
+            bitOffset: 0
+            bitWidth: 32 
+            access: read-only
+      DMA_WAITONREQ_STATUS:
+        description: "Channel wait on request status" 
+        addressOffset: 0x010
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          dma_waitonreq_status:
+            description: "Channel wait on request status. \\n \\n
+                          Read as: \\n \\n
+                          Bit [C] = 0 dma_waitonreq[C] is LOW. \\n \\n 
+                          Bit [C] = 1 dma_waitonreq[C] is HIGH."
+            bitOffset: 0
+            bitWidth: 16
+            access: read-only
+      CHNL_SW_REQ:
+        description: "Registers to generate a software DMA request in one of the 16 DMA channels" 
+        addressOffset: 0x014
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          chnl_sw_request:
+            description: "Set the appropriate bit to generate a software DMA request on the corresponding DMA channel. Write as: \\n \\n
+                          Bit [C] = 0 Does not create a DMA request for channel C. \\n \\n
+                          Bit [C] = 1 Creates a DMA request for channel C. \\n \\n
+                          Writing to a bit where a DMA channel is not implemented does not create a DMA request for that channel."
+            bitOffset: 0
+            bitWidth: 16
+            access: write-only
+      CHNL_USE_BURST_SET:
+        description: "Returns the useburst status, or disables dma_sreq[Channel] from generating DMA requests"
+        addressOffset: 0x018
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          chnl_use_burst_set:
+            description: "Returns the useburst status, or disables dma_sreq[C] from generating DMA requests.  Read as: \\n \\n
+                          Bit [C] = 0 DMA channel C responds to requests that it receives on dma_req[C] or dma_sreq[C]. 
+                          The controller performs 2R, or single, bus transfers. \\n \\n
+                          Bit [C] = 1 DMA channel C does not respond to requests that it receives on dma_sreq[C]. 
+                          The controller only responds to dma_req[C] requests and performs 2R transfers. \\n \\n
+                          Write as: \\n \\n
+                          Bit [C] = 0 No effect. Use the chnl_useburst_clr Register to set bit [C] to 0. \\n \\n
+                          Bit [C] = 1 Disables dma_sreq[C] from generating DMA requests. The controller  performs 2R transfers. \\n \\n
+                          Writing to a bit where a DMA channel is not implemented has no effect." 
+            bitOffset: 0
+            bitWidth: 16
+            access: read-write
+      CHNL_USEBURST_SET:
+        description: "Set the appropriate bit to enable dma_sreq[Channel] to generate requests." 
+        addressOffset: 0x01C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          chnl_useburst_clr:
+            description: "Set the appropriate bit to enable dma_sreq[] to generate requests. Write as: \\n \\n 
+                          Bit [C] = 0 No effect. Use the chnl_useburst_set Register to disable dma_sreq[] from generating requests. \\n \\n 
+                          Bit [C] = 1 Enables dma_sreq[C] to generate DMA requests. \\n\\n
+                          Writing to a bit where a DMA channel is not implemented has no effect"
+            bitOffset: 0
+            bitWidth: 16
+            access: write-only
+      CHNL_REQ_MASK_SET:
+        description: "Returns the request mask status of dma_req[] and dma_sreq[], or disables the corresponding channel from generating DMA requests." 
+        addressOffset: 0x020
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          chnl_req_mask_set:
+            description: "Returns the request mask status of dma_req[C] and dma_sreq[C], 
+                          or disables the corresponding channel from generating DMA requests. Read as: \\n \\n 
+                          Bit [C] = 0 External requests are enabled for channel C. \\n \\n
+                          Bit [C] = 1 External requests are disabled for channel C. \\n \\n
+                          Write as: \\n \\n
+                          Bit [C] = 0 No effect. Use the chnl_req_mask_clr Register to enable DMA requests. \\n 
+                          Bit [C] = 1 Disables dma_req[C] and dma_sreq[C] from generating DMA requests. \\n 
+                          Writing to a bit where a DMA channel is not implemented has no effect."
+            bitOffset: 0
+            bitWidth: 16
+            access: read-write
+      CHNL_REQ_MASK_CLR:
+        description: "Set the appropriate bit to enable DMA requests for the  channel corresponding to dma_req[C] and dma_sreq[C]. " 
+        addressOffset: 0x024
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          chnl_req_mask_cler:
+            description: "Set the appropriate bit to enable DMA requests for the  channel corresponding to dma_req[C] and dma_sreq[C]. Write as: \\n \\n
+                          Bit [C] = 0 No effect. Use the chnl_req_mask_set Register to disable dma_req[C] and \\n \\n 
+                          dma_sreq[C] from generating requests. \\n \\n
+                          Bit [C] = 1 Enables dma_req[C] or dma_sreq[C] to generate DMA requests. \\n \\n
+                          Writing to a bit where a DMA channel is not implemented has no effect."
+            bitOffset: 0
+            bitWidth:  16
+            access:  write-only
+      CHNL_ENABLE_SET:
+        description: "Returns the enable status of the channels, or enables the corresponding channels." 
+        addressOffset: 0x028
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          chnl_enable_set:
+            description: "Returns the enable status of the channels, or enables the corresponding channels. Read as: \\n \\n 
+                          Bit [C] = 0 Channel C is disabled. \\n \\n
+                          Bit [C] = 1 Channel C is enabled. \\n \\n
+                          Write as: \\n \\n
+                          Bit [C] = 0 No effect. Use the chnl_enable_clr Register to disable a channel. \\n \\n 
+                          Bit [C] = 1 Enables channel C. \\n \\n
+                          Writing to a bit where a DMA channel is not implemented has no effect."
+            bitOffset: 0
+            bitWidth: 16
+            access: read-write
+      CHNL_ENABLE_CLR:
+        description: "Set the appropriate bit to disable the corresponding DMA channel." 
+        addressOffset: 0x02C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          chnl_enable_clr:
+            description: "Set the appropriate bit to disable the corresponding DMA channel. Write as: \\n \\n 
+                          Bit [C] = 0 No effect. Use the chnl_enable_set Register to enable DMA channels. \\n \\n 
+                          Bit [C] = 1 Disables channel C. \\n \\n 
+                          Writing to a bit where a DMA channel is not implemented has no effect."
+            bitOffset: 0
+            bitWidth: 16
+            access: write-only
+      CHNL_PRI_ALT_SET:
+        description: "Returns the channel control data structure status, or selects the alternate data structure for the  corresponding DMA channel. " 
+        addressOffset: 0x030
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          chnl_pri_alt_set:
+            description: "Returns the channel control data structure status, or selects the alternate data structure for the  corresponding DMA channel. Read as: \\n \\n 
+                          Bit [C] = 0 DMA channel C is using the primary data structure. \\n \\n 
+                          Bit [C] = 1 DMA channel C is using the alternate data structure. \\n \\n 
+                          Write as: \\n \\n
+                          Bit [C] = 0 No effect. Use the chnl_pri_alt_clr Register to set bit [C] to 0. \\n \\n
+                          Bit [C] = 1 Selects the alternate data structure for channel C. \\n \\n
+                          Writing to a bit where a DMA channel is not implemented has no effect."
+            bitOffset: 0
+            bitWidth: 16
+            access: read-write
+      CHNL_PRI_ALT_CLR:
+        description: "Set the appropriate bit to select the primary data structure for the corresponding DMA channel." 
+        addressOffset: 0x034
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          chnl_pri_alt_clr:
+            description: "Set the appropriate bit to select the primary data structure for the corresponding DMA channel. Write as: \\n \\n
+                          Bit [C] = 0 No effect. Use the chnl_pri_alt_set Register to select the alternate data structure. \\n \\n
+                          Bit [C] = 1 Selects the primary data structure for channel C. \\n \\n
+                          Writing to a bit where a DMA channel is not implemented has no effect."
+            bitOffset: 0
+            bitWidth: 16
+            access: write-only
+      CHNL_PRIORITY_SET:
+        description: "Returns the channel priority mask status, or sets the channel priority to high." 
+        addressOffset: 0x038
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          chnl_priority_set:
+            description: "Returns the channel priority mask status, or sets the channel priority to high. Read as: \\n \\n 
+                          Bit [C] = 0 DMA channel C is using the default priority level. \\n \\n 
+                          Bit [C] = 1 DMA channel C is using a high priority level. \\n \\n
+                          Write as: \\n \\n
+                          Bit [C] = 0 No effect. Use the chnl_priority_clr Register to set channel C to the default priority level. \\n \\n
+                          Bit [C] = 1 Channel C uses the high priority level. \\n \\n
+                          Writing to a bit where a DMA channel is not implemented has no effect."
+            bitOffset: 0
+            bitWidth: 16
+            access: write-only
+      CHNL_PRIORITY_CLEAR:
+        description: "Set the appropriate bit to select the default priority level for the specified DMA channel." 
+        addressOffset: 0x03C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          chnl_priority_clear:
+            description: "Set the appropriate bit to select the default priority level for the specified DMA channel. Write as: \\n \\n
+                          Bit [C] = 0 No effect. Use the chnl_priority_set Register to set channel C to the high priority level. \\n \\n
+                          Bit [C] = 1 Channel C uses the default priority level. \\n \\n
+                          Writing to a bit where a DMA channel is not implemented has no effect."
+            bitOffset: 0
+            bitWidth: 16
+            access: read-write
+      ERR_CLR:
+        description: "Returns the status of dma_err, or sets the signal LOW." 
+        addressOffset: 0x04C
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          err_clr:
+            description: "Returns the status of dma_err, or sets the signal LOW. Read as:\\n \\n 
+                          0 = dma_err is LOW \\n  \\n
+                          1 = dma_err is HIGH. \\n \\n
+                          Write as: \\n \\n
+                          0 = No effect, status of dma_err is unchanged. \\n \\n
+                          1 = Sets dma_err LOW. \\n \\n
+                          For test purposes, use the err_set register to set dma_err HIGH."
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      PERIPH_ID_4:
+        description: "Peripheral identification 4" 
+        addressOffset: 0xFD0
+        size: 32
+        resetValue: 0x0000_0004
+        resetMask:  0xFFFF_FFFF
+        fields:
+          periph_id_4:
+            description: "Peripheral identification 4"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      PERIPH_ID_0:
+        description: "Peripheral identification 0" 
+        addressOffset: 0xFE0
+        size: 32
+        resetValue: 0x0000_0030
+        resetMask:  0xFFFF_FFFF
+        fields:
+          periph_id_0:
+            description: "Peripheral identification 0"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      PERIPH_ID_1:
+        description: "Peripheral identification 1" 
+        addressOffset: 0xFE4
+        size: 32
+        resetValue: 0x0000_00B2
+        resetMask:  0xFFFF_FFFF
+        fields:
+          periph_id_1:
+            description: "Peripheral identification 1"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      PERIPH_ID_2:
+        description: "Peripheral identification 2" 
+        addressOffset: 0xFE8
+        size: 32
+        resetValue: 0x0000_000B
+        resetMask:  0xFFFF_FFFF
+        fields:
+          periph_id_2:
+            description: "Peripheral identification 2"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      PERIPH_ID_3:
+        description: "Peripheral identification 3" 
+        addressOffset: 0xFEC
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          periph_id_3:
+            description: "Peripheral identification 3"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      PCELL_ID_0:
+        description: "PrimeCell identification 0" 
+        addressOffset: 0xFF0
+        size: 32
+        resetValue: 0x0000_000D
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pcell_id_0:
+            description: "PrimeCell identification 0"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      PCELL_ID_1:
+        description: "PrimeCell identification 1" 
+        addressOffset: 0xFF0
+        size: 32
+        resetValue: 0x0000_00F0
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pcell_id_1:
+            description: "PrimeCell identification 1"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      PCELL_ID_2:
+        description: "PrimeCell identification 2" 
+        addressOffset: 0xFF0
+        size: 32
+        resetValue: 0x0000_0005
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pcell_id_2:
+            description: "PrimeCell identification 2"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      PCELL_ID_3:
+        description: "PrimeCell identification 3" 
+        addressOffset: 0xFF0
+        size: 32
+        resetValue: 0x0000_00B1
+        resetMask:  0xFFFF_FFFF
+        fields:
+          pcell_id_3:
+            description: "PrimeCell identification 3"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      
+
+
+
+SDMA:
+  DMA_STATUS:
+    state:
+      idle: [0, "idle state"]
+      read_ch_cntrl_data: [1, "reading channel controller data."]
+      read_src_data_end_ptr: [2, "reading source data end pointer"]
+      read_dest_data_end_ptr: [3, "reading destination data end pointer"]
+      read_src_data: [4, "reading source data"]
+      write_dest_data: [5, "writing destination data"]
+      wait_dma_req_clear: [6, "waiting for DMA request to clear"]
+      write_ch_ctrl_data: [7, "writing channel controller data"]
+      stalled: [8, "stalled state"]
+      done: [9, "done state"]
+      periph_scatter_gather_trans: [10, "peripheral scatter-gather transition"]

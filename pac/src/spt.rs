@@ -25,7 +25,7 @@ pub struct RegisterBlock {
     pub error_cmp_rtc_3: crate::Reg<error_cmp_rtc_3::ERROR_CMP_RTC_3_SPEC>,
     #[doc = "0x2c - Update the 30-Bit Timer once write. Note: Please programmed SPT_EN (0x000, bit 0) to 0 before write this register to avoid any potential issue"]
     pub update_tmr_val: crate::Reg<update_tmr_val::UPDATE_TMR_VAL_SPEC>,
-    #[doc = "0x30 - "]
+    #[doc = "0x30 - Not documented"]
     pub spare_bits: crate::Reg<spare_bits::SPARE_BITS_SPEC>,
     #[doc = "0x34 - Return the Value of 30-bits, in 1mS resoultion. This is the RTC value"]
     pub timer_value: crate::Reg<timer_value::TIMER_VALUE_SPEC>,
@@ -101,7 +101,7 @@ pub type UPDATE_TMR_VAL = crate::Reg<update_tmr_val::UPDATE_TMR_VAL_SPEC>;
 pub mod update_tmr_val;
 #[doc = "SPARE_BITS register accessor: an alias for `Reg<SPARE_BITS_SPEC>`"]
 pub type SPARE_BITS = crate::Reg<spare_bits::SPARE_BITS_SPEC>;
-#[doc = ""]
+#[doc = "Not documented"]
 pub mod spare_bits;
 #[doc = "TIMER_VALUE register accessor: an alias for `Reg<TIMER_VALUE_SPEC>`"]
 pub type TIMER_VALUE = crate::Reg<timer_value::TIMER_VALUE_SPEC>;

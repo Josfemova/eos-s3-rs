@@ -1,6 +1,6 @@
 _add:
   TIMER:
-    description: ""
+    description: "Timer peripheral"
     baseAddress: 0x4001_3000
     addressBlocks:
       - offset: 0

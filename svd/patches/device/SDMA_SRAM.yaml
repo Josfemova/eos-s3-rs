@@ -1,8 +1,2601 @@
 _add:
   SDMA_SRAM: 
-    description: ""
+    description: "System DMA SRAM"
     baseAddress: 0x4000_F000
     addressBlocks:
       - offset: 0 
         size: 0x1FC
         usage: registers 
+    registers:
+      SRC_DATA_END_PTR_CH0:
+        description: "Primary pointer to the end address of the source data of channel 0" 
+        addressOffset: 0x000
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH0:
+            description: "Primary pointer to the end address of the source data of channel 0"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH0:
+        description: "Primary pointer to the end address of the destination data of channel 0" 
+        addressOffset: 0x004
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH0:
+            description: "Primary pointer to the end address of the destination data of channel 0"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH0:
+        description: "Primary configuration for channel 0" 
+        addressOffset: 0x008
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH1:
+        description: "Primary pointer to the end address of the source data of channel 1" 
+        addressOffset: 0x010
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH1:
+            description: "Primary pointer to the end address of the source data of channel 1"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH1:
+        description: "Primary pointer to the end address of the destination data of channel 1" 
+        addressOffset: 0x014
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH1:
+            description: "Primary pointer to the end address of the destination data of channel 1"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH1:
+        description: "Primary configuration for channel 1" 
+        addressOffset: 0x018
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH2:
+        description: "Primary pointer to the end address of the source data of channel 2" 
+        addressOffset: 0x020
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH0:
+            description: "Primary pointer to the end address of the source data of channel 2"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH2:
+        description: "Primary pointer to the end address of the destination data of channel 2" 
+        addressOffset: 0x024
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH2:
+            description: "Primary pointer to the end address of the destination data of channel 2"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH2:
+        description: "Primary configuration for channel 2" 
+        addressOffset: 0x028
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH3:
+        description: "Primary pointer to the end address of the source data of channel 3" 
+        addressOffset: 0x030
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH3:
+            description: "Primary pointer to the end address of the source data of channel 3"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH3:
+        description: "Primary pointer to the end address of the destination data of channel 3" 
+        addressOffset: 0x034
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH3:
+            description: "Primary pointer to the end address of the destination data of channel 3"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH3:
+        description: "Primary configuration for channel 3" 
+        addressOffset: 0x038
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH4:
+        description: "Primary pointer to the end address of the source data of channel 4" 
+        addressOffset: 0x040
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH4:
+            description: "Primary pointer to the end address of the source data of channel 4"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH4:
+        description: "Primary pointer to the end address of the destination data of channel 4" 
+        addressOffset: 0x044
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH4:
+            description: "Primary pointer to the end address of the destination data of channel 4"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH4:
+        description: "Primary configuration for channel 4" 
+        addressOffset: 0x048
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH5:
+        description: "Primary pointer to the end address of the source data of channel 5" 
+        addressOffset: 0x050
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH5:
+            description: "Primary pointer to the end address of the source data of channel 5"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH5:
+        description: "Primary pointer to the end address of the destination data of channel 5" 
+        addressOffset: 0x054
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH5:
+            description: "Primary pointer to the end address of the destination data of channel 5"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH5:
+        description: "Primary configuration for channel 5" 
+        addressOffset: 0x058
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH6:
+        description: "Primary pointer to the end address of the source data of channel 6" 
+        addressOffset: 0x060
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH6:
+            description: "Primary pointer to the end address of the source data of channel 6"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH6:
+        description: "Primary pointer to the end address of the destination data of channel 6" 
+        addressOffset: 0x064
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH6:
+            description: "Primary pointer to the end address of the destination data of channel 6"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH6:
+        description: "Primary configuration for channel 6" 
+        addressOffset: 0x068
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH7:
+        description: "Primary pointer to the end address of the source data of channel 7" 
+        addressOffset: 0x070
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH7:
+            description: "Primary pointer to the end address of the source data of channel 7"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH7:
+        description: "Primary pointer to the end address of the destination data of channel 7" 
+        addressOffset: 0x074
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH7:
+            description: "Primary pointer to the end address of the destination data of channel 7"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH7:
+        description: "Primary configuration for channel 7" 
+        addressOffset: 0x078
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH8:
+        description: "Primary pointer to the end address of the source data of channel 8" 
+        addressOffset: 0x080
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH8:
+            description: "Primary pointer to the end address of the source data of channel 8"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH8:
+        description: "Primary pointer to the end address of the destination data of channel 8" 
+        addressOffset: 0x084
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH8:
+            description: "Primary pointer to the end address of the destination data of channel 0"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH8:
+        description: "Primary configuration for channel 8" 
+        addressOffset: 0x088
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH9:
+        description: "Primary pointer to the end address of the source data of channel 9" 
+        addressOffset: 0x090
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH9:
+            description: "Primary pointer to the end address of the source data of channel 9"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH9:
+        description: "Primary pointer to the end address of the destination data of channel 9" 
+        addressOffset: 0x094
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH9:
+            description: "Primary pointer to the end address of the destination data of channel 0"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH9:
+        description: "Primary configuration for channel 9" 
+        addressOffset: 0x098
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH10:
+        description: "Primary pointer to the end address of the source data of channel 10" 
+        addressOffset: 0x0A0
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH10:
+            description: "Primary pointer to the end address of the source data of channel 10"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH10:
+        description: "Primary pointer to the end address of the destination data of channel 10" 
+        addressOffset: 0x0A4
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH10:
+            description: "Primary pointer to the end address of the destination data of channel 10"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH10:
+        description: "Primary configuration for channel 10" 
+        addressOffset: 0x0A8
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH11:
+        description: "Primary pointer to the end address of the source data of channel 11" 
+        addressOffset: 0x0B0
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH11:
+            description: "Primary pointer to the end address of the source data of channel 11"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH11:
+        description: "Primary pointer to the end address of the destination data of channel 11" 
+        addressOffset: 0x0B4
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH11:
+            description: "Primary pointer to the end address of the destination data of channel 11"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH11:
+        description: "Primary configuration for channel 11" 
+        addressOffset: 0x0B8
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH12:
+        description: "Primary pointer to the end address of the source data of channel 12" 
+        addressOffset: 0x0C0
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH12:
+            description: "Primary pointer to the end address of the source data of channel 12"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH12:
+        description: "Primary pointer to the end address of the destination data of channel 12" 
+        addressOffset: 0x0C4
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH12:
+            description: "Primary pointer to the end address of the destination data of channel 12"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH12:
+        description: "Primary configuration for channel 12" 
+        addressOffset: 0x0C8
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH13:
+        description: "Primary pointer to the end address of the source data of channel 13" 
+        addressOffset: 0x0D0
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH13:
+            description: "Primary pointer to the end address of the source data of channel 13"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH13:
+        description: "Primary pointer to the end address of the destination data of channel 13" 
+        addressOffset: 0x0D4
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH13:
+            description: "Primary pointer to the end address of the destination data of channel 13"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH13:
+        description: "Primary configuration for channel 13" 
+        addressOffset: 0x0D8
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH14:
+        description: "Primary pointer to the end address of the source data of channel 14" 
+        addressOffset: 0x0E0
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH14:
+            description: "Primary pointer to the end address of the source data of channel 14"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH14:
+        description: "Primary pointer to the end address of the destination data of channel 14" 
+        addressOffset: 0x0E4
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH14:
+            description: "Primary pointer to the end address of the destination data of channel 14"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH14:
+        description: "Primary configuration for channel 14" 
+        addressOffset: 0x0E8
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      SRC_DATA_END_PTR_CH15:
+        description: "Primary pointer to the end address of the source data of channel 15" 
+        addressOffset: 0x0F0
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          SRC_DATA_END_PTR_CH15:
+            description: "Primary pointer to the end address of the source data of channel 15"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      DST_DATA_END_PTR_CH15:
+        description: "Primary pointer to the end address of the destination data of channel 15" 
+        addressOffset: 0x0F4
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          DST_DATA_END_PTR_CH15:
+            description: "Primary pointer to the end address of the destination data of channel 15"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      CH_CFG_CH15:
+        description: "Primary configuration for channel 15" 
+        addressOffset: 0x0F8
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH0:
+        description: "Alternate pointer to the end address of the source data of channel 0" 
+        addressOffset: 0x100
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH0:
+            description: "Alternate pointer to the end address of the source data of channel 0"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH0:
+        description: "Alternate pointer to the end address of the destination data of channel 0" 
+        addressOffset: 0x104
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH0:
+            description: "Alternate pointer to the end address of the destination data of channel 0"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH0:
+        description: "Primary configuration for channel 0" 
+        addressOffset: 0x108
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH1:
+        description: "Alternate pointer to the end address of the source data of channel 1" 
+        addressOffset: 0x110
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH1:
+            description: "Alternate pointer to the end address of the source data of channel 1"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH1:
+        description: "Alternate pointer to the end address of the destination data of channel 1" 
+        addressOffset: 0x114
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH1:
+            description: "Alternate pointer to the end address of the destination data of channel 1"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH1:
+        description: "Primary configuration for channel 1" 
+        addressOffset: 0x118
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH2:
+        description: "Alternate pointer to the end address of the source data of channel 2" 
+        addressOffset: 0x120
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH0:
+            description: "Alternate pointer to the end address of the source data of channel 2"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH2:
+        description: "Alternate pointer to the end address of the destination data of channel 2" 
+        addressOffset: 0x124
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH2:
+            description: "Alternate pointer to the end address of the destination data of channel 2"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH2:
+        description: "Primary configuration for channel 2" 
+        addressOffset: 0x128
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH3:
+        description: "Alternate pointer to the end address of the source data of channel 3" 
+        addressOffset: 0x130
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH3:
+            description: "Alternate pointer to the end address of the source data of channel 3"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH3:
+        description: "Alternate pointer to the end address of the destination data of channel 3" 
+        addressOffset: 0x134
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH3:
+            description: "Alternate pointer to the end address of the destination data of channel 3"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH3:
+        description: "Primary configuration for channel 3" 
+        addressOffset: 0x138
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH4:
+        description: "Alternate pointer to the end address of the source data of channel 4" 
+        addressOffset: 0x140
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH4:
+            description: "Alternate pointer to the end address of the source data of channel 4"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH4:
+        description: "Alternate pointer to the end address of the destination data of channel 4" 
+        addressOffset: 0x144
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH4:
+            description: "Alternate pointer to the end address of the destination data of channel 4"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH4:
+        description: "Primary configuration for channel 4" 
+        addressOffset: 0x148
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH5:
+        description: "Alternate pointer to the end address of the source data of channel 5" 
+        addressOffset: 0x150
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH5:
+            description: "Alternate pointer to the end address of the source data of channel 5"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH5:
+        description: "Alternate pointer to the end address of the destination data of channel 5" 
+        addressOffset: 0x154
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH5:
+            description: "Alternate pointer to the end address of the destination data of channel 5"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH5:
+        description: "Primary configuration for channel 5" 
+        addressOffset: 0x158
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH6:
+        description: "Alternate pointer to the end address of the source data of channel 6" 
+        addressOffset: 0x160
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH6:
+            description: "Alternate pointer to the end address of the source data of channel 6"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH6:
+        description: "Alternate pointer to the end address of the destination data of channel 6" 
+        addressOffset: 0x164
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH6:
+            description: "Alternate pointer to the end address of the destination data of channel 6"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH6:
+        description: "Primary configuration for channel 6" 
+        addressOffset: 0x168
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH7:
+        description: "Alternate pointer to the end address of the source data of channel 7" 
+        addressOffset: 0x170
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH7:
+            description: "Alternate pointer to the end address of the source data of channel 7"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH7:
+        description: "Alternate pointer to the end address of the destination data of channel 7" 
+        addressOffset: 0x174
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH7:
+            description: "Alternate pointer to the end address of the destination data of channel 7"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH7:
+        description: "Primary configuration for channel 7" 
+        addressOffset: 0x178
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH8:
+        description: "Alternate pointer to the end address of the source data of channel 8" 
+        addressOffset: 0x180
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH8:
+            description: "Alternate pointer to the end address of the source data of channel 8"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH8:
+        description: "Alternate pointer to the end address of the destination data of channel 8" 
+        addressOffset: 0x184
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH8:
+            description: "Alternate pointer to the end address of the destination data of channel 0"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH8:
+        description: "Primary configuration for channel 8" 
+        addressOffset: 0x188
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH9:
+        description: "Alternate pointer to the end address of the source data of channel 9" 
+        addressOffset: 0x190
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH9:
+            description: "Alternate pointer to the end address of the source data of channel 9"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH9:
+        description: "Alternate pointer to the end address of the destination data of channel 9" 
+        addressOffset: 0x194
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH9:
+            description: "Alternate pointer to the end address of the destination data of channel 0"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH9:
+        description: "Primary configuration for channel 9" 
+        addressOffset: 0x198
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH10:
+        description: "Alternate pointer to the end address of the source data of channel 10" 
+        addressOffset: 0x1A0
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH10:
+            description: "Alternate pointer to the end address of the source data of channel 10"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH10:
+        description: "Alternate pointer to the end address of the destination data of channel 10" 
+        addressOffset: 0x1A4
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH10:
+            description: "Alternate pointer to the end address of the destination data of channel 10"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH10:
+        description: "Primary configuration for channel 10" 
+        addressOffset: 0x1A8
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH11:
+        description: "Alternate pointer to the end address of the source data of channel 11" 
+        addressOffset: 0x1B0
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH11:
+            description: "Alternate pointer to the end address of the source data of channel 11"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH11:
+        description: "Alternate pointer to the end address of the destination data of channel 11" 
+        addressOffset: 0x1B4
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH11:
+            description: "Alternate pointer to the end address of the destination data of channel 11"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH11:
+        description: "Primary configuration for channel 11" 
+        addressOffset: 0x1B8
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH12:
+        description: "Alternate pointer to the end address of the source data of channel 12" 
+        addressOffset: 0x1C0
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH12:
+            description: "Alternate pointer to the end address of the source data of channel 12"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH12:
+        description: "Alternate pointer to the end address of the destination data of channel 12" 
+        addressOffset: 0x1C4
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH12:
+            description: "Alternate pointer to the end address of the destination data of channel 12"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH12:
+        description: "Primary configuration for channel 12" 
+        addressOffset: 0x1C8
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH13:
+        description: "Alternate pointer to the end address of the source data of channel 13" 
+        addressOffset: 0x1D0
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH13:
+            description: "Alternate pointer to the end address of the source data of channel 13"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH13:
+        description: "Alternate pointer to the end address of the destination data of channel 13" 
+        addressOffset: 0x1D4
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH13:
+            description: "Alternate pointer to the end address of the destination data of channel 13"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH13:
+        description: "Primary configuration for channel 13" 
+        addressOffset: 0x1D8
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH14:
+        description: "Alternate pointer to the end address of the source data of channel 14" 
+        addressOffset: 0x1E0
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH14:
+            description: "Alternate pointer to the end address of the source data of channel 14"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH14:
+        description: "Alternate pointer to the end address of the destination data of channel 14" 
+        addressOffset: 0x1E4
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH14:
+            description: "Alternate pointer to the end address of the destination data of channel 14"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH14:
+        description: "Primary configuration for channel 14" 
+        addressOffset: 0x1E8
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write
+      ALT_SRC_DATA_END_PTR_CH15:
+        description: "Alternate pointer to the end address of the source data of channel 15" 
+        addressOffset: 0x1F0
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_SRC_DATA_END_PTR_CH15:
+            description: "Alternate pointer to the end address of the source data of channel 15"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_DST_DATA_END_PTR_CH15:
+        description: "Alternate pointer to the end address of the destination data of channel 15" 
+        addressOffset: 0x1F4
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          ALT_DST_DATA_END_PTR_CH15:
+            description: "Alternate pointer to the end address of the destination data of channel 15"
+            bitOffset: 0
+            bitWidth: 32
+            access: read-write
+      ALT_CHN_CFG_CH15:
+        description: "Primary configuration for channel 15" 
+        addressOffset: 0x1F8
+        size: 32
+        resetValue: 0x0000_0000
+        resetMask:  0xFFFF_FFFF
+        fields:
+          cycle_ctrl:
+            description: "The operating mode of the DMA cycle"
+            bitOffset: 0
+            bitWidth: 3
+            access: read-write
+          next_useburst:
+            description: "Controls if the chnl_useburst_set [C] bit is set to a 1, when the controller is performing a peripheral scatter-gather and is completing a DMA cycle that uses the alternate data structure"
+            bitOffset: 3
+            bitWidth: 1
+            access: read-write
+          n_minus_1:
+            description: "Prior to the DMA cycle commencing, these bits represent the total number of DMA transfers that the DMA cycle contains. You must set these bits according to the size of DMA cycle that you require."
+            bitOffset: 4
+            bitWidth: 10
+            access: read-write
+          R_power:
+            description: "Set these bits to control how many DMA transfers can occur before the controller rearbitrates"
+            bitOffset: 14
+            bitWidth: 4
+            access: read-write
+          src_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller reads the source data"
+            bitOffset: 18
+            bitWidth: 3
+            access: read-write
+          dst_prot_ctrl:
+            description: "Set the bits to control the state of HPROT[3:1] when the controller writes the destination data"
+            bitOffset: 21
+            bitWidth: 3
+            access: read-write
+          src_size:
+            description: "Source data size"
+            bitOffset: 24
+            bitWidth: 2
+            access: read-write
+          src_inc:
+            description: "Source address increment"
+            bitOffset: 26
+            bitWidth: 2
+            access: read-write
+          dst_size:
+            description: "Destination data size"
+            bitOffset: 28
+            bitWidth: 2
+            access: read-write
+          dst_inc:
+            description: "Destination address increment"
+            bitOffset: 30
+            bitWidth: 2
+            access: read-write

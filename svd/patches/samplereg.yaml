@@ -7,6 +7,6 @@
         fields:
           _:
             description: ""
-            bitOffset:
-            bitWidth: 
+            bitOffset: 0
+            bitWidth: 1
             access: read-write

@@ -34,7 +34,7 @@ impl From<crate::W<SPARE_BITS_SPEC>> for W {
         W(writer)
     }
 }
-#[doc = "Field `SPARE_BITS` reader - "]
+#[doc = "Field `SPARE_BITS` reader - Not documented"]
 pub struct SPARE_BITS_R(crate::FieldReader<u8, u8>);
 impl SPARE_BITS_R {
     #[inline(always)]
@@ -49,7 +49,7 @@ impl core::ops::Deref for SPARE_BITS_R {
         &self.0
     }
 }
-#[doc = "Field `SPARE_BITS` writer - "]
+#[doc = "Field `SPARE_BITS` writer - Not documented"]
 pub struct SPARE_BITS_W<'a> {
     w: &'a mut W,
 }
@@ -62,14 +62,14 @@ impl<'a> SPARE_BITS_W<'a> {
     }
 }
 impl R {
-    #[doc = "Bits 0:7"]
+    #[doc = "Bits 0:7 - Not documented"]
     #[inline(always)]
     pub fn spare_bits(&self) -> SPARE_BITS_R {
         SPARE_BITS_R::new((self.bits & 0xff) as u8)
     }
 }
 impl W {
-    #[doc = "Bits 0:7"]
+    #[doc = "Bits 0:7 - Not documented"]
     #[inline(always)]
     pub fn spare_bits(&mut self) -> SPARE_BITS_W {
         SPARE_BITS_W { w: self }
@@ -81,7 +81,7 @@ impl W {
         self
     }
 }
-#[doc = "\n\nThis register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [spare_bits](index.html) module"]
+#[doc = "Not documented\n\nThis register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [spare_bits](index.html) module"]
 pub struct SPARE_BITS_SPEC;
 impl crate::RegisterSpec for SPARE_BITS_SPEC {
     type Ux = u32;

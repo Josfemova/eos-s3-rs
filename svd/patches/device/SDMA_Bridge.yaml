@@ -1,6 +1,6 @@
 _add:
   SDMA_Bridge: 
-    description: ""
+    description: "System Direct Memory Access Bridge"
     baseAddress: 0x4000_D000
     addressBlocks:
       - offset: 0 

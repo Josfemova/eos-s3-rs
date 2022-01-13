@@ -452,6 +452,34 @@ impl core::fmt::Debug for AIP {
 }
 #[doc = "Analog IP block"]
 pub mod aip;
+#[doc = "Audio Subsystem"]
+pub struct AUD {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for AUD {}
+impl AUD {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const aud::RegisterBlock = 0x4001_5000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const aud::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for AUD {
+    type Target = aud::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for AUD {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("AUD").finish()
+    }
+}
+#[doc = "Audio Subsystem"]
+pub mod aud;
 #[doc = "PIF Register (FPGA Programming interface)"]
 pub struct CFG_CTL {
     _marker: PhantomData<*const ()>,
@@ -564,7 +592,7 @@ impl core::fmt::Debug for EXTREGSFFE {
 }
 #[doc = "Flexible Fusion Engine registers"]
 pub mod ext_regs_ffe;
-#[doc = "I2S_Slave"]
+#[doc = "I2S Slave"]
 pub struct I2S_SLAVE {
     _marker: PhantomData<*const ()>,
 }
@@ -590,7 +618,7 @@ impl core::fmt::Debug for I2S_SLAVE {
         f.debug_struct("I2S_SLAVE").finish()
     }
 }
-#[doc = "I2S_Slave"]
+#[doc = "I2S Slave"]
 pub mod i2s_slave;
 #[doc = "Interrupt Controller"]
 pub struct INTR_CTRL {
@@ -704,7 +732,7 @@ impl core::fmt::Debug for PMU {
 }
 #[doc = "Power Management Unit"]
 pub mod pmu;
-#[doc = "SDMA_Bridge"]
+#[doc = "System Direct Memory Access Bridge"]
 pub struct SDMA_BRIDGE {
     _marker: PhantomData<*const ()>,
 }
@@ -730,8 +758,64 @@ impl core::fmt::Debug for SDMA_BRIDGE {
         f.debug_struct("SDMA_BRIDGE").finish()
     }
 }
-#[doc = "SDMA_Bridge"]
+#[doc = "System Direct Memory Access Bridge"]
 pub mod sdma_bridge;
+#[doc = "System DMA SRAM"]
+pub struct SDMA_SRAM {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SDMA_SRAM {}
+impl SDMA_SRAM {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const sdma_sram::RegisterBlock = 0x4000_f000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const sdma_sram::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for SDMA_SRAM {
+    type Target = sdma_sram::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for SDMA_SRAM {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SDMA_SRAM").finish()
+    }
+}
+#[doc = "System DMA SRAM"]
+pub mod sdma_sram;
+#[doc = "System Direct Access Memory"]
+pub struct SDMA {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SDMA {}
+impl SDMA {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const sdma::RegisterBlock = 0x4000_c000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const sdma::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for SDMA {
+    type Target = sdma::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for SDMA {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SDMA").finish()
+    }
+}
+#[doc = "System Direct Access Memory"]
+pub mod sdma;
 #[doc = "SPI peripheral control"]
 pub struct SPI {
     _marker: PhantomData<*const ()>,
@@ -788,7 +872,35 @@ impl core::fmt::Debug for SPT {
 }
 #[doc = "Simple Periodic Timer"]
 pub mod spt;
-#[doc = "TIMER"]
+#[doc = "Communication Manager - Top Level controller"]
+pub struct SPI_TLC {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SPI_TLC {}
+impl SPI_TLC {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const spi_tlc::RegisterBlock = 0x4005_0000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const spi_tlc::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for SPI_TLC {
+    type Target = spi_tlc::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for SPI_TLC {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SPI_TLC").finish()
+    }
+}
+#[doc = "Communication Manager - Top Level controller"]
+pub mod spi_tlc;
+#[doc = "Timer peripheral"]
 pub struct TIMER {
     _marker: PhantomData<*const ()>,
 }
@@ -814,9 +926,9 @@ impl core::fmt::Debug for TIMER {
         f.debug_struct("TIMER").finish()
     }
 }
-#[doc = "TIMER"]
+#[doc = "Timer peripheral"]
 pub mod timer;
-#[doc = "UART"]
+#[doc = "Universal Asynchronous Receiver Transmitter"]
 pub struct UART {
     _marker: PhantomData<*const ()>,
 }
@@ -842,7 +954,7 @@ impl core::fmt::Debug for UART {
         f.debug_struct("UART").finish()
     }
 }
-#[doc = "UART"]
+#[doc = "Universal Asynchronous Receiver Transmitter"]
 pub mod uart;
 #[doc = "WatchDog Timer"]
 pub struct WDT {
@@ -872,6 +984,34 @@ impl core::fmt::Debug for WDT {
 }
 #[doc = "WatchDog Timer"]
 pub mod wdt;
+#[doc = "External registers to control M4 Subsystem (not a core peripheral)"]
+pub struct EXTM4REGS {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for EXTM4REGS {}
+impl EXTM4REGS {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const extm4regs::RegisterBlock = 0x4000_0000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const extm4regs::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for EXTM4REGS {
+    type Target = extm4regs::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for EXTM4REGS {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("EXTM4REGS").finish()
+    }
+}
+#[doc = "External registers to control M4 Subsystem (not a core peripheral)"]
+pub mod extm4regs;
 #[no_mangle]
 static mut DEVICE_PERIPHERALS: bool = false;
 #[doc = r"All the peripherals"]
@@ -885,6 +1025,8 @@ pub struct Peripherals {
     pub ADC: ADC,
     #[doc = "AIP"]
     pub AIP: AIP,
+    #[doc = "AUD"]
+    pub AUD: AUD,
     #[doc = "CFG_CTL"]
     pub CFG_CTL: CFG_CTL,
     #[doc = "CRU"]
@@ -905,16 +1047,24 @@ pub struct Peripherals {
     pub PMU: PMU,
     #[doc = "SDMA_BRIDGE"]
     pub SDMA_BRIDGE: SDMA_BRIDGE,
+    #[doc = "SDMA_SRAM"]
+    pub SDMA_SRAM: SDMA_SRAM,
+    #[doc = "SDMA"]
+    pub SDMA: SDMA,
     #[doc = "SPI"]
     pub SPI: SPI,
     #[doc = "SPT"]
     pub SPT: SPT,
+    #[doc = "SPI_TLC"]
+    pub SPI_TLC: SPI_TLC,
     #[doc = "TIMER"]
     pub TIMER: TIMER,
     #[doc = "UART"]
     pub UART: UART,
     #[doc = "WDT"]
     pub WDT: WDT,
+    #[doc = "EXTM4REGS"]
+    pub EXTM4REGS: EXTM4REGS,
 }
 impl Peripherals {
     #[doc = r"Returns all the peripherals *once*"]
@@ -943,6 +1093,9 @@ impl Peripherals {
                 _marker: PhantomData,
             },
             AIP: AIP {
+                _marker: PhantomData,
+            },
+            AUD: AUD {
                 _marker: PhantomData,
             },
             CFG_CTL: CFG_CTL {
@@ -975,10 +1128,19 @@ impl Peripherals {
             SDMA_BRIDGE: SDMA_BRIDGE {
                 _marker: PhantomData,
             },
+            SDMA_SRAM: SDMA_SRAM {
+                _marker: PhantomData,
+            },
+            SDMA: SDMA {
+                _marker: PhantomData,
+            },
             SPI: SPI {
                 _marker: PhantomData,
             },
             SPT: SPT {
+                _marker: PhantomData,
+            },
+            SPI_TLC: SPI_TLC {
                 _marker: PhantomData,
             },
             TIMER: TIMER {
@@ -988,6 +1150,9 @@ impl Peripherals {
                 _marker: PhantomData,
             },
             WDT: WDT {
+                _marker: PhantomData,
+            },
+            EXTM4REGS: EXTM4REGS {
                 _marker: PhantomData,
             },
         }

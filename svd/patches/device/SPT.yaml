@@ -257,14 +257,14 @@ _add:
             bitWidth: 30
             access: read-write
       SPARE_BITS:
-        description: "" 
+        description: "Not documented" #Not sure what this is supposed to do
         addressOffset: 0x030
         size: 32
         resetValue: 0x00
         resetMask:  0xFF
         fields:
           SPARE_BITS:
-            description: ""
+            description: "Not documented"
             bitOffset: 0
             bitWidth: 8
             access: read-write

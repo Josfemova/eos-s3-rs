@@ -1,6 +1,6 @@
 _add:
   I2S_Slave: 
-    description: ""
+    description: "I2S Slave"
     baseAddress: 0x4000_B000
     addressBlocks:
       - offset: 0 

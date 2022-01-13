@@ -1,0 +1,430 @@
+_add:
+  SPI_TLC: 
+    description: "Communication Manager - Top Level controller"
+    baseAddress: 0x4005_0000
+    addressBlocks:
+      - offset: 0 
+        size: 0x80
+        usage: registers 
+    registers:
+      CM_FIFO_0_DATA:
+        description: "PF Bank FIFO 0 Read Port" 
+        addressOffset: 0x009
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          DATA:
+            description: "PF FIFO Read Port"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      CM_FIFO_1_DATA:
+        description: "PF Bank FIFO 1 Read Port" 
+        addressOffset: 0x00A
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          DATA:
+            description: "PF FIFO Read Port"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      CM_FIFO_2_DATA:
+        description: "PF Bank FIFO 2 Read Port" 
+        addressOffset: 0x00B
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          DATA:
+            description: "PF FIFO Read Port"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      CM_FIFO_3_DATA:
+        description: "PF Bank FIFO 3 Read Port" 
+        addressOffset: 0x00C
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          DATA:
+            description: "PF FIFO Read Port"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      MemAddrByte0:
+        description: "Memory Address, It is representing AHB Byte Address bit [7:0]. \\n
+Bit 7:0 R/W, Default All 0 \\n
+Bit [1:0] will be ignored since only Support Word Access" 
+        addressOffset: 0x020
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          MemAddrByte0:
+            description: "Memory Address, It is representing AHB Byte Address bit [7:0]. \\n
+Bit 7:0 R/W, Default All 0 \\n
+Bit [1:0] will be ignored since only Support Word Access"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      MemAddrByte1:
+        description: "AHB Memory Address, It is representing AHB Byte Address bit [15:8]. Bit 7:0 R/W, Default All 0 \\n
+Once write to this SFR, an AHB memory Read Could be Trigger. See 'TLC AHB Memory Read Trigger' worksheet for detail." 
+        addressOffset: 0x021
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          MemAddrByte1:
+            description: "AHB Memory Address, It is representing AHB Byte Address bit [15:8]. Bit 7:0 R/W, Default All 0 \\n
+Once write to this SFR, an AHB memory Read Could be Trigger. See 'TLC AHB Memory Read Trigger' worksheet for detail."
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      MemAddrByte2:
+        description: "AHB Memory Address, It is representing AHB Byte Address bit [23:16]. Bit 7:0 R/W, Default All 0" 
+        addressOffset: 0x022
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          MemAddrByte2:
+            description: "AHB Memory Address, It is representing AHB Byte Address bit [23:16]. Bit 7:0 R/W, Default All 0"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      MemAddrByte3:
+        description: "AHB Memory Address, It is representing AHB Byte Address bit [31:24]. Bit 7:0 R/W,Default All 0" 
+        addressOffset: 0x023
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          MemAddrByte3:
+            description: "AHB Memory Address, It is representing AHB Byte Address bit [31:24]. Bit 7:0 R/W,Default All 0"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      MemDataByte0:
+        description: "First Byte (LSB) of AHB memory data" 
+        addressOffset: 0x028
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          MemDataByte0:
+            description: "First Byte (LSB) of AHB memory data"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      MemDataByte1:
+        description: "Second byte of AHB memory data" 
+        addressOffset: 0x029
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          MemDataByte1:
+            description: "Second byte of AHB memory data"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      MemDataByte2:
+        description: "Third byte of AHB memory data" 
+        addressOffset: 0x02A
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          MemDataByte2:
+            description: "Third byte of AHB memory data"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      MemDataByte3:
+        description: "Forth byte of AHB memory data, once write to this SFR \\n
+1. Trigger a AHB memory Write \\n
+2. Auto Increment the AHB memory address (MemAddrByte0/MemAddrByte1) by 4 since AHB memory Address is in Byte Granunality. (offset 0x20~0x21, 64KB range)" 
+        addressOffset: 0x02B
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          MemDataByte3:
+            description: "Forth byte of AHB memory data, once write to this SFR \\n
+1. Trigger a AHB memory Write \\n
+2. Auto Increment the AHB memory address (MemAddrByte0/MemAddrByte1) by 4 since AHB memory Address is in Byte Granunality. (offset 0x20~0x21, 64KB range)"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      AHBSTATUS:
+        description: "AHB status register" 
+        addressOffset: 0x02F
+        size: 8
+        resetValue: 0x08
+        resetMask:  0xFF
+        fields:
+          NoPendingAhbReq:
+            description: "If set, there's pending AHB Memory Read/Write request"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+          AhbReadDataValid:
+            description: "Set if AHB Read Data is Ready. This bit is Auto Clear Once a new AHB read Access kick off and Auto Set once AHB read data is valid."
+            bitOffset: 1
+            bitWidth: 1
+            access: read-only
+          AhbReqFIFOFull:
+            description: "Set if AHB Address/Data/Command FIFO is Full. (Read Only)"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-only
+          AhbReqFIFOhalfEmpty:
+            description: "Set if AHB Address/Data/Command FIFO is less than half full."
+            bitOffset: 3
+            bitWidth: 1
+            access: read-only
+          AhbReqFIFOSize:
+            description: "0 if FIFO is 4 entries, 1 if FIFO is 8 entries."
+            bitOffset: 6
+            bitWidth: 2
+            access: read-only
+      AHBACCESSCTL:
+        description: "AHB access control register" 
+        addressOffset: 0x030
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          AhbReadReqMode:
+            description: "AHB Memory Read Option \\n
+                          2'b11 : If MemAddrByte[1:0] is 2'b11, then AHB Memory Read will not be automatically triggered once MemAddrByte1 is written Other : The AHB Memory Read behavior is same as S2, Once MemAddrByte1 is  written, AHB Memory read is triggered."
+            bitOffset: 0
+            bitWidth: 2
+            access: read-write
+          scratch0:
+            description: "General Purpose Registers"
+            bitOffset: 2
+            bitWidth: 6
+            access: read-write
+      SCRATCHBYTE:
+        description: "General Purpose Registers, R/W, Default 0" 
+        addressOffset: 0x031
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          ScratchByte:
+            description: "General Purpose Registers, R/W, Default 0"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      TAMARSTATUS:
+        description: "???" 
+        addressOffset: 0x032
+        size: 8
+        resetValue: 0xE0
+        resetMask:  0xFF
+        fields:
+          M4PowerStatus:
+            description: "Indicate the M4 Power Status"
+            bitOffset: 0
+            bitWidth: 2
+            access: read-only
+          M4ResetStatus:
+            description: "Indicates if the M4 Subsystem reset is released (not core reset)"
+            bitOffset: 2
+            bitWidth: 1
+            access: read-only
+          M4RebootReq:
+            description: "This bit is reflect the value on RFUPMU offset 3EC. It will not set for cold start."
+            bitOffset: 3
+            bitWidth: 1
+            access: read-only
+          PORiniCond:
+            description: "0xE value if POR trigger, It reflect the value of rfupmu offset 00C"
+            bitOffset: 4
+            bitWidth: 4
+            access: read-only
+      DMADEBUGCTL0:
+        description: "Set bit to clear the DMA FIFO. Firmware can only set this bit to 1 after set DmaClear bit to 1 and Program this bit to 0 after clear DmaClear bit" 
+        addressOffset: 0x036
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          DmaFifoClear:
+            description: "Set bit to clear the DMA FIFO. Firmware can only set this bit to 1 after set DmaClear bit to 1 and Program this bit to 0 after clear DmaClear bit"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      DMADEBUGCTL1:
+        description: "Set bit to Reset the DMA engineer. Firmware needs to clear it before kick off the new DMA Transfer. Need to do a dummy Read on this SFR after program this bit" 
+        addressOffset: 0x037
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          DmaClear:
+            description: "Set bit to Reset the DMA engineer. Firmware needs to clear it before kick off the new DMA Transfer. Need to do a dummy Read on this SFR after program this bit"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-write
+      DMAADDR0:
+        description: "DMA Starting Address,  It is representing AHB Byte Address bit [7:0]. Bit [1:0] will be ignored since only Support Word Access" 
+        addressOffset: 0x038
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          DMAAddr0:
+            description: "DMA Starting Address,  It is representing AHB Byte Address bit [7:0]. Bit [1:0] will be ignored since only Support Word Access"
+            bitOffset: 0
+            bitWidth: 8 
+            access: read-write
+      DMAADDR1:
+        description: "DMA Starting Address,  It is representing AHB Byte Address bit [15:8]. " 
+        addressOffset: 0x039
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          DMAAddr1:
+            description: "DMA Starting Address,  It is representing AHB Byte Address bit [15:8]. "
+            bitOffset: 0
+            bitWidth: 8 
+            access: read-write
+      DMAADDR2:
+        description: "DMA Starting Address,  It is representing AHB Byte Address bit [23:16]" 
+        addressOffset: 0x03A
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          DMAAddr2:
+            description: "DMA Starting Address,  It is representing AHB Byte Address bit [23:16]"
+            bitOffset: 0
+            bitWidth: 8 
+            access: read-write
+      DMAADDR3:
+        description: "DMA Starting Address,  It is representing AHB Byte Address bit [31:24]" 
+        addressOffset: 0x03B
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          DMAAddr3:
+            description: "DMA Starting Address,  It is representing AHB Byte Address bit [31:24]"
+            bitOffset: 0
+            bitWidth: 8 
+            access: read-write
+      DMABURSTSIZE0:
+        description: "DMA transfer size indicates the number of bytes to be read out ( X ). The minimum transfer size is 4 bytes. \\n
+                      Program the value for number of bytes to read minus 4 bytes ( X -4 ), into the 2 registers. \\n
+                      DmaBurstSize0 register represents the BurstSize[7:0]. \\n
+                      DmaBurstSize1 register represents the BurstSize[15:8]. \\n
+                      Lower 2 bits are ignored by hardware, since it only supports Word Access. This means only multiples of 4 are supported. \\n
+                      For example:  \\n
+                      To read 4 bytes, you would write: \\n
+                      DmaBurstSize0 = 0, DmaBurstSize1 = 0 \\n
+                      To read 8 bytes, you would write: \\n
+                      DmaBurstSize0 = 4, DmaBurstSize1 = 0 \\n
+                      … \\n
+                      To read 256 bytes, you would write: \\n
+                      DmaBurstSize0 = FC, DmaBurstSize1 = 0 \\n
+                      To read 260 bytes, you would write: \\n
+                      DmaBurstSize0 = 0, DmaBurstSize1 = 1 \\n
+                      ... and so on, etc." 
+        addressOffset: 0x03C
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          DMABurstSize0:
+            description: "LSB Byte of DMA transfer size. It is representing BurstSize[7:0]"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write    
+      DMABURSTSIZE1:
+        description: "MSB Byte of DMA transfer size. it is representing BurstSize[15:8]. Max transfer size is 64KB, Once it is written, DMA will be kickoff unless DmaBurstSize0[1:0] = 2'b10.  Min. Transfer Size will be 4 Bytes once DMA is Kick Off ({DmaBurstSize0, DmaBurstSize1} == 0x0}" 
+        addressOffset: 0x03D
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          DMABurstSize1:
+            description: "MSB Byte of DMA transfer size. It is representing BurstSize[15:8]"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-write
+      Reserved_dummy:
+        description: "For dummy write purpose." 
+        addressOffset: 0x03E
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          dummy:
+            description: "For dummy write purpose"
+            bitOffset: 0
+            bitWidth: 8
+            access: write-only
+      DMASTATUS:
+        description: "DMA Status register" 
+        addressOffset: 0x03F
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          DmaFIFO_Empty:
+            description: "Set if DMA FIFO is Empty"
+            bitOffset: 0
+            bitWidth: 1
+            access: read-only
+          DmaFIFO_underflow:
+            description: "Set if DMA hit underflow condition"
+            bitOffset: 1
+            bitWidth: 1
+            access: read-only
+      DMARDDATA:
+        description: "DMA Read Data Port" 
+        addressOffset: 0x040
+        size: 8
+        resetValue: 0x00
+        resetMask:  0xFF
+        fields:
+          DmaRdData:
+            description: "DMA Read Data Port"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      DEVICEIDBYTE:
+        description: "Device ID, Read Only. 0x21, the Protocol of accessing this SFR is different, See Device ID read Page for detail" 
+        addressOffset: 0x000
+        size: 8
+        resetValue: 0x21
+        resetMask:  0xFF
+        fields:
+          DeviceIDByte:
+            description: "Device ID, Read Only. 0x21, the Protocol of accessing this SFR is different, See Device ID read Page for detail"
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+
+SPI_TLC:
+  TAMARSTATUS: 
+    M4PowerStatus:
+      active: [0, "Active mode."]
+      deep_sleep: [1, "Deep Sleep mode."]
+      shut_down: [2, "Shut down mode."]
+      clock_off: [3, "Clock off mode."]
+    M4ResetStatus:
+      reset_released: [0, "M4 Subsystem reset is released."]
+      reset_not_release: [1, "M4 Subsystem reset is NOT released."]
+    M4RebootReq:
+      no_reload_need: [0, "No Code reload is neccesary"]
+      reload_needed: [1, "Need to Re-Load the Code in AP mode"]
